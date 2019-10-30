@@ -27,21 +27,33 @@ img {
 
 @media (min-width:601px){
     #saints-logo {
-        border-radius: 10%;
-        max-width: 60%;
+        max-width: 30%;
+    }
+
+    
+    .social-media {
+        margin-left: 1%;
     }
 }
 
 @media (max-width:600px) {
     #saints-logo {
-        border-radius: 10%;
         max-width: 80%;
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
+
+    
+    .social-media {
+        margin-left: 5%;
+    }
 }
 
-#instagram-logo {
+#saints-logo {
+    border-radius: 10%;
+}
+
+.social-media {
     max-width: 100px;
 }
