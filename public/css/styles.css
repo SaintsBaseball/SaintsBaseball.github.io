@@ -27,7 +27,10 @@ img {
 
 #saints-logo {
     border-radius: 10%;
-    max-width: 25%;
+    max-width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #instagram-logo {
