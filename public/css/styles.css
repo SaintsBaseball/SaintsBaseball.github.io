@@ -25,12 +25,21 @@ img {
     height: auto;
 }
 
-#saints-logo {
-    border-radius: 10%;
-    max-width: 80%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+@media (min-width:601px){
+    #saints-logo {
+        border-radius: 10%;
+        max-width: 60%;
+    }
+}
+
+@media (max-width:600px) {
+    #saints-logo {
+        border-radius: 10%;
+        max-width: 80%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 #instagram-logo {
