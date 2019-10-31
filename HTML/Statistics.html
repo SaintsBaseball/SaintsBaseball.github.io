@@ -4,12 +4,12 @@
 		<title>Saints Baseball</title>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="public/css/w3Styles.css">
+		<link rel="stylesheet" href="../public/css/w3Styles.css">
 		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="public/css/styles.css">
-		<link rel="shortcut icon" type="image/png" href="public/images/saintsFavicon.ico"/>
+		<link rel="stylesheet" href="../public/css/styles.css">
+		<link rel="shortcut icon" type="image/png" href="../public/images/saintsFavicon.ico"/>
 	</head>
 	<body>
 
@@ -20,7 +20,7 @@
 					href="javascript:void(0)" onclick="sidebarController.openSidebar()">
 					<i class="fa fa-bars"></i>
 				</a>
-				<a href="index.html" class="w3-bar-item w3-button w3-theme-l1">Saints</a>
+				<a href="../index.html" class="w3-bar-item w3-button w3-theme-l1">Saints</a>
 			</div>
 		</div>
 
@@ -38,27 +38,19 @@
 			<h4 class="w3-bar-item">
 				<b>Menu</b>
 			</h4>
-			<a href="HTML/Statistics.html" class="w3-bar-item w3-button w3-hover-black">Statistics</a>
+			<a class="w3-bar-item selected">Statistics</a>
 		</nav>
 
 		<!-- Main content -->
 		<div class="w3-main">
 			<div class="w3-row w3-padding-64">
 				<div class="w3-container">
-					<img src="public/images/saintsLogo.jpg" id="saints-logo">
+
 				</div>
 			</div>
 		</div>
 
-		<a href="https://www.instagram.com/saints.baseball/" title="Follow us on Instagram">
-			<img class="social-media" src="public/images/instagramLogo.png" alt="Instagram">
-		</a>
-
-		<a href="https://www.facebook.com/SaintsBaseball760/" title="Like us on Facebook">
-			<img class="social-media" src="public/images/facebookLogo.png" alt="Facebook">
-		</a>
-
-		<script src='./controllers/sidebarController.js'></script>
+		<script src='../controllers/sidebarController.js'></script>
 		<script>
 			const sidebarElement = document.getElementById("mySidebar");
 			const overlayElement = document.getElementById("myOverlay");
