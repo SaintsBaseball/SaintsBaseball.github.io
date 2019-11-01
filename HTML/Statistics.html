@@ -49,7 +49,6 @@
 
                     <select id='season-selector' name='season'>
                         <option value='Season'>Season</option>
-                        <option value='2019spring'>Spring 2019</option>
                     </select>
                     
                     <div></div>
@@ -131,7 +130,7 @@
             sidebarController = sidebarController(sidebarElement, overlayElement);
     
             const seasonSelector = document.getElementById('season-selector');
-            // addSelectorOptions(seasonSelector, document);
+            addSelectorOptions(seasonSelector, stats, document);
 
             document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('select[name="season"]').onchange=changeEventHandler;

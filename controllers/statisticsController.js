@@ -66,19 +66,19 @@ function resetTableElement(element) {
     }
 }
 
-function buildStatisticsTable(stats, statsHeader, statsBody, document) {
+function buildStatisticsTable(statsForASeason, statsHeader, statsBody, document) {
     resetTableElement(statsHeader);
     resetTableElement(statsBody);
 
-    if (!stats) {
+    if (!statsForASeason) {
         return;
     }
 
     const headerRow = document.createElement('tr');
-    Object.keys(stats[0]).forEach(statistic => {
+    Object.keys(statsForASeason[0]).forEach(statistic => {
         const headerElement = document.createElement('th');
         headerElement.innerHTML = statistic;
-        headerElement.onclick = () => sortStatistics(statistic, stats, statsHeader, statsBody, document);
+        headerElement.onclick = () => sortStatistics(statistic, statsForASeason, statsHeader, statsBody, document);
 
         if (statsSortedByKey[statistic]) {
             headerElement.className = 'selected';
@@ -89,8 +89,8 @@ function buildStatisticsTable(stats, statsHeader, statsBody, document) {
 
     statsHeader.appendChild(headerRow);
 
-    for (let i = 0; i < stats.length; i++) {
-        const curPlayer = stats[i];
+    for (let i = 0; i < statsForASeason.length; i++) {
+        const curPlayer = statsForASeason[i];
         const playerRow = document.createElement('tr');
 
         Object.keys(curPlayer).forEach(statistic => {
@@ -108,7 +108,22 @@ function buildStatisticsTable(stats, statsHeader, statsBody, document) {
     }
 }
 
+function createNewSeasonOption(seasonSelector, season, document) {
+    const newDateOption = document.createElement('option');
+    newDateOption.value = season;
+    const newDateOptionText = document.createTextNode(season);
+    newDateOption.appendChild(newDateOptionText);
+    seasonSelector.appendChild(newDateOption);
+}
+
+function addSelectorOptions(seasonSelector, allStats, document) {
+    Object.keys(allStats).forEach(statsForASeason => {
+        createNewSeasonOption(seasonSelector, statsForASeason, document);
+    });
+}
+
 module.exports = {
+    addSelectorOptions,
     buildStatisticsTable,
     resetTableElement
 };
