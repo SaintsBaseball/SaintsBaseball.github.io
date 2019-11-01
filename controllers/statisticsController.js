@@ -66,10 +66,45 @@ function resetTableElement(element) {
     }
 }
 
-function buildStatistics(stats, statsHeader, statsBody, document) {
+function buildOldStatistics(stats, statsHeader, statsBody, document) {
     resetTableElement(statsHeader);
     resetTableElement(statsBody);
 
+    const headerRow = document.createElement('tr');
+    Object.keys(stats[0]).forEach(statistic => {
+        const headerElement = document.createElement('th');
+        headerElement.innerHTML = statistic;
+        headerElement.onclick = sortStatistics.bind(null, statistic, stats, statsHeader, statsBody, document);
+
+        if (statsSortedByKey[statistic]) {
+            headerElement.className = 'selected';
+        }
+
+        headerRow.appendChild(headerElement);
+    });
+
+    statsHeader.appendChild(headerRow);
+
+    for (let i = 0; i < stats.length; i++) {
+        const curPlayer = stats[i];
+        const playerRow = document.createElement('tr');
+
+        Object.keys(curPlayer).forEach(statistic => {
+            const statElement = document.createElement('td');
+            statElement.innerHTML = curPlayer[statistic];
+
+            if (statsSortedByKey[statistic]) {
+                statElement.className = 'selected';
+            }
+
+            playerRow.appendChild(statElement);
+        });
+
+        statsBody.appendChild(playerRow);
+    }
+}
+
+function buildStatistics(seasonSelector, statsTables, document) {
     const headerRow = document.createElement('tr');
     Object.keys(stats[0]).forEach(statistic => {
         const headerElement = document.createElement('th');

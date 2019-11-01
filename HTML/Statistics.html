@@ -8,11 +8,11 @@
 		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="../public/css/styles.css">
+        <link rel="stylesheet" href="../public/css/styles.css">		
+        <link rel="stylesheet" href="../public/css/statsStyles.css">
 		<link rel="shortcut icon" type="image/png" href="../public/images/saintsFavicon.ico"/>
 	</head>
 	<body>
-
 		<!-- Navbar -->
 		<div class="w3-top">
 			<div class="w3-bar w3-theme w3-top w3-left-align w3-large">
@@ -44,18 +44,107 @@
 		<!-- Main content -->
 		<div class="w3-main">
 			<div class="w3-row w3-padding-64">
-				<div class="w3-container">
+                <div class="w3-container">
+                    <div id='stats-tables-wrapper'>
+                        <h1 class="w3-text-black">Saints Statistics</h1>
 
-				</div>
+                        <select id='season-selector' name='season'>
+                            <option value='Season'>Season</option>
+                        </select>
+                        
+                        <div></div>
+                        <br>
+                    </div>
+
+                    <table id="key-table" cellpadding="5">
+                        <thead>
+                            <tr>
+                                <th>Key</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>G - Games</td>
+                                <td>AB - At Bats</td>
+                                <td>R - Runs</td>
+                            </tr>
+                            <tr>
+                                <td>H - Hits</td>
+                                <td>2B - Doubles</td>
+                                <td>3B - Triples</td>
+                            </tr>
+                            <tr>
+                                <td>HR - Homeruns</td>
+                                <td>RBI - Runs Batted In</td>
+                                <td>BB - Base on Balls</td>
+                            </tr>
+                            <tr>
+                                <td>SO - Strikeouts</td>
+                                <td>SB - Stolen Bases</td>
+                                <td>CS - Caught Stealing</td>
+                            </tr>
+                            <tr>
+                                <td>AVG - Average</td>
+                                <td>OBP - On-Base Percentage</td>
+                                <td>SLG - Slugging Percentage</td>
+                            </tr>
+                            <tr>
+                                <td>OPS - On-Base Plus Slugging</td>
+                                <td>IBB - Intentional Walks</td>
+                                <td>HBP - Hit By Pitch</td>
+                            </tr>
+                            <tr>
+                                <td>SAC - Sacrifice Bunts</td>
+                                <td>SF - Sacrifice Flys</td>
+                                <td>TB - Total Bases</td>
+                            </tr>
+                            <tr>
+                                <td>XBH - Extra Base Hits</td>
+                                <td>GDP - Grounded Into Double Play</td>
+                                <td>GO - Ground Outs</td>
+                            </tr>
+                            <tr>
+                                <td>AO - Fly Outs</td>
+                                <td>GO_AO - Ground Outs Per Fly Out</td>
+                                <td>PA - Plate Appearances</td>
+                            </tr>
+                        </tbody>
+                    </table>  
+                </div>
 			</div>
 		</div>
 
-		<script src='../controllers/sidebarController.js'></script>
-		<script>
-			const sidebarElement = document.getElementById("mySidebar");
-			const overlayElement = document.getElementById("myOverlay");
-			sidebarController = sidebarController(sidebarElement, overlayElement);
-		</script>
+        <script src='../controllers/sidebarController.js'></script>
+        <script src='../controllers/statisticsController.js'></script>
+        <script src='../filebase/statisticsFilebase.js'></script>    
+        <script>
+            const sidebarElement = document.getElementById("mySidebar");
+            const overlayElement = document.getElementById("myOverlay");
+            sidebarController = sidebarController(sidebarElement, overlayElement);
+    
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelector('select[name="season"]').onchange=changeEventHandler;
+            }, false);
+    
+            function changeEventHandler(event) {            
+                var tablesToHide = document.getElementsByClassName('stats-table');
+                for (var i = 0; i < tablesToHide.length; i++) {
+                    tablesToHide[i].style.display = 'none';
+                }
+    
+                var tableToShow = document.getElementById(this.value);
+                if (tableToShow) {
+                    tableToShow.style.display = 'block';
+                }
+            }
+    
+            const seasonSelector = document.getElementById('season-selector');
+            const statsTables = document.getElementById('stats-tables-wrapper');
+    
+            statisticsController = statisticsController(stats);
+            statisticsController.buildStatistics(seasonSelector, statsTables, document);
+        </script>
 	</body>
-
 </html>
