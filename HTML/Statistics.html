@@ -45,16 +45,22 @@
 		<div class="w3-main">
 			<div class="w3-row w3-padding-64">
                 <div class="w3-container">
-                    <div id='stats-tables-wrapper'>
-                        <h1 class="w3-text-black">Saints Statistics</h1>
+                    <h1 class="w3-text-black">Saints Statistics</h1>
 
-                        <select id='season-selector' name='season'>
-                            <option value='Season'>Season</option>
-                        </select>
-                        
-                        <div></div>
-                        <br>
-                    </div>
+                    <select id='season-selector' name='season'>
+                        <option value='Season'>Season</option>
+                        <option value='2019spring'>Spring 2019</option>
+                    </select>
+                    
+                    <div></div>
+                    <br>
+
+                    <table id="stats-table" cellpadding="8">
+                        <thead id='stats-header'></thead>
+                        <tbody id='stats-body'></tbody>
+                    </table>
+
+                    <br>
 
                     <table id="key-table" cellpadding="5">
                         <thead>
@@ -124,27 +130,19 @@
             const overlayElement = document.getElementById("myOverlay");
             sidebarController = sidebarController(sidebarElement, overlayElement);
     
+            const seasonSelector = document.getElementById('season-selector');
+            // addSelectorOptions(seasonSelector, document);
+
             document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('select[name="season"]').onchange=changeEventHandler;
             }, false);
     
-            function changeEventHandler(event) {            
-                var tablesToHide = document.getElementsByClassName('stats-table');
-                for (var i = 0; i < tablesToHide.length; i++) {
-                    tablesToHide[i].style.display = 'none';
-                }
-    
-                var tableToShow = document.getElementById(this.value);
-                if (tableToShow) {
-                    tableToShow.style.display = 'block';
-                }
+            function changeEventHandler() {                
+                const statsHeader = document.getElementById('stats-header');
+                const statsBody = document.getElementById('stats-body');
+
+                buildStatisticsTable(stats[this.value], statsHeader, statsBody, document)
             }
-    
-            const seasonSelector = document.getElementById('season-selector');
-            const statsTables = document.getElementById('stats-tables-wrapper');
-    
-            statisticsController = statisticsController(stats);
-            statisticsController.buildStatistics(seasonSelector, statsTables, document);
         </script>
 	</body>
 </html>

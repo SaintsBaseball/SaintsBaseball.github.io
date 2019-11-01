@@ -57,7 +57,7 @@ function sortStatistics(statToSortBy, stats, statsHeader, statsBody, document) {
 
     resetStatsSortedByKey();
     statsSortedByKey[statToSortBy] = true;
-    buildStatistics(stats, statsHeader, statsBody, document);
+    buildStatisticsTable(stats, statsHeader, statsBody, document);
 }
 
 function resetTableElement(element) {
@@ -66,15 +66,19 @@ function resetTableElement(element) {
     }
 }
 
-function buildOldStatistics(stats, statsHeader, statsBody, document) {
+function buildStatisticsTable(stats, statsHeader, statsBody, document) {
     resetTableElement(statsHeader);
     resetTableElement(statsBody);
 
+    if (!stats) {
+        return;
+    }
+
     const headerRow = document.createElement('tr');
     Object.keys(stats[0]).forEach(statistic => {
         const headerElement = document.createElement('th');
         headerElement.innerHTML = statistic;
-        headerElement.onclick = sortStatistics.bind(null, statistic, stats, statsHeader, statsBody, document);
+        headerElement.onclick = () => sortStatistics(statistic, stats, statsHeader, statsBody, document);
 
         if (statsSortedByKey[statistic]) {
             headerElement.className = 'selected';
@@ -103,43 +107,8 @@ function buildOldStatistics(stats, statsHeader, statsBody, document) {
         statsBody.appendChild(playerRow);
     }
 }
-
-function buildStatistics(seasonSelector, statsTables, document) {
-    const headerRow = document.createElement('tr');
-    Object.keys(stats[0]).forEach(statistic => {
-        const headerElement = document.createElement('th');
-        headerElement.innerHTML = statistic;
-        headerElement.onclick = sortStatistics.bind(null, statistic, stats, statsHeader, statsBody, document);
-
-        if (statsSortedByKey[statistic]) {
-            headerElement.className = 'selected';
-        }
-
-        headerRow.appendChild(headerElement);
-    });
-
-    statsHeader.appendChild(headerRow);
-
-    for (let i = 0; i < stats.length; i++) {
-        const curPlayer = stats[i];
-        const playerRow = document.createElement('tr');
-
-        Object.keys(curPlayer).forEach(statistic => {
-            const statElement = document.createElement('td');
-            statElement.innerHTML = curPlayer[statistic];
-
-            if (statsSortedByKey[statistic]) {
-                statElement.className = 'selected';
-            }
-
-            playerRow.appendChild(statElement);
-        });
-
-        statsBody.appendChild(playerRow);
-    }
-}
-
 
 module.exports = {
-    buildStatistics
+    buildStatisticsTable,
+    resetTableElement
 };
