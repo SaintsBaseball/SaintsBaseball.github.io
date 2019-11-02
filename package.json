@@ -1,0 +1,22 @@
+{
+  "name": "saints-baseball",
+  "version": "1.0.0",
+  "description": "Website for Saints Baseball Club.",
+  "scripts": {
+    "buildStats": "node ./generators/statisticsFilebaseGenerator.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SaintsBaseball/SaintsBaseball.github.io.git"
+  },
+  "author": "Eli Magallanes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaintsBaseball/SaintsBaseball.github.io/issues"
+  },
+  "homepage": "https://SaintsBaseball.github.io",
+  "dependencies": {
+    "convert-excel-to-json": "^1.6.1",
+    "dateformat": "^3.0.3"
+  }
+}
