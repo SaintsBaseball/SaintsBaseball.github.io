@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Website for Saints Baseball Club.",
   "scripts": {
-    "buildStats": "node ./generators/statisticsFilebaseGenerator.js"
+    "buildStats": "node ./generators/statisticsFilebaseGenerator.js",
+    "test": "mocha ./tests/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,8 @@
   "homepage": "https://SaintsBaseball.github.io",
   "dependencies": {
     "convert-excel-to-json": "^1.6.1"
+  },
+  "devDependencies": {
+    "mocha": "^6.2.2"
   }
 }

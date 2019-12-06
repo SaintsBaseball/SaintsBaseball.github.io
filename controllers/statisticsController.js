@@ -30,7 +30,7 @@ const statsSortedByKey = {
     'AO': false,
     'GO_AO': false,
     'PA': false
-}
+};
 
 function resetStatsSortedByKey() {
     Object.keys(statsSortedByKey).forEach(key => {
