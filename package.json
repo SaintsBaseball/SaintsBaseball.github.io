@@ -16,7 +16,6 @@
   },
   "homepage": "https://SaintsBaseball.github.io",
   "dependencies": {
-    "convert-excel-to-json": "^1.6.1",
-    "dateformat": "^3.0.3"
+    "convert-excel-to-json": "^1.6.1"
   }
 }
