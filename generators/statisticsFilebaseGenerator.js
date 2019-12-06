@@ -3,7 +3,7 @@
 const convertExcelToJsonService = require('../services/convertExcelToJson.service');
 const writeToFileService = require('../services/writeToFile.service');
 
-function buildStatsFilebase () {
+(function buildStatsFilebase () {
     const sourceFile = 'filebase/NCBL Statistics.xlsx';
 
     const statsObject = convertExcelToJsonService.convert(sourceFile);
@@ -12,6 +12,4 @@ function buildStatsFilebase () {
     const statsFilebase = 'filebase/statisticsFilebase.js';
 
     writeToFileService.writeToFile(filebaseVarName, statsObject, statsFilebase);
-}
-
-buildStatsFilebase();
+})();
