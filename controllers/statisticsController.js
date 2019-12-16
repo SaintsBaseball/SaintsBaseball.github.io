@@ -124,6 +124,5 @@ function addSelectorOptions(seasonSelector, allStats, document) {
 
 module.exports = {
     addSelectorOptions,
-    buildStatisticsTable,
-    resetTableElement
+    buildStatisticsTable
 };
