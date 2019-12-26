@@ -4,8 +4,6 @@ table {
 }
 
 #stats-table {
-    border: 3px black solid;
-    border-collapse: collapse;
     text-align: center;
     width: 90%;
     overflow: hidden;
