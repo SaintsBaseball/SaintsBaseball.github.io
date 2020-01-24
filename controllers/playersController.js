@@ -1,8 +1,16 @@
-function playersController() {
+function playersController(statsFilebase) {
 
     function getPlayerList() {
-        return {};
-    };
+        const playerList = [];
+
+        Object.values(statsFilebase).forEach(statsForASeason => {
+            statsForASeason.forEach(playerStats => {
+                playerList.push(playerStats.Player);
+            });
+        });
+
+        return playerList.sort();
+    }
 
     return {
         getPlayerList
