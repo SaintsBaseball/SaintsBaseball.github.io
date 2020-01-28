@@ -31,7 +31,7 @@ describe('Players Controller', () => {
 
         it('should return the list of players from all seasons', () => {
             const statsFilebase = {
-                season1: [{Player:"Alpha"}, {Player: "Bravo"}, {Player:"Charlie"}],
+                season1: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Charlie"}],
                 season2: [{Player: "Delta"}],
                 season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
             };
@@ -45,7 +45,7 @@ describe('Players Controller', () => {
 
         it('should return the list of players from all seasons sorted alphabetically', () => {
             const statsFilebase = {
-                season1: [{Player:"Echo"}, {Player: "Foxtrot"}, {Player:"Delta"}],
+                season1: [{Player: "Echo"}, {Player: "Foxtrot"}, {Player: "Delta"}],
                 season2: [{Player: "Charlie"}],
                 season3: [{Player: "Alpha"}, {Player: "Bravo"}]
             };
