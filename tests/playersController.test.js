@@ -71,4 +71,63 @@ describe('Players Controller', () => {
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
     });
+
+    describe('buildStatsForEachPlayer', () => {
+        it('should build an empty object if there are no seasons', () => {
+            const statsFilebase = {};
+            const expectedStatsForEachPlayer = {};
+            playersController = new PlayersController(statsFilebase);
+
+            playersController.buildStatsForEachPlayer();
+
+            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+        });
+
+        it('should build an empty object if there are no players in any season', () => {
+            const statsFilebase = {
+                season1: [],
+                season2: [],
+                season3: []
+            };
+            const expectedStatsForEachPlayer = {};
+            playersController = new PlayersController(statsFilebase);
+
+            playersController.buildStatsForEachPlayer();
+
+            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+        });
+
+        it('should build an object of players stats from all seasons', () => {
+            const statsFilebase = {
+                season1: [{Player: "Alpha", Stats: 'some fake stats'}, {Player: "Bravo", DifStats: 'some dif fake stats'}, {Player: "Charlie", DiffStats: 'some diff fake stats'}],
+                season2: [{Player: "Delta", DifferentStats: 'some different fake stats'}],
+                season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
+            };
+            const expectedStatsForEachPlayer = {
+                Alpha: {
+                    season1: {Stats: 'some fake stats'}
+                },
+                Bravo: {
+                    season1: {DifStats: 'some dif fake stats'}
+                },
+                Charlie: {
+                    season1: {DiffStats: 'some diff fake stats'}
+                },
+                Delta: {
+                    season2: {DifferentStats: 'some different fake stats'}
+                },
+                Echo: {
+                    season3: {OtherStats: 'some other fake stats'}
+                },
+                Foxtrot: {
+                    season3: {FakeStats: 'these are fake stats'}
+                }
+            };
+            playersController = new PlayersController(statsFilebase);
+
+            playersController.buildStatsForEachPlayer();
+
+            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+        });
+    });
 });

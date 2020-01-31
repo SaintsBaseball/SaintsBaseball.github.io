@@ -18,4 +18,18 @@ PlayersController.prototype.getPlayerList = function () {
     return playersListNoDuplicates.sort();
 };
 
+PlayersController.prototype.buildStatsForEachPlayer = function () {
+    this.statsForEachPlayer = {};
+
+    Object.keys(this.statsFilebase).forEach(seasonKey => {
+        const statsForASeason = this.statsFilebase[seasonKey];
+        statsForASeason.forEach(playerStats => {
+            const playerName = playerStats.Player;
+            delete playerStats.Player;
+            this.statsForEachPlayer[playerName] = {};
+            this.statsForEachPlayer[playerName][seasonKey] = playerStats;
+        });
+    });
+};
+
 module.exports = PlayersController;
