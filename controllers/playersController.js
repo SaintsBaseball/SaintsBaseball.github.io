@@ -9,7 +9,11 @@ function playersController(statsFilebase) {
             });
         });
 
-        return playerList.sort();
+        const playersListNoDuplicates = playerList.filter((player, index) => {
+            return playerList.indexOf(player) === index;
+        });
+
+        return playersListNoDuplicates.sort();
     }
 
     return {

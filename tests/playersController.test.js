@@ -56,5 +56,19 @@ describe('Players Controller', () => {
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
+
+        it('should return the list of players with no duplicates', function () {
+            const statsFilebase = {
+                season1: [{Player: "Echo"}, {Player: "Bravo"}, {Player: "Foxtrot"}, {Player: "Alpha"}, {Player: "Delta"}],
+                season2: [{Player: "Echo"}, {Player: "Charlie"}, {Player: "Bravo"}],
+                season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
+            };
+            const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
+            playersController = playersControllerConstructor(statsFilebase);
+
+            const actualPlayerList = playersController.getPlayerList();
+
+            assert.deepEqual(actualPlayerList, expectedPlayerList);
+        });
     });
 });
