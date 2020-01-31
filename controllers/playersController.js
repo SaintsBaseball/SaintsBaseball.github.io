@@ -1,24 +1,21 @@
-function playersController(statsFilebase) {
-
-    function getPlayerList() {
-        const playerList = [];
-
-        Object.values(statsFilebase).forEach(statsForASeason => {
-            statsForASeason.forEach(playerStats => {
-                playerList.push(playerStats.Player);
-            });
-        });
-
-        const playersListNoDuplicates = playerList.filter((player, index) => {
-            return playerList.indexOf(player) === index;
-        });
-
-        return playersListNoDuplicates.sort();
-    }
-
-    return {
-        getPlayerList
-    };
+function PlayersController(statsFilebase) {
+    this.statsFilebase = statsFilebase;
 }
 
-module.exports = playersController;
+PlayersController.prototype.getPlayerList = function () {
+    const playerList = [];
+
+    Object.values(this.statsFilebase).forEach(statsForASeason => {
+        statsForASeason.forEach(playerStats => {
+            playerList.push(playerStats.Player);
+        });
+    });
+
+    const playersListNoDuplicates = playerList.filter((player, index) => {
+        return playerList.indexOf(player) === index;
+    });
+
+    return playersListNoDuplicates.sort();
+};
+
+module.exports = PlayersController;

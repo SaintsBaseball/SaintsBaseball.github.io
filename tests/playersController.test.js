@@ -1,5 +1,5 @@
 const assert = require('assert');
-const playersControllerConstructor = require('../controllers/playersController');
+const PlayersController = require("../controllers/playersController");
 
 describe('Players Controller', () => {
     let playersController;
@@ -8,7 +8,7 @@ describe('Players Controller', () => {
         it('should return an empty list if there are no seasons', () => {
             const statsFilebase = {};
             const expectedPlayerList = [];
-            playersController = playersControllerConstructor(statsFilebase);
+            playersController = new PlayersController(statsFilebase);
 
             const actualPlayerList = playersController.getPlayerList();
 
@@ -22,7 +22,7 @@ describe('Players Controller', () => {
                 season3: []
             };
             const expectedPlayerList = [];
-            playersController = playersControllerConstructor(statsFilebase);
+            playersController = new PlayersController(statsFilebase);
 
             const actualPlayerList = playersController.getPlayerList();
 
@@ -36,7 +36,7 @@ describe('Players Controller', () => {
                 season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
             };
             const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
-            playersController = playersControllerConstructor(statsFilebase);
+            playersController = new PlayersController(statsFilebase);
 
             const actualPlayerList = playersController.getPlayerList();
 
@@ -50,7 +50,7 @@ describe('Players Controller', () => {
                 season3: [{Player: "Alpha"}, {Player: "Bravo"}]
             };
             const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
-            playersController = playersControllerConstructor(statsFilebase);
+            playersController = new PlayersController(statsFilebase);
 
             const actualPlayerList = playersController.getPlayerList();
 
@@ -64,7 +64,7 @@ describe('Players Controller', () => {
                 season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
             };
             const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
-            playersController = playersControllerConstructor(statsFilebase);
+            playersController = new PlayersController(statsFilebase);
 
             const actualPlayerList = playersController.getPlayerList();
 
