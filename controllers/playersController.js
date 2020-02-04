@@ -1,5 +1,6 @@
 function PlayersController(statsFilebase) {
     this.statsFilebase = statsFilebase;
+    this.statsForEachPlayer = {};
 }
 
 PlayersController.prototype.getPlayerList = function () {
@@ -19,15 +20,14 @@ PlayersController.prototype.getPlayerList = function () {
 };
 
 PlayersController.prototype.buildStatsForEachPlayer = function () {
-    this.statsForEachPlayer = {};
-
     Object.keys(this.statsFilebase).forEach(seasonKey => {
         const statsForASeason = this.statsFilebase[seasonKey];
         statsForASeason.forEach(playerStats => {
-            const playerName = playerStats.Player;
-            delete playerStats.Player;
+            const playerStatsCopy = Object.assign({}, playerStats);
+            const playerName = playerStatsCopy.Player;
+            delete playerStatsCopy.Player;
             this.statsForEachPlayer[playerName] = {};
-            this.statsForEachPlayer[playerName][seasonKey] = playerStats;
+            this.statsForEachPlayer[playerName][seasonKey] = playerStatsCopy;
         });
     });
 };

@@ -4,6 +4,21 @@ const PlayersController = require("../controllers/playersController");
 describe('Players Controller', () => {
     let playersController;
 
+    describe('constructor', () => {
+        it('should construct a players controller object with the statsFilebase and statsForEachPlayer', function () {
+            const statsFilebase = {
+                season1: [{Player: "Alpha", Stats: 'some fake stats'}, {Player: "Bravo", DifStats: 'some dif fake stats'}, {Player: "Charlie", DiffStats: 'some diff fake stats'}],
+                season2: [{Player: "Delta", DifferentStats: 'some different fake stats'}],
+                season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
+            };
+
+            playersController = new PlayersController(statsFilebase);
+
+            assert.equal(playersController.statsFilebase, statsFilebase);
+            assert.deepEqual(playersController.statsForEachPlayer, {});
+        });
+    });
+
     describe('getPlayerList', () => {
         it('should return an empty list if there are no seasons', () => {
             const statsFilebase = {};
@@ -103,6 +118,7 @@ describe('Players Controller', () => {
                 season2: [{Player: "Delta", DifferentStats: 'some different fake stats'}],
                 season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
             };
+            const statsFilebaseCopy = JSON.parse(JSON.stringify(statsFilebase));
             const expectedStatsForEachPlayer = {
                 Alpha: {
                     season1: {Stats: 'some fake stats'}
@@ -128,6 +144,7 @@ describe('Players Controller', () => {
             playersController.buildStatsForEachPlayer();
 
             assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+            assert.deepEqual(playersController.statsFilebase, statsFilebaseCopy);
         });
     });
 });
