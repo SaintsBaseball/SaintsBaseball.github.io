@@ -7,15 +7,16 @@ PlayersController.prototype.buildStatsForEachPlayer = function () {
     Object.keys(this.statsFilebase).forEach(seasonKey => {
         const statsForASeason = this.statsFilebase[seasonKey];
         statsForASeason.forEach(playerStats => {
-            const playerStatsCopy = Object.assign({}, playerStats);
-            const playerName = playerStatsCopy.Player;
-            delete playerStatsCopy.Player;
+            const playerName = playerStats.Player;
+
+            const playerStatsWithNoName = Object.assign({}, playerStats);
+            delete playerStatsWithNoName.Player;
 
             if (!this.statsForEachPlayer[playerName]) {
                 this.statsForEachPlayer[playerName] = {};
             }
 
-            this.statsForEachPlayer[playerName][seasonKey] = playerStatsCopy;
+            this.statsForEachPlayer[playerName][seasonKey] = playerStatsWithNoName;
         });
     });
 };
