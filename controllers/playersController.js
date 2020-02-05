@@ -27,8 +27,14 @@ PlayersController.prototype.getListOfPlayers = function (statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 };
 
-PlayersController.prototype.buildPlayersPage = function () {
+PlayersController.prototype.buildPlayersPage = function (document) {
+    const statsForEachPlayer = this.buildStatsForEachPlayer();
+    const playerList = this.getListOfPlayers(statsForEachPlayer);
 
+    playerList.forEach(playerName => {
+        document.createElement('li');
+        document.createTextNode(playerName);
+    });
 };
 
 module.exports = PlayersController;

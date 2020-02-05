@@ -212,5 +212,25 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
         });
+
+        it('should build the player list of all players in all seasons', function () {
+            playersController.statsFilebase = {
+                season1: [{Player: "Alpha", Stats: 'some fake stats'}, {Player: "Bravo", DifStats: 'some dif fake stats'}, {Player: "Charlie", DiffStats: 'some diff fake stats'}],
+                season2: [{Player: "Delta", DifferentStats: 'some different fake stats'}],
+                season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
+            };
+
+            playersController.buildPlayersPage(documentMock);
+
+            assert.equal(documentMock.createElement.callCount, 6);
+            assert(documentMock.createElement.alwaysCalledWithExactly('li'));
+            assert.equal(documentMock.createTextNode.callCount, 6);
+            assert.equal(documentMock.createTextNode.args[0][0], 'Alpha');
+            assert.equal(documentMock.createTextNode.args[1][0], 'Bravo');
+            assert.equal(documentMock.createTextNode.args[2][0], 'Charlie');
+            assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
+            assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
+            assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
+        });
     });
 });
