@@ -25,4 +25,8 @@ PlayersController.prototype.getListOfPlayers = function () {
     return Object.keys(this.statsForEachPlayer).sort();
 };
 
+PlayersController.prototype.buildPlayersPage = function () {
+
+};
+
 module.exports = PlayersController;

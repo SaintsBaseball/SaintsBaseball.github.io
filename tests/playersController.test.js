@@ -1,4 +1,5 @@
 const assert = require('assert');
+const sinon = require('sinon');
 const PlayersController = require("../controllers/playersController");
 
 describe('Players Controller', () => {
@@ -173,6 +174,23 @@ describe('Players Controller', () => {
             const actualPlayerList = playersController.getListOfPlayers();
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
+        });
+    });
+
+    describe('buildPlayersPage', () => {
+        const documentMock = {
+            createElement: sinon.spy(),
+            createTextNode: sinon.spy()
+        };
+
+        it('should build an empty player list if there are no statistics', function () {
+            const statsFilebase = {};
+            playersController = new PlayersController(statsFilebase);
+
+            playersController.buildPlayersPage(documentMock);
+
+            assert.equal(documentMock.createElement.callCount, 0);
+            assert.equal(documentMock.createTextNode.callCount, 0);
         });
     });
 });
