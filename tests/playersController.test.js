@@ -16,7 +16,6 @@ describe('Players Controller', () => {
             playersController = new PlayersController(statsFilebase);
 
             assert.equal(playersController.statsFilebase, statsFilebase);
-            assert.deepEqual(playersController.statsForEachPlayer, {});
         });
     });
 
@@ -26,9 +25,9 @@ describe('Players Controller', () => {
             const expectedStatsForEachPlayer = {};
             playersController = new PlayersController(statsFilebase);
 
-            playersController.buildStatsForEachPlayer();
+            const actualStatsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+            assert.deepEqual(actualStatsForEachPlayer, expectedStatsForEachPlayer);
         });
 
         it('should build an empty object if there are no players in any season', () => {
@@ -40,9 +39,9 @@ describe('Players Controller', () => {
             const expectedStatsForEachPlayer = {};
             playersController = new PlayersController(statsFilebase);
 
-            playersController.buildStatsForEachPlayer();
+            const actualStatsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+            assert.deepEqual(actualStatsForEachPlayer, expectedStatsForEachPlayer);
         });
 
         it('should build an object of players stats from all seasons', () => {
@@ -74,9 +73,9 @@ describe('Players Controller', () => {
             };
             playersController = new PlayersController(statsFilebase);
 
-            playersController.buildStatsForEachPlayer();
+            const actualStatsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+            assert.deepEqual(actualStatsForEachPlayer, expectedStatsForEachPlayer);
             assert.deepEqual(playersController.statsFilebase, statsFilebaseCopy);
         });
 
@@ -114,9 +113,9 @@ describe('Players Controller', () => {
             };
             playersController = new PlayersController(statsFilebase);
 
-            playersController.buildStatsForEachPlayer();
+            const actualStatsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            assert.deepEqual(playersController.statsForEachPlayer, expectedStatsForEachPlayer);
+            assert.deepEqual(actualStatsForEachPlayer, expectedStatsForEachPlayer);
             assert.deepEqual(playersController.statsFilebase, statsFilebaseCopy);
         });
     });
@@ -126,8 +125,9 @@ describe('Players Controller', () => {
             const statsFilebase = {};
             const expectedPlayerList = [];
             playersController = new PlayersController(statsFilebase);
+            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            const actualPlayerList = playersController.getListOfPlayers();
+            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
@@ -140,8 +140,9 @@ describe('Players Controller', () => {
             };
             const expectedPlayerList = [];
             playersController = new PlayersController(statsFilebase);
+            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            const actualPlayerList = playersController.getListOfPlayers();
+            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
@@ -154,9 +155,9 @@ describe('Players Controller', () => {
             };
             const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
             playersController = new PlayersController(statsFilebase);
-            playersController.buildStatsForEachPlayer();
+            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            const actualPlayerList = playersController.getListOfPlayers();
+            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
@@ -169,23 +170,29 @@ describe('Players Controller', () => {
             };
             const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
             playersController = new PlayersController(statsFilebase);
-            playersController.buildStatsForEachPlayer();
+            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
 
-            const actualPlayerList = playersController.getListOfPlayers();
+            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
 
             assert.deepEqual(actualPlayerList, expectedPlayerList);
         });
     });
 
     describe('buildPlayersPage', () => {
-        const documentMock = {
-            createElement: sinon.spy(),
-            createTextNode: sinon.spy()
-        };
+        let documentMock;
+        let playersController;
+
+        beforeEach(() => {
+            documentMock = {
+                createElement: sinon.spy(),
+                createTextNode: sinon.spy()
+            };
+
+            playersController = new PlayersController();
+        });
 
         it('should build an empty player list if there are no statistics', function () {
-            const statsFilebase = {};
-            playersController = new PlayersController(statsFilebase);
+            playersController.statsFilebase = {};
 
             playersController.buildPlayersPage(documentMock);
 
@@ -194,12 +201,11 @@ describe('Players Controller', () => {
         });
 
         it('should build an empty player list if there are no players in any season', function () {
-            const statsFilebase = {
+            playersController.statsFilebase = {
                 season1: [],
                 season2: [],
                 season3: []
             };
-            playersController = new PlayersController(statsFilebase);
 
             playersController.buildPlayersPage(documentMock);
 
