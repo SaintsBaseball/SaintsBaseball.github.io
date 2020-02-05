@@ -192,5 +192,19 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
         });
+
+        it('should build an empty player list if there are no players in any season', function () {
+            const statsFilebase = {
+                season1: [],
+                season2: [],
+                season3: []
+            };
+            playersController = new PlayersController(statsFilebase);
+
+            playersController.buildPlayersPage(documentMock);
+
+            assert.equal(documentMock.createElement.callCount, 0);
+            assert.equal(documentMock.createTextNode.callCount, 0);
+        });
     });
 });
