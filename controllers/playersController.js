@@ -27,16 +27,20 @@ PlayersController.prototype.getListOfPlayers = function (statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 };
 
-PlayersController.prototype.buildPlayersPage = function (document, listElement) {
+PlayersController.prototype.buildPlayersPage = function (document, playerListElement) {
     const statsForEachPlayer = this.buildStatsForEachPlayer();
     const playerList = this.getListOfPlayers(statsForEachPlayer);
 
     playerList.forEach(playerName => {
-        const playerListItemElement = document.createElement('li');
+        const tableRowElement = document.createElement('tr');
+        const tableItemElement = document.createElement('td');
+        const tableItemButtonElement = document.createElement('button');
         const playerTextNode = document.createTextNode(playerName);
 
-        playerListItemElement.appendChild(playerTextNode);
-        listElement.appendChild(playerListItemElement);
+        tableItemButtonElement.appendChild(playerTextNode);
+        tableItemElement.appendChild(tableItemButtonElement);
+        tableRowElement.appendChild(tableItemElement);
+        playerListElement.appendChild(tableRowElement);
     });
 };
 
