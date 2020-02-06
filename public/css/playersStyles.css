@@ -1,0 +1,9 @@
+table {
+    text-align: center;
+    color: #010150;
+    font-size: 150%;
+}
+
+td:hover {
+    text-decoration: underline;
+}

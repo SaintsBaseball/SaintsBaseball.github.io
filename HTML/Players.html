@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="../public/css/styles.css">		
+        <link rel="stylesheet" href="../public/css/playersStyles.css">
 		<link rel="shortcut icon" type="image/png" href="../public/images/saintsFavicon.ico"/>
 		
 		<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -56,6 +57,10 @@
 			<div class="w3-row w3-padding-64">
                 <div class="w3-container">
                     <h1 class="w3-text-black">Saints Players</h1>
+					<table>
+						<tbody id="player-list">
+						</tbody>
+					</table>
                 </div>
 			</div>
 		</div>
@@ -67,6 +72,10 @@
             const sidebarElement = document.getElementById("mySidebar");
             const overlayElement = document.getElementById("myOverlay");
             sidebarController = sidebarController(sidebarElement, overlayElement);
+
+            const playerListElement = document.getElementById("player-list");
+            const playersController = new PlayersController(stats);
+            playersController.buildPlayersPage(document, playerListElement);
         </script>
 	</body>
 </html>
