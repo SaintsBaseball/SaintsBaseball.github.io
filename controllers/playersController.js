@@ -23,13 +23,13 @@ PlayersController.prototype.buildStatsForEachPlayer = function () {
     return statsForEachPlayer;
 };
 
-PlayersController.prototype.getListOfPlayers = function (statsForEachPlayer) {
+function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
-};
+}
 
 PlayersController.prototype.buildPlayersPage = function (document, playerListElement) {
     const statsForEachPlayer = this.buildStatsForEachPlayer();
-    const playerList = this.getListOfPlayers(statsForEachPlayer);
+    const playerList = getListOfPlayers(statsForEachPlayer);
 
     playerList.forEach(playerName => {
         const tableRowElement = document.createElement('tr');

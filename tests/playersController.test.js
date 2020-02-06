@@ -120,64 +120,6 @@ describe('Players Controller', () => {
         });
     });
 
-    describe('getListOfPlayers', () => {
-        it('should return an empty list if there are no seasons', () => {
-            const statsFilebase = {};
-            const expectedPlayerList = [];
-            playersController = new PlayersController(statsFilebase);
-            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
-
-            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
-
-            assert.deepEqual(actualPlayerList, expectedPlayerList);
-        });
-
-        it('should return an empty list if there are no players in any season', () => {
-            const statsFilebase = {
-                season1: [],
-                season2: [],
-                season3: []
-            };
-            const expectedPlayerList = [];
-            playersController = new PlayersController(statsFilebase);
-            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
-
-            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
-
-            assert.deepEqual(actualPlayerList, expectedPlayerList);
-        });
-
-        it('should return the list of players from all seasons', () => {
-            const statsFilebase = {
-                season1: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Charlie"}],
-                season2: [{Player: "Delta"}],
-                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
-            };
-            const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
-            playersController = new PlayersController(statsFilebase);
-            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
-
-            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
-
-            assert.deepEqual(actualPlayerList, expectedPlayerList);
-        });
-
-        it('should return the list of players with no duplicates sorted alphabetically', function () {
-            const statsFilebase = {
-                season1: [{Player: "Echo"}, {Player: "Bravo"}, {Player: "Foxtrot"}, {Player: "Alpha"}, {Player: "Delta"}],
-                season2: [{Player: "Echo"}, {Player: "Charlie"}, {Player: "Bravo"}],
-                season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
-            };
-            const expectedPlayerList = ["Alpha", "Bravo", "Charlie", "Delta", "Echo", "Foxtrot"];
-            playersController = new PlayersController(statsFilebase);
-            const statsForEachPlayer = playersController.buildStatsForEachPlayer();
-
-            const actualPlayerList = playersController.getListOfPlayers(statsForEachPlayer);
-
-            assert.deepEqual(actualPlayerList, expectedPlayerList);
-        });
-    });
-
     describe('buildPlayersPage', () => {
         let documentMock;
         let listElementMock;
@@ -244,9 +186,35 @@ describe('Players Controller', () => {
 
         it('should build the player list of all players in all seasons', function () {
             playersController.statsFilebase = {
-                season1: [{Player: "Alpha", Stats: 'some fake stats'}, {Player: "Bravo", DifStats: 'some dif fake stats'}, {Player: "Charlie", DiffStats: 'some diff fake stats'}],
-                season2: [{Player: "Delta", DifferentStats: 'some different fake stats'}],
-                season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
+                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
+                season2: [{Player: "Delta"}],
+                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listElementMock);
+
+            assert.equal(documentMock.createElement.withArgs('tr').callCount, 6);
+            assert.equal(documentMock.createElement.withArgs('td').callCount, 6);
+            assert.equal(documentMock.createTextNode.callCount, 6);
+            assert.equal(documentMock.createTextNode.args[0][0], 'Alpha');
+            assert.equal(documentMock.createTextNode.args[1][0], 'Bravo');
+            assert.equal(documentMock.createTextNode.args[2][0], 'Charlie');
+            assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
+            assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
+            assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
+            assert.equal(tableItemElement.appendChild.callCount, 6);
+            assert(tableItemElement.appendChild.alwaysCalledWithExactly(textNodeMock));
+            assert.equal(tableRowElement.appendChild.callCount, 6);
+            assert(tableRowElement.appendChild.alwaysCalledWithExactly(tableItemElement));
+            assert.equal(listElementMock.appendChild.callCount, 6);
+            assert(listElementMock.appendChild.alwaysCalledWithExactly(tableRowElement));
+        });
+
+        it('should build the player list of all players in all seasons with no duplicates sorted alphabetically', function () {
+            playersController.statsFilebase = {
+                season1: [{Player: "Echo"}, {Player: "Bravo"}, {Player: "Foxtrot"}, {Player: "Alpha"}, {Player: "Delta"}],
+                season2: [{Player: "Echo"}, {Player: "Charlie"}, {Player: "Bravo"}],
+                season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
             };
 
             playersController.buildPlayersPage(documentMock, listElementMock);
