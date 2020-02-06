@@ -180,12 +180,26 @@ describe('Players Controller', () => {
 
     describe('buildPlayersPage', () => {
         let documentMock;
+        let listElementMock;
+        let elementMock;
+        let textNodeMock;
         let playersController;
 
         beforeEach(() => {
+            elementMock = {
+                appendChild: sinon.spy()
+            };
+            textNodeMock = {};
             documentMock = {
-                createElement: sinon.spy(),
-                createTextNode: sinon.spy()
+                createElement: sinon.spy(() => {
+                    return elementMock;
+                }),
+                createTextNode: sinon.spy(() => {
+                    return textNodeMock;
+                })
+            };
+            listElementMock = {
+                appendChild: sinon.spy()
             };
 
             playersController = new PlayersController();
@@ -194,10 +208,11 @@ describe('Players Controller', () => {
         it('should build an empty player list if there are no statistics', function () {
             playersController.statsFilebase = {};
 
-            playersController.buildPlayersPage(documentMock);
+            playersController.buildPlayersPage(documentMock, listElementMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
+            assert.equal(elementMock.appendChild.callCount, 0);
         });
 
         it('should build an empty player list if there are no players in any season', function () {
@@ -207,10 +222,11 @@ describe('Players Controller', () => {
                 season3: []
             };
 
-            playersController.buildPlayersPage(documentMock);
+            playersController.buildPlayersPage(documentMock, listElementMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
+            assert.equal(elementMock.appendChild.callCount, 0);
         });
 
         it('should build the player list of all players in all seasons', function () {
@@ -220,7 +236,7 @@ describe('Players Controller', () => {
                 season3: [{Player: "Echo", OtherStats: 'some other fake stats'}, {Player: "Foxtrot", FakeStats: 'these are fake stats'}]
             };
 
-            playersController.buildPlayersPage(documentMock);
+            playersController.buildPlayersPage(documentMock, listElementMock);
 
             assert.equal(documentMock.createElement.callCount, 6);
             assert(documentMock.createElement.alwaysCalledWithExactly('li'));
@@ -231,6 +247,10 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
             assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
             assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
+            assert.equal(elementMock.appendChild.callCount, 6);
+            assert(elementMock.appendChild.alwaysCalledWithExactly(textNodeMock));
+            assert.equal(listElementMock.appendChild.callCount, 6);
+            assert(listElementMock.appendChild.alwaysCalledWithExactly(elementMock));
         });
     });
 });
