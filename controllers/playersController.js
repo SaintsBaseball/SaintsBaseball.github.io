@@ -34,11 +34,9 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
     playerList.forEach(playerName => {
         const tableRowElement = document.createElement('tr');
         const tableItemElement = document.createElement('td');
-        const tableItemButtonElement = document.createElement('button');
         const playerTextNode = document.createTextNode(playerName);
 
-        tableItemButtonElement.appendChild(playerTextNode);
-        tableItemElement.appendChild(tableItemButtonElement);
+        tableItemElement.appendChild(playerTextNode);
         tableRowElement.appendChild(tableItemElement);
         playerListElement.appendChild(tableRowElement);
     });

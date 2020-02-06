@@ -181,16 +181,12 @@ describe('Players Controller', () => {
     describe('buildPlayersPage', () => {
         let documentMock;
         let listElementMock;
-        let tableItemButtonElement;
         let tableItemElement;
         let tableRowElement;
         let textNodeMock;
         let playersController;
 
         beforeEach(() => {
-            tableItemButtonElement = {
-                appendChild: sinon.spy()
-            };
             tableItemElement = {
                 appendChild: sinon.spy()
             };
@@ -201,8 +197,6 @@ describe('Players Controller', () => {
             documentMock = {
                 createElement: sinon.spy((elementType) => {
                     switch(elementType) {
-                        case 'button':
-                            return tableItemButtonElement;
                         case 'td':
                             return tableItemElement;
                         case 'tr':
@@ -227,7 +221,9 @@ describe('Players Controller', () => {
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
-            assert.equal(tableItemButtonElement.appendChild.callCount, 0);
+            assert.equal(tableItemElement.appendChild.callCount, 0);
+            assert.equal(tableRowElement.appendChild.callCount, 0);
+            assert.equal(listElementMock.appendChild.callCount, 0);
         });
 
         it('should build an empty player list if there are no players in any season', function () {
@@ -241,7 +237,9 @@ describe('Players Controller', () => {
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
-            assert.equal(tableItemButtonElement.appendChild.callCount, 0);
+            assert.equal(tableItemElement.appendChild.callCount, 0);
+            assert.equal(tableRowElement.appendChild.callCount, 0);
+            assert.equal(listElementMock.appendChild.callCount, 0);
         });
 
         it('should build the player list of all players in all seasons', function () {
@@ -255,7 +253,6 @@ describe('Players Controller', () => {
 
             assert.equal(documentMock.createElement.withArgs('tr').callCount, 6);
             assert.equal(documentMock.createElement.withArgs('td').callCount, 6);
-            assert.equal(documentMock.createElement.withArgs('button').callCount, 6);
             assert.equal(documentMock.createTextNode.callCount, 6);
             assert.equal(documentMock.createTextNode.args[0][0], 'Alpha');
             assert.equal(documentMock.createTextNode.args[1][0], 'Bravo');
@@ -263,10 +260,8 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
             assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
             assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
-            assert.equal(tableItemButtonElement.appendChild.callCount, 6);
-            assert(tableItemButtonElement.appendChild.alwaysCalledWithExactly(textNodeMock));
             assert.equal(tableItemElement.appendChild.callCount, 6);
-            assert(tableItemElement.appendChild.alwaysCalledWithExactly(tableItemButtonElement));
+            assert(tableItemElement.appendChild.alwaysCalledWithExactly(textNodeMock));
             assert.equal(tableRowElement.appendChild.callCount, 6);
             assert(tableRowElement.appendChild.alwaysCalledWithExactly(tableItemElement));
             assert.equal(listElementMock.appendChild.callCount, 6);
