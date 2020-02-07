@@ -126,6 +126,7 @@ describe('Players Controller', () => {
         let tableItemElement;
         let tableRowElement;
         let textNodeMock;
+        let modalMock;
         let playersController;
 
         beforeEach(() => {
@@ -134,6 +135,11 @@ describe('Players Controller', () => {
             };
             tableRowElement = {
                 appendChild: sinon.spy()
+            };
+            modalMock = {
+                appendChild: sinon.spy(),
+                hasChildNodes: sinon.spy(),
+                removeChild: sinon.spy()
             };
             textNodeMock = {};
             documentMock = {
@@ -159,7 +165,7 @@ describe('Players Controller', () => {
         it('should build an empty player list if there are no statistics', function () {
             playersController.statsFilebase = {};
 
-            playersController.buildPlayersPage(documentMock, listElementMock);
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
@@ -175,39 +181,13 @@ describe('Players Controller', () => {
                 season3: []
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock);
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
             assert.equal(tableItemElement.appendChild.callCount, 0);
             assert.equal(tableRowElement.appendChild.callCount, 0);
             assert.equal(listElementMock.appendChild.callCount, 0);
-        });
-
-        it('should build the player list of all players in all seasons', function () {
-            playersController.statsFilebase = {
-                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
-                season2: [{Player: "Delta"}],
-                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
-            };
-
-            playersController.buildPlayersPage(documentMock, listElementMock);
-
-            assert.equal(documentMock.createElement.withArgs('tr').callCount, 6);
-            assert.equal(documentMock.createElement.withArgs('td').callCount, 6);
-            assert.equal(documentMock.createTextNode.callCount, 6);
-            assert.equal(documentMock.createTextNode.args[0][0], 'Alpha');
-            assert.equal(documentMock.createTextNode.args[1][0], 'Bravo');
-            assert.equal(documentMock.createTextNode.args[2][0], 'Charlie');
-            assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
-            assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
-            assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
-            assert.equal(tableItemElement.appendChild.callCount, 6);
-            assert(tableItemElement.appendChild.alwaysCalledWithExactly(textNodeMock));
-            assert.equal(tableRowElement.appendChild.callCount, 6);
-            assert(tableRowElement.appendChild.alwaysCalledWithExactly(tableItemElement));
-            assert.equal(listElementMock.appendChild.callCount, 6);
-            assert(listElementMock.appendChild.alwaysCalledWithExactly(tableRowElement));
         });
 
         it('should build the player list of all players in all seasons with no duplicates sorted alphabetically', function () {
@@ -217,7 +197,7 @@ describe('Players Controller', () => {
                 season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock);
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
 
             assert.equal(documentMock.createElement.withArgs('tr').callCount, 6);
             assert.equal(documentMock.createElement.withArgs('td').callCount, 6);
@@ -234,6 +214,19 @@ describe('Players Controller', () => {
             assert(tableRowElement.appendChild.alwaysCalledWithExactly(tableItemElement));
             assert.equal(listElementMock.appendChild.callCount, 6);
             assert(listElementMock.appendChild.alwaysCalledWithExactly(tableRowElement));
+        });
+
+        it('should open a modal when selecting a player', function () {
+            playersController.statsFilebase = {
+                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
+                season2: [{Player: "Delta"}],
+                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            tableItemElement.onclick();
+
+            assert.equal(documentMock.createElement.withArgs('div').callCount, 1);
         });
     });
 });

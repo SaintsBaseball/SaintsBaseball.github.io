@@ -8,10 +8,10 @@
 		<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="../public/css/styles.css">		
+        <link rel="stylesheet" href="../public/css/styles.css">
         <link rel="stylesheet" href="../public/css/playersStyles.css">
 		<link rel="shortcut icon" type="image/png" href="../public/images/saintsFavicon.ico"/>
-		
+
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151566221-1"></script>
 		<script>
@@ -49,7 +49,7 @@
 				<b>Menu</b>
 			</h4>
             <a href="Statistics.html" class="w3-bar-item w3-button w3-hover-black">Statistics</a>
-			<a class="w3-bar-item selected">Players</a>         
+			<a class="w3-bar-item selected">Players</a>
 		</nav>
 
 		<!-- Main content -->
@@ -61,21 +61,30 @@
 						<tbody id="player-list">
 						</tbody>
 					</table>
+
+					<div id="my-modal" class="modal"></div>
                 </div>
 			</div>
 		</div>
 
 		<script src='../controllers/sidebarController.js'></script>
 		<script src='../controllers/playersController.js'></script>
-		<script src='../filebase/statisticsFilebase.js'></script>   
+		<script src='../filebase/statisticsFilebase.js'></script>
         <script>
             const sidebarElement = document.getElementById("mySidebar");
             const overlayElement = document.getElementById("myOverlay");
             sidebarController = sidebarController(sidebarElement, overlayElement);
 
-            const playerListElement = document.getElementById("player-list");
-            const playersController = new PlayersController(stats);
-            playersController.buildPlayersPage(document, playerListElement);
+			const playerListElement = document.getElementById("player-list");
+			const modal = document.getElementById("my-modal");
+			const playersController = new PlayersController(stats);
+            playersController.buildPlayersPage(document, playerListElement, modal);
+
+			window.onclick = function (event) {
+				if (event.target === modal) {
+					modal.style.display = "none";
+				}
+			};
         </script>
 	</body>
 </html>
