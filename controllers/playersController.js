@@ -27,6 +27,29 @@ function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 }
 
+function buildModal(document, modal) {
+    while (modal.hasChildNodes()) {
+        modal.removeChild(modal.firstChild);
+    }
+
+    const modalContent = document.createElement('div');
+    modalContent.className = 'modal-content';
+    const closeSpan = document.createElement('span');
+    closeSpan.className = 'close';
+    closeSpan.innerHTML = '&times';
+    const pElement = document.createElement('p');
+
+    modalContent.appendChild(closeSpan);
+    modalContent.appendChild(pElement);
+    modal.appendChild(modalContent);
+
+    closeSpan.onclick = function () {
+        modal.style.display = 'none';
+    };
+
+    modal.style.display = 'block';
+}
+
 PlayersController.prototype.buildPlayersPage = function (document, playerListElement, modal) {
     const statsForEachPlayer = this.buildStatsForEachPlayer();
     const playerList = getListOfPlayers(statsForEachPlayer);
@@ -36,28 +59,7 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
         const tableItemElement = document.createElement('td');
         const playerTextNode = document.createTextNode(playerName);
 
-        tableItemElement.onclick = function () {
-            while (modal.hasChildNodes()) {
-                modal.removeChild(modal.firstChild);
-            }
-
-            const modalContent = document.createElement('div');
-            modalContent.className = 'modal-content';
-            const closeSpan = document.createElement('span');
-            closeSpan.className = 'close';
-            closeSpan.innerHTML = '&times';
-            const pElement = document.createElement('p');
-
-            modalContent.appendChild(closeSpan);
-            modalContent.appendChild(pElement);
-            modal.appendChild(modalContent);
-
-            closeSpan.onclick = function () {
-                modal.style.display = 'none';
-            };
-
-            modal.style.display = 'block';
-        };
+        tableItemElement.onclick = buildModal.bind(null, document, modal);
 
         tableItemElement.appendChild(playerTextNode);
         tableRowElement.appendChild(tableItemElement);
