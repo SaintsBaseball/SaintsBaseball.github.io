@@ -27,7 +27,7 @@ function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 }
 
-PlayersController.prototype.buildPlayersPage = function (document, playerListElement) {
+PlayersController.prototype.buildPlayersPage = function (document, playerListElement, modal) {
     const statsForEachPlayer = this.buildStatsForEachPlayer();
     const playerList = getListOfPlayers(statsForEachPlayer);
 
@@ -40,24 +40,23 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
         //     while(modal.hasChildNodes()) {
         //         modal.removeChild(modal.firstChild);
         //     }
-        //
+
             const modalContent = document.createElement('div');
-        //     modalContent.className = 'modal-content';
-        //     const closeSpan = document.createElement('span');
-        //     closeSpan.className = 'close';
-        //     closeSpan.innerHTML = '&times';
-        //     const pElement = document.createElement('p');
-        //
-        //     modalContent.appendChild(closeSpan);
-        //     modalContent.appendChild(pElement);
-        //
-        //     modal.appendChild(modalContent);
-        //
+            modalContent.className = 'modal-content';
+            const closeSpan = document.createElement('span');
+            closeSpan.className = 'close';
+            closeSpan.innerHTML = '&times';
+            const pElement = document.createElement('p');
+
+            modalContent.appendChild(closeSpan);
+            modalContent.appendChild(pElement);
+            modal.appendChild(modalContent);
+
         //     closeSpan.onclick = function () {
         //         modal.style.display = 'none';
         //     };
-        //
-        //     modal.style.display = 'block';
+
+            modal.style.display = 'block';
         };
 
         tableItemElement.appendChild(playerTextNode);

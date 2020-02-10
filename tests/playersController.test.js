@@ -127,6 +127,9 @@ describe('Players Controller', () => {
         let tableRowElement;
         let textNodeMock;
         let modalMock;
+        let divMock;
+        let spanMock;
+        let paragraphMock;
         let playersController;
 
         beforeEach(() => {
@@ -139,7 +142,17 @@ describe('Players Controller', () => {
             modalMock = {
                 appendChild: sinon.spy(),
                 hasChildNodes: sinon.spy(),
-                removeChild: sinon.spy()
+                removeChild: sinon.spy(),
+                style: {}
+            };
+            divMock = {
+                appendChild: sinon.spy()
+            };
+            spanMock = {
+                appendChild: sinon.spy()
+            };
+            paragraphMock = {
+                appendChild: sinon.spy()
             };
             textNodeMock = {};
             documentMock = {
@@ -149,6 +162,12 @@ describe('Players Controller', () => {
                             return tableItemElement;
                         case 'tr':
                             return tableRowElement;
+                        case 'div':
+                            return divMock;
+                        case 'span':
+                            return spanMock;
+                        case 'p':
+                            return paragraphMock;
                     }
                 }),
                 createTextNode: sinon.spy(() => {
@@ -225,8 +244,19 @@ describe('Players Controller', () => {
 
             playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
             tableItemElement.onclick();
-
+            
             assert.equal(documentMock.createElement.withArgs('div').callCount, 1);
+            assert.equal(divMock.className, 'modal-content');
+            assert.equal(documentMock.createElement.withArgs('span').callCount, 1);
+            assert.equal(spanMock.className, 'close');
+            assert.equal(spanMock.innerHTML, '&times');
+            assert.equal(documentMock.createElement.withArgs('p').callCount, 1);
+            assert.equal(divMock.appendChild.callCount, 2);
+            assert.equal(divMock.appendChild.args[0][0], spanMock);
+            assert.equal(divMock.appendChild.args[1][0], paragraphMock);
+            assert.equal(modalMock.appendChild.callCount, 1);
+            assert.equal(modalMock.appendChild.args[0][0], divMock);
+            assert.equal(modalMock.style.display, 'block');
         });
     });
 });
