@@ -129,7 +129,7 @@ describe('Players Controller', () => {
         let modalMock;
         let divMock;
         let spanMock;
-        let paragraphMock;
+        let headerMock;
         let playersController;
         let hasChildNodesCallCount;
 
@@ -159,7 +159,7 @@ describe('Players Controller', () => {
             spanMock = {
                 appendChild: sinon.spy()
             };
-            paragraphMock = {
+            headerMock = {
                 appendChild: sinon.spy()
             };
             textNodeMock = {};
@@ -174,8 +174,8 @@ describe('Players Controller', () => {
                             return divMock;
                         case 'span':
                             return spanMock;
-                        case 'p':
-                            return paragraphMock;
+                        case 'h2':
+                            return headerMock;
                     }
                 }),
                 createTextNode: sinon.spy(() => {
@@ -258,10 +258,11 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createElement.withArgs('span').callCount, 1);
             assert.equal(spanMock.className, 'close');
             assert.equal(spanMock.innerHTML, '&times');
-            assert.equal(documentMock.createElement.withArgs('p').callCount, 1);
+            assert.equal(documentMock.createElement.withArgs('h2').callCount, 1);
+            assert.equal(headerMock.innerHTML, 'Foxtrot');
             assert.equal(divMock.appendChild.callCount, 2);
             assert.equal(divMock.appendChild.args[0][0], spanMock);
-            assert.equal(divMock.appendChild.args[1][0], paragraphMock);
+            assert.equal(divMock.appendChild.args[1][0], headerMock);
             assert.equal(modalMock.appendChild.callCount, 1);
             assert.equal(modalMock.appendChild.args[0][0], divMock);
             assert.equal(modalMock.style.display, 'block');

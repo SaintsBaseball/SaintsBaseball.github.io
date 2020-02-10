@@ -27,20 +27,26 @@ function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 }
 
-function buildModal(document, modal) {
+function restModalContents(modal) {
     while (modal.hasChildNodes()) {
         modal.removeChild(modal.firstChild);
     }
+}
+
+function buildModal(document, modal, playerName) {
+    restModalContents(modal);
 
     const modalContent = document.createElement('div');
     modalContent.className = 'modal-content';
     const closeSpan = document.createElement('span');
     closeSpan.className = 'close';
     closeSpan.innerHTML = '&times';
-    const pElement = document.createElement('p');
+
+    const playerNameHeader = document.createElement('h2');
+    playerNameHeader.innerHTML = playerName;
 
     modalContent.appendChild(closeSpan);
-    modalContent.appendChild(pElement);
+    modalContent.appendChild(playerNameHeader);
     modal.appendChild(modalContent);
 
     closeSpan.onclick = function () {
@@ -59,7 +65,7 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
         const tableItemElement = document.createElement('td');
         const playerTextNode = document.createTextNode(playerName);
 
-        tableItemElement.onclick = buildModal.bind(null, document, modal);
+        tableItemElement.onclick = buildModal.bind(null, document, modal, playerName);
 
         tableItemElement.appendChild(playerTextNode);
         tableRowElement.appendChild(tableItemElement);
