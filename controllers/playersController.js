@@ -37,9 +37,9 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
         const playerTextNode = document.createTextNode(playerName);
 
         tableItemElement.onclick = function () {
-        //     while(modal.hasChildNodes()) {
-        //         modal.removeChild(modal.firstChild);
-        //     }
+            while (modal.hasChildNodes()) {
+                modal.removeChild(modal.firstChild);
+            }
 
             const modalContent = document.createElement('div');
             modalContent.className = 'modal-content';
@@ -52,9 +52,9 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
             modalContent.appendChild(pElement);
             modal.appendChild(modalContent);
 
-        //     closeSpan.onclick = function () {
-        //         modal.style.display = 'none';
-        //     };
+            closeSpan.onclick = function () {
+                modal.style.display = 'none';
+            };
 
             modal.style.display = 'block';
         };

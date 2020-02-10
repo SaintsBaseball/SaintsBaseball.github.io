@@ -131,8 +131,10 @@ describe('Players Controller', () => {
         let spanMock;
         let paragraphMock;
         let playersController;
+        let hasChildNodesCallCount;
 
         beforeEach(() => {
+            hasChildNodesCallCount = 0;
             tableItemElement = {
                 appendChild: sinon.spy()
             };
@@ -141,9 +143,15 @@ describe('Players Controller', () => {
             };
             modalMock = {
                 appendChild: sinon.spy(),
-                hasChildNodes: sinon.spy(),
+                hasChildNodes: sinon.spy(() => {
+                    hasChildNodesCallCount++;
+                    return hasChildNodesCallCount < 5;
+                }),
                 removeChild: sinon.spy(),
-                style: {}
+                style: {},
+                firstChild: {
+                    data: 'this is a fake child'
+                }
             };
             divMock = {
                 appendChild: sinon.spy()
@@ -244,7 +252,7 @@ describe('Players Controller', () => {
 
             playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
             tableItemElement.onclick();
-            
+
             assert.equal(documentMock.createElement.withArgs('div').callCount, 1);
             assert.equal(divMock.className, 'modal-content');
             assert.equal(documentMock.createElement.withArgs('span').callCount, 1);
@@ -257,6 +265,35 @@ describe('Players Controller', () => {
             assert.equal(modalMock.appendChild.callCount, 1);
             assert.equal(modalMock.appendChild.args[0][0], divMock);
             assert.equal(modalMock.style.display, 'block');
+        });
+
+        it('should clear the contents of the modal when opening it', function () {
+            playersController.statsFilebase = {
+                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
+                season2: [{Player: "Delta"}],
+                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            tableItemElement.onclick();
+
+            assert.equal(modalMock.hasChildNodes.callCount, hasChildNodesCallCount);
+            assert.equal(modalMock.removeChild.callCount, hasChildNodesCallCount - 1);
+            assert.equal(modalMock.removeChild.args[0][0], modalMock.firstChild);
+        });
+
+        it('should close the modal when clicking the X', function () {
+            playersController.statsFilebase = {
+                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
+                season2: [{Player: "Delta"}],
+                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            tableItemElement.onclick();
+            spanMock.onclick();
+
+            assert.equal(modalMock.style.display, 'none');
         });
     });
 });
