@@ -33,26 +33,36 @@ function restModalContents(modal) {
     }
 }
 
-function buildModal(document, modal, playerName, statsForEachPlayer) {
-    restModalContents(modal);
-
-    const modalContent = document.createElement('div');
-    modalContent.className = 'modal-content';
+function buildCloseModalButton(document, modal) {
     const closeSpan = document.createElement('span');
     closeSpan.className = 'close';
     closeSpan.innerHTML = '&times';
 
-    const playerNameHeader = document.createElement('h2');
-    const playerNumber = (Object.values(statsForEachPlayer[playerName]))[0]['#'];
-    playerNameHeader.innerHTML = `${playerName} #${playerNumber}`;
-
-    modalContent.appendChild(closeSpan);
-    modalContent.appendChild(playerNameHeader);
-    modal.appendChild(modalContent);
-
     closeSpan.onclick = function () {
         modal.style.display = 'none';
     };
+    return closeSpan;
+}
+
+function buildPlayerModalHeader(document, statsForEachPlayer, playerName) {
+    const playerNameHeader = document.createElement('h2');
+    const playerNumber = (Object.values(statsForEachPlayer[playerName]))[0]['#'];
+    playerNameHeader.innerHTML = `${playerName} #${playerNumber}`;
+    return playerNameHeader;
+}
+
+function buildModal(document, modal, playerName, statsForEachPlayer) {
+    restModalContents(modal);
+
+    const modalContentWrapper = document.createElement('div');
+    modalContentWrapper.className = 'modal-content';
+
+    const closeModalButton = buildCloseModalButton(document, modal);
+    const playerModalHeader = buildPlayerModalHeader(document, statsForEachPlayer, playerName);
+
+    modalContentWrapper.appendChild(closeModalButton);
+    modalContentWrapper.appendChild(playerModalHeader);
+    modal.appendChild(modalContentWrapper);
 
     modal.style.display = 'block';
 }
