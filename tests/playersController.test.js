@@ -245,9 +245,9 @@ describe('Players Controller', () => {
 
         it('should open a modal when selecting a player', function () {
             playersController.statsFilebase = {
-                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
-                season2: [{Player: "Delta"}],
-                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+                season1: [{Player: "Alpha", '#': 1}, {Player: "Bravo", '#': 2}, {Player: "Charlie", '#': 3}],
+                season2: [{Player: "Delta", '#': 4}],
+                season3: [{Player: "Echo", '#': 5}, {Player: "Foxtrot", '#': 6}]
             };
 
             playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
@@ -259,13 +259,26 @@ describe('Players Controller', () => {
             assert.equal(spanMock.className, 'close');
             assert.equal(spanMock.innerHTML, '&times');
             assert.equal(documentMock.createElement.withArgs('h2').callCount, 1);
-            assert.equal(headerMock.innerHTML, 'Foxtrot');
+            assert.equal(headerMock.innerHTML, 'Foxtrot #6');
             assert.equal(divMock.appendChild.callCount, 2);
             assert.equal(divMock.appendChild.args[0][0], spanMock);
             assert.equal(divMock.appendChild.args[1][0], headerMock);
             assert.equal(modalMock.appendChild.callCount, 1);
             assert.equal(modalMock.appendChild.args[0][0], divMock);
             assert.equal(modalMock.style.display, 'block');
+        });
+
+        it('should show the most recent number for a player in the modal header', function () {
+            playersController.statsFilebase = {
+                season3: [{Player: "Alpha", '#': 3}],
+                season2: [{Player: "Alpha", '#': 2}],
+                season1: [{Player: "Alpha", '#': 1}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            tableItemElement.onclick();
+
+            assert.equal(headerMock.innerHTML, 'Alpha #3');
         });
 
         it('should clear the contents of the modal when opening it', function () {
