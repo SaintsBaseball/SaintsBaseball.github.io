@@ -44,24 +44,33 @@ function buildCloseModalButton(document, modal) {
     return closeSpan;
 }
 
-function buildPlayerModalHeader(document, statsForEachPlayer, playerName) {
+function buildPlayerModalHeader(document, playerName, playerStats) {
     const playerNameHeader = document.createElement('h2');
-    const playerNumber = (Object.values(statsForEachPlayer[playerName]))[0]['#'];
+    const playerNumber = (Object.values(playerStats))[0]['#'];
     playerNameHeader.innerHTML = `${playerName} #${playerNumber}`;
     return playerNameHeader;
 }
 
-function buildModal(document, modal, playerName, statsForEachPlayer) {
+function buildModal(document, modal, playerName, playerStats) {
     restModalContents(modal);
 
     const modalContentWrapper = document.createElement('div');
     modalContentWrapper.className = 'modal-content';
 
     const closeModalButton = buildCloseModalButton(document, modal);
-    const playerModalHeader = buildPlayerModalHeader(document, statsForEachPlayer, playerName);
+    const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
+
+    const playerStatsTable = document.createElement('table');
+
+    const mostRecentSeasonStats = Object.values(playerStats)[0];
+    Object.keys(mostRecentSeasonStats).forEach(statName => {
+        const playerStatsHeaderElement = document.createElement('th');
+        const playerStatsHeaderTextNode = document.createTextNode(statName);
+    });
 
     modalContentWrapper.appendChild(closeModalButton);
     modalContentWrapper.appendChild(playerModalHeader);
+    modalContentWrapper.appendChild(playerStatsTable);
     modal.appendChild(modalContentWrapper);
 
     modal.style.display = 'block';
@@ -75,7 +84,8 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
         const listItemElement = document.createElement('li');
         const playerTextNode = document.createTextNode(playerName);
 
-        listItemElement.onclick = buildModal.bind(null, document, modal, playerName, statsForEachPlayer);
+        const playerStats = statsForEachPlayer[playerName];
+        listItemElement.onclick = buildModal.bind(null, document, modal, playerName, playerStats);
 
         listItemElement.appendChild(playerTextNode);
         playerListElement.appendChild(listItemElement);

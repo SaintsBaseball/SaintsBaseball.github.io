@@ -242,9 +242,7 @@ describe('Players Controller', () => {
 
         it('should open a modal when selecting a player', function () {
             playersController.statsFilebase = {
-                season1: [{Player: "Alpha", '#': 1}, {Player: "Bravo", '#': 2}, {Player: "Charlie", '#': 3}],
-                season2: [{Player: "Delta", '#': 4}],
-                season3: [{Player: "Echo", '#': 5}, {Player: "Foxtrot", '#': 6}]
+                season1: [{Player: "Alpha", '#': 1}]
             };
 
             playersController.buildPlayersPage(documentMock, listMock, modalMock);
@@ -256,7 +254,7 @@ describe('Players Controller', () => {
             assert.equal(spanMock.className, 'close');
             assert.equal(spanMock.innerHTML, '&times');
             assert.equal(documentMock.createElement.withArgs('h2').callCount, 1);
-            assert.equal(headerMock.innerHTML, 'Foxtrot #6');
+            assert.equal(headerMock.innerHTML, 'Alpha #1');
             assert.equal(divMock.appendChild.args[0][0], spanMock);
             assert.equal(divMock.appendChild.args[1][0], headerMock);
             assert.equal(modalMock.appendChild.callCount, 1);
@@ -279,9 +277,7 @@ describe('Players Controller', () => {
 
         it('should clear the contents of the modal when opening it', function () {
             playersController.statsFilebase = {
-                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
-                season2: [{Player: "Delta"}],
-                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+                season1: [{Player: "Alpha"}]
             };
 
             playersController.buildPlayersPage(documentMock, listMock, modalMock);
@@ -294,9 +290,7 @@ describe('Players Controller', () => {
 
         it('should close the modal when clicking the X', function () {
             playersController.statsFilebase = {
-                season1: [{Player: "Alpha"}, {Player: "Bravo",}, {Player: "Charlie"}],
-                season2: [{Player: "Delta"}],
-                season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
+                season1: [{Player: "Alpha"}]
             };
 
             playersController.buildPlayersPage(documentMock, listMock, modalMock);
@@ -304,6 +298,26 @@ describe('Players Controller', () => {
             spanMock.onclick();
 
             assert.equal(modalMock.style.display, 'none');
+        });
+
+        it('should show the player stats for each season in a table in the modal', function () {
+            playersController.statsFilebase = {
+                season3: [{Player: "Alpha", '#': 3, stat: 'some final fake value', anotherStat: 9, lastStat: 5.24}],
+                season2: [{Player: "Alpha", '#': 2, stat: 'some other fake value', anotherStat: 0, lastStat: 3.16}],
+                season1: [{Player: "Alpha", '#': 1, stat: 'some fake value', anotherStat: 6, lastStat: 2.87}]
+            };
+
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
+            listItemMock.onclick();
+
+            assert.equal(documentMock.createElement.withArgs('table').callCount, 1);
+            assert.equal(documentMock.createElement.withArgs('th').callCount, 3);
+            assert.equal(documentMock.createTextNode.callCount, 4);
+            assert.equal(documentMock.createTextNode.args[1][0], 'stat');
+            assert.equal(documentMock.createTextNode.args[2][0], 'anotherStat');
+            assert.equal(documentMock.createTextNode.args[3][0], 'lastStat');
+            assert.equal(divMock.appendChild.callCount, 3);
+            assert.equal(divMock.appendChild.args[2][0], tableMock);
         });
     });
 });
