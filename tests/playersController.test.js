@@ -122,25 +122,59 @@ describe('Players Controller', () => {
 
     describe('buildPlayersPage', () => {
         let documentMock;
-        let listElementMock;
-        let tableItemElement;
-        let tableRowElement;
+        let listMock;
+        let listItemMock;
         let textNodeMock;
         let modalMock;
         let divMock;
         let spanMock;
         let headerMock;
+        let tableMock;
         let playersController;
         let hasChildNodesCallCount;
 
         beforeEach(() => {
+            listItemMock = {
+                appendChild: sinon.spy()
+            };
+            divMock = {
+                appendChild: sinon.spy()
+            };
+            spanMock = {
+                appendChild: sinon.spy()
+            };
+            headerMock = {
+                appendChild: sinon.spy()
+            };
+            tableMock = {
+                appendChild: sinon.spy()
+            };
+            textNodeMock = {};
+            documentMock = {
+                createElement: sinon.spy((elementType) => {
+                    switch(elementType) {
+                        case 'li':
+                            return listItemMock;
+                        case 'div':
+                            return divMock;
+                        case 'span':
+                            return spanMock;
+                        case 'h2':
+                            return headerMock;
+                        case 'table':
+                            return tableMock;
+                    }
+                }),
+                createTextNode: sinon.spy(() => {
+                    return textNodeMock;
+                })
+            };
+
+            listMock = {
+                appendChild: sinon.spy()
+            };
+
             hasChildNodesCallCount = 0;
-            tableItemElement = {
-                appendChild: sinon.spy()
-            };
-            tableRowElement = {
-                appendChild: sinon.spy()
-            };
             modalMock = {
                 appendChild: sinon.spy(),
                 hasChildNodes: sinon.spy(() => {
@@ -153,38 +187,6 @@ describe('Players Controller', () => {
                     data: 'this is a fake child'
                 }
             };
-            divMock = {
-                appendChild: sinon.spy()
-            };
-            spanMock = {
-                appendChild: sinon.spy()
-            };
-            headerMock = {
-                appendChild: sinon.spy()
-            };
-            textNodeMock = {};
-            documentMock = {
-                createElement: sinon.spy((elementType) => {
-                    switch(elementType) {
-                        case 'td':
-                            return tableItemElement;
-                        case 'tr':
-                            return tableRowElement;
-                        case 'div':
-                            return divMock;
-                        case 'span':
-                            return spanMock;
-                        case 'h2':
-                            return headerMock;
-                    }
-                }),
-                createTextNode: sinon.spy(() => {
-                    return textNodeMock;
-                })
-            };
-            listElementMock = {
-                appendChild: sinon.spy()
-            };
 
             playersController = new PlayersController();
         });
@@ -192,13 +194,12 @@ describe('Players Controller', () => {
         it('should build an empty player list if there are no statistics', function () {
             playersController.statsFilebase = {};
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
-            assert.equal(tableItemElement.appendChild.callCount, 0);
-            assert.equal(tableRowElement.appendChild.callCount, 0);
-            assert.equal(listElementMock.appendChild.callCount, 0);
+            assert.equal(listItemMock.appendChild.callCount, 0);
+            assert.equal(listMock.appendChild.callCount, 0);
         });
 
         it('should build an empty player list if there are no players in any season', function () {
@@ -208,13 +209,12 @@ describe('Players Controller', () => {
                 season3: []
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
 
             assert.equal(documentMock.createElement.callCount, 0);
             assert.equal(documentMock.createTextNode.callCount, 0);
-            assert.equal(tableItemElement.appendChild.callCount, 0);
-            assert.equal(tableRowElement.appendChild.callCount, 0);
-            assert.equal(listElementMock.appendChild.callCount, 0);
+            assert.equal(listItemMock.appendChild.callCount, 0);
+            assert.equal(listMock.appendChild.callCount, 0);
         });
 
         it('should build the player list of all players in all seasons with no duplicates sorted alphabetically', function () {
@@ -224,10 +224,9 @@ describe('Players Controller', () => {
                 season3: [{Player: "Alpha"}, {Player: "Bravo"}, {Player: "Foxtrot"}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
 
-            assert.equal(documentMock.createElement.withArgs('tr').callCount, 6);
-            assert.equal(documentMock.createElement.withArgs('td').callCount, 6);
+            assert.equal(documentMock.createElement.withArgs('li').callCount, 6);
             assert.equal(documentMock.createTextNode.callCount, 6);
             assert.equal(documentMock.createTextNode.args[0][0], 'Alpha');
             assert.equal(documentMock.createTextNode.args[1][0], 'Bravo');
@@ -235,12 +234,10 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createTextNode.args[3][0], 'Delta');
             assert.equal(documentMock.createTextNode.args[4][0], 'Echo');
             assert.equal(documentMock.createTextNode.args[5][0], 'Foxtrot');
-            assert.equal(tableItemElement.appendChild.callCount, 6);
-            assert(tableItemElement.appendChild.alwaysCalledWithExactly(textNodeMock));
-            assert.equal(tableRowElement.appendChild.callCount, 6);
-            assert(tableRowElement.appendChild.alwaysCalledWithExactly(tableItemElement));
-            assert.equal(listElementMock.appendChild.callCount, 6);
-            assert(listElementMock.appendChild.alwaysCalledWithExactly(tableRowElement));
+            assert.equal(listItemMock.appendChild.callCount, 6);
+            assert(listItemMock.appendChild.alwaysCalledWithExactly(textNodeMock));
+            assert.equal(listMock.appendChild.callCount, 6);
+            assert(listMock.appendChild.alwaysCalledWithExactly(listItemMock));
         });
 
         it('should open a modal when selecting a player', function () {
@@ -250,8 +247,8 @@ describe('Players Controller', () => {
                 season3: [{Player: "Echo", '#': 5}, {Player: "Foxtrot", '#': 6}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
-            tableItemElement.onclick();
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
+            listItemMock.onclick();
 
             assert.equal(documentMock.createElement.withArgs('div').callCount, 1);
             assert.equal(divMock.className, 'modal-content');
@@ -260,7 +257,6 @@ describe('Players Controller', () => {
             assert.equal(spanMock.innerHTML, '&times');
             assert.equal(documentMock.createElement.withArgs('h2').callCount, 1);
             assert.equal(headerMock.innerHTML, 'Foxtrot #6');
-            assert.equal(divMock.appendChild.callCount, 2);
             assert.equal(divMock.appendChild.args[0][0], spanMock);
             assert.equal(divMock.appendChild.args[1][0], headerMock);
             assert.equal(modalMock.appendChild.callCount, 1);
@@ -275,8 +271,8 @@ describe('Players Controller', () => {
                 season1: [{Player: "Alpha", '#': 1}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
-            tableItemElement.onclick();
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
+            listItemMock.onclick();
 
             assert.equal(headerMock.innerHTML, 'Alpha #3');
         });
@@ -288,8 +284,8 @@ describe('Players Controller', () => {
                 season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
-            tableItemElement.onclick();
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
+            listItemMock.onclick();
 
             assert.equal(modalMock.hasChildNodes.callCount, hasChildNodesCallCount);
             assert.equal(modalMock.removeChild.callCount, hasChildNodesCallCount - 1);
@@ -303,8 +299,8 @@ describe('Players Controller', () => {
                 season3: [{Player: "Echo"}, {Player: "Foxtrot"}]
             };
 
-            playersController.buildPlayersPage(documentMock, listElementMock, modalMock);
-            tableItemElement.onclick();
+            playersController.buildPlayersPage(documentMock, listMock, modalMock);
+            listItemMock.onclick();
             spanMock.onclick();
 
             assert.equal(modalMock.style.display, 'none');

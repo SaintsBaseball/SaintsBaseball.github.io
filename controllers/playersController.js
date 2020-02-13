@@ -72,15 +72,13 @@ PlayersController.prototype.buildPlayersPage = function (document, playerListEle
     const playerList = getListOfPlayers(statsForEachPlayer);
 
     playerList.forEach(playerName => {
-        const tableRowElement = document.createElement('tr');
-        const tableItemElement = document.createElement('td');
+        const listItemElement = document.createElement('li');
         const playerTextNode = document.createTextNode(playerName);
 
-        tableItemElement.onclick = buildModal.bind(null, document, modal, playerName, statsForEachPlayer);
+        listItemElement.onclick = buildModal.bind(null, document, modal, playerName, statsForEachPlayer);
 
-        tableItemElement.appendChild(playerTextNode);
-        tableRowElement.appendChild(tableItemElement);
-        playerListElement.appendChild(tableRowElement);
+        listItemElement.appendChild(playerTextNode);
+        playerListElement.appendChild(listItemElement);
     });
 };
 
