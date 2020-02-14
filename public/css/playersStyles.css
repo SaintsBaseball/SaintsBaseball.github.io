@@ -3,6 +3,7 @@ ul {
     color: #010150;
     font-size: 150%;
     padding-left: 0;
+    width: fit-content;
 }
 
 li:hover {
