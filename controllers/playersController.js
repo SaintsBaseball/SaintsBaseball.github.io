@@ -61,12 +61,21 @@ function buildModal(document, modal, playerName, playerStats) {
     const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
 
     const playerStatsTable = document.createElement('table');
+    const playerStatsHeader = document.createElement('thead');
+    const playerStatsHeaderRow = document.createElement('tr');
 
     const mostRecentSeasonStats = Object.values(playerStats)[0];
     Object.keys(mostRecentSeasonStats).forEach(statName => {
-        const playerStatsHeaderElement = document.createElement('th');
-        const playerStatsHeaderTextNode = document.createTextNode(statName);
+        if (statName !== '#') {
+            const playerStatsHeaderElement = document.createElement('th');
+            const playerStatsHeaderTextNode = document.createTextNode(statName);
+            playerStatsHeaderElement.appendChild(playerStatsHeaderTextNode);
+            playerStatsHeaderRow.appendChild(playerStatsHeaderElement);
+        }
     });
+
+    playerStatsHeader.appendChild(playerStatsHeaderRow);
+    playerStatsTable.appendChild(playerStatsHeader);
 
     modalContentWrapper.appendChild(closeModalButton);
     modalContentWrapper.appendChild(playerModalHeader);
