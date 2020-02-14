@@ -52,26 +52,26 @@ function buildPlayerModalHeader(document, playerName, playerStats) {
 }
 
 function buildTableHeader(document, playerStats) {
-    const playerStatsHeader = document.createElement('thead');
-    const playerStatsHeaderRow = document.createElement('tr');
+    const playerStatsTableHeader = document.createElement('thead');
+    const playerStatsTableHeaderRow = document.createElement('tr');
 
     const seasonHeaderElement = document.createElement('th');
     const seasonHeaderElementTextNode = document.createTextNode('Season');
     seasonHeaderElement.appendChild(seasonHeaderElementTextNode);
-    playerStatsHeaderRow.appendChild(seasonHeaderElement);
+    playerStatsTableHeaderRow.appendChild(seasonHeaderElement);
 
     const mostRecentSeasonStats = Object.values(playerStats)[0];
     Object.keys(mostRecentSeasonStats).forEach(statName => {
         if (statName !== '#') {
-            const playerStatsHeaderElement = document.createElement('th');
-            const playerStatsHeaderTextNode = document.createTextNode(statName);
-            playerStatsHeaderElement.appendChild(playerStatsHeaderTextNode);
-            playerStatsHeaderRow.appendChild(playerStatsHeaderElement);
+            const playerStatsTableHeaderElement = document.createElement('th');
+            const playerStatsTableHeaderElementTextNode = document.createTextNode(statName);
+            playerStatsTableHeaderElement.appendChild(playerStatsTableHeaderElementTextNode);
+            playerStatsTableHeaderRow.appendChild(playerStatsTableHeaderElement);
         }
     });
 
-    playerStatsHeader.appendChild(playerStatsHeaderRow);
-    return playerStatsHeader;
+    playerStatsTableHeader.appendChild(playerStatsTableHeaderRow);
+    return playerStatsTableHeader;
 }
 
 function buildModal(document, modal, playerName, playerStats) {
@@ -84,8 +84,22 @@ function buildModal(document, modal, playerName, playerStats) {
     const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
 
     const playerStatsTable = document.createElement('table');
-    const playerStatsHeader = buildTableHeader(document, playerStats);
-    playerStatsTable.appendChild(playerStatsHeader);
+    const playerStatsTableHeader = buildTableHeader(document, playerStats);
+    playerStatsTable.appendChild(playerStatsTableHeader);
+
+    const playerStatsTableBody = document.createElement('tbody');
+
+    Object.keys(playerStats).forEach(season => {
+        const seasonStatsTableRow = document.createElement('tr');
+        const seasonTableDataElement = document.createElement('td');
+        const seasonTableDataElementTextNode = document.createTextNode(season);
+        seasonTableDataElement.appendChild(seasonTableDataElementTextNode);
+        seasonStatsTableRow.appendChild(seasonTableDataElement);
+
+        playerStatsTableBody.appendChild(seasonStatsTableRow);
+    });
+
+    playerStatsTable.appendChild(playerStatsTableBody);
 
     modalContentWrapper.appendChild(closeModalButton);
     modalContentWrapper.appendChild(playerModalHeader);
