@@ -96,6 +96,17 @@ function buildModal(document, modal, playerName, playerStats) {
         seasonTableDataElement.appendChild(seasonTableDataElementTextNode);
         seasonStatsTableRow.appendChild(seasonTableDataElement);
 
+        const statsForSeason = playerStats[season];
+        Object.keys(statsForSeason).forEach(statisticName => {
+            if (statisticName !== '#') {
+                const statisticValue = statsForSeason[statisticName];
+                const statisticTableDataElement = document.createElement('td');
+                const statisticTableDataElementTextNode = document.createTextNode(statisticValue);
+                statisticTableDataElement.appendChild(statisticTableDataElementTextNode);
+                seasonStatsTableRow.appendChild(statisticTableDataElement);
+            }
+        });
+
         playerStatsTableBody.appendChild(seasonStatsTableRow);
     });
 
