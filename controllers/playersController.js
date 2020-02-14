@@ -74,19 +74,7 @@ function buildTableHeader(document, playerStats) {
     return playerStatsTableHeader;
 }
 
-function buildModal(document, modal, playerName, playerStats) {
-    resetModalContents(modal);
-
-    const modalContentWrapper = document.createElement('div');
-    modalContentWrapper.className = 'modal-content';
-
-    const closeModalButton = buildCloseModalButton(document, modal);
-    const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
-
-    const playerStatsTable = document.createElement('table');
-    const playerStatsTableHeader = buildTableHeader(document, playerStats);
-    playerStatsTable.appendChild(playerStatsTableHeader);
-
+function buildTableBody(document, playerStats) {
     const playerStatsTableBody = document.createElement('tbody');
 
     Object.keys(playerStats).forEach(season => {
@@ -109,8 +97,27 @@ function buildModal(document, modal, playerName, playerStats) {
 
         playerStatsTableBody.appendChild(seasonStatsTableRow);
     });
+    return playerStatsTableBody;
+}
 
+function buildStatsTable(document, playerStats) {
+    const playerStatsTable = document.createElement('table');
+    const playerStatsTableHeader = buildTableHeader(document, playerStats);
+    playerStatsTable.appendChild(playerStatsTableHeader);
+    const playerStatsTableBody = buildTableBody(document, playerStats);
     playerStatsTable.appendChild(playerStatsTableBody);
+    return playerStatsTable;
+}
+
+function buildModal(document, modal, playerName, playerStats) {
+    resetModalContents(modal);
+
+    const modalContentWrapper = document.createElement('div');
+    modalContentWrapper.className = 'modal-content';
+
+    const closeModalButton = buildCloseModalButton(document, modal);
+    const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
+    const playerStatsTable = buildStatsTable(document, playerStats);
 
     modalContentWrapper.appendChild(closeModalButton);
     modalContentWrapper.appendChild(playerModalHeader);
