@@ -44,3 +44,22 @@ li:hover {
     text-decoration: none;
     cursor: pointer;
 }
+
+table {
+    border: 3px black solid;
+    border-collapse: collapse;
+    text-align: center;
+    width: 90%;
+    overflow: hidden;
+}
+
+th {
+    border-bottom: 2px black solid;
+    background-color: lightgray;
+    border-right: 1px black solid;
+    width: 3%;
+}
+
+td {
+    border: 1px black solid;
+}
