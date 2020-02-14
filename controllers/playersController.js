@@ -2,10 +2,10 @@ function PlayersController(statsFilebase) {
     this.statsFilebase = statsFilebase;
 }
 
-PlayersController.prototype.buildStatsForEachPlayer = function () {
+function buildStatsForEachPlayer (statsFilebase) {
     const statsForEachPlayer = {};
-    Object.keys(this.statsFilebase).forEach(seasonKey => {
-        const statsForASeason = this.statsFilebase[seasonKey];
+    Object.keys(statsFilebase).forEach(seasonKey => {
+        const statsForASeason = statsFilebase[seasonKey];
         statsForASeason.forEach(playerStats => {
             const playerName = playerStats.Player;
 
@@ -21,7 +21,7 @@ PlayersController.prototype.buildStatsForEachPlayer = function () {
     });
 
     return statsForEachPlayer;
-};
+}
 
 function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
@@ -128,7 +128,7 @@ function buildModal(document, modal, playerName, playerStats) {
 }
 
 PlayersController.prototype.buildPlayersPage = function (document, playerListElement, modal) {
-    const statsForEachPlayer = this.buildStatsForEachPlayer();
+    const statsForEachPlayer = buildStatsForEachPlayer(this.statsFilebase);
     const playerList = getListOfPlayers(statsForEachPlayer);
 
     playerList.forEach(playerName => {
