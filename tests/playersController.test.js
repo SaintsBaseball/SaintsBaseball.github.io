@@ -331,19 +331,22 @@ describe('Players Controller', () => {
             assert.equal(documentMock.createElement.withArgs('table').callCount, 1);
             assert.equal(documentMock.createElement.withArgs('thead').callCount, 1);
             assert.equal(documentMock.createElement.withArgs('tr').callCount, 1);
-            assert.equal(documentMock.createElement.withArgs('th').callCount, 3);
-            assert.equal(documentMock.createTextNode.callCount, 4);
-            assert.equal(documentMock.createTextNode.args[1][0], 'stat');
-            assert.equal(documentMock.createTextNode.args[2][0], 'anotherStat');
-            assert.equal(documentMock.createTextNode.args[3][0], 'lastStat');
-            assert.equal(tableHeaderElementMock.appendChild.callCount, 3);
-            assert.equal(tableHeaderElementMock.appendChild.withArgs(textNodeMock).callCount, 3);
-            assert.equal(tableRowMock.appendChild.callCount, 3);
-            assert.equal(tableRowMock.appendChild.withArgs(tableHeaderElementMock).callCount, 3);
+            assert.equal(documentMock.createElement.withArgs('th').callCount, 4);
+            assert.equal(documentMock.createTextNode.callCount, 5);
+            assert.equal(documentMock.createTextNode.args[1][0], 'Season');
+            assert.equal(documentMock.createTextNode.args[2][0], 'stat');
+            assert.equal(documentMock.createTextNode.args[3][0], 'anotherStat');
+            assert.equal(documentMock.createTextNode.args[4][0], 'lastStat');
+            assert.equal(tableHeaderElementMock.appendChild.callCount, 4);
+            assert.equal(tableHeaderElementMock.appendChild.withArgs(textNodeMock).callCount, 4);
+            assert.equal(tableRowMock.appendChild.callCount, 4);
+            assert.equal(tableRowMock.appendChild.withArgs(tableHeaderElementMock).callCount, 4);
             assert.equal(tableHeaderMock.appendChild.callCount, 1);
             assert.equal(tableHeaderMock.appendChild.withArgs(tableRowMock).callCount, 1);
             assert.equal(tableMock.appendChild.callCount, 1);
             assert.equal(tableMock.appendChild.withArgs(tableHeaderMock).callCount, 1);
+
+
             assert.equal(divMock.appendChild.callCount, 3);
             assert.equal(divMock.appendChild.args[2][0], tableMock);
         });

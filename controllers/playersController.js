@@ -64,6 +64,11 @@ function buildModal(document, modal, playerName, playerStats) {
     const playerStatsHeader = document.createElement('thead');
     const playerStatsHeaderRow = document.createElement('tr');
 
+    const seasonHeaderElement = document.createElement('th');
+    const seasonHeaderElementTextNode = document.createTextNode('Season');
+    seasonHeaderElement.appendChild(seasonHeaderElementTextNode);
+    playerStatsHeaderRow.appendChild(seasonHeaderElement);
+
     const mostRecentSeasonStats = Object.values(playerStats)[0];
     Object.keys(mostRecentSeasonStats).forEach(statName => {
         if (statName !== '#') {
