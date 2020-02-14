@@ -346,7 +346,6 @@ describe('Players Controller', () => {
             assert.equal(tableMock.appendChild.callCount, 1);
             assert.equal(tableMock.appendChild.withArgs(tableHeaderMock).callCount, 1);
 
-
             assert.equal(divMock.appendChild.callCount, 3);
             assert.equal(divMock.appendChild.args[2][0], tableMock);
         });

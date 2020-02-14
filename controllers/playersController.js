@@ -51,16 +51,7 @@ function buildPlayerModalHeader(document, playerName, playerStats) {
     return playerNameHeader;
 }
 
-function buildModal(document, modal, playerName, playerStats) {
-    restModalContents(modal);
-
-    const modalContentWrapper = document.createElement('div');
-    modalContentWrapper.className = 'modal-content';
-
-    const closeModalButton = buildCloseModalButton(document, modal);
-    const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
-
-    const playerStatsTable = document.createElement('table');
+function buildTableHeader(document, playerStats) {
     const playerStatsHeader = document.createElement('thead');
     const playerStatsHeaderRow = document.createElement('tr');
 
@@ -80,6 +71,20 @@ function buildModal(document, modal, playerName, playerStats) {
     });
 
     playerStatsHeader.appendChild(playerStatsHeaderRow);
+    return playerStatsHeader;
+}
+
+function buildModal(document, modal, playerName, playerStats) {
+    restModalContents(modal);
+
+    const modalContentWrapper = document.createElement('div');
+    modalContentWrapper.className = 'modal-content';
+
+    const closeModalButton = buildCloseModalButton(document, modal);
+    const playerModalHeader = buildPlayerModalHeader(document, playerName, playerStats);
+
+    const playerStatsTable = document.createElement('table');
+    const playerStatsHeader = buildTableHeader(document, playerStats);
     playerStatsTable.appendChild(playerStatsHeader);
 
     modalContentWrapper.appendChild(closeModalButton);
