@@ -27,7 +27,7 @@ function getListOfPlayers(statsForEachPlayer) {
     return Object.keys(statsForEachPlayer).sort();
 }
 
-function restModalContents(modal) {
+function resetModalContents(modal) {
     while (modal.hasChildNodes()) {
         modal.removeChild(modal.firstChild);
     }
@@ -75,7 +75,7 @@ function buildTableHeader(document, playerStats) {
 }
 
 function buildModal(document, modal, playerName, playerStats) {
-    restModalContents(modal);
+    resetModalContents(modal);
 
     const modalContentWrapper = document.createElement('div');
     modalContentWrapper.className = 'modal-content';
