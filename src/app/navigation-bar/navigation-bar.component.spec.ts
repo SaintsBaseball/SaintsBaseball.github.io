@@ -5,6 +5,7 @@ import { NavigationBarComponent } from './navigation-bar.component';
 describe('NavigationBarComponent', () => {
   let fixture: ComponentFixture<NavigationBarComponent>;
   let navigationBarComponent: NavigationBarComponent;
+  let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,6 +18,7 @@ describe('NavigationBarComponent', () => {
     fixture = TestBed.createComponent(NavigationBarComponent);
     navigationBarComponent = fixture.componentInstance;
     fixture.detectChanges();
+    nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
@@ -25,5 +27,6 @@ describe('NavigationBarComponent', () => {
 
   it('should have a link to the homepage with text Saints', () => {
     expect(navigationBarComponent.linkToHomepageText).toBe('Saints');
+    expect(nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[0].textContent).toBe(navigationBarComponent.linkToHomepageText)
   });
 });
