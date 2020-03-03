@@ -22,4 +22,8 @@ describe('NavigationBarComponent', () => {
   it('should create', () => {
     expect(navigationBarComponent).toBeTruthy();
   });
+
+  it('should have a link to the homepage with text Saints', () => {
+    expect(navigationBarComponent.linkToHomepageText).toBe('Saints');
+  });
 });
