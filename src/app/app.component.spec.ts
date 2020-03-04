@@ -29,7 +29,6 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   });
 
-
   it('should render the navigation bar', () => {
     expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
   });
