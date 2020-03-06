@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NavigationBarComponent } from './navigation-bar.component';
+import {NavigationBarComponent} from './navigation-bar.component';
 
 describe('NavigationBarComponent', () => {
   let fixture: ComponentFixture<NavigationBarComponent>;
@@ -9,9 +9,9 @@ describe('NavigationBarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NavigationBarComponent ]
+      declarations: [NavigationBarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -32,10 +32,29 @@ describe('NavigationBarComponent', () => {
 
   it('should open the sidebar when the sidebar button is clicked', () => {
     expect(navigationBarComponent.sidebarIsOpen).toBe(false);
+    let overlay = nativeElement.querySelector('div.w3-overlay');
+    expect(overlay).toBeFalsy();
+
     let sidebarButton = nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[1];
 
     sidebarButton.click();
+    fixture.detectChanges();
 
     expect(navigationBarComponent.sidebarIsOpen).toBe(true);
+    overlay = nativeElement.querySelector('div.w3-overlay');
+    expect(overlay).toBeTruthy();
+  });
+
+  it('should close the sidebar when the overlay is clicked', () => {
+    navigationBarComponent.sidebarIsOpen = true;
+    fixture.detectChanges();
+    let overlay = nativeElement.querySelector('div.w3-overlay');
+
+    overlay.click();
+    fixture.detectChanges();
+
+    expect(navigationBarComponent.sidebarIsOpen).toBe(false);
+    overlay = nativeElement.querySelector('div.w3-overlay');
+    expect(overlay).toBeFalsy();
   });
 });

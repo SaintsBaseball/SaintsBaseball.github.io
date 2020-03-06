@@ -13,4 +13,7 @@ export class NavigationBarComponent {
     this.sidebarIsOpen = true;
   }
 
+  closeSidebar() {
+    this.sidebarIsOpen = false;
+  }
 }
