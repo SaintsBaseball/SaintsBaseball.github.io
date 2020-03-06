@@ -7,7 +7,10 @@ import { Component } from '@angular/core';
 })
 export class NavigationBarComponent {
   linkToHomepageText: string = 'Saints';
+  sidebarIsOpen: boolean = false;
 
-  constructor() { }
+  openSidebar() {
+    this.sidebarIsOpen = true;
+  }
 
 }

@@ -29,4 +29,13 @@ describe('NavigationBarComponent', () => {
     expect(navigationBarComponent.linkToHomepageText).toBe('Saints');
     expect(nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[0].textContent).toBe(navigationBarComponent.linkToHomepageText)
   });
+
+  it('should open the sidebar when the sidebar button is clicked', () => {
+    expect(navigationBarComponent.sidebarIsOpen).toBe(false);
+    let sidebarButton = nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[1];
+
+    sidebarButton.click();
+
+    expect(navigationBarComponent.sidebarIsOpen).toBe(true);
+  });
 });
