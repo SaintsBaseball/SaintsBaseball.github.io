@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'sidebar',
@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class SidebarComponent{
   title: string = 'Menu';
 
+  @Input() closeSidebar: Function = () => {};
 }

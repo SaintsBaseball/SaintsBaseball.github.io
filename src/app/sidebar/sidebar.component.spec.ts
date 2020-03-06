@@ -29,4 +29,13 @@ describe('SidebarComponent', () => {
     expect(sidebarComponent.title).toBe('Menu');
     expect(nativeElement.querySelector('nav.w3-sidebar h4.w3-bar-item b').textContent).toBe(sidebarComponent.title)
   });
+
+  it('should have an X that closes the sidebar', function () {
+    spyOn(sidebarComponent, "closeSidebar");
+
+    const xButton = nativeElement.querySelector('nav.w3-sidebar button');
+    xButton.click();
+
+    expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
+  });
 });

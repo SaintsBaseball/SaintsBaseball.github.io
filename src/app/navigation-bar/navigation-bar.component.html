@@ -9,4 +9,4 @@
 
 <div class="w3-overlay" *ngIf="sidebarIsOpen" (click)="closeSidebar()" title="Close Side Menu"></div>
 
-<sidebar *ngIf="sidebarIsOpen"></sidebar>
+<sidebar *ngIf="sidebarIsOpen" [closeSidebar]="closeSidebar.bind(this)"></sidebar>
