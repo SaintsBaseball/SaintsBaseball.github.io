@@ -38,8 +38,7 @@ describe('NavigationBarComponent', () => {
     let sidebarComponent = nativeElement.querySelector('sidebar');
     expect(sidebarComponent).toBeFalsy();
 
-    let sidebarButton = nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[1];
-
+    const sidebarButton = nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[1];
     sidebarButton.click();
     fixture.detectChanges();
 
@@ -53,10 +52,10 @@ describe('NavigationBarComponent', () => {
   it('should close the sidebar when the overlay is clicked', () => {
     navigationBarComponent.sidebarIsOpen = true;
     fixture.detectChanges();
-    let overlay = nativeElement.querySelector('div.w3-overlay');
     let sidebarComponent = nativeElement.querySelector('sidebar');
     expect(sidebarComponent).toBeTruthy();
 
+    let overlay = nativeElement.querySelector('div.w3-overlay');
     overlay.click();
     fixture.detectChanges();
 
