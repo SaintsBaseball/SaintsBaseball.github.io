@@ -1,6 +1,7 @@
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -13,7 +14,8 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        NavigationBarComponent
       ],
     }).compileComponents();
 
@@ -25,5 +27,9 @@ describe('AppComponent', () => {
 
   it('should create the app', () => {
     expect(appComponent).toBeTruthy();
+  });
+
+  it('should render the navigation bar', () => {
+    expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
   });
 });
