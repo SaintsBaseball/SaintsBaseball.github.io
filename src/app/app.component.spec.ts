@@ -2,6 +2,7 @@ import {TestBed, async, ComponentFixture} from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
+import {MainContentComponent} from "./main-content/main-content.component";
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -15,7 +16,8 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        NavigationBarComponent
+        NavigationBarComponent,
+        MainContentComponent
       ],
     }).compileComponents();
 
@@ -31,5 +33,9 @@ describe('AppComponent', () => {
 
   it('should render the navigation bar', () => {
     expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
+  });
+
+  it('should render the main content', () => {
+    expect(nativeElement.querySelector('main-content')).toBeTruthy();
   });
 });
