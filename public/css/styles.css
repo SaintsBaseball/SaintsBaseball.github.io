@@ -31,8 +31,8 @@ img {
     #saints-logo {
         max-width: 30%;
     }
-    
-    .social-media {
+
+    .logos {
         margin-left: 1%;
     }
 }
@@ -45,11 +45,11 @@ img {
         margin-right: auto;
     }
 
-    .social-media {
+    .logos {
         margin-left: 5%;
     }
 }
 
-.social-media {
+.logos {
     max-width: 100px;
 }
