@@ -1,28 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainContentWrapperComponent } from './main-content-wrapper.component';
+import { MainContentComponent } from './main-content.component';
 
 describe('MainContentWrapperComponent', () => {
-  let mainContentWrapperComponent: MainContentWrapperComponent;
-  let fixture: ComponentFixture<MainContentWrapperComponent>;
+  let mainContentComponent: MainContentComponent;
+  let fixture: ComponentFixture<MainContentComponent>;
   let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainContentWrapperComponent ]
+      declarations: [ MainContentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainContentWrapperComponent);
-    mainContentWrapperComponent = fixture.componentInstance;
+    fixture = TestBed.createComponent(MainContentComponent);
+    mainContentComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
-    expect(mainContentWrapperComponent).toBeTruthy();
+    expect(mainContentComponent).toBeTruthy();
   });
 
   it('should have the wrapper contents', () => {
