@@ -1,8 +1,9 @@
 import {TestBed, async, ComponentFixture} from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
-import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
+import {RouterTestingModule} from '@angular/router/testing';
+import {AppComponent} from './app.component';
+import {NavigationBarComponent} from "./navigation-bar/navigation-bar.component";
 import {MainContentComponent} from "./main-content/main-content.component";
+import {SponsorComponent} from "./sponsor/sponsor.component";
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -17,7 +18,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         NavigationBarComponent,
-        MainContentComponent
+        MainContentComponent,
+        SponsorComponent
       ],
     }).compileComponents();
 
@@ -37,5 +39,9 @@ describe('AppComponent', () => {
 
   it('should render the main content', () => {
     expect(nativeElement.querySelector('main-content')).toBeTruthy();
+  });
+
+  it('should render the sponsor info', () => {
+    expect(nativeElement.querySelector('sponsor')).toBeTruthy();
   });
 });
