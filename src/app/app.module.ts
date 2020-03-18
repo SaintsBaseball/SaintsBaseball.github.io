@@ -7,6 +7,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
+import { SocialMediaComponent } from './social-media/social-media.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { SponsorComponent } from './sponsor/sponsor.component';
     NavigationBarComponent,
     SidebarComponent,
     MainContentComponent,
-    SponsorComponent
+    SponsorComponent,
+    SocialMediaComponent
   ],
   imports: [
     BrowserModule,
