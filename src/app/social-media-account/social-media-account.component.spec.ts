@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaAccountComponent } from './social-media-account.component';
+import { inflateSync } from 'zlib';
 
 describe('SocialMediaAccountComponent', () => {
   let socialMediaAccountComponent: SocialMediaAccountComponent;
@@ -21,5 +22,15 @@ describe('SocialMediaAccountComponent', () => {
 
   it('should create', () => {
     expect(socialMediaAccountComponent).toBeTruthy();
+  });
+
+  it('should have a link to the instagram account', () => {
+
+    socialMediaAccountComponent.ngOnInit();
+
+    expect(socialMediaAccountComponent.linkToAccount).toBe('https://www.instagram.com/saints.baseball/');
+    expect(socialMediaAccountComponent.linkTitle).toBe('Follow us on Instagram');
+    expect(socialMediaAccountComponent.imageSource).toBe('../../assets/instagramLogo.png');
+    expect(socialMediaAccountComponent.imageAlternate).toBe('Instagram');
   });
 });
