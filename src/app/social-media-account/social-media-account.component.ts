@@ -14,14 +14,20 @@ export class SocialMediaAccountComponent implements OnInit {
   @Input() socialMediaAccount: string;
 
   constructor() {
-    this.linkToAccount = 'https://www.instagram.com/saints.baseball/';
-    this.linkTitle = 'Follow us on Instagram';
-    this.imageSource = '../../assets/instagramLogo.png';
-    this.imageAlternate = 'Instagram';
+
   }
 
   ngOnInit(): void {
-
+    if (this.socialMediaAccount === 'instagram') {
+      this.linkToAccount = 'https://www.instagram.com/saints.baseball/';
+      this.linkTitle = 'Follow us on Instagram';
+      this.imageSource = '../../assets/instagramLogo.png';
+      this.imageAlternate = 'Instagram';
+    } else {
+      this.linkToAccount = 'https://www.facebook.com/SaintsBaseball760/';
+      this.linkTitle = 'Like us on Facebook';
+      this.imageSource = '../../assets/facebookLogo.png';
+      this.imageAlternate = 'Facebook';
+    }
   }
-
 }
