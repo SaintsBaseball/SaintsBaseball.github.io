@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SocialMediaAccountInfo } from '../social-media-account-info';
 
 @Component({
   selector: 'social-media-account',
@@ -6,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./social-media-account.component.css']
 })
 export class SocialMediaAccountComponent implements OnInit {
-  accountInfo;
+  accountInfo: SocialMediaAccountInfo;
   private accountToInfo = {
     'instagram': {
       linkToAccount: 'https://www.instagram.com/saints.baseball/',
