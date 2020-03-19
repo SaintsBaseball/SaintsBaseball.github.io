@@ -25,8 +25,7 @@ describe('SocialMediaAccountComponent', () => {
   });
 
   it('should have a link to the instagram account', () => {
-
-    socialMediaAccountComponent.ngOnInit();
+    socialMediaAccountComponent.socialMediaAccount = 'instagram';
 
     expect(socialMediaAccountComponent.linkToAccount).toBe('https://www.instagram.com/saints.baseball/');
     expect(socialMediaAccountComponent.linkTitle).toBe('Follow us on Instagram');
