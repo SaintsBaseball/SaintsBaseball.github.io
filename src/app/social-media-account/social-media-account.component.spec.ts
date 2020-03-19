@@ -26,36 +26,43 @@ describe('SocialMediaAccountComponent', () => {
   });
 
   it('should have a link to the instagram account', () => {
+    const expectedAccountInfo = {
+      linkToAccount: 'https://www.instagram.com/saints.baseball/',
+      linkTitle: 'Follow us on Instagram',
+      imageSource: '../../assets/instagramLogo.png',
+      imageAlternate: 'Instagram'
+    };
     socialMediaAccountComponent.socialMediaAccount = 'instagram';
     
     socialMediaAccountComponent.ngOnInit();
     fixture.detectChanges();
 
-    expect(socialMediaAccountComponent.linkToAccount).toBe('https://www.instagram.com/saints.baseball/');
-    expect(socialMediaAccountComponent.linkTitle).toBe('Follow us on Instagram');
-    expect(socialMediaAccountComponent.imageSource).toBe('../../assets/instagramLogo.png');
-    expect(socialMediaAccountComponent.imageAlternate).toBe('Instagram');
-    expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.linkToAccount);
-    expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.linkTitle);
-    const imageSourceWithNoRelativePath = socialMediaAccountComponent.imageSource.slice(6);
+    expect(socialMediaAccountComponent.accountInfo).toEqual(expectedAccountInfo);
+    expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.accountInfo.linkToAccount);
+    expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.accountInfo.linkTitle);
+    const imageSourceWithNoRelativePath = socialMediaAccountComponent.accountInfo.imageSource.slice(6);
     expect(nativeElement.querySelector('img').src.includes(imageSourceWithNoRelativePath)).toBeTrue();
-    expect(nativeElement.querySelector('img').alt).toBe(socialMediaAccountComponent.imageAlternate);
+    expect(nativeElement.querySelector('img').alt).toBe(socialMediaAccountComponent.accountInfo.imageAlternate);
   });
 
   it('should have a link to the facebook account', () => {
+    const expectedAccountInfo = {
+      linkToAccount: 'https://www.facebook.com/SaintsBaseball760/',
+      linkTitle: 'Like us on Facebook',
+      imageSource: '../../assets/facebookLogo.png',
+      imageAlternate: 'Facebook'
+    };
     socialMediaAccountComponent.socialMediaAccount = 'facebook';
     
     socialMediaAccountComponent.ngOnInit();
     fixture.detectChanges();
 
-    expect(socialMediaAccountComponent.linkToAccount).toBe('https://www.facebook.com/SaintsBaseball760/');
-    expect(socialMediaAccountComponent.linkTitle).toBe('Like us on Facebook');
-    expect(socialMediaAccountComponent.imageSource).toBe('../../assets/facebookLogo.png');
-    expect(socialMediaAccountComponent.imageAlternate).toBe('Facebook');
-    expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.linkToAccount);
-    expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.linkTitle);
-    const imageSourceWithNoRelativePath = socialMediaAccountComponent.imageSource.slice(6);
+    expect(socialMediaAccountComponent.accountInfo).toEqual(expectedAccountInfo);
+    expect(socialMediaAccountComponent.accountInfo).toEqual(expectedAccountInfo);
+    expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.accountInfo.linkToAccount);
+    expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.accountInfo.linkTitle);
+    const imageSourceWithNoRelativePath = socialMediaAccountComponent.accountInfo.imageSource.slice(6);
     expect(nativeElement.querySelector('img').src.includes(imageSourceWithNoRelativePath)).toBeTrue();
-    expect(nativeElement.querySelector('img').alt).toBe(socialMediaAccountComponent.imageAlternate);
+    expect(nativeElement.querySelector('img').alt).toBe(socialMediaAccountComponent.accountInfo.imageAlternate);
   });
 });

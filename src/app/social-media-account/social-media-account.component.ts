@@ -6,10 +6,21 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./social-media-account.component.css']
 })
 export class SocialMediaAccountComponent implements OnInit {
-  linkToAccount: string;
-  linkTitle: string;
-  imageSource: string;
-  imageAlternate: string;
+  accountInfo;
+  private accountToInfo = {
+    'instagram': {
+      linkToAccount: 'https://www.instagram.com/saints.baseball/',
+      linkTitle: 'Follow us on Instagram',
+      imageSource: '../../assets/instagramLogo.png',
+      imageAlternate: 'Instagram'
+    },
+    'facebook': {
+      linkToAccount: 'https://www.facebook.com/SaintsBaseball760/',
+      linkTitle: 'Like us on Facebook',
+      imageSource: '../../assets/facebookLogo.png',
+      imageAlternate: 'Facebook'
+    }
+  }
 
   @Input() socialMediaAccount: string;
 
@@ -18,16 +29,6 @@ export class SocialMediaAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.socialMediaAccount === 'instagram') {
-      this.linkToAccount = 'https://www.instagram.com/saints.baseball/';
-      this.linkTitle = 'Follow us on Instagram';
-      this.imageSource = '../../assets/instagramLogo.png';
-      this.imageAlternate = 'Instagram';
-    } else {
-      this.linkToAccount = 'https://www.facebook.com/SaintsBaseball760/';
-      this.linkTitle = 'Like us on Facebook';
-      this.imageSource = '../../assets/facebookLogo.png';
-      this.imageAlternate = 'Facebook';
-    }
+    this.accountInfo = this.accountToInfo[this.socialMediaAccount];
   }
 }
