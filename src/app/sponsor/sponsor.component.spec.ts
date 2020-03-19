@@ -29,6 +29,8 @@ describe('SponsorComponent', () => {
     expect(sponsorComponent.sponsor).toBe('Secure E-Waste Solutions');
     expect(sponsorComponent.title).toBe(`Sponsored by ${sponsorComponent.sponsor}`);
     expect(nativeElement.querySelector('h3').textContent).toBe(sponsorComponent.title);
+    const imageSourceWithNoRelativePath = 'assets/sponsorLogo.jpg';
+    expect(nativeElement.querySelector('img').src.includes(imageSourceWithNoRelativePath)).toBeTrue();
     expect(nativeElement.querySelector('img').alt).toBe(sponsorComponent.sponsor);
   });
 });
