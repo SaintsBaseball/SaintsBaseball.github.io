@@ -7,7 +7,7 @@ import { NavigationBarComponent } from './navigation-bar/navigation-bar.componen
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
-import { SocialMediaComponent } from './social-media/social-media.component';
+import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { SocialMediaComponent } from './social-media/social-media.component';
     SidebarComponent,
     MainContentComponent,
     SponsorComponent,
-    SocialMediaComponent
+    SocialMediaAccountComponent
   ],
   imports: [
     BrowserModule,
