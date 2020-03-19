@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaAccountComponent } from './social-media-account.component';
-import { inflateSync } from 'zlib';
 
 describe('SocialMediaAccountComponent', () => {
   let socialMediaAccountComponent: SocialMediaAccountComponent;
   let fixture: ComponentFixture<SocialMediaAccountComponent>;
+  let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -18,6 +18,7 @@ describe('SocialMediaAccountComponent', () => {
     fixture = TestBed.createComponent(SocialMediaAccountComponent);
     socialMediaAccountComponent = fixture.componentInstance;
     fixture.detectChanges();
+    nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
@@ -31,5 +32,10 @@ describe('SocialMediaAccountComponent', () => {
     expect(socialMediaAccountComponent.linkTitle).toBe('Follow us on Instagram');
     expect(socialMediaAccountComponent.imageSource).toBe('../../assets/instagramLogo.png');
     expect(socialMediaAccountComponent.imageAlternate).toBe('Instagram');
+    expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.linkToAccount);
+    expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.linkTitle);
+    const imageSourceWithNoRelativePath = socialMediaAccountComponent.imageSource.slice(6);
+    expect(nativeElement.querySelector('img').src.includes(imageSourceWithNoRelativePath)).toBeTrue();
+    expect(nativeElement.querySelector('img').alt).toBe(socialMediaAccountComponent.imageAlternate);
   });
 });
