@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaAccountComponent } from './social-media-account.component';
 import { SocialMediaAccountInfoFactoryServiceMock } from '../testClasses/social-media-account-info-factory-service-mock';
-import { ISocialMediaAccountInfo } from '../interfaces/i-social-media-account-info';
+import { SocialMediaAccountInfoMock } from '../testClasses/social-media-account-info-mock';
 
 describe('SocialMediaAccountComponent', () => {
   let socialMediaAccountComponent: SocialMediaAccountComponent;
@@ -38,12 +38,7 @@ describe('SocialMediaAccountComponent', () => {
 
   it('should have a link to the social media account', () => {
     socialMediaAccountComponent.socialMediaAccount = 'social media';
-    const socialMediaAccountInfo: ISocialMediaAccountInfo = {
-      linkToAccount: 'https://account_link/',
-      linkTitle: 'title',
-      imageSource: 'source_link',
-      imageAlternate: 'alternate'
-    };
+    const socialMediaAccountInfo = new SocialMediaAccountInfoMock();
     socialMediaAccountInfoFactoryServiceMock.createReturnValues.push(socialMediaAccountInfo);
     
     socialMediaAccountComponent.ngOnInit();
