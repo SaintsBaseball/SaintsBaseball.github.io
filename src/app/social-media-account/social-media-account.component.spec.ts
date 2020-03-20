@@ -34,16 +34,18 @@ describe('SocialMediaAccountComponent', () => {
 
   it('should create', () => {
     expect(socialMediaAccountComponent).toBeTruthy();
+    expect(socialMediaAccountInfoFactoryServiceMock.create.callCount).toBe(1);
   });
 
   it('should have a link to the social media account', () => {
-    socialMediaAccountComponent.socialMediaAccount = 'social media';
+    socialMediaAccountComponent.account = 'social media';
     const socialMediaAccountInfo = new SocialMediaAccountInfoMock();
     socialMediaAccountInfoFactoryServiceMock.createReturnValues.push(socialMediaAccountInfo);
     
     socialMediaAccountComponent.ngOnInit();
     fixture.detectChanges();
 
+    expect(socialMediaAccountInfoFactoryServiceMock.create.callCount).toBe(2);
     expect(socialMediaAccountComponent.accountInfo).toBe(socialMediaAccountInfo);
     expect(nativeElement.querySelector('a').href).toBe(socialMediaAccountComponent.accountInfo.linkToAccount);
     expect(nativeElement.querySelector('a').title).toBe(socialMediaAccountComponent.accountInfo.linkTitle);

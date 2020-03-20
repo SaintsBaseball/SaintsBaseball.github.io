@@ -10,13 +10,13 @@ import { ISocialMediaAccountInfoFactory } from '../interfaces/i-social-media-acc
 export class SocialMediaAccountComponent implements OnInit {
   accountInfo: ISocialMediaAccountInfo;
 
-  @Input() socialMediaAccount: string;
+  @Input() account: string;
 
   constructor(@Inject('ISocialMediaAccountInfoFactory') private socialMediaAccountInfoFactory: ISocialMediaAccountInfoFactory) {
 
   }
 
   ngOnInit(): void {
-    this.accountInfo = this.socialMediaAccountInfoFactory.create(this.socialMediaAccount);
+    this.accountInfo = this.socialMediaAccountInfoFactory.create(this.account);
   }
 }
