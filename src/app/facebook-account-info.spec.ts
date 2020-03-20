@@ -9,6 +9,5 @@ describe('FacebookAccountInfo', () => {
     expect(facebookAccountInfo.linkTitle).toBe('Like us on Facebook');
     expect(facebookAccountInfo.imageSource).toBe('../../assets/facebookLogo.png');
     expect(facebookAccountInfo.imageAlternate).toBe('Facebook');
-
   });
 });
