@@ -21,7 +21,7 @@ export class SocialMediaAccountComponent implements OnInit {
       imageSource: '../../assets/facebookLogo.png',
       imageAlternate: 'Facebook'
     }
-  }
+  };
 
   @Input() socialMediaAccount: string;
 
