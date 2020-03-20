@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { SocialMediaAccountInfoFactoryService } from './social-media-account-info-factory.service';
-import { InstagramAccountInfo } from './classes/instagram-account-info';
-import { FacebookAccountInfo } from './classes/facebook-account-info';
+import { InstagramAccountInfo } from '../classes/instagram-account-info';
+import { FacebookAccountInfo } from '../classes/facebook-account-info';
 
 describe('SocialMediaAccountInfoFactoryService', () => {
   let socialMediaAccountInfoFactoryService: SocialMediaAccountInfoFactoryService;

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ISocialMediaAccountInfo } from './interfaces/i-social-media-account-info';
-import { InstagramAccountInfo } from './classes/instagram-account-info';
-import { FacebookAccountInfo } from './classes/facebook-account-info';
-import { ISocialMediaAccountInfoFactory } from './interfaces/i-social-media-account-info-factory';
+import { ISocialMediaAccountInfo } from '../interfaces/i-social-media-account-info';
+import { InstagramAccountInfo } from '../classes/instagram-account-info';
+import { FacebookAccountInfo } from '../classes/facebook-account-info';
+import { ISocialMediaAccountInfoFactory } from '../interfaces/i-social-media-account-info-factory';
 
 @Injectable({
   providedIn: 'root'
