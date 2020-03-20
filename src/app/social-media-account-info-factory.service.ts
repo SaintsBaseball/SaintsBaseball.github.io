@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { SocialMediaAccountInfo } from './social-media-account-info';
-import { InstagramAccountInfo } from './instagram-account-info';
-import { FacebookAccountInfo } from './facebook-account-info';
+import { ISocialMediaAccountInfo } from './interfaces/i-social-media-account-info';
+import { InstagramAccountInfo } from './classes/instagram-account-info';
+import { FacebookAccountInfo } from './classes/facebook-account-info';
+import { ISocialMediaAccountInfoFactory } from './interfaces/i-social-media-account-info-factory';
 
 @Injectable({
   providedIn: 'root'
 })
-export class SocialMediaAccountInfoFactoryService {
+export class SocialMediaAccountInfoFactoryService implements ISocialMediaAccountInfoFactory {
   private socialMediaAccountInfoDictionary = {
     facebook: FacebookAccountInfo,
     instagram: InstagramAccountInfo
   };
 
-  create(socialMediaAccountInfoToCreate: string): SocialMediaAccountInfo {
+  create(socialMediaAccountInfoToCreate: string): ISocialMediaAccountInfo {
     const socialMediaAccountInfoClassToCreate = this.socialMediaAccountInfoDictionary[socialMediaAccountInfoToCreate];
     return new socialMediaAccountInfoClassToCreate();
   }

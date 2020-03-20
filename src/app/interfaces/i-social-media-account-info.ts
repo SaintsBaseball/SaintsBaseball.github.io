@@ -1,4 +1,4 @@
-export interface SocialMediaAccountInfo {
+export interface ISocialMediaAccountInfo {
     linkToAccount: string;
     linkTitle: string;
     imageSource: string;
