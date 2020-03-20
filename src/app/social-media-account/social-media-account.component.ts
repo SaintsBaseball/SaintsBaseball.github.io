@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ISocialMediaAccountInfo } from '../interfaces/i-social-media-account-info';
+import { ISocialMediaAccountInfoFactory } from '../interfaces/i-social-media-account-info-factory';
 
 @Component({
   selector: 'social-media-account',
@@ -8,28 +9,14 @@ import { ISocialMediaAccountInfo } from '../interfaces/i-social-media-account-in
 })
 export class SocialMediaAccountComponent implements OnInit {
   accountInfo: ISocialMediaAccountInfo;
-  private accountToInfo = {
-    'instagram': {
-      linkToAccount: 'https://www.instagram.com/saints.baseball/',
-      linkTitle: 'Follow us on Instagram',
-      imageSource: '../../assets/instagramLogo.png',
-      imageAlternate: 'Instagram'
-    },
-    'facebook': {
-      linkToAccount: 'https://www.facebook.com/SaintsBaseball760/',
-      linkTitle: 'Like us on Facebook',
-      imageSource: '../../assets/facebookLogo.png',
-      imageAlternate: 'Facebook'
-    }
-  };
 
   @Input() socialMediaAccount: string;
 
-  constructor() {
+  constructor(@Inject('ISocialMediaAccountInfoFactory') private socialMediaAccountInfoFactory: ISocialMediaAccountInfoFactory) {
 
   }
 
   ngOnInit(): void {
-    this.accountInfo = this.accountToInfo[this.socialMediaAccount];
+    this.accountInfo = this.socialMediaAccountInfoFactory.create(this.socialMediaAccount);
   }
 }

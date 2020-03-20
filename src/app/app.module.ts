@@ -8,6 +8,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainContentComponent } from './main-content/main-content.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
+import { SocialMediaAccountInfoFactoryService } from './social-media-account-info-factory.service';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,12 @@ import { SocialMediaAccountComponent } from './social-media-account/social-media
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: 'ISocialMediaAccountInfoFactory',
+      useClass: SocialMediaAccountInfoFactoryService
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
