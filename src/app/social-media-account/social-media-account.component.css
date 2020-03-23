@@ -1,0 +1,15 @@
+@media (min-width:601px){
+    img {
+        margin-left: 1%;
+    }
+}
+
+@media (max-width:600px) {
+    img {
+        margin-left: 5%;
+    }
+}
+
+img {
+    max-width: 100px;
+}
