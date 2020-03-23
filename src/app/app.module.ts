@@ -9,6 +9,7 @@ import { MainContentComponent } from './main-content/main-content.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './services/social-media-account-info-factory.service';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SocialMediaAccountInfoFactoryService } from './services/social-media-ac
     SidebarComponent,
     MainContentComponent,
     SponsorComponent,
-    SocialMediaAccountComponent
+    SocialMediaAccountComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
