@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
-  constructor() { }
+  title: string = 'Home of the NCBL Spring 2019 Champs!';
 }

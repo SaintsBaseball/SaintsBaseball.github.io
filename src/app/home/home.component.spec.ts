@@ -30,4 +30,9 @@ describe('HomeComponent', () => {
     expect(saintsLogoImage.src.includes('saintsLogo.jpg')).toBeTrue();
     expect(saintsLogoImage.id).toBe('saints-logo');
   });
+
+  it('should have the header title', () => {
+    expect(homeComponent.title).toBe('Home of the NCBL Spring 2019 Champs!');
+    expect(nativeElement.querySelector('h1').textContent).toBe(homeComponent.title);
+  });
 });
