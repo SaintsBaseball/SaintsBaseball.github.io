@@ -1,9 +1,11 @@
-import {TestBed, async, ComponentFixture} from '@angular/core/testing';
-import {RouterTestingModule} from '@angular/router/testing';
-import {AppComponent} from './app.component';
-import {NavigationBarComponent} from "./navigation-bar/navigation-bar.component";
-import {MainContentComponent} from "./main-content/main-content.component";
-import {SponsorComponent} from "./sponsor/sponsor.component";
+import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
+import { MainContentComponent } from "./main-content/main-content.component";
+import { SponsorComponent } from "./sponsor/sponsor.component";
+import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
+import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -19,8 +21,15 @@ describe('AppComponent', () => {
         AppComponent,
         NavigationBarComponent,
         MainContentComponent,
-        SponsorComponent
+        SponsorComponent,
+        SocialMediaAccountComponent
       ],
+      providers: [
+        {
+          provide: 'ISocialMediaAccountInfoFactory',
+          useClass: SocialMediaAccountInfoFactoryServiceMock
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -43,5 +52,11 @@ describe('AppComponent', () => {
 
   it('should render the sponsor info', () => {
     expect(nativeElement.querySelector('sponsor')).toBeTruthy();
+  });
+
+  it('should render the social media accounts', () => {
+    const socialMediaAccountComponent = nativeElement.querySelectorAll('social-media-account');
+    expect(socialMediaAccountComponent[0]).toBeTruthy();
+    expect(socialMediaAccountComponent[1]).toBeTruthy();
   });
 });
