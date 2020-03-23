@@ -35,4 +35,9 @@ describe('HomeComponent', () => {
     expect(homeComponent.title).toBe('Home of the NCBL Spring 2019 Champs!');
     expect(nativeElement.querySelector('h1').textContent).toBe(homeComponent.title);
   });
+  
+  it('should have the image of the spring 2019 champs', () => {
+    const championshipImage = nativeElement.querySelectorAll('img')[1];
+    expect(championshipImage.src.includes('spring2019Champs.jpg')).toBeTrue();
+  });
 });
