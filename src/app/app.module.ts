@@ -11,6 +11,7 @@ import { SocialMediaAccountComponent } from './social-media-account/social-media
 import { SocialMediaAccountInfoFactoryService } from './services/social-media-account-info-factory.service';
 import { HomeComponent } from './home/home.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { StatisticsComponent } from './statistics/statistics.component';
     SponsorComponent,
     SocialMediaAccountComponent,
     HomeComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    SocialMediaWrapperComponent
   ],
   imports: [
     BrowserModule,
