@@ -4,8 +4,9 @@ import { AppComponent } from './app.component';
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
 import { MainContentComponent } from "./main-content/main-content.component";
 import { SponsorComponent } from "./sponsor/sponsor.component";
-import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
+import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
+import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -22,6 +23,7 @@ describe('AppComponent', () => {
         NavigationBarComponent,
         MainContentComponent,
         SponsorComponent,
+        SocialMediaWrapperComponent,
         SocialMediaAccountComponent
       ],
       providers: [
@@ -54,9 +56,7 @@ describe('AppComponent', () => {
     expect(nativeElement.querySelector('sponsor')).toBeTruthy();
   });
 
-  it('should render the social media accounts', () => {
-    const socialMediaAccountComponent = nativeElement.querySelectorAll('social-media-account');
-    expect(socialMediaAccountComponent[0]).toBeTruthy();
-    expect(socialMediaAccountComponent[1]).toBeTruthy();
+  it('should render the social media wrapper', () => {
+    expect(nativeElement.querySelector('social-media-wrapper')).toBeTruthy();
   });
 });
