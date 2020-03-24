@@ -10,6 +10,7 @@ import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './services/social-media-account-info-factory.service';
 import { HomeComponent } from './home/home.component';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     MainContentComponent,
     SponsorComponent,
     SocialMediaAccountComponent,
-    HomeComponent
+    HomeComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
