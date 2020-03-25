@@ -29,4 +29,10 @@ describe('StatisticsComponent', () => {
     expect(statisticsComponent.title).toBe('Saints Statistics');
     expect(nativeElement.querySelector('h1').textContent).toBe(statisticsComponent.title);
   });
+
+  it('should have a dropdown to select a season', () => {
+    expect(nativeElement.querySelector('select')).toBeTruthy();
+    const defaultOption = nativeElement.querySelector('option');
+    expect(defaultOption.textContent).toBe('Season');
+  });
 });
