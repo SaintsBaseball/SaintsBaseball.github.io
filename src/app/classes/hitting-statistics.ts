@@ -1,4 +1,4 @@
 import { IStatistics } from '../interfaces/i-statistics';
 
-export class BattingStatistics implements IStatistics {
+export class HittingStatistics implements IStatistics {
 }
