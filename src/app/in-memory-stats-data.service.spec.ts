@@ -15,7 +15,8 @@ describe('InMemoryDataServiceService', () => {
   });
 
   describe('createDb', () => {
-    it('should create the database', () => {
+    it('should create the database with a list of player hitting statistics', () => {
+
     });
   });
 });
