@@ -1,6 +1,6 @@
-import { IStatistics } from '../interfaces/i-statistics';
+import { IPlayerStatistics } from '../interfaces/i-player-statistics';
 
-export class HittingStatistics implements IStatistics {
+export class PlayerHittingStatistics implements IPlayerStatistics {
     private G: number;
     private AB: number;
     private R: number;
