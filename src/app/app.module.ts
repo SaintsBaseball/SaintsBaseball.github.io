@@ -38,6 +38,10 @@ import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.s
     {
       provide: 'ISocialMediaAccountInfoFactory',
       useClass: SocialMediaAccountInfoFactoryService
+    },
+    {
+      provide: 'IStatisticsService',
+      useClass: StatisticsService
     }
   ],
   bootstrap: [AppComponent]
