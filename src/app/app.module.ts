@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +14,7 @@ import { SocialMediaAccountInfoFactoryService } from './services/social-media-ac
 import { HomeComponent } from './home/home.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
+import { InMemoryStatsDataService } from './in-memory-stats-data.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,9 @@ import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryStatsDataService)
   ],
   providers: [
     {
