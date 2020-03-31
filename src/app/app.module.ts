@@ -15,6 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
 import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.service';
+import { StatisticsService } from './services/statistics.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.s
   ],
   providers: [
     {
-      provide: 'ISocialMediaAccountInfoFactory',
+      provide: 'ISocialMediaAccountInfoFactoryService',
       useClass: SocialMediaAccountInfoFactoryService
     },
     {

@@ -12,7 +12,7 @@ export class SocialMediaAccountComponent implements OnInit {
 
   @Input() account: string;
 
-  constructor(@Inject('ISocialMediaAccountInfoFactory') private socialMediaAccountInfoFactory: ISocialMediaAccountInfoFactoryService) {
+  constructor(@Inject('ISocialMediaAccountInfoFactoryService') private socialMediaAccountInfoFactory: ISocialMediaAccountInfoFactoryService) {
 
   }
 

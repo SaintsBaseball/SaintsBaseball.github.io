@@ -17,7 +17,7 @@ describe('SocialMediaWrapperComponent', () => {
       ],
       providers: [
         {
-          provide: 'ISocialMediaAccountInfoFactory',
+          provide: 'ISocialMediaAccountInfoFactoryService',
           useClass: SocialMediaAccountInfoFactoryServiceMock
         }
       ]

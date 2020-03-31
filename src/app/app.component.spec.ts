@@ -28,7 +28,7 @@ describe('AppComponent', () => {
       ],
       providers: [
         {
-          provide: 'ISocialMediaAccountInfoFactory',
+          provide: 'ISocialMediaAccountInfoFactoryService',
           useClass: SocialMediaAccountInfoFactoryServiceMock
         }
       ]

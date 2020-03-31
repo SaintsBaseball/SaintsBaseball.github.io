@@ -15,7 +15,7 @@ describe('SocialMediaAccountComponent', () => {
       declarations: [ SocialMediaAccountComponent ],
       providers: [
         {
-          provide: 'ISocialMediaAccountInfoFactory',
+          provide: 'ISocialMediaAccountInfoFactoryService',
           useClass: SocialMediaAccountInfoFactoryServiceMock
         }
       ]
@@ -29,7 +29,7 @@ describe('SocialMediaAccountComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
 
-    socialMediaAccountInfoFactoryServiceMock = TestBed.get('ISocialMediaAccountInfoFactory')
+    socialMediaAccountInfoFactoryServiceMock = TestBed.get('ISocialMediaAccountInfoFactoryService')
   });
 
   it('should create', () => {
