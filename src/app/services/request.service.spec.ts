@@ -5,19 +5,19 @@ import { RequestService } from './request.service';
 
 describe('RequestService', () => {
   let requestService: RequestService;
-  let httpMock: HttpTestingController;
+  let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({      
-      imports: [HttpClientTestingModule],
-      providers: [RequestService]
+      providers: [RequestService],
+      imports: [HttpClientTestingModule]
     });
     requestService = TestBed.get(RequestService);
-    httpMock = TestBed.get(HttpTestingController);
+    httpTestingController = TestBed.get(HttpTestingController);
   });
 
   afterEach(() => {
-    httpMock.verify();
+    httpTestingController.verify();
   });
 
   it('should be created', () => {
@@ -26,12 +26,18 @@ describe('RequestService', () => {
 
   describe('get', () => {
     it('should make an http request to get information', () => {
+      const dataToReturn = {
+        someData: 'fake data'
+      };
       const randomUrl = 'https://blahUrl.com/some/random/route';
 
-      requestService.get(randomUrl);
+      requestService.get<Object>(randomUrl).subscribe((data) => {
+        expect(data).toBe(dataToReturn);
+      });
 
-      const req = httpMock.expectOne(randomUrl);
+      const req = httpTestingController.expectOne(randomUrl);
       expect(req.request.method).toBe('GET');
+      req.flush(dataToReturn);
     });
   });
 });
