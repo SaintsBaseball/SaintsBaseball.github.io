@@ -16,7 +16,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
 import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.service';
 import { StatisticsService } from './services/statistics.service';
-import { RequestService } from './services/request.service';
+import { HttpRequestService } from './services/http-request.service';
 
 @NgModule({
   declarations: [
@@ -47,7 +47,7 @@ import { RequestService } from './services/request.service';
     },
     {
       provide: 'IRequestService',
-      useClass: RequestService
+      useClass: HttpRequestService
     }
   ],
   bootstrap: [AppComponent]

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class RequestService implements IRequestService {
+export class HttpRequestService implements IRequestService {
 
   constructor(private http: HttpClient) { }
 

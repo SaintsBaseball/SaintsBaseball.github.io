@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-import { RequestService } from './request.service';
+import { HttpRequestService } from './http-request.service';
 
 describe('RequestService', () => {
-  let requestService: RequestService;
+  let requestService: HttpRequestService;
   let httpTestingController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({      
-      providers: [RequestService],
+      providers: [HttpRequestService],
       imports: [HttpClientTestingModule]
     });
-    requestService = TestBed.get(RequestService);
+    requestService = TestBed.get(HttpRequestService);
     httpTestingController = TestBed.get(HttpTestingController);
   });
 
