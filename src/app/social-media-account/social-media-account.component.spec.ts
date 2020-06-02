@@ -12,7 +12,7 @@ describe('SocialMediaAccountComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SocialMediaAccountComponent ],
+      declarations: [SocialMediaAccountComponent],
       providers: [
         {
           provide: 'ISocialMediaAccountInfoFactoryService',
@@ -20,7 +20,7 @@ describe('SocialMediaAccountComponent', () => {
         }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -41,7 +41,7 @@ describe('SocialMediaAccountComponent', () => {
     socialMediaAccountComponent.account = 'social media';
     const socialMediaAccountInfo = new SocialMediaAccountInfoMock();
     socialMediaAccountInfoFactoryServiceMock.createReturnValues.push(socialMediaAccountInfo);
-    
+
     socialMediaAccountComponent.ngOnInit();
     fixture.detectChanges();
 
