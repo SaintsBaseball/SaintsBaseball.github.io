@@ -15,12 +15,11 @@ describe('InMemoryDataServiceService', () => {
   });
 
   describe('createDb', () => {
-    it('should create the database with a list of player hitting statistics', () => {
+    it('should create the database with the statistics', () => {
       const actualDatabase = inMemoryStatsDataService.createDb();
 
       expect(typeof actualDatabase).toBe('object');
-      expect(Object.values(actualDatabase).length).toBeTruthy();
-      expect(Object.values(actualDatabase)[0].length).toBeTruthy();
+      expect(actualDatabase.stats).toBeTruthy();
     });
   });
 });
