@@ -11,6 +11,6 @@ export class InMemoryStatsDataService implements InMemoryDbService {
   constructor() { }
 
   createDb(): IDatabase {
-    return stats;
+    return { stats };
   }
 }
