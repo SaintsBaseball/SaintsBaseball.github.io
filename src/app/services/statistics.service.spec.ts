@@ -34,7 +34,7 @@ describe('StatisticsService', () => {
       expect(requestServiceMock.get.args[0][0]).toBe('api/stats');
     });
 
-    it('should save the requested statistics', () => {
+    it('should save the requested statistics', (done) => {
       const statsFromRequest: PlayerHittingStatistics[] = [
         {
           '#': 1,
@@ -105,6 +105,7 @@ describe('StatisticsService', () => {
 
       statisticsService.playerHittingStats.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statsFromRequest);
+        done();
       });
     });
   });
