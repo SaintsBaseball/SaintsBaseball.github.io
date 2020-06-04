@@ -6,6 +6,7 @@ export class RequestServiceMock implements IRequestService {
   getReturnValues: any[] = [];
 
   get = sinon.spy(() => {
-    return of(this.getReturnValues.shift());
+    const returnValueArray = this.getReturnValues.shift();
+    return of(returnValueArray);
   });
 }

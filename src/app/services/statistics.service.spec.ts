@@ -34,7 +34,7 @@ describe('StatisticsService', () => {
       expect(requestServiceMock.get.args[0][0]).toBe('api/stats');
     });
 
-    it('should save the requested statistics', (done) => {
+    it('should return an observable of the requested statistics', (done) => {
       const statsFromRequest: PlayerHittingStatistics[] = [
         {
           '#': 1,
@@ -101,9 +101,9 @@ describe('StatisticsService', () => {
       ];
       requestServiceMock.getReturnValues.push(statsFromRequest);
 
-      statisticsService.getPlayerHittingStatistics();
+      const playerHittingStatsObservable = statisticsService.getPlayerHittingStatistics();
 
-      statisticsService.playerHittingStats.pipe(take(1)).subscribe(stats => {
+      playerHittingStatsObservable.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statsFromRequest);
         done();
       });
