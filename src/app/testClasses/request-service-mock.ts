@@ -1,12 +1,23 @@
 import * as sinon from 'sinon';
 import { IRequestService } from '../interfaces/i-request-service';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 export class RequestServiceMock implements IRequestService {
-  getReturnValues: any[] = [];
+  getReturnValues: any[][] = [];
 
   get = sinon.spy(() => {
     const returnValueArray = this.getReturnValues.shift();
-    return of(returnValueArray);
+    if (!returnValueArray) {
+      return of();
+    }
+
+    const error = returnValueArray[0];
+    const data = returnValueArray[1];
+
+    if (error) {
+      return throwError(error);
+    }
+
+    return of(data);
   });
 }

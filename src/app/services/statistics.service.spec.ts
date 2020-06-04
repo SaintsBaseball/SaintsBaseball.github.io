@@ -35,6 +35,7 @@ describe('StatisticsService', () => {
     });
 
     it('should return an observable of the requested statistics', (done) => {
+      const getStatsError = null;
       const statsFromRequest: PlayerHittingStatistics[] = [
         {
           '#': 1,
@@ -99,13 +100,29 @@ describe('StatisticsService', () => {
           PA: 33
         }
       ];
-      requestServiceMock.getReturnValues.push(statsFromRequest);
+      requestServiceMock.getReturnValues.push([getStatsError, statsFromRequest]);
 
       const playerHittingStatsObservable = statisticsService.getPlayerHittingStatistics();
 
       playerHittingStatsObservable.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statsFromRequest);
         done();
+      });
+    });
+
+    it('should handle the error if stats could not be retrieved', (done) => {
+      const getStatsError = new Error('could not get the stats');
+      const statsFromRequest = null;
+      requestServiceMock.getReturnValues.push([getStatsError, statsFromRequest]);
+
+      const playerHittingStatsObservable = statisticsService.getPlayerHittingStatistics();
+
+      playerHittingStatsObservable.pipe(take(1)).subscribe({
+        next: () => expect(true).toBe(false),
+        error: (err) => {
+          expect(err).toBe(getStatsError);
+          done();
+        }
       });
     });
   });
