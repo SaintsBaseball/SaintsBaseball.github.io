@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
+import { WelcomeComponent } from './home/welcome/welcome.component';
 import { StatisticsTableComponent } from './statistics/components/statistics-table/statistics-table.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/welcome', pathMatch: 'full' },
+  { path: 'welcome', component: WelcomeComponent },
   { path: 'statistics', component: StatisticsTableComponent }
 ];
 

@@ -1,28 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { WelcomeComponent } from './welcome.component';
 
-describe('HomeComponent', () => {
-  let homeComponent: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('WelcomeComponent', () => {
+  let welcomeComponent: WelcomeComponent;
+  let fixture: ComponentFixture<WelcomeComponent>;
   let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ WelcomeComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
-    homeComponent = fixture.componentInstance;
+    fixture = TestBed.createComponent(WelcomeComponent);
+    welcomeComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
-    expect(homeComponent).toBeTruthy();
+    expect(welcomeComponent).toBeTruthy();
   });
 
   it('should have the saints logo', () => {
@@ -32,8 +32,8 @@ describe('HomeComponent', () => {
   });
 
   it('should have the header title', () => {
-    expect(homeComponent.title).toBe('Home of the NCBL Spring 2019 Champs!');
-    expect(nativeElement.querySelector('h1').textContent).toBe(homeComponent.title);
+    expect(welcomeComponent.title).toBe('Home of the NCBL Spring 2019 Champs!');
+    expect(nativeElement.querySelector('h1').textContent).toBe(welcomeComponent.title);
   });
   
   it('should have the image of the spring 2019 champs', () => {
