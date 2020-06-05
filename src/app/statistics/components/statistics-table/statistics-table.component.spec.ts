@@ -1,33 +1,33 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StatisticsComponent } from './statistics.component';
+import { StatisticsTableComponent } from './statistics-table.component';
 
-describe('StatisticsComponent', () => {
-  let statisticsComponent: StatisticsComponent;
-  let fixture: ComponentFixture<StatisticsComponent>;
+describe('StatisticsTableComponent', () => {
+  let statisticsTableComponent: StatisticsTableComponent;
+  let fixture: ComponentFixture<StatisticsTableComponent>;
   let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StatisticsComponent ]
+      declarations: [ StatisticsTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StatisticsComponent);
-    statisticsComponent = fixture.componentInstance;
+    fixture = TestBed.createComponent(StatisticsTableComponent);
+    statisticsTableComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
-    expect(statisticsComponent).toBeTruthy();
+    expect(statisticsTableComponent).toBeTruthy();
   });
 
   it('should have the title in the header', () => {
-    expect(statisticsComponent.title).toBe('Saints Statistics');
-    expect(nativeElement.querySelector('h1').textContent).toBe(statisticsComponent.title);
+    expect(statisticsTableComponent.title).toBe('Saints Statistics');
+    expect(nativeElement.querySelector('h1').textContent).toBe(statisticsTableComponent.title);
   });
 
   it('should have a dropdown to select a season', () => {
