@@ -1,12 +1,12 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
-import { ShellComponent } from "./shell/shell.component";
-import { SponsorComponent } from "./sponsor/sponsor.component";
+import { NavigationBarComponent } from "./home/navigation-bar/navigation-bar.component";
+import { ShellComponent } from "./home/shell/shell.component";
+import { SponsorComponent } from "./home/sponsor/sponsor.component";
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
-import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
-import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
+import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
+import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;

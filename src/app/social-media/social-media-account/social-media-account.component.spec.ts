@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaAccountComponent } from './social-media-account.component';
-import { SocialMediaAccountInfoFactoryServiceMock } from '../testClasses/social-media-account-info-factory-service-mock';
-import { SocialMediaAccountInfoMock } from '../testClasses/social-media-account-info-mock';
+import { SocialMediaAccountInfoFactoryServiceMock } from '../../testClasses/social-media-account-info-factory-service-mock';
+import { SocialMediaAccountInfoMock } from '../../testClasses/social-media-account-info-mock';
 
 describe('SocialMediaAccountComponent', () => {
   let socialMediaAccountComponent: SocialMediaAccountComponent;

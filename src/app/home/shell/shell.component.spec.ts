@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellComponent } from './shell.component';
-import { AppRoutingModule } from '../app-routing.module';
+import { AppRoutingModule } from '../../app-routing.module';
 
 describe('ShellComponent', () => {
   let shellComponent: ShellComponent;

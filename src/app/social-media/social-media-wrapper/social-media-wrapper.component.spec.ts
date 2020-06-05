@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SocialMediaWrapperComponent } from './social-media-wrapper.component';
 import { SocialMediaAccountComponent } from '../social-media-account/social-media-account.component';
-import { SocialMediaAccountInfoFactoryServiceMock } from '../testClasses/social-media-account-info-factory-service-mock';
+import { SocialMediaAccountInfoFactoryServiceMock } from '../../testClasses/social-media-account-info-factory-service-mock';
 
 describe('SocialMediaWrapperComponent', () => {
   let socialMediaWrapperComponent: SocialMediaWrapperComponent;
