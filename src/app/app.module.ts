@@ -3,6 +3,12 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
+/* NgRx */
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
@@ -34,7 +40,14 @@ import { HttpRequestService } from './services/http-request.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryStatsDataService)
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryStatsDataService),
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({
+      name: 'Saints Baseball',
+      maxAge: 25,
+      logOnly: environment.production
+    })
   ],
   providers: [
     {
