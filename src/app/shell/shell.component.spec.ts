@@ -1,29 +1,29 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainContentComponent } from './main-content.component';
+import { ShellComponent } from './shell.component';
 import { AppRoutingModule } from '../app-routing.module';
 
-describe('MainContentWrapperComponent', () => {
-  let mainContentComponent: MainContentComponent;
-  let fixture: ComponentFixture<MainContentComponent>;
+describe('ShellComponent', () => {
+  let shellComponent: ShellComponent;
+  let fixture: ComponentFixture<ShellComponent>;
   let nativeElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MainContentComponent],
+      declarations: [ShellComponent],
       imports: [AppRoutingModule]
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MainContentComponent);
-    mainContentComponent = fixture.componentInstance;
+    fixture = TestBed.createComponent(ShellComponent);
+    shellComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
-    expect(mainContentComponent).toBeTruthy();
+    expect(shellComponent).toBeTruthy();
   });
 
   it('should have the wrapper contents', () => {

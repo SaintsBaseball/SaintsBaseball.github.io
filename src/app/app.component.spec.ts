@@ -2,7 +2,7 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from "./navigation-bar/navigation-bar.component";
-import { MainContentComponent } from "./main-content/main-content.component";
+import { ShellComponent } from "./shell/shell.component";
 import { SponsorComponent } from "./sponsor/sponsor.component";
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
 import { SocialMediaWrapperComponent } from './social-media-wrapper/social-media-wrapper.component';
@@ -21,7 +21,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         NavigationBarComponent,
-        MainContentComponent,
+        ShellComponent,
         SponsorComponent,
         SocialMediaWrapperComponent,
         SocialMediaAccountComponent
@@ -49,7 +49,7 @@ describe('AppComponent', () => {
   });
 
   it('should render the main content', () => {
-    expect(nativeElement.querySelector('main-content')).toBeTruthy();
+    expect(nativeElement.querySelector('shell')).toBeTruthy();
   });
 
   it('should render the sponsor info', () => {

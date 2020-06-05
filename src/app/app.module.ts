@@ -13,7 +13,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { MainContentComponent } from './main-content/main-content.component';
+import { ShellComponent } from './shell/shell.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './services/social-media-account-info-factory.service';
@@ -29,7 +29,7 @@ import { HttpRequestService } from './services/http-request.service';
     AppComponent,
     NavigationBarComponent,
     SidebarComponent,
-    MainContentComponent,
+    ShellComponent,
     SponsorComponent,
     SocialMediaAccountComponent,
     HomeComponent,
