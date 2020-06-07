@@ -18,10 +18,8 @@ import { SponsorComponent } from './home/sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './social-media/social-media-account-info-factory.service';
 import { WelcomeComponent } from './home/welcome/welcome.component';
-import { StatisticsTableComponent } from './statistics/components/statistics-table/statistics-table.component';
 import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
 import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.service';
-import { StatisticsService } from './statistics/statistics.service';
 import { HttpRequestService } from './services/http-request.service';
 
 @NgModule({
@@ -33,7 +31,6 @@ import { HttpRequestService } from './services/http-request.service';
     SponsorComponent,
     SocialMediaAccountComponent,
     WelcomeComponent,
-    StatisticsTableComponent,
     SocialMediaWrapperComponent
   ],
   imports: [
@@ -53,10 +50,6 @@ import { HttpRequestService } from './services/http-request.service';
     {
       provide: 'ISocialMediaAccountInfoFactoryService',
       useClass: SocialMediaAccountInfoFactoryService
-    },
-    {
-      provide: 'IStatisticsService',
-      useClass: StatisticsService
     },
     {
       provide: 'IRequestService',

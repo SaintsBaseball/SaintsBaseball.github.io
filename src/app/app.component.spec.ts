@@ -1,12 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from "./home/navigation-bar/navigation-bar.component";
-import { ShellComponent } from "./home/shell/shell.component";
-import { SponsorComponent } from "./home/sponsor/sponsor.component";
-import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
-import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
-import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -18,20 +12,7 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      declarations: [
-        AppComponent,
-        NavigationBarComponent,
-        ShellComponent,
-        SponsorComponent,
-        SocialMediaWrapperComponent,
-        SocialMediaAccountComponent
-      ],
-      providers: [
-        {
-          provide: 'ISocialMediaAccountInfoFactoryService',
-          useClass: SocialMediaAccountInfoFactoryServiceMock
-        }
-      ]
+      declarations: [AppComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -44,19 +25,7 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   });
 
-  it('should render the navigation bar', () => {
-    expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
-  });
-
-  it('should render the main content', () => {
-    expect(nativeElement.querySelector('shell')).toBeTruthy();
-  });
-
-  it('should render the sponsor info', () => {
-    expect(nativeElement.querySelector('sponsor')).toBeTruthy();
-  });
-
-  it('should render the social media wrapper', () => {
-    expect(nativeElement.querySelector('social-media-wrapper')).toBeTruthy();
+  it('should have the router outlet', () => {
+    expect(nativeElement.querySelector('router-outlet')).toBeTruthy();
   });
 });
