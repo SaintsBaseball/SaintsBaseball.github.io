@@ -1,4 +1,4 @@
-import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
+import { PlayerHittingStatistics } from '../statistics/player-hitting-statistics';
 import { Observable } from 'rxjs';
 
 export interface IStatisticsService {

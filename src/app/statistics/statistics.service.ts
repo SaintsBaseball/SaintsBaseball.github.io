@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { IStatisticsService } from '../interfaces/i-statistics-service';
 import { Observable } from 'rxjs';
 import { IRequestService } from '../interfaces/i-request-service';
-import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
+import { PlayerHittingStatistics } from './player-hitting-statistics';
 
 @Injectable({
   providedIn: 'root'

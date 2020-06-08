@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { StatisticsService } from './statistics.service';
 import { RequestServiceMock } from '../testClasses/request-service-mock';
-import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
+import { PlayerHittingStatistics } from './player-hitting-statistics';
 
 describe('StatisticsService', () => {
   let statisticsService: StatisticsService;
