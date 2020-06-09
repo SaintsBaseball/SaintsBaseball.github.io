@@ -1,17 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'statistics-table',
   templateUrl: './statistics-table.component.html',
-  styleUrls: ['./statistics-table.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./statistics-table.component.css']
 })
-export class StatisticsTableComponent implements OnInit {
-  title: string = 'Saints Statistics';
-
+export class StatisticsTableComponent {
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

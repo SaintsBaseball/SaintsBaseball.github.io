@@ -25,17 +25,6 @@ describe('StatisticsTableComponent', () => {
     expect(statisticsTableComponent).toBeTruthy();
   });
 
-  it('should have the title in the header', () => {
-    expect(statisticsTableComponent.title).toBe('Saints Statistics');
-    expect(nativeElement.querySelector('h1').textContent).toBe(statisticsTableComponent.title);
-  });
-
-  it('should have a dropdown to select a season', () => {
-    expect(nativeElement.querySelector('select')).toBeTruthy();
-    const defaultOption = nativeElement.querySelector('option');
-    expect(defaultOption.textContent).toBe('Season');
-  });
-
   it('should have a table for the statistics', () => {
     expect(nativeElement.querySelector('table#stats-table')).toBeTruthy();
     expect(nativeElement.querySelector('table#stats-table thead')).toBeTruthy();
