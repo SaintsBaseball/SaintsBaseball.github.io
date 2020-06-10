@@ -19,7 +19,6 @@ describe('InMemoryDataServiceService', () => {
       const actualDatabase = inMemoryStatsDataService.createDb();
 
       expect(typeof actualDatabase).toBe('object');
-      expect(actualDatabase.stats).toBeTruthy();
     });
   });
 });

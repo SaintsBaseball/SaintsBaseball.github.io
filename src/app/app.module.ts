@@ -19,7 +19,7 @@ import { SocialMediaAccountComponent } from './social-media/social-media-account
 import { SocialMediaAccountInfoFactoryService } from './social-media/social-media-account-info-factory.service';
 import { WelcomeComponent } from './home/welcome/welcome.component';
 import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
-import { InMemoryStatsDataService } from './data-services/in-memory-stats-data.service';
+import { InMemoryStatsDataService } from './in-memory-data-service/in-memory-stats-data.service';
 import { HttpRequestService } from './services/http-request.service';
 
 @NgModule({
