@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { InMemoryStatsDataService } from './in-memory-stats-data.service';
+import { InMemoryDataService } from './in-memory-data.service';
 
 describe('InMemoryDataServiceService', () => {
-  let inMemoryStatsDataService: InMemoryStatsDataService;
+  let inMemoryStatsDataService: InMemoryDataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    inMemoryStatsDataService = TestBed.inject(InMemoryStatsDataService);
+    inMemoryStatsDataService = TestBed.inject(InMemoryDataService);
   });
 
   it('should be created', () => {
@@ -19,6 +19,7 @@ describe('InMemoryDataServiceService', () => {
       const actualDatabase = inMemoryStatsDataService.createDb();
 
       expect(typeof actualDatabase).toBe('object');
+      expect(actualDatabase.stats).toBeTruthy();
     });
   });
 });
