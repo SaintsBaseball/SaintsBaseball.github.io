@@ -1,6 +1,6 @@
-import { IPlayerStatistics } from '../interfaces/i-player-statistics';
+import { PlayerHittingStatistics } from '../statistics/player-hitting-statistics';
 
 export class StatisticsDatabaseTable {
-  'Fall 2019-2020': IPlayerStatistics;
-  'Spring 2019': IPlayerStatistics;
+  'Fall 2019-2020': PlayerHittingStatistics[];
+  'Spring 2019': PlayerHittingStatistics[];
 }
