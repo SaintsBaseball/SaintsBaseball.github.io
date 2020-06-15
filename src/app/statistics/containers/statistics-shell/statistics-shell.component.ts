@@ -1,4 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
+import * as fromStatistics from '../../state';
+import * as statisticActions from '../../state/statistic.actions';
 
 @Component({
   selector: 'statistics-shell',
@@ -8,9 +11,10 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
 
-  constructor() { }
+  constructor(private store: Store<fromStatistics.State>) { }
 
   ngOnInit(): void {
+    this.store.dispatch(new statisticActions.Load());
   }
 
 }
