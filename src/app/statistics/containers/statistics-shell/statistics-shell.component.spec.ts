@@ -74,6 +74,7 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should update the statistics on successful load', (done) => {
+      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
       const getPlayerHittingStatisticsError = null;
       const statisticsToReturn: StatisticsDatabaseTable = {
         'Fall 2019-2020': [
@@ -143,13 +144,34 @@ describe('StatisticsShellComponent', () => {
         'Spring 2019': []
       };
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
-      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
 
       statisticsShellComponent.ngOnInit();
 
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statisticsToReturn);
         done();
+      });
+    });
+
+    it('should show an error message if failed to load statistics', (done) => {
+      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
+      const getPlayerHittingStatisticsError = new Error('Some error');
+      const statisticsToReturn = null;
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+
+      statisticsShellComponent.ngOnInit();
+
+      const defaultStats: StatisticsDatabaseTable = {
+        'Fall 2019-2020': [],
+        'Spring 2019': []
+      };
+      statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
+        expect(stats).toEqual(defaultStats);
+        
+        statisticsShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
+          expect(errorMessage).toBe('Could not load statistics');
+          done();
+        });
       });
     });
   });

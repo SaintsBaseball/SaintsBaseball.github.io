@@ -12,3 +12,8 @@ export const getStatistics = createSelector(
   getStatisticFeatureState,
   state => state.statistics
 )
+
+export const getErrorMessage = createSelector(
+  getStatisticFeatureState,
+  state => state.errorMessage
+)

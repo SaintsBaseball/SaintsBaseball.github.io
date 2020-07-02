@@ -17,5 +17,10 @@ export class LoadSuccess implements Action {
   constructor(public payload: StatisticsDatabaseTable) { }
 }
 
+export class LoadFail implements Action {
+  readonly type = StatisticActionTypes.LoadFail;
+}
+
 export type StatisticActions = Load
-  | LoadSuccess;
+  | LoadSuccess
+  | LoadFail;
