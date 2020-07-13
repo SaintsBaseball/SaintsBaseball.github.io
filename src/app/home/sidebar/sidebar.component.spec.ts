@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarComponent } from './sidebar.component';
 
@@ -9,7 +10,10 @@ describe('SidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ]
+      declarations: [ SidebarComponent ],
+      imports: [
+        RouterTestingModule
+      ]
     })
     .compileComponents();
   }));
@@ -27,7 +31,7 @@ describe('SidebarComponent', () => {
 
   it('should have the Sidebar Title at the top of the sidebar', function () {
     expect(sidebarComponent.title).toBe('Menu');
-    expect(nativeElement.querySelector('nav.w3-sidebar h4.w3-bar-item b').textContent).toBe(sidebarComponent.title)
+    expect(nativeElement.querySelector('nav.w3-sidebar h4.w3-bar-item b').textContent).toBe(sidebarComponent.title);
   });
 
   it('should have an X that closes the sidebar', function () {
@@ -37,5 +41,10 @@ describe('SidebarComponent', () => {
     xButton.click();
 
     expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
+  });
+
+  it('should have a link to the stats page', function () {
+    expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].textContent).toBe('Statistics');
+    expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].href).toContain('/statistics');
   });
 });
