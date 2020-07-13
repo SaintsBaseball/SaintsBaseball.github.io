@@ -47,4 +47,13 @@ describe('SidebarComponent', () => {
     expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].textContent).toBe('Statistics');
     expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].href).toContain('/statistics');
   });
+
+  it('should close the sidebar when navigating to the stats page', function () {
+    spyOn(sidebarComponent, "closeSidebar");
+
+    const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
+    linkToStatsPage.click();
+
+    expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
+  });
 });
