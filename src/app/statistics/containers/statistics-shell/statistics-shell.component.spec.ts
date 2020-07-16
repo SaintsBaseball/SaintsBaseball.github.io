@@ -167,12 +167,29 @@ describe('StatisticsShellComponent', () => {
       };
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toEqual(defaultStats);
-        
+
         statisticsShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
           expect(errorMessage).toBe('Could not load statistics');
           done();
         });
       });
+    });
+  });
+
+  describe('statistics-selector', () => {
+    it('should have a dropdown to select a season', () => {
+      expect(nativeElement.querySelector('select')).toBeTruthy();
+      const defaultOption = nativeElement.querySelector('option');
+      expect(defaultOption.textContent).toBe('Season');
+    });
+  });
+
+  describe('statistics-table', () => {
+    it('should have a table for the statistics', () => {
+      expect(nativeElement.querySelector('table#stats-table')).toBeTruthy();
+      expect(nativeElement.querySelector('table#stats-table thead')).toBeTruthy();
+      expect(nativeElement.querySelector('table#stats-table thead tr')).toBeTruthy();
+      expect(nativeElement.querySelector('table#stats-table tbody')).toBeTruthy();
     });
   });
 });
