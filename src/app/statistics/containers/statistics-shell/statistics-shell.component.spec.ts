@@ -74,7 +74,6 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should update the statistics on successful load', (done) => {
-      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
       const getPlayerHittingStatisticsError = null;
       const statisticsToReturn: StatisticsDatabaseTable = {
         'Fall 2019-2020': [
@@ -154,7 +153,6 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should show an error message if failed to load statistics', (done) => {
-      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
       const getPlayerHittingStatisticsError = new Error('Some error');
       const statisticsToReturn = null;
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
@@ -177,9 +175,14 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-selector', () => {
-    it('should have a dropdown to select a season', () => {
+    it('should have an empty dropdown when statistics have not been loaded', () => {
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
       expect(nativeElement.querySelector('select')).toBeTruthy();
-      const defaultOption = nativeElement.querySelector('option');
+      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      expect(allOptionsInDropdown.length).toBe(1);
+      const defaultOption = allOptionsInDropdown[0];
       expect(defaultOption.textContent).toBe('Season');
     });
   });
