@@ -1,5 +1,7 @@
 <h1>{{title}}</h1>
 
-<statistics-selector></statistics-selector>
+<statistics-selector
+  [statistics]="statistics$ | async"
+></statistics-selector>
 
 <statistics-table></statistics-table>

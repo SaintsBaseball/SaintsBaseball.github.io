@@ -1,3 +1,4 @@
 <select>
     <option>Season</option>
+    <option *ngFor="let seasonName of statistics | statisticsToSeason">{{seasonName}}</option>
 </select>
