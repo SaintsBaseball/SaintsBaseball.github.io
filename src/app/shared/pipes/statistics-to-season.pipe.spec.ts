@@ -1,7 +1,7 @@
 import { StatisticsToSeasonPipe } from './statistics-to-season.pipe';
 import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
-fdescribe('StatisticsToSeasonPipe', () => {
+describe('StatisticsToSeasonPipe', () => {
   let statisticsToSeasonPipe: StatisticsToSeasonPipe;
 
   beforeEach(() => {
