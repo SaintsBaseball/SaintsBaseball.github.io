@@ -210,6 +210,24 @@ describe('StatisticsShellComponent', () => {
         expect(dropdownOption.textContent).toBe(expectedText);
       });
     });
+
+    it('should populate the dropdown even when statistics failed to load', () => {
+      const getPlayerHittingStatisticsError = new Error("some error loading statistics");
+      const statisticsToReturn = null
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('select')).toBeTruthy();
+      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      expect(allOptionsInDropdown.length).toBe(3);
+      const expectedOptions = ['Season', 'Fall 2019-2020', 'Spring 2019'];
+      allOptionsInDropdown.forEach((dropdownOption, index) => {
+        const expectedText = expectedOptions[index];
+        expect(dropdownOption.textContent).toBe(expectedText);
+      });
+    });
   });
 
   describe('statistics-table', () => {
