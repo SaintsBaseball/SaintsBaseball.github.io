@@ -13,6 +13,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
   statistics$: Observable<StatisticsDatabaseTable>;
+  currentSeason$: Observable<string>;
   errorMessage$: Observable<string>;
 
   constructor(private store: Store<fromStatistics.State>) { }
@@ -22,5 +23,6 @@ export class StatisticsShellComponent implements OnInit {
 
     this.statistics$ = this.store.pipe(select(fromStatistics.getStatistics));
     this.errorMessage$ = this.store.pipe(select(fromStatistics.getErrorMessage));
+    this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
   }
 }

@@ -17,3 +17,8 @@ export const getErrorMessage = createSelector(
   getStatisticFeatureState,
   state => state.errorMessage
 )
+
+export const getCurrentSeason = createSelector(
+  getStatisticFeatureState,
+  state => state.currentSeason
+)

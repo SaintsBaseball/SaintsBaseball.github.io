@@ -173,6 +173,15 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
+
+    it('should get the current season', (done) => {
+      statisticsShellComponent.ngOnInit();
+
+      statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
+        expect(currentSeason).toBe('Season');
+        done();
+      });    
+    });
   });
 
   describe('statistics-selector', () => {

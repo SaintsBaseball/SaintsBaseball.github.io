@@ -3,7 +3,8 @@ import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
   statistics: StatisticsDatabaseTable,
-  errorMessage: string
+  errorMessage: string,
+  currentSeason: string
 }
 
 const initialState: StatisticState = {
@@ -11,7 +12,8 @@ const initialState: StatisticState = {
     'Fall 2019-2020': [],
     'Spring 2019': []
   },
-  errorMessage: null
+  errorMessage: null,
+  currentSeason: 'Season'
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {
