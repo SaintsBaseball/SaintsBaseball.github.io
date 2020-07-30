@@ -4,7 +4,8 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 export enum StatisticActionTypes {
   Load = '[Statistics] Load',
   LoadSuccess = '[Statistics] Load Success',
-  LoadFail = '[Statistics] Load Fail'
+  LoadFail = '[Statistics] Load Fail',
+  ChangeSeason = '[Statistics] Change Season'
 }
 
 export class Load implements Action {
@@ -21,6 +22,13 @@ export class LoadFail implements Action {
   readonly type = StatisticActionTypes.LoadFail;
 }
 
+export class ChangeSeason implements Action {
+  readonly type = StatisticActionTypes.ChangeSeason;
+
+  constructor(public payload: string) { }
+}
+
 export type StatisticActions = Load
   | LoadSuccess
-  | LoadFail;
+  | LoadFail
+  | ChangeSeason;

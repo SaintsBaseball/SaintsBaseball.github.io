@@ -25,4 +25,8 @@ export class StatisticsShellComponent implements OnInit {
     this.errorMessage$ = this.store.pipe(select(fromStatistics.getErrorMessage));
     this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
   }
+
+  changeSeason(seasonName: string): void {
+    this.store.dispatch(new statisticActions.ChangeSeason(seasonName));
+  }
 }

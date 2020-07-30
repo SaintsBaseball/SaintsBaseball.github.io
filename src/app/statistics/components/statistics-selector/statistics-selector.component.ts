@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 @Component({
@@ -8,4 +8,10 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 })
 export class StatisticsSelectorComponent {
   @Input() statistics: StatisticsDatabaseTable;
+  @Input() currentSeason: string;
+  @Output() seasonChanged = new EventEmitter<string>();
+
+  changeSeason(seasonName: string): void {
+    this.seasonChanged.emit(seasonName);
+  }
 }

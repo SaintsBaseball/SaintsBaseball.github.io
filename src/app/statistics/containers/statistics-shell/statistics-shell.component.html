@@ -2,6 +2,8 @@
 
 <statistics-selector
   [statistics]="statistics$ | async"
+  [currentSeason]="currentSeason$ | async"
+  (seasonChanged)="changeSeason($event)"
 ></statistics-selector>
 
 <statistics-table></statistics-table>

@@ -23,12 +23,18 @@ export function reducer(state = initialState, action: StatisticActions): Statist
         ...state,
         statistics: action.payload
       };
-    
+
     case StatisticActionTypes.LoadFail:
       return {
         ...state,
         statistics: initialState.statistics,
         errorMessage: 'Could not load statistics'
+      };
+
+    case StatisticActionTypes.ChangeSeason:
+      return {
+        ...state,
+        currentSeason: action.payload
       };
 
     default:

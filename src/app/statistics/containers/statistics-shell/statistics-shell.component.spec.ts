@@ -10,6 +10,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 import { take } from 'rxjs/operators';
 import { reducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { of } from 'rxjs';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -180,7 +181,7 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
         expect(currentSeason).toBe('Season');
         done();
-      });    
+      });
     });
   });
 
@@ -235,6 +236,27 @@ describe('StatisticsShellComponent', () => {
       allOptionsInDropdown.forEach((dropdownOption, index) => {
         const expectedText = expectedOptions[index];
         expect(dropdownOption.textContent).toBe(expectedText);
+      });
+    });
+
+    it('should set the current season when the user changes the selected season', (done) => {
+      const getPlayerHittingStatisticsError = null;
+      const statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [];
+      statisticsToReturn["Spring 2019"] = [];
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const seasonToSelect = "Fall 2019-2020";
+      const seasonDropdown = nativeElement.querySelector('select');
+      seasonDropdown.value = seasonToSelect;
+      seasonDropdown.dispatchEvent(new Event('change'));
+      fixture.detectChanges();
+
+      statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
+        expect(currentSeason).toBe(seasonToSelect);
+        done();
       });
     });
   });
