@@ -1,4 +1,4 @@
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store } from '@ngrx/store';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StatisticsShellComponent } from './statistics-shell.component';
 import { StatisticsSelectorComponent } from '../../components/statistics-selector/statistics-selector.component';
@@ -10,13 +10,15 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 import { take } from 'rxjs/operators';
 import { reducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { of } from 'rxjs';
+import * as fromStatistics from '../../state';
+import * as statisticActions from '../../state/statistic.actions';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
   let fixture: ComponentFixture<StatisticsShellComponent>;
   let nativeElement;
   let statisticsServiceMock: StatisticsServiceMock;
+  let store: Store<fromStatistics.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,6 +49,7 @@ describe('StatisticsShellComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
     statisticsServiceMock = TestBed.get('IStatisticsService');
+    store = TestBed.get(Store);
   });
 
   it('should create', () => {
@@ -250,6 +253,29 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
         expect(currentSeason).toBe(seasonToSelect);
         done();
+      });
+    });
+
+    it('should set the dropdown selection to the current season', () => {
+      const getPlayerHittingStatisticsError = null;
+      const statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [];
+      statisticsToReturn["Spring 2019"] = [];
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const currentSeason = 'Spring 2019';      
+      store.dispatch(new statisticActions.ChangeSeason(currentSeason));
+      fixture.detectChanges();
+
+      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      allOptionsInDropdown.forEach(dropdownOption => {
+        if (dropdownOption.textContent === currentSeason) {
+          expect(dropdownOption.selected).toBeTrue();
+        } else {
+          expect(dropdownOption.selected).toBeFalse();
+        }
       });
     });
   });
