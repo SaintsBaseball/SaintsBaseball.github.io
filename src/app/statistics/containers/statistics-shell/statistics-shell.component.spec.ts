@@ -161,10 +161,7 @@ describe('StatisticsShellComponent', () => {
 
       statisticsShellComponent.ngOnInit();
 
-      const defaultStats: StatisticsDatabaseTable = {
-        'Fall 2019-2020': [],
-        'Spring 2019': []
-      };
+      const defaultStats = new StatisticsDatabaseTable();
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toEqual(defaultStats);
 
@@ -221,7 +218,7 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should populate the dropdown even when statistics failed to load', () => {
+    it('should not populate the dropdown when statistics failed to load', () => {
       const getPlayerHittingStatisticsError = new Error("some error loading statistics");
       const statisticsToReturn = null
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
@@ -231,12 +228,8 @@ describe('StatisticsShellComponent', () => {
 
       expect(nativeElement.querySelector('select')).toBeTruthy();
       const allOptionsInDropdown = nativeElement.querySelectorAll('option');
-      expect(allOptionsInDropdown.length).toBe(3);
-      const expectedOptions = ['Season', 'Fall 2019-2020', 'Spring 2019'];
-      allOptionsInDropdown.forEach((dropdownOption, index) => {
-        const expectedText = expectedOptions[index];
-        expect(dropdownOption.textContent).toBe(expectedText);
-      });
+      expect(allOptionsInDropdown.length).toBe(1);
+      expect(allOptionsInDropdown[0].textContent).toBe('Season');
     });
 
     it('should set the current season when the user changes the selected season', (done) => {

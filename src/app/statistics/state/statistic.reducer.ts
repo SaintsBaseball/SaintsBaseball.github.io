@@ -8,10 +8,7 @@ export interface StatisticState {
 }
 
 const initialState: StatisticState = {
-  statistics: {
-    'Fall 2019-2020': [],
-    'Spring 2019': []
-  },
+  statistics: new StatisticsDatabaseTable(),
   errorMessage: null,
   currentSeason: 'Season'
 }
