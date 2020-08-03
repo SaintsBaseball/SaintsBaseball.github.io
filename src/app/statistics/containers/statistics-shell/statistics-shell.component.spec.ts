@@ -186,7 +186,7 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-selector', () => {
-    it('should have an empty dropdown when statistics have not been loaded', () => {
+    it('should have only default option in dropdown when no statistics have been loaded', () => {
       const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new StatisticsDatabaseTable();
 
@@ -286,6 +286,25 @@ describe('StatisticsShellComponent', () => {
       expect(nativeElement.querySelector('table#stats-table thead')).toBeTruthy();
       expect(nativeElement.querySelector('table#stats-table thead tr')).toBeTruthy();
       expect(nativeElement.querySelector('table#stats-table tbody')).toBeTruthy();
+    });
+
+    it('should have an empty table when dropdown is set to default option', () => {
+      const getPlayerHittingStatisticsError = null;
+      const statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [];
+      statisticsToReturn["Spring 2019"] = [];
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const defaultOption = 'Season';      
+      store.dispatch(new statisticActions.ChangeSeason(defaultOption));
+      fixture.detectChanges();
+
+      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr td');
+      const allRowsInBody = nativeElement.querySelectorAll('table#stats-table tbody tr');
+      expect(allColumnsInHeadRow.length).toBe(0);
+      expect(allRowsInBody.length).toBe(0);
     });
   });
 });
