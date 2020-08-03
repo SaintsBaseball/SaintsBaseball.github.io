@@ -306,5 +306,24 @@ describe('StatisticsShellComponent', () => {
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
     });
+
+    it('should have an empty table when an invalid option is selected', () => {
+      const getPlayerHittingStatisticsError = null;
+      const statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [];
+      statisticsToReturn["Spring 2019"] = [];
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const invalidOption = 'sadfbasjhdbfasjhd';      
+      store.dispatch(new statisticActions.ChangeSeason(invalidOption));
+      fixture.detectChanges();
+
+      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr td');
+      const allRowsInBody = nativeElement.querySelectorAll('table#stats-table tbody tr');
+      expect(allColumnsInHeadRow.length).toBe(0);
+      expect(allRowsInBody.length).toBe(0);
+    });
   });
 });
