@@ -265,7 +265,7 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const currentSeason = 'Spring 2019';      
+      const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       fixture.detectChanges();
 
@@ -281,6 +281,32 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-table', () => {
+    let statisticsToReturn;
+
+    beforeEach(() => {
+      const getPlayerHittingStatisticsError = null;
+      statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [
+        {
+          "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
+        },
+        {
+          "#": 8, "Player": "helmet slammer", "G": 11, "AB": 36, "R": 7, "H": 6, "2B": 1, "3B": 0, "HR": 0, "RBI": 4, "BB": 9, "SO": 4, "SB": 5, "CS": 0, "AVG": "0.167", "OBP": "0.347", "SLG": "0.194", "OPS": "0.541", "IBB": 0, "HBP": 2, "SAC": 1, "SF": 2, "TB": 7, "XBH": 1, "GDP": 0, "GO": 8, "AO": 20, "GO_AO": "0.40", "PA": 50
+        }
+      ];
+      statisticsToReturn["Spring 2019"] = [
+        {
+          "#": 3, "Player": "my bro", "G": 17, "AB": 63, "R": 9, "H": 19, "2B": 1, "3B": 0, "HR": 0, "RBI": 11, "BB": 7, "SO": 19, "SB": 3, "CS": 1, "AVG": "0.302", "OBP": "0.380", "SLG": "0.317", "OPS": "0.697", "IBB": 0, "HBP": 1, "SAC": 0, "SF": 0, "TB": 20, "XBH": 1, "GDP": 1, "GO": 6, "AO": 12, "GO_AO": "0.50", "PA": 71
+        },
+        {
+          "#": 4, "Player": "real estate", "G": 12, "AB": 44, "R": 13, "H": 15, "2B": 1, "3B": 1, "HR": 1, "RBI": 12, "BB": 6, "SO": 15, "SB": 1, "CS": 0, "AVG": "0.341", "OBP": "0.431", "SLG": "0.477", "OPS": "0.908", "IBB": 0, "HBP": 1, "SAC": 1, "SF": 0, "TB": 21, "XBH": 3, "GDP": 0, "GO": 7, "AO": 7, "GO_AO": "1.00", "PA": 52
+        }
+      ];
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+    });
+
     it('should have a table for the statistics', () => {
       expect(nativeElement.querySelector('table#stats-table')).toBeTruthy();
       expect(nativeElement.querySelector('table#stats-table thead')).toBeTruthy();
@@ -289,38 +315,24 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should have an empty table when dropdown is set to default option', () => {
-      const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [];
-      statisticsToReturn["Spring 2019"] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
-      statisticsShellComponent.ngOnInit();
-      fixture.detectChanges();
+      const defaultOption = 'Season';
 
-      const defaultOption = 'Season';      
       store.dispatch(new statisticActions.ChangeSeason(defaultOption));
       fixture.detectChanges();
 
-      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr td');
+      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr th');
       const allRowsInBody = nativeElement.querySelectorAll('table#stats-table tbody tr');
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
     });
 
     it('should have an empty table when an invalid option is selected', () => {
-      const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [];
-      statisticsToReturn["Spring 2019"] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
-      statisticsShellComponent.ngOnInit();
+      const invalidSeason = 'sadfbasjhdbfasjhd';
+
+      store.dispatch(new statisticActions.ChangeSeason(invalidSeason));
       fixture.detectChanges();
 
-      const invalidOption = 'sadfbasjhdbfasjhd';      
-      store.dispatch(new statisticActions.ChangeSeason(invalidOption));
-      fixture.detectChanges();
-
-      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr td');
+      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr th');
       const allRowsInBody = nativeElement.querySelectorAll('table#stats-table tbody tr');
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
