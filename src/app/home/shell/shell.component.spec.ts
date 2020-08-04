@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShellComponent } from './shell.component';
-import { AppRoutingModule } from '../../app-routing.module';
 import { NavigationBarComponent } from '../navigation-bar/navigation-bar.component';
 import { SponsorComponent } from '../sponsor/sponsor.component';
 import { SocialMediaWrapperComponent } from 'src/app/social-media/social-media-wrapper/social-media-wrapper.component';
 import { SocialMediaAccountComponent } from 'src/app/social-media/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryServiceMock } from 'src/app/testClasses/social-media-account-info-factory-service-mock';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('ShellComponent', () => {
   let shellComponent: ShellComponent;
@@ -22,7 +22,9 @@ describe('ShellComponent', () => {
         SocialMediaWrapperComponent,
         SocialMediaAccountComponent
       ],
-      imports: [AppRoutingModule],
+      imports: [
+        RouterTestingModule
+      ],
       providers: [
         {
           provide: 'ISocialMediaAccountInfoFactoryService',
