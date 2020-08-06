@@ -6,4 +6,7 @@
   (seasonChanged)="changeSeason($event)"
 ></statistics-selector>
 
-<statistics-table></statistics-table>
+<statistics-table
+  [statistics]="statistics$ | async"
+  [currentSeason]="currentSeason$ | async"
+></statistics-table>

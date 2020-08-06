@@ -337,5 +337,31 @@ describe('StatisticsShellComponent', () => {
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
     });
+
+    it('should populate the table with stats from season when a valid option is selected', () => {
+      const validSeason = 'Spring 2019';
+
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
+      const expectedHeaderColumns = Object.keys(expectedPlayerSeasonStats[0]);
+      const allColumnsInHeadRow = nativeElement.querySelectorAll('table#stats-table thead tr th');
+      const allRowsInBody = nativeElement.querySelectorAll('table#stats-table tbody tr');
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');
+      expect(allColumnsInHeadRow.length).toBe(expectedHeaderColumns.length);
+      allColumnsInHeadRow.forEach((column, index) => {
+        expect(column.textContent).toBe(expectedHeaderColumns[index]);
+      });
+      expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
+      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedHeaderColumns.length);
+      let columnInBodyRowIndex = 0;
+      expectedPlayerSeasonStats.forEach(playerStats => {
+        Object.values(playerStats).forEach(statistic => {
+          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
+          columnInBodyRowIndex++;
+        });
+      });
+    });
   });
 });

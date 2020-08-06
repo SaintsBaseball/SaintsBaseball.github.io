@@ -1,6 +1,12 @@
 <table id="stats-table">
     <thead>
-        <tr></tr>
+        <tr>
+            <th *ngFor="let statisticKey of statistics | playerStatisticsToStatisticKeys:currentSeason">{{statisticKey}}</th>
+        </tr>
     </thead>
-    <tbody></tbody>
+    <tbody>
+        <tr *ngFor="let playerStatistics of statistics[currentSeason]">
+            <td *ngFor="let statistic of playerStatistics | keyvalue:keepOriginalOrder">{{statistic.value}}</td>
+        </tr>
+    </tbody>
 </table>
