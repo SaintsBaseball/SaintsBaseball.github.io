@@ -370,4 +370,37 @@ describe('StatisticsShellComponent', () => {
       });
     });
   });
+
+  
+  describe('statistics-key-table', () => {
+    it('should have a key table for the statistics', () => {
+      expect(nativeElement.querySelector('table#key-table')).toBeTruthy();
+      expect(nativeElement.querySelector('table#key-table thead')).toBeTruthy();
+      expect(nativeElement.querySelector('table#key-table tbody')).toBeTruthy();
+
+      const tableHeaderRow = nativeElement.querySelectorAll('table#key-table thead tr');
+      expect(tableHeaderRow).toBeTruthy();
+      expect(tableHeaderRow.length).toBe(1);
+
+      const tableHeaderElements = nativeElement.querySelectorAll('table#key-table thead tr th');
+      expect(tableHeaderElements).toBeTruthy();
+      expect(tableHeaderElements.length).toBe(3);
+      const expectedHeaderColumns = ['Key', '', ''];
+      tableHeaderElements.forEach((element, index) => {
+        expect(element.textContent).toBe(expectedHeaderColumns[index]);
+      });
+
+      const tableBodyRows = nativeElement.querySelectorAll('table#key-table tbody tr');
+      expect(tableBodyRows).toBeTruthy();
+      expect(tableBodyRows.length).toBe(9);
+
+      const tableBodyElements = nativeElement.querySelectorAll('table#key-table tbody tr td');
+      expect(tableBodyElements).toBeTruthy();
+      expect(tableBodyElements.length).toBe(27);
+      const expectedBodyColumns = ['G - Games', 'AB - At Bats', 'R - Runs', 'H - Hits', '2B - Doubles', '3B - Triples', 'HR - Homeruns', 'RBI - Runs Batted In', 'BB - Base on Balls', 'SO - Strikeouts', 'SB - Stolen Bases', 'CS - Caught Stealing', 'AVG - Average', 'OBP - On-Base Percentage', 'SLG - Slugging Percentage', 'OPS - On-Base Plus Slugging', 'IBB - Intentional Walks', 'HBP - Hit By Pitch', 'SAC - Sacrifice Bunts', 'SF - Sacrifice Flys', 'TB - Total Bases', 'XBH - Extra Base Hits', 'GDP - Grounded Into Double Play', 'GO - Ground Outs', 'AO - Fly Outs', 'GO_AO - Ground Outs Per Fly Out', 'PA - Plate Appearances'];
+      tableBodyElements.forEach((element, index) => {
+        expect(element.textContent).toBe(expectedBodyColumns[index]);
+      });
+    });
+  });
 });
