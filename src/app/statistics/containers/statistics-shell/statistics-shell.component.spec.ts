@@ -12,6 +12,7 @@ import { reducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
 import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
+import { StatisticsKeyTableComponent } from '../../components/statistics-key-table/statistics-key-table.component';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -25,7 +26,8 @@ describe('StatisticsShellComponent', () => {
       declarations: [
         StatisticsShellComponent,
         StatisticsSelectorComponent,
-        StatisticsTableComponent
+        StatisticsTableComponent,
+        StatisticsKeyTableComponent
       ],
       providers: [
         {
@@ -67,6 +69,10 @@ describe('StatisticsShellComponent', () => {
 
   it('should have the statistics table', () => {
     expect(nativeElement.querySelector('statistics-table')).toBeTruthy();
+  });
+
+  it('should have the statistics key table', () => {
+    expect(nativeElement.querySelector('statistics-key-table')).toBeTruthy();
   });
 
   describe('ngOnInit', () => {
