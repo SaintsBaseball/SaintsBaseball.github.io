@@ -369,9 +369,27 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
+
+    it('should be ordered by jersey number', () => {
+      const validSeason = 'Spring 2019';
+
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
+      const selectedHeaderRow = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
+      const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td.selected');
+      expect(selectedHeaderRow.length).toBe(1);
+      const expectedSelectedStat = '#';
+      expect(selectedHeaderRow[0].textContent).toBe(expectedSelectedStat);
+      expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
+      selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
+        const statsForPlayer = expectedPlayerSeasonStats[index];
+        expect(columnElements.textContent).toBe(statsForPlayer[expectedSelectedStat].toString());
+      });
+    });
   });
 
-  
   describe('statistics-key-table', () => {
     it('should have a key table for the statistics', () => {
       expect(nativeElement.querySelector('table#key-table')).toBeTruthy();

@@ -1,12 +1,14 @@
 <table id="stats-table" cellpadding="8">
     <thead>
         <tr>
-            <th *ngFor="let statisticKey of statistics | playerStatisticsToStatisticKeys:currentSeason">{{statisticKey}}</th>
+            <th *ngFor="let statisticKey of statistics | playerStatisticsToStatisticKeys:currentSeason"
+                [ngClass]="{'selected':statisticKey === selectedStatistic}">{{statisticKey}}</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let playerStatistics of statistics[currentSeason]">
-            <td *ngFor="let statistic of playerStatistics | keyvalue:keepOriginalOrder">{{statistic.value}}</td>
+            <td *ngFor="let statistic of playerStatistics | keyvalue:keepOriginalOrder"
+                [ngClass]="{'selected':statistic.key === selectedStatistic}">{{statistic.value}}</td>
         </tr>
     </tbody>
 </table>

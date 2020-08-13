@@ -9,6 +9,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 export class StatisticsTableComponent {
   @Input() statistics: StatisticsDatabaseTable;
   @Input() currentSeason: string;
+  selectedStatistic: string = '#';
   
   public keepOriginalOrder = (a) => a.key;
 }
