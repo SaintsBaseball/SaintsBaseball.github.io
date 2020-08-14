@@ -12,4 +12,8 @@ export class StatisticsTableComponent {
   selectedStatistic: string = '#';
   
   public keepOriginalOrder = (a) => a.key;
+
+  changeSelectedStat(statisticKey: string) {
+    this.selectedStatistic = statisticKey;
+  }
 }

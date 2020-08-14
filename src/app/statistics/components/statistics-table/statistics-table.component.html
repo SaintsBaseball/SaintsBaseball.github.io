@@ -2,7 +2,8 @@
     <thead>
         <tr>
             <th *ngFor="let statisticKey of statistics | playerStatisticsToStatisticKeys:currentSeason"
-                [ngClass]="{'selected':statisticKey === selectedStatistic}">{{statisticKey}}</th>
+                [ngClass]="{'selected':statisticKey === selectedStatistic}"
+                (click)="changeSelectedStat(statisticKey)">{{statisticKey}}</th>
         </tr>
     </thead>
     <tbody>
