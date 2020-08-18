@@ -4,13 +4,15 @@ import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 export interface StatisticState {
   statistics: StatisticsDatabaseTable,
   errorMessage: string,
-  currentSeason: string
+  currentSeason: string,
+  selectedStatistic: string
 }
 
 const initialState: StatisticState = {
   statistics: new StatisticsDatabaseTable(),
   errorMessage: null,
-  currentSeason: 'Season'
+  currentSeason: 'Season',
+  selectedStatistic: '#'
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {
@@ -31,7 +33,8 @@ export function reducer(state = initialState, action: StatisticActions): Statist
     case StatisticActionTypes.ChangeSeason:
       return {
         ...state,
-        currentSeason: action.payload
+        currentSeason: action.payload,
+        selectedStatistic: '#'
       };
 
     default:
