@@ -12,6 +12,8 @@
 <statistics-table
   [statistics]="statistics$ | async"
   [currentSeason]="currentSeason$ | async"
+  [selectedStatistic]="selectedStatistic$ | async"
+  (selectedStatisticChanged)="changeSelectedStatistic($event)"
 ></statistics-table>
 
 <br>

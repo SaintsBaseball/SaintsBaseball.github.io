@@ -31,4 +31,8 @@ export class StatisticsShellComponent implements OnInit {
   changeSeason(seasonName: string): void {
     this.store.dispatch(new statisticActions.ChangeSeason(seasonName));
   }
+
+  changeSelectedStatistic(selectedStatistic: string): void {
+    this.store.dispatch(new statisticActions.ChangeSelectedStatistic(selectedStatistic));
+  }
 }

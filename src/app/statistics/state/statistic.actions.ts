@@ -5,7 +5,8 @@ export enum StatisticActionTypes {
   Load = '[Statistics] Load',
   LoadSuccess = '[Statistics] Load Success',
   LoadFail = '[Statistics] Load Fail',
-  ChangeSeason = '[Statistics] Change Season'
+  ChangeSeason = '[Statistics] Change Season',
+  ChangeSelectedStatistic = '[Statsitics] Change Selected Statistic'
 }
 
 export class Load implements Action {
@@ -28,7 +29,14 @@ export class ChangeSeason implements Action {
   constructor(public payload: string) { }
 }
 
+export class ChangeSelectedStatistic implements Action {
+  readonly type = StatisticActionTypes.ChangeSelectedStatistic;
+
+  constructor(public payload: string) { }
+}
+
 export type StatisticActions = Load
   | LoadSuccess
   | LoadFail
-  | ChangeSeason;
+  | ChangeSeason
+  | ChangeSelectedStatistic;

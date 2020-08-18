@@ -37,6 +37,12 @@ export function reducer(state = initialState, action: StatisticActions): Statist
         selectedStatistic: '#'
       };
 
+    case StatisticActionTypes.ChangeSelectedStatistic:
+      return {
+        ...state,
+        selectedStatistic: action.payload
+      };
+
     default:
       return state;
   }

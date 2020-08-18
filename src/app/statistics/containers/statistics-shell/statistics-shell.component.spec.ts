@@ -370,7 +370,7 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should be ordered by jersey number', () => {
+    it('should be ordered by jersey number', (done) => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
@@ -389,6 +389,7 @@ describe('StatisticsShellComponent', () => {
       });
       statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
         expect(selectedStatistic).toBe(expectedSelectedStat);
+        done()
       });
     });
 
@@ -409,6 +410,11 @@ describe('StatisticsShellComponent', () => {
         const expectedSelectedStat = tableHeaderColumn.textContent;
         expect(selectedHeaderColumn[0].textContent).toBe(expectedSelectedStat);
         expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
+        statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
+          expect(selectedStatistic).toBe(expectedSelectedStat);
+        });
+      });
+    });
       });
     });
   });

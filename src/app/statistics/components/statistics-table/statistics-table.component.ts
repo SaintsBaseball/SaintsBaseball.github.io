@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 @Component({
@@ -9,11 +9,12 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 export class StatisticsTableComponent {
   @Input() statistics: StatisticsDatabaseTable;
   @Input() currentSeason: string;
-  selectedStatistic: string = '#';
+  @Input() selectedStatistic: string;
+  @Output() selectedStatisticChanged = new EventEmitter<string>();
   
   public keepOriginalOrder = (a) => a.key;
 
-  changeSelectedStat(statisticKey: string) {
-    this.selectedStatistic = statisticKey;
+  changeSelectedStatistic(statisticKey: string) {
+    this.selectedStatisticChanged.emit(statisticKey);
   }
 }
