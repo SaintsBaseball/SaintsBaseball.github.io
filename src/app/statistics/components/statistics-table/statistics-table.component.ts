@@ -14,7 +14,7 @@ export class StatisticsTableComponent {
   
   public keepOriginalOrder = (a) => a.key;
 
-  changeSelectedStatistic(statisticKey: string) {
+  changeSelectedStatistic(statisticKey: string): void {
     this.selectedStatisticChanged.emit(statisticKey);
   }
 }

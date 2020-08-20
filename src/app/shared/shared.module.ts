@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StatisticsToSeasonPipe } from './pipes/statistics-to-season.pipe';
 import { PlayerStatisticsToStatisticKeys } from './pipes/player-statistics-to-statistic-keys.pipe';
+import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
 
 @NgModule({
   imports: [
@@ -11,7 +12,8 @@ import { PlayerStatisticsToStatisticKeys } from './pipes/player-statistics-to-st
   ],
   declarations: [
     StatisticsToSeasonPipe,
-    PlayerStatisticsToStatisticKeys
+    PlayerStatisticsToStatisticKeys,
+    SortStatisticsPipe
   ],
   exports: [
     CommonModule,
