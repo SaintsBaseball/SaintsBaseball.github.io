@@ -96,5 +96,22 @@ describe('SortStatisticsPipe', () => {
       const expected = [firstPlayer, secondPlayer];
       expect(results).toEqual(expected);
     });
+
+    it('should handle undefined statistics', () => {
+      let undefinedStats: PlayerHittingStatistics[];
+      const statisticToSortBy = '#';
+
+      const results = sortStatisticsPipe.transform(undefinedStats, statisticToSortBy);
+
+      expect(results).toBeUndefined();
+    });
+
+    it('should return unsorted statistics if statisticToSortBy is undefined', () => {
+      let statisticToSortBy: string;
+
+      const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
+
+      expect(results).toBe(playerStatisticsToSort);
+    });
   });
 });

@@ -6,6 +6,10 @@ import { PlayerHittingStatistics } from 'src/app/statistics/player-hitting-stati
 })
 export class SortStatisticsPipe implements PipeTransform {
   transform(playerStatisticsToSort: PlayerHittingStatistics[], statisticToSortBy: string): PlayerHittingStatistics[] {
+    if (!playerStatisticsToSort || !statisticToSortBy) {
+      return playerStatisticsToSort;
+    }
+
     const sortedStatistics = [...playerStatisticsToSort];
     const statisticName = statisticToSortBy.replace('Reverse', '');
 
