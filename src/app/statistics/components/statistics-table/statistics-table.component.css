@@ -15,9 +15,9 @@ th {
     color: #010150;
 }
 
-/* th:hover {
+th:hover {
     text-decoration: underline;
-} */
+}
 
 td {
     border: 1px black solid;
