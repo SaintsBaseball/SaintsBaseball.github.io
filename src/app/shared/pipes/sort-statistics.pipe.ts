@@ -7,9 +7,20 @@ import { PlayerHittingStatistics } from 'src/app/statistics/player-hitting-stati
 export class SortStatisticsPipe implements PipeTransform {
   transform(playerStatisticsToSort: PlayerHittingStatistics[], statisticToSortBy: string): PlayerHittingStatistics[] {
     const sortedStatistics = [...playerStatisticsToSort];
-    sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-      return firstPlayerStatistics[statisticToSortBy].localeCompare(secondPlayerStatistics[statisticToSortBy]);
-    });
+
+    if (statisticToSortBy === '#') {
+      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
+        return firstPlayerStatistics[statisticToSortBy] - secondPlayerStatistics[statisticToSortBy];
+      });
+    } else if (statisticToSortBy === 'Player') {
+      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
+        return firstPlayerStatistics[statisticToSortBy].localeCompare(secondPlayerStatistics[statisticToSortBy]);
+      });
+    } else {
+      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
+        return secondPlayerStatistics[statisticToSortBy] - firstPlayerStatistics[statisticToSortBy];
+      });
+    }
 
     return sortedStatistics;
   }
