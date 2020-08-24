@@ -62,7 +62,7 @@ describe('SortStatisticsPipe', () => {
     });
     
     it('should return the statistics sorted by jersey number from highest to lowest', () => {
-      const statisticToSortBy = '# Reverse';
+      const statisticToSortBy = '#Reverse';
 
       const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
 
@@ -71,7 +71,25 @@ describe('SortStatisticsPipe', () => {
     });
     
     it('should return the statistics sorted reverse alphabetically by player name', () => {
-      const statisticToSortBy = 'Player Reverse';
+      const statisticToSortBy = 'PlayerReverse';
+
+      const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
+
+      const expected = [firstPlayer, secondPlayer];
+      expect(results).toEqual(expected);
+    });
+
+    it('should return the statistics sorted by a statistic that is a number from lowest to highest', () => {
+      const statisticToSortBy = 'RReverse';
+
+      const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
+
+      const expected = [firstPlayer, secondPlayer];
+      expect(results).toEqual(expected);
+    });
+
+    it('should return the statistics sorted by a statistic that is a number string from lowest to highest', () => {
+      const statisticToSortBy = 'AVGReverse';
 
       const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
 

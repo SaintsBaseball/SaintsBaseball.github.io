@@ -7,27 +7,24 @@ import { PlayerHittingStatistics } from 'src/app/statistics/player-hitting-stati
 export class SortStatisticsPipe implements PipeTransform {
   transform(playerStatisticsToSort: PlayerHittingStatistics[], statisticToSortBy: string): PlayerHittingStatistics[] {
     const sortedStatistics = [...playerStatisticsToSort];
+    const statisticName = statisticToSortBy.replace('Reverse', '');
 
-    if (statisticToSortBy === '#') {
+    if (statisticToSortBy.includes('#')) {
       sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-        return firstPlayerStatistics[statisticToSortBy] - secondPlayerStatistics[statisticToSortBy];
+        return firstPlayerStatistics[statisticName] - secondPlayerStatistics[statisticName];
       });
-    } else if (statisticToSortBy === '# Reverse') {
+    } else if (statisticToSortBy.includes('Player')) {
       sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-        return secondPlayerStatistics['#'] - firstPlayerStatistics['#'];
-      });
-    } else if (statisticToSortBy === 'Player') {
-      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-        return firstPlayerStatistics[statisticToSortBy].localeCompare(secondPlayerStatistics[statisticToSortBy]);
-      });
-    } else if (statisticToSortBy === 'Player Reverse') {
-      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-        return secondPlayerStatistics.Player.localeCompare(firstPlayerStatistics.Player);
+        return firstPlayerStatistics[statisticName].localeCompare(secondPlayerStatistics[statisticName]);
       });
     } else {
       sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
-        return secondPlayerStatistics[statisticToSortBy] - firstPlayerStatistics[statisticToSortBy];
+        return secondPlayerStatistics[statisticName] - firstPlayerStatistics[statisticName];
       });
+    }
+
+    if (statisticToSortBy.includes('Reverse')) {
+      sortedStatistics.reverse();
     }
 
     return sortedStatistics;
