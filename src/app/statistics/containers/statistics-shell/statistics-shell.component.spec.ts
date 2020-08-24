@@ -478,6 +478,40 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
+    
+    it('should sort the statistics in reverse order of selected stat when the same stat is selected', () => {
+      const validSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      let selectedHeaderColumn = nativeElement.querySelector('table#stats-table thead tr th.selected');
+      const selectedColumnStat = selectedHeaderColumn.textContent;
+      selectedHeaderColumn.click();
+      fixture.detectChanges();
+      selectedHeaderColumn.click();
+      fixture.detectChanges();
+
+      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
+        expect(selectedStatistic).toBe(selectedColumnStat);
+      });
+      const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
+      selectedHeaderColumn = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
+      expect(selectedHeaderColumn.length).toBe(1);
+      const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td.selected');
+      expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
+      selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
+        const statsForPlayer = expectedPlayerSeasonStats[index];
+        expect(columnElements.textContent).toBe(statsForPlayer[selectedColumnStat].toString());
+      });
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');      
+      let columnInBodyRowIndex = 0;
+      expectedPlayerSeasonStats.forEach(playerStats => {
+        Object.values(playerStats).forEach(statistic => {
+          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
+          columnInBodyRowIndex++;
+        });
+      });
+    });
   });
 
   describe('statistics-key-table', () => {
