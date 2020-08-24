@@ -20,7 +20,8 @@ import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
     FormsModule,
     ReactiveFormsModule,
     StatisticsToSeasonPipe,
-    PlayerStatisticsToStatisticKeys
+    PlayerStatisticsToStatisticKeys,
+    SortStatisticsPipe
   ]
 })
 export class SharedModule { }
