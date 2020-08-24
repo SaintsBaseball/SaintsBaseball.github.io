@@ -5,9 +5,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
   name: 'statisticsToSeason'
 })
 export class StatisticsToSeasonPipe implements PipeTransform {
-
   transform(value: StatisticsDatabaseTable): string[] {
     return Object.keys(value);
   }
-
 }

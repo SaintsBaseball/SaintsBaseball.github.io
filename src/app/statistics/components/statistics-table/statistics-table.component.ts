@@ -15,6 +15,14 @@ export class StatisticsTableComponent {
   public keepOriginalOrder = (a) => a.key;
 
   changeSelectedStatistic(statisticKey: string): void {
+    if (statisticKey === this.selectedStatistic) {
+      statisticKey += 'Reverse';
+    }
     this.selectedStatisticChanged.emit(statisticKey);
+  }
+
+  determineIfStatisticIsSelected(statisticName: string): boolean {
+    const selectedStatisticName = this.selectedStatistic.replace('Reverse', '');
+    return selectedStatisticName === statisticName;
   }
 }
