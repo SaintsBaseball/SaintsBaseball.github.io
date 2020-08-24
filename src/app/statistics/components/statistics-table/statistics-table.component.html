@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let playerStatistics of statistics[currentSeason]">
+        <tr *ngFor="let playerStatistics of statistics[currentSeason] | sortStatistics: selectedStatistic">
             <td *ngFor="let statistic of playerStatistics | keyvalue:keepOriginalOrder"
                 [ngClass]="{'selected':statistic.key === selectedStatistic}">{{statistic.value}}</td>
         </tr>

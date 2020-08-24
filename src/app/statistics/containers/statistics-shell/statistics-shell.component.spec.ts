@@ -288,26 +288,24 @@ describe('StatisticsShellComponent', () => {
 
   describe('statistics-table', () => {
     let statisticsToReturn: StatisticsDatabaseTable;
+    const playerNumber3 = {
+      "#": 3, "Player": "this is my bro", "G": 17, "AB": 63, "R": 9, "H": 19, "2B": 1, "3B": 0, "HR": 0, "RBI": 11, "BB": 7, "SO": 19, "SB": 3, "CS": 1, "AVG": "0.302", "OBP": "0.380", "SLG": "0.317", "OPS": "0.697", "IBB": 0, "HBP": 1, "SAC": 0, "SF": 0, "TB": 20, "XBH": 1, "GDP": 1, "GO": 6, "AO": 12, "GO_AO": "0.50", "PA": 71
+    };
+    const playerNumber4 = {
+      "#": 4, "Player": "real estate", "G": 12, "AB": 44, "R": 13, "H": 15, "2B": 1, "3B": 1, "HR": 1, "RBI": 12, "BB": 6, "SO": 15, "SB": 1, "CS": 0, "AVG": "0.341", "OBP": "0.431", "SLG": "0.477", "OPS": "0.908", "IBB": 0, "HBP": 1, "SAC": 1, "SF": 0, "TB": 21, "XBH": 3, "GDP": 0, "GO": 7, "AO": 7, "GO_AO": "1.00", "PA": 52
+    };
+    const playerNumber6 = {
+      "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
+    };
+    const playerNumber8 = {
+      "#": 8, "Player": "helmet slammer", "G": 11, "AB": 36, "R": 7, "H": 6, "2B": 1, "3B": 0, "HR": 0, "RBI": 4, "BB": 9, "SO": 4, "SB": 5, "CS": 0, "AVG": "0.167", "OBP": "0.347", "SLG": "0.194", "OPS": "0.541", "IBB": 0, "HBP": 2, "SAC": 1, "SF": 2, "TB": 7, "XBH": 1, "GDP": 0, "GO": 8, "AO": 20, "GO_AO": "0.40", "PA": 50
+    };
 
     beforeEach(() => {
       const getPlayerHittingStatisticsError = null;
       statisticsToReturn = new StatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [
-        {
-          "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
-        },
-        {
-          "#": 8, "Player": "helmet slammer", "G": 11, "AB": 36, "R": 7, "H": 6, "2B": 1, "3B": 0, "HR": 0, "RBI": 4, "BB": 9, "SO": 4, "SB": 5, "CS": 0, "AVG": "0.167", "OBP": "0.347", "SLG": "0.194", "OPS": "0.541", "IBB": 0, "HBP": 2, "SAC": 1, "SF": 2, "TB": 7, "XBH": 1, "GDP": 0, "GO": 8, "AO": 20, "GO_AO": "0.40", "PA": 50
-        }
-      ];
-      statisticsToReturn["Spring 2019"] = [
-        {
-          "#": 3, "Player": "this is my bro", "G": 17, "AB": 63, "R": 9, "H": 19, "2B": 1, "3B": 0, "HR": 0, "RBI": 11, "BB": 7, "SO": 19, "SB": 3, "CS": 1, "AVG": "0.302", "OBP": "0.380", "SLG": "0.317", "OPS": "0.697", "IBB": 0, "HBP": 1, "SAC": 0, "SF": 0, "TB": 20, "XBH": 1, "GDP": 1, "GO": 6, "AO": 12, "GO_AO": "0.50", "PA": 71
-        },
-        {
-          "#": 4, "Player": "real estate", "G": 12, "AB": 44, "R": 13, "H": 15, "2B": 1, "3B": 1, "HR": 1, "RBI": 12, "BB": 6, "SO": 15, "SB": 1, "CS": 0, "AVG": "0.341", "OBP": "0.431", "SLG": "0.477", "OPS": "0.908", "IBB": 0, "HBP": 1, "SAC": 1, "SF": 0, "TB": 21, "XBH": 3, "GDP": 0, "GO": 7, "AO": 7, "GO_AO": "1.00", "PA": 52
-        }
-      ];
+      statisticsToReturn["Fall 2019-2020"] = [playerNumber6, playerNumber8];
+      statisticsToReturn["Spring 2019"] = [playerNumber3, playerNumber4];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -415,6 +413,37 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
+
+    it('should sort the statistics in order of selected stat when a new stat is selected', () => {
+      const validSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      const unselectedTableHeaderColumns = nativeElement.querySelectorAll('table#stats-table thead tr th:not(.selected)');
+      const columnToSelect = 'Player';
+      let playerNameColumn;
+      unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
+        if (tableHeaderColumn.textContent === columnToSelect) {
+          playerNameColumn = tableHeaderColumn;
+        }
+      });
+      playerNameColumn.click();
+      fixture.detectChanges();
+
+      const expectedPlayerSeasonStats = [playerNumber4, playerNumber3];
+      const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td.selected');
+      expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
+      selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
+        const statsForPlayer = expectedPlayerSeasonStats[index];
+        expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
+      });
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');      
+      let columnInBodyRowIndex = 0;
+      expectedPlayerSeasonStats.forEach(playerStats => {
+        Object.values(playerStats).forEach(statistic => {
+          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
+          columnInBodyRowIndex++;
+        });
       });
     });
   });
