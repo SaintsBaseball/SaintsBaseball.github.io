@@ -62,11 +62,20 @@ describe('SortStatisticsPipe', () => {
     });
     
     it('should return the statistics sorted by jersey number from highest to lowest', () => {
-      const statisticToSortBy = '# reverse';
+      const statisticToSortBy = '# Reverse';
 
       const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
 
       const expected = [secondPlayer, firstPlayer];
+      expect(results).toEqual(expected);
+    });
+    
+    it('should return the statistics sorted reverse alphabetically by player name', () => {
+      const statisticToSortBy = 'Player Reverse';
+
+      const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
+
+      const expected = [firstPlayer, secondPlayer];
       expect(results).toEqual(expected);
     });
   });
