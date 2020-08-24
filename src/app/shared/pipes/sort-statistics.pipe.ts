@@ -12,6 +12,10 @@ export class SortStatisticsPipe implements PipeTransform {
       sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
         return firstPlayerStatistics[statisticToSortBy] - secondPlayerStatistics[statisticToSortBy];
       });
+    } else if (statisticToSortBy === '# reverse') {
+      sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
+        return secondPlayerStatistics['#'] - firstPlayerStatistics['#'];
+      });
     } else if (statisticToSortBy === 'Player') {
       sortedStatistics.sort((firstPlayerStatistics, secondPlayerStatistics) => {
         return firstPlayerStatistics[statisticToSortBy].localeCompare(secondPlayerStatistics[statisticToSortBy]);

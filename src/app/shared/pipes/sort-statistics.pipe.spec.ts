@@ -60,5 +60,14 @@ describe('SortStatisticsPipe', () => {
       const expected = [secondPlayer, firstPlayer];
       expect(results).toEqual(expected);
     });
+    
+    it('should return the statistics sorted by jersey number from highest to lowest', () => {
+      const statisticToSortBy = '# reverse';
+
+      const results = sortStatisticsPipe.transform(playerStatisticsToSort, statisticToSortBy);
+
+      const expected = [secondPlayer, firstPlayer];
+      expect(results).toEqual(expected);
+    });
   });
 });
