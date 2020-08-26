@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'players-shell',
   templateUrl: './players-shell.component.html',
-  styleUrls: ['./players-shell.component.css']
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayersShellComponent implements OnInit {
+  title: string = 'Saints Players';
 
   constructor() { }
 
