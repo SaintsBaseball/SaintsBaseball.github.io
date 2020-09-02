@@ -21,6 +21,7 @@ import { WelcomeComponent } from './home/welcome/welcome.component';
 import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
 import { InMemoryDataService } from './in-memory-data-service/in-memory-data.service';
 import { HttpRequestService } from './services/http-request.service';
+import { AppEffects } from './state/app.effects';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,7 @@ import { HttpRequestService } from './services/http-request.service';
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
     StoreModule.forRoot({}),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       name: 'Saints Baseball',
       maxAge: 25,

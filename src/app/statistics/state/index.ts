@@ -1,4 +1,4 @@
-import * as fromRoot from '../../state/app.state';
+import * as fromRoot from '../../state';
 import { StatisticState } from './statistic.reducer';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
