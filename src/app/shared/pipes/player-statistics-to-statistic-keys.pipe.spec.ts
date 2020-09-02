@@ -1,4 +1,4 @@
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { PlayerStatisticsToStatisticKeys } from './player-statistics-to-statistic-keys.pipe';
 
 describe('PlayerStatisticsToStatisticKeys', () => {

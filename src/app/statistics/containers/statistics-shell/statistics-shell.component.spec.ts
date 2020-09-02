@@ -6,7 +6,7 @@ import { StatisticsTableComponent } from '../../components/statistics-table/stat
 import { StatisticsServiceMock } from 'src/app/testClasses/statistics-service-mock';
 import { EffectsModule } from '@ngrx/effects';
 import { StatisticsEffects } from '../../state/statistic.effects';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { take } from 'rxjs/operators';
 import { reducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';

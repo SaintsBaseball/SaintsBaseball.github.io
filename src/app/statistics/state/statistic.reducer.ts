@@ -1,4 +1,4 @@
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {

@@ -1,4 +1,4 @@
-import { PlayerHittingStatisticsDatabaseTable } from './statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from './player-hitting-statistics-database-table';
 
 export class SaintsDatabase {
   stats: PlayerHittingStatisticsDatabaseTable

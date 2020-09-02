@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 
 export enum StatisticActionTypes {
   Load = '[Statistics] Load',
