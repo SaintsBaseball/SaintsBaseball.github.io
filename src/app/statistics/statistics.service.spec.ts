@@ -3,7 +3,7 @@ import { take } from 'rxjs/operators';
 
 import { StatisticsService } from './statistics.service';
 import { RequestServiceMock } from '../testClasses/request-service-mock';
-import { StatisticsDatabaseTable } from '../in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/statistics-database-table';
 
 describe('StatisticsService', () => {
   let statisticsService: StatisticsService;
@@ -36,7 +36,7 @@ describe('StatisticsService', () => {
 
     it('should return an observable of the requested statistics', (done) => {
       const getStatsError = null;
-      const statsFromRequest: StatisticsDatabaseTable = {
+      const statsFromRequest: PlayerHittingStatisticsDatabaseTable = {
         'Fall 2019-2020': [
           {
             '#': 1,

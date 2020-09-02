@@ -6,7 +6,7 @@ import { StatisticsTableComponent } from '../../components/statistics-table/stat
 import { StatisticsServiceMock } from 'src/app/testClasses/statistics-service-mock';
 import { EffectsModule } from '@ngrx/effects';
 import { StatisticsEffects } from '../../state/statistic.effects';
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 import { take } from 'rxjs/operators';
 import { reducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -86,7 +86,7 @@ describe('StatisticsShellComponent', () => {
 
     it('should update the statistics on successful load', (done) => {
       const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [
         {
           '#': 1,
@@ -170,7 +170,7 @@ describe('StatisticsShellComponent', () => {
 
       statisticsShellComponent.ngOnInit();
 
-      const defaultStats = new StatisticsDatabaseTable();
+      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toEqual(defaultStats);
 
@@ -194,7 +194,7 @@ describe('StatisticsShellComponent', () => {
   describe('statistics-selector', () => {
     it('should have only default option in dropdown when no statistics have been loaded', () => {
       const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
 
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
       statisticsShellComponent.ngOnInit();
@@ -209,7 +209,7 @@ describe('StatisticsShellComponent', () => {
 
     it('should populate the dropdown with the list of seasons when statistics have been loaded', () => {
       const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
@@ -243,7 +243,7 @@ describe('StatisticsShellComponent', () => {
 
     it('should set the current season when the user changes the selected season', (done) => {
       const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
@@ -264,7 +264,7 @@ describe('StatisticsShellComponent', () => {
 
     it('should set the dropdown selection to the current season', () => {
       const getPlayerHittingStatisticsError = null;
-      const statisticsToReturn = new StatisticsDatabaseTable();
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
@@ -287,7 +287,7 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-table', () => {
-    let statisticsToReturn: StatisticsDatabaseTable;
+    let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
     const playerNumber3 = {
       "#": 3, "Player": "this is my bro", "G": 17, "AB": 63, "R": 9, "H": 19, "2B": 1, "3B": 0, "HR": 0, "RBI": 11, "BB": 7, "SO": 19, "SB": 3, "CS": 1, "AVG": "0.302", "OBP": "0.380", "SLG": "0.317", "OPS": "0.697", "IBB": 0, "HBP": 1, "SAC": 0, "SF": 0, "TB": 20, "XBH": 1, "GDP": 1, "GO": 6, "AO": 12, "GO_AO": "0.50", "PA": 71
     };
@@ -303,7 +303,7 @@ describe('StatisticsShellComponent', () => {
 
     beforeEach(() => {
       const getPlayerHittingStatisticsError = null;
-      statisticsToReturn = new StatisticsDatabaseTable();
+      statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [playerNumber6, playerNumber8];
       statisticsToReturn["Spring 2019"] = [playerNumber3, playerNumber4];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);

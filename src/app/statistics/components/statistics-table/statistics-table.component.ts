@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 @Component({
   selector: 'statistics-table',
@@ -7,7 +7,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
   styleUrls: ['./statistics-table.component.css']
 })
 export class StatisticsTableComponent {
-  @Input() statistics: StatisticsDatabaseTable;
+  @Input() statistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: string;
   @Input() selectedStatistic: string;
   @Output() selectedStatisticChanged = new EventEmitter<string>();

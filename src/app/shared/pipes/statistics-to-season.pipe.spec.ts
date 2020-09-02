@@ -1,5 +1,5 @@
 import { StatisticsToSeasonPipe } from './statistics-to-season.pipe';
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 describe('StatisticsToSeasonPipe', () => {
   let statisticsToSeasonPipe: StatisticsToSeasonPipe;
@@ -14,7 +14,7 @@ describe('StatisticsToSeasonPipe', () => {
 
   describe('transform', () => {
     it('should transform an empty table to an empty string array', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
 
       const result = statisticsToSeasonPipe.transform(statistics);
 
@@ -22,7 +22,7 @@ describe('StatisticsToSeasonPipe', () => {
     });
 
     it('should transform a populated table to a string array with the season names', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
       statistics["Fall 2019-2020"] = [];
       statistics["Spring 2019"] = [];
 

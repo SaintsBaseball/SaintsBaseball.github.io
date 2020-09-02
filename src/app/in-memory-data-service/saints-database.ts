@@ -1,5 +1,5 @@
-import { StatisticsDatabaseTable } from './statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from './statistics-database-table';
 
 export class SaintsDatabase {
-  stats: StatisticsDatabaseTable
+  stats: PlayerHittingStatisticsDatabaseTable
 }

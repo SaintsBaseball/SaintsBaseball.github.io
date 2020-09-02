@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 export enum StatisticActionTypes {
   Load = '[Statistics] Load',
@@ -16,7 +16,7 @@ export class Load implements Action {
 export class LoadSuccess implements Action {
   readonly type = StatisticActionTypes.LoadSuccess;
 
-  constructor(public payload: StatisticsDatabaseTable) { }
+  constructor(public payload: PlayerHittingStatisticsDatabaseTable) { }
 }
 
 export class LoadFail implements Action {

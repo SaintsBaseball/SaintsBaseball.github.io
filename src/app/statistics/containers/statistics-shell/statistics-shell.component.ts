@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 
 @Component({
   selector: 'statistics-shell',
@@ -12,7 +12,7 @@ import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statisti
 })
 export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
-  statistics$: Observable<StatisticsDatabaseTable>;
+  statistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
   currentSeason$: Observable<string>;
   selectedStatistic$: Observable<string>;

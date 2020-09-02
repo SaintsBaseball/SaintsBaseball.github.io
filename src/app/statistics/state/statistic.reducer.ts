@@ -1,15 +1,15 @@
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
-  statistics: StatisticsDatabaseTable,
+  statistics: PlayerHittingStatisticsDatabaseTable,
   errorMessage: string,
   currentSeason: string,
   selectedStatistic: string
 }
 
 const initialState: StatisticState = {
-  statistics: new StatisticsDatabaseTable(),
+  statistics: new PlayerHittingStatisticsDatabaseTable(),
   errorMessage: null,
   currentSeason: 'Season',
   selectedStatistic: '#'

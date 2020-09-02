@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { PlayersShellComponent } from './containers/players-shell/players-shell.component';
 
-
 const playersRoutes: Routes = [
   { path: '', component: PlayersShellComponent }
 ]

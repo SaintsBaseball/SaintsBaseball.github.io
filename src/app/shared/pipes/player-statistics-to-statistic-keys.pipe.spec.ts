@@ -1,4 +1,4 @@
-import { StatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/statistics-database-table';
 import { PlayerStatisticsToStatisticKeys } from './player-statistics-to-statistic-keys.pipe';
 
 describe('PlayerStatisticsToStatisticKeys', () => {
@@ -14,7 +14,7 @@ describe('PlayerStatisticsToStatisticKeys', () => {
 
   describe('transform', () => {
     it('should transform an empty table to an empty string array', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
       const currentSeason = 'currentSeason';
 
       const result = playerStatisticsToStatisticKeys.transform(statistics, currentSeason);
@@ -23,7 +23,7 @@ describe('PlayerStatisticsToStatisticKeys', () => {
     });
 
     it('should transform a populated table to an empty string array when an invalid season name is passed in', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
       statistics["Fall 2019-2020"] = [
         {
           "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
@@ -48,7 +48,7 @@ describe('PlayerStatisticsToStatisticKeys', () => {
     });
 
     it('should transform a populated table to an empty string array when there are no statistics in given season', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
       statistics["Fall 2019-2020"] = [
         {
           "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
@@ -66,7 +66,7 @@ describe('PlayerStatisticsToStatisticKeys', () => {
     });
 
     it('should transform a populated table to a string array with the statistic keys when a valid season is passed in', () => {
-      const statistics = new StatisticsDatabaseTable();
+      const statistics = new PlayerHittingStatisticsDatabaseTable();
       statistics["Fall 2019-2020"] = [
         {
           "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
