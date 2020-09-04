@@ -2,7 +2,8 @@ import { createSelector } from '@ngrx/store';
 import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/player-hitting-statistics-database-table';
 
 export interface State {
-  playerHittingStatistics: PlayerHittingStatisticsDatabaseTable
+  playerHittingStatistics: PlayerHittingStatisticsDatabaseTable,
+  errorMessage: string
 }
 
 function getAppState (state): State {
@@ -12,4 +13,9 @@ function getAppState (state): State {
 export const getPlayerHittingStatistics = createSelector(
   getAppState,
   state => state.playerHittingStatistics
+)
+
+export const getErrorMessage = createSelector(
+  getAppState,
+  state => state.errorMessage
 )

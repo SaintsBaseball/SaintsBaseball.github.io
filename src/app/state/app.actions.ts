@@ -4,7 +4,7 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 export enum AppActionTypes {
   Load = '[App] Load',
   LoadSuccess = '[App] Load Success',
-  // LoadFail = '[Statistics] Load Fail'
+  LoadFail = '[App] Load Fail'
 }
 
 export class Load implements Action {
@@ -17,10 +17,10 @@ export class LoadSuccess implements Action {
   constructor(public payload: PlayerHittingStatisticsDatabaseTable) { }
 }
 
-// export class LoadFail implements Action {
-//   readonly type = AppActionTypes.LoadFail;
-// }
+export class LoadFail implements Action {
+  readonly type = AppActionTypes.LoadFail;
+}
 
 export type AppActions = Load
   | LoadSuccess
-  // | LoadFail;
+  | LoadFail;

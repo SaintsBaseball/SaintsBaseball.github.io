@@ -17,7 +17,7 @@ export class AppEffects {
     ofType(appActions.AppActionTypes.Load),
     mergeMap(() => this.statisticsService.getPlayerHittingStatistics().pipe(
       map(statistics => (new appActions.LoadSuccess(statistics))),
-      // catchError(() => of(new appActions.LoadFail()))
+      catchError(() => of(new appActions.LoadFail()))
     ))
   )
 }

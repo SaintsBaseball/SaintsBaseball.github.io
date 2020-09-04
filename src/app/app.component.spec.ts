@@ -139,22 +139,22 @@ describe('AppComponent', () => {
       });
     });
 
-    // it('should populate the error message if failed to load statistics', (done) => {
-    //   const getPlayerHittingStatisticsError = new Error('Some error');
-    //   const statisticsToReturn = null;
-    //   statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+    it('should populate the error message if failed to load statistics', (done) => {
+      const getPlayerHittingStatisticsError = new Error('Some error');
+      const statisticsToReturn = null;
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
 
-    //   statisticsShellComponent.ngOnInit();
+      appComponent.ngOnInit();
 
-    //   const defaultStats = new StatisticsDatabaseTable();
-    //   statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
-    //     expect(stats).toEqual(defaultStats);
+      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
+      store.pipe(select(fromRoot.getPlayerHittingStatistics, take(1))).subscribe(stats => {
+        expect(stats).toEqual(defaultStats);
 
-    //     statisticsShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
-    //       expect(errorMessage).toBe('Could not load statistics');
-    //       done();
-    //     });
-    //   });
-    // });
+        store.pipe(select(fromRoot.getErrorMessage, take(1))).subscribe(errorMessage => {
+          expect(errorMessage).toBe('Could not load statistics');
+          done();
+        });
+      });
+    });
   });
 });
