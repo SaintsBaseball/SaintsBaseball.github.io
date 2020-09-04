@@ -22,6 +22,8 @@ import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper
 import { InMemoryDataService } from './in-memory-data-service/in-memory-data.service';
 import { HttpRequestService } from './services/http-request.service';
 import { AppEffects } from './state/app.effects';
+import { reducer } from './state/app.reducer';
+import { StatisticsService } from './statistics/statistics.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AppEffects } from './state/app.effects';
     AppRoutingModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
-    StoreModule.forRoot({}),
+    StoreModule.forRoot({
+      appState: reducer
+    }),
     EffectsModule.forRoot([AppEffects]),
     StoreDevtoolsModule.instrument({
       name: 'Saints Baseball',
@@ -55,6 +59,10 @@ import { AppEffects } from './state/app.effects';
     {
       provide: 'IRequestService',
       useClass: HttpRequestService
+    },
+    {
+      provide: 'IStatisticsService',
+      useClass: StatisticsService
     }
   ],
   bootstrap: [AppComponent]

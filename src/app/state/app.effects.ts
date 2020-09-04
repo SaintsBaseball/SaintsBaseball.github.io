@@ -1,6 +1,6 @@
 import { Injectable, Inject } from "@angular/core";
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { mergeMap, map, catchError } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { IStatisticsService } from 'src/app/interfaces/i-statistics-service';
 import * as appActions from './app.actions';
@@ -13,10 +13,10 @@ export class AppEffects {
   ) { }
 
   @Effect()
-  loadStatistics$ = this.actions$.pipe(
+  loadApp$ = this.actions$.pipe(
     ofType(appActions.AppActionTypes.Load),
     mergeMap(() => this.statisticsService.getPlayerHittingStatistics().pipe(
-      // map(statistics => (new appActions.LoadSuccess(statistics))),
+      map(statistics => (new appActions.LoadSuccess(statistics))),
       // catchError(() => of(new appActions.LoadFail()))
     ))
   )

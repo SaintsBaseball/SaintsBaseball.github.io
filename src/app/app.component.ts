@@ -11,7 +11,7 @@ import * as appActions from './state/app.actions';
 export class AppComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.store.dispatch(new appActions.Load());
   }
 }
