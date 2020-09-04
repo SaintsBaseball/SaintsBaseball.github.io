@@ -23,7 +23,7 @@ import { InMemoryDataService } from './in-memory-data-service/in-memory-data.ser
 import { HttpRequestService } from './services/http-request.service';
 import { AppEffects } from './state/app.effects';
 import { reducer } from './state/app.reducer';
-import { StatisticsService } from './statistics/statistics.service';
+import { StatisticsService } from './statistics.service';
 
 @NgModule({
   declarations: [
