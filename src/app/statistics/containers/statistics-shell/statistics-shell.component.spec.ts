@@ -3,9 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StatisticsShellComponent } from './statistics-shell.component';
 import { StatisticsSelectorComponent } from '../../components/statistics-selector/statistics-selector.component';
 import { StatisticsTableComponent } from '../../components/statistics-table/statistics-table.component';
-import { StatisticsServiceMock } from 'src/app/testClasses/statistics-service-mock';
 import { EffectsModule } from '@ngrx/effects';
-import { StatisticsEffects } from '../../state/statistic.effects';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { take } from 'rxjs/operators';
 import { reducer as appReducer } from 'src/app/state/app.reducer';
@@ -20,7 +18,6 @@ describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
   let fixture: ComponentFixture<StatisticsShellComponent>;
   let nativeElement;
-  let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromStatistics.State>;
 
   beforeEach(async(() => {
@@ -31,19 +28,14 @@ describe('StatisticsShellComponent', () => {
         StatisticsTableComponent,
         StatisticsKeyTableComponent
       ],
-      providers: [
-        {
-          provide: 'IStatisticsService',
-          useClass: StatisticsServiceMock
-        }
-      ],
+      providers: [],
       imports: [
         SharedModule,
         StoreModule.forRoot({
           appState: appReducer
         }),
         StoreModule.forFeature('statistics', statisticsReducer),
-        EffectsModule.forRoot([StatisticsEffects])
+        EffectsModule.forRoot([])
       ]
     })
       .compileComponents();
@@ -54,7 +46,6 @@ describe('StatisticsShellComponent', () => {
     statisticsShellComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
-    statisticsServiceMock = TestBed.get('IStatisticsService');
     store = TestBed.get(Store);
   });
 

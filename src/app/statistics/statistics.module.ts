@@ -4,7 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 /* NgRx */
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { StatisticsEffects } from './state/statistic.effects';
 import { reducer } from './state/statistic.reducer';
 
 import { StatisticsService } from './statistics.service';
@@ -29,7 +28,7 @@ const statisticsRoutes: Routes = [
     SharedModule,
     RouterModule.forChild(statisticsRoutes),
     StoreModule.forFeature('statistics', reducer),
-    EffectsModule.forFeature([StatisticsEffects]),
+    EffectsModule.forFeature([]),
   ],
   providers: [
     {

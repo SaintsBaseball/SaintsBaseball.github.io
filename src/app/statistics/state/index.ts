@@ -8,16 +8,6 @@ export interface State extends fromRoot.State {
 
 const getStatisticFeatureState = createFeatureSelector<StatisticState>('statistics');
 
-export const getStatistics = createSelector(
-  getStatisticFeatureState,
-  state => state.statistics
-)
-
-export const getErrorMessage = createSelector(
-  getStatisticFeatureState,
-  state => state.errorMessage
-)
-
 export const getCurrentSeason = createSelector(
   getStatisticFeatureState,
   state => state.currentSeason
