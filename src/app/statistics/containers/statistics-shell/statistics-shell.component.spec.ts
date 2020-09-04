@@ -8,9 +8,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { StatisticsEffects } from '../../state/statistic.effects';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { take } from 'rxjs/operators';
-import { reducer } from '../../state/statistic.reducer';
+import { reducer as appReducer } from 'src/app/state/app.reducer';
+import { reducer as statisticsReducer } from '../../state/statistic.reducer';
 import { SharedModule } from 'src/app/shared/shared.module';
 import * as fromStatistics from '../../state';
+import * as appActions from 'src/app/state/app.actions';
 import * as statisticActions from '../../state/statistic.actions';
 import { StatisticsKeyTableComponent } from '../../components/statistics-key-table/statistics-key-table.component';
 
@@ -37,8 +39,10 @@ describe('StatisticsShellComponent', () => {
       ],
       imports: [
         SharedModule,
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('statistics', reducer),
+        StoreModule.forRoot({
+          appState: appReducer
+        }),
+        StoreModule.forFeature('statistics', statisticsReducer),
         EffectsModule.forRoot([StatisticsEffects])
       ]
     })
@@ -76,16 +80,7 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('ngOnInit', () => {
-    it('should load the player hitting statistics', () => {
-      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
-
-      statisticsShellComponent.ngOnInit();
-
-      expect(statisticsServiceMock.getPlayerHittingStatistics.callCount).toBe(1);
-    });
-
     it('should update the statistics on successful load', (done) => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [
         {
@@ -153,9 +148,8 @@ describe('StatisticsShellComponent', () => {
       ];
       statisticsToReturn["Spring 2019"] = [];
 
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
-
       statisticsShellComponent.ngOnInit();
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statisticsToReturn);
@@ -164,11 +158,8 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should populate the error message if failed to load statistics', (done) => {
-      const getPlayerHittingStatisticsError = new Error('Some error');
-      const statisticsToReturn = null;
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
-
       statisticsShellComponent.ngOnInit();
+      store.dispatch(new appActions.LoadFail());
 
       const defaultStats = new PlayerHittingStatisticsDatabaseTable();
       statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
@@ -193,10 +184,9 @@ describe('StatisticsShellComponent', () => {
 
   describe('statistics-selector', () => {
     it('should have only default option in dropdown when no statistics have been loaded', () => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -208,11 +198,10 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should populate the dropdown with the list of seasons when statistics have been loaded', () => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -228,9 +217,7 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should not populate the dropdown when statistics failed to load', () => {
-      const getPlayerHittingStatisticsError = new Error("some error loading statistics");
-      const statisticsToReturn = null
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      store.dispatch(new appActions.LoadFail());
 
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -242,11 +229,10 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should set the current season when the user changes the selected season', (done) => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -263,11 +249,10 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should set the dropdown selection to the current season', () => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [];
       statisticsToReturn["Spring 2019"] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -302,12 +287,11 @@ describe('StatisticsShellComponent', () => {
     };
 
     beforeEach(() => {
-      const getPlayerHittingStatisticsError = null;
       statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [playerNumber6, playerNumber8];
       statisticsToReturn["Spring 2019"] = [playerNumber3, playerNumber4];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
       statisticsShellComponent.ngOnInit();
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       fixture.detectChanges();
     });
 

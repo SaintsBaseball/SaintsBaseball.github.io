@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import * as fromRoot from '../../../state';
 import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
@@ -20,10 +21,8 @@ export class StatisticsShellComponent implements OnInit {
   constructor(private store: Store<fromStatistics.State>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new statisticActions.Load());
-
-    this.statistics$ = this.store.pipe(select(fromStatistics.getStatistics));
-    this.errorMessage$ = this.store.pipe(select(fromStatistics.getErrorMessage));
+    this.statistics$ = this.store.pipe(select(fromRoot.getPlayerHittingStatistics));
+    this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
     this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
     this.selectedStatistic$ = this.store.pipe(select(fromStatistics.getSelectedStatistic));
   }
