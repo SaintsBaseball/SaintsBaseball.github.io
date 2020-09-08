@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersShellComponent } from './players-shell.component';
+import { PlayersListComponent } from '../../components/players-list/players-list.component';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
@@ -9,7 +10,10 @@ describe('PlayersShellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersShellComponent ]
+      declarations: [ 
+        PlayersShellComponent,
+        PlayersListComponent
+      ]
     })
     .compileComponents();
   }));
@@ -28,5 +32,9 @@ describe('PlayersShellComponent', () => {
   it('should have the title in the header', () => {
     expect(playersShellComponent.title).toBe('Saints Players');
     expect(nativeElement.querySelector('h1').textContent).toBe(playersShellComponent.title);
+  });
+  
+  it('should have the players list', () => {
+    expect(nativeElement.querySelector('players-list')).toBeTruthy();
   });
 });
