@@ -175,9 +175,6 @@ describe('StatisticsShellComponent', () => {
 
   describe('statistics-selector', () => {
     it('should have only default option in dropdown when no statistics have been loaded', () => {
-      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
-
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
