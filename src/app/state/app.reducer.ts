@@ -12,7 +12,8 @@ export function reducer(state = initialState, action: AppActions): State {
     case AppActionTypes.LoadSuccess:
       return {
         ...state,
-        playerHittingStatistics: action.payload
+        playerHittingStatistics: action.payload,
+        errorMessage: null
       };
 
     case AppActionTypes.LoadFail:

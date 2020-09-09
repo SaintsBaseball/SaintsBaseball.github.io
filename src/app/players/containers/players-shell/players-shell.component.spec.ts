@@ -129,19 +129,19 @@ describe('PlayersShellComponent', () => {
       });
     });
 
-    // it('should populate the error message if failed to load statistics', (done) => {
-    //   playersShellComponent.ngOnInit();
-    //   store.dispatch(new appActions.LoadFail());
+    it('should populate the error message if failed to load statistics', (done) => {
+      playersShellComponent.ngOnInit();
+      store.dispatch(new appActions.LoadFail());
 
-    //   const defaultStats = new PlayerHittingStatisticsDatabaseTable();
-    //   playersShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
-    //     expect(stats).toEqual(defaultStats);
+      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
+      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
+        expect(stats).toEqual(defaultStats);
 
-    //     playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
-    //       expect(errorMessage).toBe('Could not load statistics');
-    //       done();
-    //     });
-    //   });
-    // });
+        playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
+          expect(errorMessage).toBe('Could not load statistics');
+          done();
+        });
+      });
+    });
   });
 });

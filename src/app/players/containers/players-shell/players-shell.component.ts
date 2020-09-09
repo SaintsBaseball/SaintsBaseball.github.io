@@ -12,11 +12,13 @@ import * as fromRoot from 'src/app/state';
 export class PlayersShellComponent implements OnInit {
   title: string = 'Saints Players';
   playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
+  errorMessage$: Observable<string>;
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit(): void {
     this.playerHittingStatistics$ = this.store.pipe(select(fromRoot.getPlayerHittingStatistics));
+    this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
   }
 
 }
