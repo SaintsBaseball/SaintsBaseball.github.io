@@ -1,5 +1,5 @@
 <select (change)="changeSeason($event.target.value)">
     <option [selected]="currentSeason == 'Season'">Season</option>
-    <option *ngFor="let seasonName of statistics | statisticsToSeason"
+    <option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
         [selected]="currentSeason == seasonName">{{seasonName}}</option>
 </select>

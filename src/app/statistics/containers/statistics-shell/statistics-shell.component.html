@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
 <statistics-selector
-  [statistics]="statistics$ | async"
+  [playerHittingStatistics]="playerHittingStatistics$ | async"
   [currentSeason]="currentSeason$ | async"
   (seasonChanged)="changeSeason($event)"
 ></statistics-selector>
@@ -10,7 +10,7 @@
 <br>
 
 <statistics-table
-  [statistics]="statistics$ | async"
+  [playerHittingStatistics]="playerHittingStatistics$ | async"
   [currentSeason]="currentSeason$ | async"
   [selectedStatistic]="selectedStatistic$ | async"
   (selectedStatisticChanged)="changeSelectedStatistic($event)"

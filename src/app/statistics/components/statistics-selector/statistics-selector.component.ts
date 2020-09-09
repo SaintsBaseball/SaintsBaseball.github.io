@@ -7,7 +7,7 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
   styleUrls: ['./statistics-selector.component.css']
 })
 export class StatisticsSelectorComponent {
-  @Input() statistics: PlayerHittingStatisticsDatabaseTable;
+  @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: string;
   @Output() seasonChanged = new EventEmitter<string>();
 

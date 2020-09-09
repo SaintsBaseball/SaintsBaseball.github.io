@@ -142,7 +142,7 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
-      statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
+      statisticsShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statisticsToReturn);
         done();
       });
@@ -153,7 +153,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new appActions.LoadFail());
 
       const defaultStats = new PlayerHittingStatisticsDatabaseTable();
-      statisticsShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
+      statisticsShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toEqual(defaultStats);
 
         statisticsShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {

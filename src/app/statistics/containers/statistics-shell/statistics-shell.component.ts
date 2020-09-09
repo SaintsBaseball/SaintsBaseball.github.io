@@ -13,7 +13,7 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 })
 export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
-  statistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
+  playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
   currentSeason$: Observable<string>;
   selectedStatistic$: Observable<string>;
@@ -21,7 +21,7 @@ export class StatisticsShellComponent implements OnInit {
   constructor(private store: Store<fromStatistics.State>) { }
 
   ngOnInit(): void {
-    this.statistics$ = this.store.pipe(select(fromRoot.getPlayerHittingStatistics));
+    this.playerHittingStatistics$ = this.store.pipe(select(fromRoot.getPlayerHittingStatistics));
     this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
     this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
     this.selectedStatistic$ = this.store.pipe(select(fromStatistics.getSelectedStatistic));
