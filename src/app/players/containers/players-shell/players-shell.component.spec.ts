@@ -119,9 +119,9 @@ describe('PlayersShellComponent', () => {
         }
       ];
       statisticsToReturn["Spring 2019"] = [];
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       playersShellComponent.ngOnInit();
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
         expect(stats).toBe(statisticsToReturn);
