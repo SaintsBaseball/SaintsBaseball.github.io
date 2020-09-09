@@ -2,17 +2,29 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PlayersShellComponent } from './players-shell.component';
 import { PlayersListComponent } from '../../components/players-list/players-list.component';
+import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { take } from 'rxjs/operators';
+import { StoreModule, Store } from '@ngrx/store';
+import * as fromRoot from 'src/app/state';
+import { reducer as appReducer } from 'src/app/state/app.reducer';
+import * as appActions from 'src/app/state/app.actions';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
   let fixture: ComponentFixture<PlayersShellComponent>;
   let nativeElement;
+  let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
         PlayersShellComponent,
         PlayersListComponent
+      ],
+      imports: [
+        StoreModule.forRoot({
+          appState: appReducer
+        })
       ]
     })
     .compileComponents();
@@ -23,6 +35,7 @@ describe('PlayersShellComponent', () => {
     playersShellComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
+    store = TestBed.get(Store);
   });
 
   it('should create', () => {
@@ -36,5 +49,99 @@ describe('PlayersShellComponent', () => {
   
   it('should have the players list', () => {
     expect(nativeElement.querySelector('players-list')).toBeTruthy();
+  });
+
+  describe('ngOnInit', () => {
+    it('should update the statistics on successful load', (done) => {
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      statisticsToReturn["Fall 2019-2020"] = [
+        {
+          '#': 1,
+          Player: 'name',
+          G: 1,
+          AB: 4,
+          R: 5,
+          H: 5,
+          '2B': 2,
+          '3B': 2,
+          HR: 0,
+          RBI: 3,
+          BB: 7,
+          SO: 10,
+          SB: 4,
+          CS: 2,
+          AVG: '0.250',
+          OBP: '0.300',
+          SLG: '0.310',
+          OPS: '0.610',
+          IBB: 0,
+          HBP: 1,
+          SAC: 3,
+          SF: 2,
+          TB: 21,
+          XBH: 4,
+          GDP: 1,
+          GO: 7,
+          AO: 10,
+          GO_AO: '0.70',
+          PA: 31
+        },
+        {
+          '#': 2,
+          Player: 'other name',
+          G: 2,
+          AB: 6,
+          R: 8,
+          H: 2,
+          '2B': 3,
+          '3B': 2,
+          HR: 1,
+          RBI: 4,
+          BB: 10,
+          SO: 0,
+          SB: 2,
+          CS: 1,
+          AVG: '0.281',
+          OBP: '0.312',
+          SLG: '0.313',
+          OPS: '0.625',
+          IBB: 2,
+          HBP: 3,
+          SAC: 2,
+          SF: 1,
+          TB: 24,
+          XBH: 2,
+          GDP: 3,
+          GO: 8,
+          AO: 4,
+          GO_AO: '2.00',
+          PA: 33
+        }
+      ];
+      statisticsToReturn["Spring 2019"] = [];
+
+      playersShellComponent.ngOnInit();
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+
+      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
+        expect(stats).toBe(statisticsToReturn);
+        done();
+      });
+    });
+
+    // it('should populate the error message if failed to load statistics', (done) => {
+    //   playersShellComponent.ngOnInit();
+    //   store.dispatch(new appActions.LoadFail());
+
+    //   const defaultStats = new PlayerHittingStatisticsDatabaseTable();
+    //   playersShellComponent.statistics$.pipe(take(1)).subscribe(stats => {
+    //     expect(stats).toEqual(defaultStats);
+
+    //     playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
+    //       expect(errorMessage).toBe('Could not load statistics');
+    //       done();
+    //     });
+    //   });
+    // });
   });
 });
