@@ -144,4 +144,15 @@ describe('PlayersShellComponent', () => {
       });
     });
   });
+
+  describe('players-list', () => {
+    it('should have an empty list when the players are not loaded', () => {
+      playersShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector('ul')).toBeTruthy();
+      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      expect(allOptionsInDropdown.length).toBe(0);
+    });
+  });
 });
