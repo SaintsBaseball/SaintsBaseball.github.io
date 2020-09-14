@@ -1,5 +1,5 @@
 import { SortStatisticsPipe } from './sort-statistics.pipe';
-import { PlayerHittingStatistics } from 'src/app/statistics/player-hitting-statistics';
+import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 
 describe('SortStatisticsPipe', () => {
   let sortStatisticsPipe: SortStatisticsPipe;

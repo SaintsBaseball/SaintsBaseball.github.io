@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { PlayerHittingStatistics } from 'src/app/statistics/player-hitting-statistics';
+import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 
 @Pipe({
   name: 'sortStatistics'
