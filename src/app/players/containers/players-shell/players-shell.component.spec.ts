@@ -17,7 +17,7 @@ describe('PlayersShellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         PlayersShellComponent,
         PlayersListComponent
       ],
@@ -27,7 +27,7 @@ describe('PlayersShellComponent', () => {
         })
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -46,13 +46,13 @@ describe('PlayersShellComponent', () => {
     expect(playersShellComponent.title).toBe('Saints Players');
     expect(nativeElement.querySelector('h1').textContent).toBe(playersShellComponent.title);
   });
-  
+
   it('should have the players list', () => {
     expect(nativeElement.querySelector('players-list')).toBeTruthy();
   });
 
   describe('ngOnInit', () => {
-    it('should update the statistics on successful load', (done) => {
+    it('should format the statistics by player on successful load of statistics', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn["Fall 2019-2020"] = [
         {
@@ -123,24 +123,84 @@ describe('PlayersShellComponent', () => {
 
       playersShellComponent.ngOnInit();
 
-      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
-        expect(stats).toBe(statisticsToReturn);
-        done();
-      });
+      const expectedHittingStatisticsByPlayer = {
+        'name': {
+          'Fall 2019-2020': {
+            '#': 1,
+            G: 1,
+            AB: 4,
+            R: 5,
+            H: 5,
+            '2B': 2,
+            '3B': 2,
+            HR: 0,
+            RBI: 3,
+            BB: 7,
+            SO: 10,
+            SB: 4,
+            CS: 2,
+            AVG: '0.250',
+            OBP: '0.300',
+            SLG: '0.310',
+            OPS: '0.610',
+            IBB: 0,
+            HBP: 1,
+            SAC: 3,
+            SF: 2,
+            TB: 21,
+            XBH: 4,
+            GDP: 1,
+            GO: 7,
+            AO: 10,
+            GO_AO: '0.70',
+            PA: 31
+          }
+        },
+        'other name': {
+          'Fall 2019-2020': {
+            '#': 2,
+            G: 2,
+            AB: 6,
+            R: 8,
+            H: 2,
+            '2B': 3,
+            '3B': 2,
+            HR: 1,
+            RBI: 4,
+            BB: 10,
+            SO: 0,
+            SB: 2,
+            CS: 1,
+            AVG: '0.281',
+            OBP: '0.312',
+            SLG: '0.313',
+            OPS: '0.625',
+            IBB: 2,
+            HBP: 3,
+            SAC: 2,
+            SF: 1,
+            TB: 24,
+            XBH: 2,
+            GDP: 3,
+            GO: 8,
+            AO: 4,
+            GO_AO: '2.00',
+            PA: 33
+          }
+        }
+      };
+      expect(playersShellComponent.hittingStatisticsByPlayer).toEqual(expectedHittingStatisticsByPlayer);
     });
 
     it('should populate the error message if failed to load statistics', (done) => {
       playersShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadFail());
 
-      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
-      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
-        expect(stats).toEqual(defaultStats);
+      expect(playersShellComponent.hittingStatisticsByPlayer).toEqual({});
 
-        playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
-          expect(errorMessage).toBe('Could not load statistics');
-          done();
-        });
+      playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
+        expect(errorMessage).toBe('Could not load statistics');
+        done();
       });
     });
   });
