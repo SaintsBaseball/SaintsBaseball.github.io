@@ -1,7 +1,7 @@
-import { HittingStatistics } from './hitting-statistics';
+import { SeasonHittingStatistics } from './season-hitting-statistics';
 
 export class HittingStatisticsByPlayer {
   '#': number;
   Player: string;
-  hittingStatistics: HittingStatistics;
+  hittingStatistics: SeasonHittingStatistics[];
 }
