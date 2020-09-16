@@ -1,6 +1,4 @@
-import { IPlayerStatistics } from '../interfaces/i-player-statistics';
-
-export class PlayerHittingStatistics implements IPlayerStatistics {
+export class PlayerHittingStatistics {
   '#': number;
   Player: string;
   G: number;
