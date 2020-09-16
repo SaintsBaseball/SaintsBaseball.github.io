@@ -3,6 +3,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import * as fromRoot from 'src/app/state';
+import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 
 @Component({
   selector: 'players-shell',
@@ -11,7 +12,7 @@ import * as fromRoot from 'src/app/state';
 })
 export class PlayersShellComponent implements OnInit, OnDestroy {
   title: string = 'Saints Players';
-  hittingStatisticsByPlayer;
+  hittingStatisticsByPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
   errorMessage$: Observable<string>;
   private getPlayerHittingStatisticsSubscription: Subscription;
 
@@ -19,7 +20,7 @@ export class PlayersShellComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getPlayerHittingStatisticsSubscription = this.store.pipe(select(fromRoot.getPlayerHittingStatistics)).subscribe((playerHittingStatisticsData) => {
-      this.hittingStatisticsByPlayer = this.buildStatsForEachPlayer(playerHittingStatisticsData);
+      this.buildStatsForEachPlayer(playerHittingStatisticsData);
     });
     this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
   }
@@ -28,24 +29,22 @@ export class PlayersShellComponent implements OnInit, OnDestroy {
     this.getPlayerHittingStatisticsSubscription.unsubscribe();
   }
 
-  private buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable) {
-    const statsForEachPlayer = {};
+  private buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable): void {
+    this.hittingStatisticsByPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
+
     Object.keys(playerHittingStatisticsData).forEach(seasonKey => {
-        const statsForASeason = playerHittingStatisticsData[seasonKey];
-        statsForASeason.forEach(playerStats => {
-            const playerName = playerStats.Player;
+      const statsForASeason: PlayerHittingStatistics[] = playerHittingStatisticsData[seasonKey];
 
-            const playerStatsWithNoName = Object.assign({}, playerStats);
-            delete playerStatsWithNoName.Player;
+      statsForASeason.forEach((playerStats: PlayerHittingStatistics) => {
+        const playerName = playerStats.Player;
 
-            if (!statsForEachPlayer[playerName]) {
-                statsForEachPlayer[playerName] = {};
-            }
+        if (!this.hittingStatisticsByPlayer.get(playerName)) {
+          this.hittingStatisticsByPlayer.set(playerName, new Map<string, PlayerHittingStatistics>());
+        }
 
-            statsForEachPlayer[playerName][seasonKey] = playerStatsWithNoName;
-        });
+        const seasonToPlayerHittingStatisticsMap = this.hittingStatisticsByPlayer.get(playerName);
+        seasonToPlayerHittingStatisticsMap.set(seasonKey, playerStats);
+      });
     });
-
-    return statsForEachPlayer;
   }
 }
