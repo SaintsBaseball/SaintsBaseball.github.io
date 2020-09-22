@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StatisticsToSeasonPipe } from './pipes/statistics-to-season.pipe';
 import { PlayerStatisticsToStatisticKeys } from './pipes/player-statistics-to-statistic-keys.pipe';
 import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
+import { SortMapByKeyAlphabeticallyPipe } from './pipes/sort-map-by-key-alphabetically.pipe';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
   declarations: [
     StatisticsToSeasonPipe,
     PlayerStatisticsToStatisticKeys,
-    SortStatisticsPipe
+    SortStatisticsPipe,
+    SortMapByKeyAlphabeticallyPipe
   ],
   exports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
     ReactiveFormsModule,
     StatisticsToSeasonPipe,
     PlayerStatisticsToStatisticKeys,
-    SortStatisticsPipe
+    SortStatisticsPipe,
+    SortMapByKeyAlphabeticallyPipe
   ]
 })
 export class SharedModule { }
