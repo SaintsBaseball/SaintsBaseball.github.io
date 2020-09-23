@@ -19,5 +19,27 @@ describe('PlayersAlphabeticalPipe', () => {
 
       expect(results).toEqual([]);
     });
+
+    it('should return a list of the player names when the map is filled', () => {
+      const inputMap = new Map<string, any>();
+      inputMap.set('name', {});
+      inputMap.set('other name', {});
+      inputMap.set('way diff name', {});
+
+      const results = sortMapByKeyAlphabeticallyPipe.transform(inputMap);
+
+      expect(results).toEqual(['name', 'other name', 'way diff name']);
+    });
+
+    it('should return a list of the player names alphabetized when the map is filled not alphabetically', () => {
+      const inputMap = new Map<string, any>();
+      inputMap.set('way diff name', {});
+      inputMap.set('name', {});
+      inputMap.set('other name', {});
+
+      const results = sortMapByKeyAlphabeticallyPipe.transform(inputMap);
+
+      expect(results).toEqual(['name', 'other name', 'way diff name']);
+    });
   });
 });
