@@ -1,3 +1,5 @@
 <h1 class="w3-text-black">{{title}}</h1>
 
-<players-list></players-list>
+<players-list
+  [playerHittingStatistics]="playerHittingStatistics$ | async"
+></players-list>
