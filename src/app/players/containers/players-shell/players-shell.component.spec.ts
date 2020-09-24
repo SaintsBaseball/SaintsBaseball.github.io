@@ -9,6 +9,7 @@ import * as fromRoot from 'src/app/state';
 import { reducer as appReducer } from 'src/app/state/app.reducer';
 import * as appActions from 'src/app/state/app.actions';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
@@ -23,6 +24,7 @@ describe('PlayersShellComponent', () => {
         PlayersListComponent
       ],
       imports: [
+        SharedModule,
         StoreModule.forRoot({
           appState: appReducer
         })
@@ -323,8 +325,9 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should populate the error message if failed to load statistics', (done) => {
-      playersShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadFail());
+
+      playersShellComponent.ngOnInit();
 
       const defaultHittingStatisticsByPlayer: Map<string, Map<string, PlayerHittingStatistics>> = new Map<string, Map<string, PlayerHittingStatistics>>();
       expect(playersShellComponent.hittingStatisticsByPlayer).toEqual(defaultHittingStatisticsByPlayer);
