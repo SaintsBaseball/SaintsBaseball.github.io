@@ -57,7 +57,7 @@ describe('PlayersShellComponent', () => {
   describe('ngOnInit', () => {
     it('should update the statistics on successful load', (done) => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [
+      statisticsToReturn['Fall 2019-2020'] = [
         {
           '#': 1,
           Player: 'name',
@@ -121,7 +121,7 @@ describe('PlayersShellComponent', () => {
           PA: 33
         }
       ];
-      statisticsToReturn["Spring 2019"] = [
+      statisticsToReturn['Spring 2019'] = [
         {
           '#': 4,
           Player: 'name',
@@ -224,7 +224,7 @@ describe('PlayersShellComponent', () => {
 
     it('should have a list of all players when the players are loaded', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [
+      statisticsToReturn['Fall 2019-2020'] = [
         {
           '#': 1,
           Player: 'other name',
@@ -288,7 +288,7 @@ describe('PlayersShellComponent', () => {
           PA: 33
         }
       ];
-      statisticsToReturn["Spring 2019"] = [
+      statisticsToReturn['Spring 2019'] = [
         {
           '#': 4,
           Player: 'name',

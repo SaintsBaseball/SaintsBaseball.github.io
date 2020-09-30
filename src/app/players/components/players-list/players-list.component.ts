@@ -12,7 +12,7 @@ export class PlayersListComponent {
 
   buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable): Map<string, Map<string, PlayerHittingStatistics[]>> {
     const statsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics[]>>();
-    
+
     Object.keys(playerHittingStatisticsData).forEach(seasonKey => {
         const statsForASeason = playerHittingStatisticsData[seasonKey];
         statsForASeason.forEach(playerStats => {

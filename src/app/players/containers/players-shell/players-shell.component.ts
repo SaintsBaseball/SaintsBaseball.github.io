@@ -10,7 +10,7 @@ import * as fromRoot from 'src/app/state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PlayersShellComponent implements OnInit {
-  title: string = 'Saints Players';
+  title = 'Saints Players';
   playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
 
