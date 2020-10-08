@@ -73,7 +73,7 @@ describe('StatisticsShellComponent', () => {
   describe('ngOnInit', () => {
     it('should update the statistics on successful load', (done) => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [
+      statisticsToReturn['Fall 2019-2020'] = [
         {
           '#': 1,
           Player: 'name',
@@ -137,7 +137,7 @@ describe('StatisticsShellComponent', () => {
           PA: 33
         }
       ];
-      statisticsToReturn["Spring 2019"] = [];
+      statisticsToReturn['Spring 2019'] = [];
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       statisticsShellComponent.ngOnInit();
@@ -187,8 +187,8 @@ describe('StatisticsShellComponent', () => {
 
     it('should populate the dropdown with the list of seasons when statistics have been loaded', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [];
-      statisticsToReturn["Spring 2019"] = [];
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
 
       statisticsShellComponent.ngOnInit();
@@ -218,13 +218,13 @@ describe('StatisticsShellComponent', () => {
 
     it('should set the current season when the user changes the selected season', (done) => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [];
-      statisticsToReturn["Spring 2019"] = [];
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const seasonToSelect = "Fall 2019-2020";
+      const seasonToSelect = 'Fall 2019-2020';
       const seasonDropdown = nativeElement.querySelector('select');
       seasonDropdown.value = seasonToSelect;
       seasonDropdown.dispatchEvent(new Event('change'));
@@ -238,8 +238,8 @@ describe('StatisticsShellComponent', () => {
 
     it('should set the dropdown selection to the current season', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [];
-      statisticsToReturn["Spring 2019"] = [];
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -262,22 +262,22 @@ describe('StatisticsShellComponent', () => {
   describe('statistics-table', () => {
     let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
     const playerNumber3 = {
-      "#": 3, "Player": "this is my bro", "G": 17, "AB": 63, "R": 9, "H": 19, "2B": 1, "3B": 0, "HR": 0, "RBI": 11, "BB": 7, "SO": 19, "SB": 3, "CS": 1, "AVG": "0.302", "OBP": "0.380", "SLG": "0.317", "OPS": "0.697", "IBB": 0, "HBP": 1, "SAC": 0, "SF": 0, "TB": 20, "XBH": 1, "GDP": 1, "GO": 6, "AO": 12, "GO_AO": "0.50", "PA": 71
+      '#': 3, Player: 'this is my bro', G: 17, AB: 63, R: 9, H: 19, '2B': 1, '3B': 0, HR: 0, RBI: 11, BB: 7, SO: 19, SB: 3, CS: 1, AVG: '0.302', OBP: '0.380', SLG: '0.317', OPS: '0.697', IBB: 0, HBP: 1, SAC: 0, SF: 0, TB: 20, XBH: 1, GDP: 1, GO: 6, AO: 12, GO_AO: '0.50', PA: 71
     };
     const playerNumber4 = {
-      "#": 4, "Player": "real estate", "G": 12, "AB": 44, "R": 13, "H": 15, "2B": 1, "3B": 1, "HR": 1, "RBI": 12, "BB": 6, "SO": 15, "SB": 1, "CS": 0, "AVG": "0.341", "OBP": "0.431", "SLG": "0.477", "OPS": "0.908", "IBB": 0, "HBP": 1, "SAC": 1, "SF": 0, "TB": 21, "XBH": 3, "GDP": 0, "GO": 7, "AO": 7, "GO_AO": "1.00", "PA": 52
+      '#': 4, Player: 'real estate', G: 12, AB: 44, R: 13, H: 15, '2B': 1, '3B': 1, HR: 1, RBI: 12, BB: 6, SO: 15, SB: 1, CS: 0, AVG: '0.341', OBP: '0.431', SLG: '0.477', OPS: '0.908', IBB: 0, HBP: 1, SAC: 1, SF: 0, TB: 21, XBH: 3, GDP: 0, GO: 7, AO: 7, GO_AO: '1.00', PA: 52
     };
     const playerNumber6 = {
-      "#": 6, "Player": "me", "G": 14, "AB": 54, "R": 11, "H": 21, "2B": 1, "3B": 0, "HR": 0, "RBI": 9, "BB": 10, "SO": 6, "SB": 3, "CS": 1, "AVG": "0.389", "OBP": "0.500", "SLG": "0.407", "OPS": "0.907", "IBB": 0, "HBP": 2, "SAC": 2, "SF": 0, "TB": 22, "XBH": 1, "GDP": 0, "GO": 17, "AO": 4, "GO_AO": "4.25", "PA": 68
+      '#': 6, Player: 'me', G: 14, AB: 54, R: 11, H: 21, '2B': 1, '3B': 0, HR: 0, RBI: 9, BB: 10, SO: 6, SB: 3, CS: 1, AVG: '0.389', OBP: '0.500', SLG: '0.407', OPS: '0.907', IBB: 0, HBP: 2, SAC: 2, SF: 0, TB: 22, XBH: 1, GDP: 0, GO: 17, AO: 4, GO_AO: '4.25', PA: 68
     };
     const playerNumber8 = {
-      "#": 8, "Player": "helmet slammer", "G": 11, "AB": 36, "R": 7, "H": 6, "2B": 1, "3B": 0, "HR": 0, "RBI": 4, "BB": 9, "SO": 4, "SB": 5, "CS": 0, "AVG": "0.167", "OBP": "0.347", "SLG": "0.194", "OPS": "0.541", "IBB": 0, "HBP": 2, "SAC": 1, "SF": 2, "TB": 7, "XBH": 1, "GDP": 0, "GO": 8, "AO": 20, "GO_AO": "0.40", "PA": 50
+      '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
     };
 
     beforeEach(() => {
       statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
-      statisticsToReturn["Fall 2019-2020"] = [playerNumber6, playerNumber8];
-      statisticsToReturn["Spring 2019"] = [playerNumber3, playerNumber4];
+      statisticsToReturn['Fall 2019-2020'] = [playerNumber6, playerNumber8];
+      statisticsToReturn['Spring 2019'] = [playerNumber3, playerNumber4];
       statisticsShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
       fixture.detectChanges();
@@ -303,7 +303,7 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should have an empty table when an invalid option is selected', () => {
-      const invalidSeason = 'sadfbasjhdbfasjhd';
+      const invalidSeason = 'this is an invalid season';
 
       store.dispatch(new statisticActions.ChangeSeason(invalidSeason));
       fixture.detectChanges();
@@ -359,7 +359,7 @@ describe('StatisticsShellComponent', () => {
       });
       statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
         expect(selectedStatistic).toBe(expectedSelectedStat);
-        done()
+        done();
       });
     });
 
@@ -409,7 +409,7 @@ describe('StatisticsShellComponent', () => {
         const statsForPlayer = expectedPlayerSeasonStats[index];
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
-      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');      
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');
       let columnInBodyRowIndex = 0;
       expectedPlayerSeasonStats.forEach(playerStats => {
         Object.values(playerStats).forEach(statistic => {
@@ -441,7 +441,7 @@ describe('StatisticsShellComponent', () => {
         const statsForPlayer = expectedPlayerSeasonStats[index];
         expect(columnElements.textContent).toBe(statsForPlayer[selectedColumnStat].toString());
       });
-      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');      
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');
       let columnInBodyRowIndex = 0;
       expectedPlayerSeasonStats.forEach(playerStats => {
         Object.values(playerStats).forEach(statistic => {
@@ -450,7 +450,7 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
-    
+
     it('should sort the statistics in reverse order of selected stat when the same stat is selected', () => {
       const validSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
@@ -475,7 +475,7 @@ describe('StatisticsShellComponent', () => {
         const statsForPlayer = expectedPlayerSeasonStats[index];
         expect(columnElements.textContent).toBe(statsForPlayer[selectedColumnStat].toString());
       });
-      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');      
+      const allColumnsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td');
       let columnInBodyRowIndex = 0;
       expectedPlayerSeasonStats.forEach(playerStats => {
         Object.values(playerStats).forEach(statistic => {
