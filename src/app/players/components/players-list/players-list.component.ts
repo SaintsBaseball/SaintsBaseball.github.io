@@ -10,20 +10,20 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 export class PlayersListComponent {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
 
-  buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable): Map<string, Map<string, PlayerHittingStatistics[]>> {
-    const statsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics[]>>();
+  buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable): Map<string, Map<string, PlayerHittingStatistics>> {
+    const statsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
 
     Object.keys(playerHittingStatisticsData).forEach(seasonKey => {
-        const statsForASeason = playerHittingStatisticsData[seasonKey];
+        const statsForASeason: PlayerHittingStatistics[] = playerHittingStatisticsData[seasonKey];
         statsForASeason.forEach(playerStats => {
             const playerName = playerStats.Player;
 
             if (!statsForEachPlayer.get(playerName)) {
-                statsForEachPlayer.set(playerName, new Map<string, PlayerHittingStatistics[]>());
+                statsForEachPlayer.set(playerName, new Map<string, PlayerHittingStatistics>());
             }
 
             const statsForOnePlayer = statsForEachPlayer.get(playerName);
-            statsForOnePlayer.set(playerName, playerStats);
+            statsForOnePlayer.set(seasonKey, playerStats);
         });
     });
 
