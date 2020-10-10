@@ -22,7 +22,8 @@ export function reducer(state = initialState, action: AppActions): State {
       return {
         ...state,
         playerHittingStatistics: new PlayerHittingStatisticsDatabaseTable(),
-        errorMessage: 'Could not load statistics'
+        errorMessage: 'Could not load statistics',
+        statsForEachPlayer: new Map<string, Map<string, PlayerHittingStatistics>>()
       };
 
     case AppActionTypes.FormatSuccess:

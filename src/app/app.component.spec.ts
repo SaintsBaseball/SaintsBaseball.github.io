@@ -147,13 +147,18 @@ describe('AppComponent', () => {
 
       appComponent.ngOnInit();
 
-      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
       store.pipe(select(fromRoot.getPlayerHittingStatistics, take(1))).subscribe(stats => {
+        const defaultStats = new PlayerHittingStatisticsDatabaseTable();
         expect(stats).toEqual(defaultStats);
 
-        store.pipe(select(fromRoot.getErrorMessage, take(1))).subscribe(errorMessage => {
-          expect(errorMessage).toBe('Could not load statistics');
-          done();
+        store.pipe(select(fromRoot.getStatsForEachPlayer, take(1))).subscribe(statsForEachPlayer => {
+          const defaultStatsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
+          expect(statsForEachPlayer).toEqual(defaultStatsForEachPlayer);
+
+          store.pipe(select(fromRoot.getErrorMessage, take(1))).subscribe(errorMessage => {
+            expect(errorMessage).toBe('Could not load statistics');
+            done();
+          });
         });
       });
     });
