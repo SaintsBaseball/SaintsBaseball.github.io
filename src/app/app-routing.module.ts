@@ -9,12 +9,12 @@ const routes: Routes = [
     component: ShellComponent,
     children: [
       { path: 'welcome', component: WelcomeComponent },
-      { 
-        path: 'statistics', 
+      {
+        path: 'statistics',
         loadChildren: () => import('./statistics/statistics.module').then(m => m.StatisticsModule)
       },
       {
-        path: 'players', 
+        path: 'players',
         loadChildren: () => import('./players/players.module').then(m => m.PlayersModule)
       },
       { path: '', redirectTo: '/welcome', pathMatch: 'full' }
