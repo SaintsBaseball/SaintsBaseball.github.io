@@ -169,7 +169,7 @@ describe('AppComponent', () => {
       statisticsToReturn['Fall 2019-2020'] = [
         {
           '#': 1,
-          Player: 'name',
+          Player: 'Beta',
           G: 1,
           AB: 4,
           R: 5,
@@ -200,7 +200,7 @@ describe('AppComponent', () => {
         },
         {
           '#': 2,
-          Player: 'other name',
+          Player: 'Charlie',
           G: 2,
           AB: 6,
           R: 8,
@@ -230,19 +230,86 @@ describe('AppComponent', () => {
           PA: 33
         }
       ];
-      statisticsToReturn['Spring 2019'] = [];
+      statisticsToReturn['Spring 2019'] = [
+        {
+          '#': 4,
+          Player: 'Beta',
+          G: 1,
+          AB: 4,
+          R: 5,
+          H: 5,
+          '2B': 2,
+          '3B': 2,
+          HR: 0,
+          RBI: 3,
+          BB: 7,
+          SO: 10,
+          SB: 2,
+          CS: 1,
+          AVG: '0.281',
+          OBP: '0.312',
+          SLG: '0.313',
+          OPS: '0.625',
+          IBB: 2,
+          HBP: 3,
+          SAC: 2,
+          SF: 1,
+          TB: 24,
+          XBH: 2,
+          GDP: 1,
+          GO: 7,
+          AO: 10,
+          GO_AO: '0.70',
+          PA: 31
+        },
+        {
+          '#': 3,
+          Player: 'Alpha',
+          G: 1,
+          AB: 4,
+          R: 5,
+          H: 5,
+          '2B': 3,
+          '3B': 2,
+          HR: 1,
+          RBI: 4,
+          BB: 10,
+          SO: 0,
+          SB: 2,
+          CS: 1,
+          AVG: '0.281',
+          OBP: '0.312',
+          SLG: '0.313',
+          OPS: '0.625',
+          IBB: 2,
+          HBP: 3,
+          SAC: 2,
+          SF: 1,
+          TB: 24,
+          XBH: 2,
+          GDP: 1,
+          GO: 7,
+          AO: 10,
+          GO_AO: '0.70',
+          PA: 31
+        }
+      ];
       statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
 
       appComponent.ngOnInit();
 
       store.pipe(select(fromRoot.getStatsForEachPlayer, take(1))).subscribe(statsForEachPlayer => {
         const expectedStatsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
-        const statsForName = new Map<string, PlayerHittingStatistics>();
-        statsForName.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][0]);
-        const statsForOtherName = new Map<string, PlayerHittingStatistics>();
-        statsForOtherName.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][1]);
-        expectedStatsForEachPlayer.set('name', statsForName);
-        expectedStatsForEachPlayer.set('other name', statsForOtherName);
+        const statsForAlpha = new Map<string, PlayerHittingStatistics>();
+        statsForAlpha.set('Spring 2019', statisticsToReturn['Spring 2019'][1]);
+        const statsForBeta = new Map<string, PlayerHittingStatistics>();
+        statsForBeta.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][0]);
+        statsForBeta.set('Spring 2019', statisticsToReturn['Spring 2019'][0]);
+        const statsForCharlie = new Map<string, PlayerHittingStatistics>();
+        statsForCharlie.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][1]);
+        expectedStatsForEachPlayer.set('Alpha', statsForAlpha);
+        expectedStatsForEachPlayer.set('Beta', statsForBeta);
+        expectedStatsForEachPlayer.set('Charlie', statsForCharlie);
 
         expect(statsForEachPlayer).toEqual(expectedStatsForEachPlayer);
         done();
