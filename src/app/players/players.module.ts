@@ -6,7 +6,7 @@ import { PlayersListComponent } from './components/players-list/players-list.com
 
 const playersRoutes: Routes = [
   { path: '', component: PlayersShellComponent }
-]
+];
 
 @NgModule({
   declarations: [
