@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { SidebarComponent } from './sidebar.component';
-import {AppComponent} from '../../app.component';
-import {AppRoutingModule} from '../../app-routing.module';
 
 describe('SidebarComponent', () => {
   let sidebarComponent: SidebarComponent;
@@ -11,11 +10,10 @@ describe('SidebarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SidebarComponent,
-        AppComponent
+        SidebarComponent
       ],
       imports: [
-        AppRoutingModule
+        RouterTestingModule
       ]
     })
     .compileComponents();
@@ -32,12 +30,12 @@ describe('SidebarComponent', () => {
     expect(sidebarComponent).toBeTruthy();
   });
 
-  it('should have the Sidebar Title at the top of the sidebar', function () {
+  it('should have the Sidebar Title at the top of the sidebar', () => {
     expect(sidebarComponent.title).toBe('Menu');
     expect(nativeElement.querySelector('nav.w3-sidebar h4.w3-bar-item b').textContent).toBe(sidebarComponent.title);
   });
 
-  it('should have an X that closes the sidebar', function () {
+  it('should have an X that closes the sidebar', () => {
     spyOn(sidebarComponent, 'closeSidebar');
 
     const xButton = nativeElement.querySelector('nav.w3-sidebar button');
@@ -46,12 +44,12 @@ describe('SidebarComponent', () => {
     expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
   });
 
-  it('should have a link to the stats page', function () {
+  it('should have a link to the stats page', () => {
     expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].textContent).toBe('Statistics');
     expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0].href).toContain('/statistics');
   });
 
-  it('should close the sidebar when navigating to the stats page', function () {
+  it('should close the sidebar when navigating to the stats page', () => {
     spyOn(sidebarComponent, 'closeSidebar');
 
     const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
