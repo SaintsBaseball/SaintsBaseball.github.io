@@ -1,3 +1,3 @@
 <ul>
-  <li *ngFor="let player of buildStatsForEachPlayer(playerHittingStatistics) | sortMapByKeyAlphabeticallyPipe">{{player}}</li>
+  <li *ngFor="let player of statsForEachPlayer | sortMapByKeyAlphabeticallyPipe">{{player}}</li>
 </ul>

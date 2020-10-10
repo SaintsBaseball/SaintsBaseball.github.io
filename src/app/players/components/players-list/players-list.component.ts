@@ -8,25 +8,5 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
   styleUrls: ['./players-list.component.css']
 })
 export class PlayersListComponent {
-  @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
-
-  buildStatsForEachPlayer(playerHittingStatisticsData: PlayerHittingStatisticsDatabaseTable): Map<string, Map<string, PlayerHittingStatistics>> {
-    const statsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
-
-    Object.keys(playerHittingStatisticsData).forEach(seasonKey => {
-        const statsForASeason: PlayerHittingStatistics[] = playerHittingStatisticsData[seasonKey];
-        statsForASeason.forEach(playerStats => {
-            const playerName = playerStats.Player;
-
-            if (!statsForEachPlayer.get(playerName)) {
-                statsForEachPlayer.set(playerName, new Map<string, PlayerHittingStatistics>());
-            }
-
-            const statsForOnePlayer = statsForEachPlayer.get(playerName);
-            statsForOnePlayer.set(seasonKey, playerStats);
-        });
-    });
-
-    return statsForEachPlayer;
-}
+  @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
 }

@@ -184,25 +184,26 @@ describe('PlayersShellComponent', () => {
     }
   ];
 
+  const statsForEachPlayerToReturn = new Map<string, Map<string, PlayerHittingStatistics>>();
+  const statsForAlpha = new Map<string, PlayerHittingStatistics>();
+  statsForAlpha.set('Spring 2019', statisticsToReturn['Spring 2019'][1]);
+  const statsForBeta = new Map<string, PlayerHittingStatistics>();
+  statsForBeta.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][0]);
+  statsForBeta.set('Spring 2019', statisticsToReturn['Spring 2019'][0]);
+  const statsForCharlie = new Map<string, PlayerHittingStatistics>();
+  statsForCharlie.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][1]);
+  statsForEachPlayerToReturn.set('Alpha', statsForAlpha);
+  statsForEachPlayerToReturn.set('Beta', statsForBeta);
+  statsForEachPlayerToReturn.set('Charlie', statsForCharlie);
+
   describe('ngOnInit', () => {
-    it('should update the statistics on successful load', (done) => {
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
-
-      playersShellComponent.ngOnInit();
-
-      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
-        expect(stats).toBe(statisticsToReturn);
-        done();
-      });
-    });
-
     it('should populate the error message if failed to load statistics', (done) => {
       store.dispatch(new appActions.LoadFail());
 
       playersShellComponent.ngOnInit();
 
-      const defaultStats = new PlayerHittingStatisticsDatabaseTable();
-      playersShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
+      const defaultStats = new Map<string, Map<string, PlayerHittingStatistics>>();
+      playersShellComponent.statsForEachPlayer$.pipe(take(1)).subscribe(stats => {
         expect(stats).toEqual(defaultStats);
 
         playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
@@ -213,17 +214,6 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should update the stats for each player on successful load', (done) => {
-      const statsForEachPlayerToReturn = new Map<string, Map<string, PlayerHittingStatistics>>();
-      const statsForAlpha = new Map<string, PlayerHittingStatistics>();
-      statsForAlpha.set('Spring 2019', statisticsToReturn['Spring 2019'][1]);
-      const statsForBeta = new Map<string, PlayerHittingStatistics>();
-      statsForBeta.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][0]);
-      statsForBeta.set('Spring 2019', statisticsToReturn['Spring 2019'][0]);
-      const statsForCharlie = new Map<string, PlayerHittingStatistics>();
-      statsForCharlie.set('Fall 2019-2020', statisticsToReturn['Fall 2019-2020'][1]);
-      statsForEachPlayerToReturn.set('Alpha', statsForAlpha);
-      statsForEachPlayerToReturn.set('Beta', statsForBeta);
-      statsForEachPlayerToReturn.set('Charlie', statsForCharlie);
       store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
 
       playersShellComponent.ngOnInit();
@@ -246,7 +236,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should have a list of all players when the players are loaded', () => {
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
 
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
