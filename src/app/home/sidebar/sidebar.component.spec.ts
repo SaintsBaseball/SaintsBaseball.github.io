@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { SidebarComponent } from './sidebar.component';
+import {AppComponent} from '../../app.component';
 
 describe('SidebarComponent', () => {
   let sidebarComponent: SidebarComponent;
@@ -10,7 +11,10 @@ describe('SidebarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SidebarComponent ],
+      declarations: [
+        SidebarComponent,
+        AppComponent
+      ],
       imports: [
         RouterTestingModule
       ]
@@ -35,7 +39,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should have an X that closes the sidebar', function () {
-    spyOn(sidebarComponent, "closeSidebar");
+    spyOn(sidebarComponent, 'closeSidebar');
 
     const xButton = nativeElement.querySelector('nav.w3-sidebar button');
     xButton.click();
@@ -49,7 +53,7 @@ describe('SidebarComponent', () => {
   });
 
   it('should close the sidebar when navigating to the stats page', function () {
-    spyOn(sidebarComponent, "closeSidebar");
+    spyOn(sidebarComponent, 'closeSidebar');
 
     const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
     linkToStatsPage.click();
