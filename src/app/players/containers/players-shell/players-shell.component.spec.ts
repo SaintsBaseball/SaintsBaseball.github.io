@@ -249,5 +249,19 @@ describe('PlayersShellComponent', () => {
       expect(allOptionsInDropdown[1].textContent).toBe('Beta');
       expect(allOptionsInDropdown[2].textContent).toBe('Charlie');
     });
+
+    it('should have open a modal with the player name in the header', () => {
+      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      playersShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      allOptionsInDropdown[0].click();
+      fixture.detectChanges();
+
+      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
+      expect(modalHeader).toBeTruthy();
+      expect(modalHeader.textContent).toBe('Alpha');
+    });
   });
 });

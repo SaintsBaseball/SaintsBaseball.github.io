@@ -1,3 +1,9 @@
 <ul>
-  <li *ngFor="let player of statsForEachPlayer | sortMapByKeyAlphabeticallyPipe">{{player}}</li>
+  <li *ngFor="let player of statsForEachPlayer | sortMapByKeyAlphabeticallyPipe"
+    (click)="showModal(player)">{{player}}</li>
 </ul>
+<div class="modal">
+  <div class="modal-content">
+    <h2>{{playerNameInModal}}</h2>
+  </div>
+</div>

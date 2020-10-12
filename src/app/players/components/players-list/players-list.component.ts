@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 
 @Component({
   selector: 'players-list',
@@ -9,4 +8,9 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 })
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
+  playerNameInModal: string;
+
+  showModal(playerName: string): void {
+    this.playerNameInModal = playerName;
+  }
 }
