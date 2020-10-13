@@ -8,9 +8,11 @@ import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statisti
 })
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
+  showPlayerStatsModal = false;
   playerNameInModal: string;
 
   showModal(playerName: string): void {
     this.playerNameInModal = playerName;
+    this.showPlayerStatsModal = true;
   }
 }

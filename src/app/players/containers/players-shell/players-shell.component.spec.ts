@@ -250,6 +250,16 @@ describe('PlayersShellComponent', () => {
       expect(allOptionsInDropdown[2].textContent).toBe('Charlie');
     });
 
+    it('should not have a modal when no player has been selected', () => {
+      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      
+      playersShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
+      expect(modalHeader).toBeFalsy();
+    });
+
     it('should have open a modal with the player name in the header', () => {
       store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
