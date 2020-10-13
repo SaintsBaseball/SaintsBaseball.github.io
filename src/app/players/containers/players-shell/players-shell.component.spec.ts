@@ -273,5 +273,25 @@ describe('PlayersShellComponent', () => {
       expect(modalHeader).toBeTruthy();
       expect(modalHeader.textContent).toBe('Alpha');
     });
+
+    it('should have an X to close the modal', () => {
+      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      playersShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      allOptionsInDropdown[0].click();
+      fixture.detectChanges();
+
+      const closeModalButton = nativeElement.querySelector('div.modal div.modal-content span.close');
+      expect(closeModalButton).toBeTruthy();
+      expect(closeModalButton.textContent).toBe('×');
+
+      closeModalButton.click();
+      fixture.detectChanges();
+
+      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
+      expect(modalHeader).toBeFalsy();
+    });
   });
 });

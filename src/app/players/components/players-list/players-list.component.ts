@@ -15,4 +15,8 @@ export class PlayersListComponent {
     this.playerNameInModal = playerName;
     this.showPlayerStatsModal = true;
   }
+
+  closeModal(): void {
+    this.showPlayerStatsModal = false;
+  }
 }
