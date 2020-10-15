@@ -9,10 +9,13 @@ import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statisti
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
   showPlayerStatsModal = false;
-  playerNameInModal: string;
+  selectedPlayer: string;
 
   showModal(playerName: string): void {
-    this.playerNameInModal = playerName;
+    const playerStats = this.statsForEachPlayer.get(playerName);
+    const mostRecentSeasonStats = playerStats.values().next().value;
+    const playerNumber = mostRecentSeasonStats['#'];
+    this.selectedPlayer = `${playerName} #${playerNumber}`;
     this.showPlayerStatsModal = true;
   }
 

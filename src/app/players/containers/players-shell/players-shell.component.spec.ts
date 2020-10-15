@@ -260,18 +260,18 @@ describe('PlayersShellComponent', () => {
       expect(modalHeader).toBeFalsy();
     });
 
-    it('should have open a modal with the player name in the header', () => {
+    it('should open a modal with the player name and number in the header', () => {
       store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
       const allOptionsInDropdown = nativeElement.querySelectorAll('li');
-      allOptionsInDropdown[0].click();
+      allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
       const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
       expect(modalHeader).toBeTruthy();
-      expect(modalHeader.textContent).toBe('Alpha');
+      expect(modalHeader.textContent).toBe('Beta #1');
     });
 
     it('should have an X to close the modal', () => {
