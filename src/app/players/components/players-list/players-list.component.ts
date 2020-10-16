@@ -9,29 +9,43 @@ import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statisti
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
   showPlayerStatsModal = false;
-  selectedPlayer: string;
-  statsHeader: string[];
-  statsForEachSeason: any[][];
-
-  public keepOriginalOrder = (a) => a.key;
+  modalHeader: string;
+  modalTableHeader: string[];
+  modalTableBody: any[][];
 
   showModal(playerName: string): void {
     const playerStats = this.statsForEachPlayer.get(playerName);
     const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
-    
-    const playerNumber = mostRecentSeasonStats['#'];
-    this.selectedPlayer = `${playerName} #${playerNumber}`;
 
-    this.statsHeader = [];
+    this.buildModalHeader(mostRecentSeasonStats, playerName);
+    this.buildModalTableHeader(mostRecentSeasonStats);
+    this.buildModalTableBody(playerStats);
+
+    this.showPlayerStatsModal = true;
+  }
+
+  closeModal(): void {
+    this.showPlayerStatsModal = false;
+  }
+
+  private buildModalHeader(mostRecentSeasonStats: PlayerHittingStatistics, playerName: string) {
+    const playerNumber = mostRecentSeasonStats['#'];
+    this.modalHeader = `${playerName} #${playerNumber}`;
+  }
+  
+  private buildModalTableHeader(mostRecentSeasonStats: PlayerHittingStatistics) {
+    this.modalTableHeader = ['Season'];
     Object.keys(mostRecentSeasonStats).forEach(statsKey => {
       if (statsKey === 'Player' || statsKey === '#') {
         return;
       }
 
-      this.statsHeader.push(statsKey);
+      this.modalTableHeader.push(statsKey);
     });
+  }
 
-    this.statsForEachSeason = [];
+  private buildModalTableBody(playerStats: Map<string, PlayerHittingStatistics>) {
+    this.modalTableBody = [];
     playerStats.forEach((statsForOneSeason, season) => {
       const statsAndSeasonToDisplay = [season];
       Object.keys(statsForOneSeason).forEach(statsKey => {
@@ -42,13 +56,7 @@ export class PlayersListComponent {
         statsAndSeasonToDisplay.push(statsForOneSeason[statsKey]);
       });
 
-      this.statsForEachSeason.push(statsAndSeasonToDisplay);
+      this.modalTableBody.push(statsAndSeasonToDisplay);
     });
-
-    this.showPlayerStatsModal = true;
-  }
-
-  closeModal(): void {
-    this.showPlayerStatsModal = false;
   }
 }

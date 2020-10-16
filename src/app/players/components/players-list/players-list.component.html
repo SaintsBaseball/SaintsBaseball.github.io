@@ -5,16 +5,15 @@
 <div class="modal" *ngIf="showPlayerStatsModal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
-    <h2>{{selectedPlayer}}</h2>
+    <h2>{{modalHeader}}</h2>
     <table>
       <thead>
         <tr>
-          <th>Season</th>
-          <th *ngFor="let statsKey of statsHeader">{{statsKey}}</th>
+          <th *ngFor="let statsKey of modalTableHeader">{{statsKey}}</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let statsForOneSeason of statsForEachSeason">
+        <tr *ngFor="let statsForOneSeason of modalTableBody">
           <td *ngFor="let statistic of statsForOneSeason">{{statistic}}</td>
         </tr>
       </tbody>
