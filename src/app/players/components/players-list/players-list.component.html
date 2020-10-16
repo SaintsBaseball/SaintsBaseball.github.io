@@ -6,5 +6,18 @@
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
     <h2>{{selectedPlayer}}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Season</th>
+          <th *ngFor="let statsKey of statsHeader">{{statsKey}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let statsForOneSeason of statsForEachSeason">
+          <td *ngFor="let statistic of statsForOneSeason">{{statistic}}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>

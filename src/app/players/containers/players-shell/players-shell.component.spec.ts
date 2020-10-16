@@ -293,5 +293,49 @@ describe('PlayersShellComponent', () => {
       const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
       expect(modalHeader).toBeFalsy();
     });
+
+    it('should open a modal with a table of the stats for the player', () => {
+      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      playersShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      allOptionsInDropdown[1].click();
+      fixture.detectChanges();
+
+      const expectedNumberOfColumns = 28;
+      const expectedNumberOfRows = 2;
+      const modalTableHeaderRow = nativeElement.querySelector('div.modal div.modal-content table thead tr');
+      expect(modalTableHeaderRow).toBeTruthy();
+      const modalTableHeaderElements = nativeElement.querySelectorAll('div.modal div.modal-content table thead tr th');
+      expect(modalTableHeaderElements).toBeTruthy();
+      expect(modalTableHeaderElements.length).toBe(expectedNumberOfColumns);
+      modalTableHeaderElements.forEach((element, index) => {
+        if (index === 0) {
+          expect(element.textContent).toBe('Season');
+        } else {
+          expect(element.textContent).toBe(Object.keys(statisticsToReturn['Fall 2019-2020'][0])[index + 1]);
+        }
+      });
+      const modalTableBody = nativeElement.querySelector('div.modal div.modal-content table tbody');
+      expect(modalTableBody).toBeTruthy();
+      const modalTableBodyRows = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr');
+      expect(modalTableBodyRows).toBeTruthy();
+      expect(modalTableBodyRows.length).toBe(expectedNumberOfRows);
+      const modalTableBodyElements = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr td');
+      expect(modalTableBodyElements).toBeTruthy();
+      expect(modalTableBodyElements.length).toBe(expectedNumberOfColumns * expectedNumberOfRows);
+      modalTableBodyElements.forEach((element, index) => {
+        if (index === 0) {
+          expect(element.textContent).toBe('Fall 2019-2020');
+        } else if (index < expectedNumberOfColumns) {
+          expect(element.textContent).toBe(Object.values(statisticsToReturn['Fall 2019-2020'][0])[index + 1].toString());
+        } else if (index === expectedNumberOfColumns) {
+          expect(element.textContent).toBe('Spring 2019');
+        } else {
+          expect(element.textContent).toBe(Object.values(statisticsToReturn['Spring 2019'][0])[index - expectedNumberOfColumns + 1].toString());
+        }
+      });
+    });
   });
 });

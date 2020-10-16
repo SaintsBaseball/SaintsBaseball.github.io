@@ -10,12 +10,41 @@ export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
   showPlayerStatsModal = false;
   selectedPlayer: string;
+  statsHeader: string[];
+  statsForEachSeason: any[][];
+
+  public keepOriginalOrder = (a) => a.key;
 
   showModal(playerName: string): void {
     const playerStats = this.statsForEachPlayer.get(playerName);
-    const mostRecentSeasonStats = playerStats.values().next().value;
+    const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
+    
     const playerNumber = mostRecentSeasonStats['#'];
     this.selectedPlayer = `${playerName} #${playerNumber}`;
+
+    this.statsHeader = [];
+    Object.keys(mostRecentSeasonStats).forEach(statsKey => {
+      if (statsKey === 'Player' || statsKey === '#') {
+        return;
+      }
+
+      this.statsHeader.push(statsKey);
+    });
+
+    this.statsForEachSeason = [];
+    playerStats.forEach((statsForOneSeason, season) => {
+      const statsAndSeasonToDisplay = [season];
+      Object.keys(statsForOneSeason).forEach(statsKey => {
+        if (statsKey === 'Player' || statsKey === '#') {
+          return;
+        }
+
+        statsAndSeasonToDisplay.push(statsForOneSeason[statsKey]);
+      });
+
+      this.statsForEachSeason.push(statsAndSeasonToDisplay);
+    });
+
     this.showPlayerStatsModal = true;
   }
 
