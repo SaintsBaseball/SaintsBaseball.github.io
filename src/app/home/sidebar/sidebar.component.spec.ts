@@ -14,9 +14,10 @@ describe('SidebarComponent', () => {
         SidebarComponent
       ],
       imports: [
-        RouterTestingModule.withRoutes(
-          [{path: 'statistics', component: WelcomeComponent}]
-        )
+        RouterTestingModule.withRoutes([
+          {path: 'statistics', component: WelcomeComponent}, 
+          {path: 'players', component: WelcomeComponent}
+        ])
       ]
     })
     .compileComponents();
@@ -56,6 +57,20 @@ describe('SidebarComponent', () => {
     spyOn(sidebarComponent, 'closeSidebar');
 
     const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
+    linkToStatsPage.click();
+
+    expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
+  });
+  
+  it('should have a link to the players page', () => {
+    expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[1].textContent).toBe('Players');
+    expect(nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[1].href).toContain('/players');
+  });
+
+  it('should close the sidebar when navigating to the players page', () => {
+    spyOn(sidebarComponent, 'closeSidebar');
+
+    const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[1];
     linkToStatsPage.click();
 
     expect(sidebarComponent.closeSidebar).toHaveBeenCalledTimes(1);
