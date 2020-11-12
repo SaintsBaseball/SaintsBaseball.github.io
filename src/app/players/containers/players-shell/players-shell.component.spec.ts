@@ -38,7 +38,7 @@ describe('PlayersShellComponent', () => {
     playersShellComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store);
   });
 
   it('should create', () => {

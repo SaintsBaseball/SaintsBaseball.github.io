@@ -3,7 +3,6 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { take } from 'rxjs/operators';
 import { StoreModule, select, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
 import { AppComponent } from './app.component';
 import { StatisticsServiceMock } from './testClasses/statistics-service-mock';
 import { AppEffects } from './state/app.effects';
@@ -42,7 +41,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
     statisticsServiceMock = TestBed.get('IStatisticsService');
-    store = TestBed.get(Store);
+    store = TestBed.inject(Store);
   }));
 
   it('should create the app', () => {

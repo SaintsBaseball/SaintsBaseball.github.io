@@ -12,8 +12,8 @@ describe('RequestService', () => {
       providers: [HttpRequestService],
       imports: [HttpClientTestingModule]
     });
-    requestService = TestBed.get(HttpRequestService);
-    httpTestingController = TestBed.get(HttpTestingController);
+    requestService = TestBed.inject(HttpRequestService);
+    httpTestingController = TestBed.inject(HttpTestingController);
   });
 
   afterEach(() => {
