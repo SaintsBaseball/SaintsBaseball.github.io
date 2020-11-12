@@ -10,16 +10,17 @@ describe('StatisticsService', () => {
   let requestServiceMock: RequestServiceMock;
 
   beforeEach(() => {
+    requestServiceMock = new RequestServiceMock();
+
     TestBed.configureTestingModule({
       providers: [
         {
           provide: 'IRequestService',
-          useClass: RequestServiceMock
+          useValue: requestServiceMock
         }
       ]
     });
     statisticsService = TestBed.inject(StatisticsService);
-    requestServiceMock = TestBed.get('IRequestService')
   });
 
   it('should be created', () => {

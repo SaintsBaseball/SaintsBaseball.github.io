@@ -11,26 +11,23 @@ describe('SocialMediaAccountComponent', () => {
   let socialMediaAccountInfoFactoryServiceMock: SocialMediaAccountInfoFactoryServiceMock;
 
   beforeEach(async(() => {
+    socialMediaAccountInfoFactoryServiceMock = new SocialMediaAccountInfoFactoryServiceMock();
+
     TestBed.configureTestingModule({
       declarations: [SocialMediaAccountComponent],
       providers: [
         {
           provide: 'ISocialMediaAccountInfoFactoryService',
-          useClass: SocialMediaAccountInfoFactoryServiceMock
+          useValue: socialMediaAccountInfoFactoryServiceMock
         }
       ]
-    })
-      .compileComponents();
-  }));
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(SocialMediaAccountComponent);
     socialMediaAccountComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
-
-    socialMediaAccountInfoFactoryServiceMock = TestBed.get('ISocialMediaAccountInfoFactoryService')
-  });
+  }));
 
   it('should create', () => {
     expect(socialMediaAccountComponent).toBeTruthy();

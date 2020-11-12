@@ -19,6 +19,8 @@ describe('AppComponent', () => {
   let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
+    statisticsServiceMock = new StatisticsServiceMock();
+
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
@@ -30,7 +32,7 @@ describe('AppComponent', () => {
       providers: [
         {
           provide: 'IStatisticsService',
-          useClass: StatisticsServiceMock
+          useValue: statisticsServiceMock
         }
       ],
       declarations: [AppComponent]
@@ -40,7 +42,6 @@ describe('AppComponent', () => {
     appComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
-    statisticsServiceMock = TestBed.get('IStatisticsService');
     store = TestBed.inject(Store);
   }));
 
