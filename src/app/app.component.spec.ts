@@ -10,14 +10,12 @@ import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/p
 import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
 import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
-import { IStatisticsService } from './interfaces/i-statistics-service';
-import { of, throwError } from 'rxjs';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let appComponent: AppComponent;
   let nativeElement;
-  let statisticsServiceMock: IStatisticsService;
+  let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
   beforeEach(async(() => {
@@ -56,14 +54,15 @@ describe('AppComponent', () => {
 
   describe('ngOnInit', () => {
     it('should load the player hitting statistics', () => {
-      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics');
+      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
 
       appComponent.ngOnInit();
 
-      expect(statisticsServiceMock.getPlayerHittingStatistics).toHaveBeenCalledTimes(1);
+      expect(statisticsServiceMock.getPlayerHittingStatistics.callCount).toBe(1);
     });
 
     it('should update the statistics on successful load', (done) => {
+      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [
         {
@@ -130,7 +129,7 @@ describe('AppComponent', () => {
         }
       ];
       statisticsToReturn['Spring 2019'] = [];
-      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(of(statisticsToReturn));
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
 
       appComponent.ngOnInit();
 
@@ -142,7 +141,8 @@ describe('AppComponent', () => {
 
     it('should populate the error message if failed to load statistics', (done) => {
       const getPlayerHittingStatisticsError = new Error('Some error');
-      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(throwError(getPlayerHittingStatisticsError));
+      const statisticsToReturn = null;
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
 
       appComponent.ngOnInit();
 
@@ -163,6 +163,7 @@ describe('AppComponent', () => {
     });
 
     it('should update the statistics for each player on successful load', (done) => {
+      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [
         {
@@ -292,7 +293,7 @@ describe('AppComponent', () => {
           PA: 31
         }
       ];
-      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(of(statisticsToReturn));
+      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
 
       appComponent.ngOnInit();
 
