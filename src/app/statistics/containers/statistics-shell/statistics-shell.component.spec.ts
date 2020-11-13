@@ -1,5 +1,5 @@
 import { StoreModule, Store } from '@ngrx/store';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { StatisticsShellComponent } from './statistics-shell.component';
 import { StatisticsSelectorComponent } from '../../components/statistics-selector/statistics-selector.component';
 import { StatisticsTableComponent } from '../../components/statistics-table/statistics-table.component';
@@ -20,7 +20,7 @@ describe('StatisticsShellComponent', () => {
   let nativeElement;
   let store: Store<fromStatistics.State>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         StatisticsShellComponent,

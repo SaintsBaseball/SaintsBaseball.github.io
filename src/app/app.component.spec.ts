@@ -1,4 +1,4 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { take } from 'rxjs/operators';
 import { StoreModule, select, Store } from '@ngrx/store';
@@ -18,7 +18,7 @@ describe('AppComponent', () => {
   let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     statisticsServiceMock = new StatisticsServiceMock();
 
     TestBed.configureTestingModule({

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { SocialMediaWrapperComponent } from './social-media-wrapper.component';
 import { SocialMediaAccountComponent } from '../social-media-account/social-media-account.component';
@@ -9,7 +9,7 @@ describe('SocialMediaWrapperComponent', () => {
   let fixture: ComponentFixture<SocialMediaWrapperComponent>;
   let nativeElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         SocialMediaWrapperComponent,

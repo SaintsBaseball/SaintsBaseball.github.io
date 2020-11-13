@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PlayersShellComponent } from './players-shell.component';
 import { PlayersListComponent } from '../../components/players-list/players-list.component';
@@ -17,7 +17,7 @@ describe('PlayersShellComponent', () => {
   let nativeElement;
   let store: Store<fromRoot.State>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         PlayersShellComponent,

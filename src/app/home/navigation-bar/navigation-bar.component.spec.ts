@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { NavigationBarComponent } from './navigation-bar.component';
@@ -9,7 +9,7 @@ describe('NavigationBarComponent', () => {
   let navigationBarComponent: NavigationBarComponent;
   let nativeElement;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         NavigationBarComponent,
