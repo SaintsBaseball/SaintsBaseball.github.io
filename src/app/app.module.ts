@@ -24,6 +24,7 @@ import { HttpRequestService } from './services/http-request.service';
 import { AppEffects } from './state/app.effects';
 import { reducer } from './state/app.reducer';
 import { StatisticsService } from './statistics.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { StatisticsService } from './statistics.service';
       name: 'Saints Baseball',
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    BrowserAnimationsModule
   ],
   providers: [
     {
