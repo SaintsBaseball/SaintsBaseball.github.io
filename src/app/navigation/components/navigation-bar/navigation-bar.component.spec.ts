@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 import { NavigationBarComponent } from './navigation-bar.component';
-import { SidebarComponent } from "../sidebar/sidebar.component";
 
 describe('NavigationBarComponent', () => {
   let fixture: ComponentFixture<NavigationBarComponent>;

@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SidebarComponent } from './sidebar.component';
-import {WelcomeComponent} from '../welcome/welcome.component';
+import {WelcomeComponent} from 'src/app/welcome/welcome.component';
 
 describe('SidebarComponent', () => {
   let sidebarComponent: SidebarComponent;

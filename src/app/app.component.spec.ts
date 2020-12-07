@@ -11,10 +11,10 @@ import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
 import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
 import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
+import { NavigationBarComponent } from './navigation/components/navigation-bar/navigation-bar.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;

@@ -11,8 +11,6 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { InMemoryDataService } from './in-memory-data-service/in-memory-data.service';
@@ -26,8 +24,6 @@ import { NavigationModule } from './navigation/navigation.module';
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent,
-    SidebarComponent,
     SponsorComponent,
     WelcomeComponent,
   ],
