@@ -17,7 +17,7 @@ import { InMemoryDataService } from './in-memory-data-service/in-memory-data.ser
 import { HttpRequestService } from './services/http-request.service';
 import { AppEffects } from './state/app.effects';
 import { reducer } from './state/app.reducer';
-import { StatisticsService } from './statistics.service';
+import { StatisticsService } from './services/statistics.service';
 import { SocialMediaModule } from './social-media/social-media.module';
 import { NavigationModule } from './navigation/navigation.module';
 

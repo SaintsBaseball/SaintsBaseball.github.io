@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { take } from 'rxjs/operators';
 
 import { StatisticsService } from './statistics.service';
-import { RequestServiceMock } from './testClasses/request-service-mock';
-import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/player-hitting-statistics-database-table';
+import { RequestServiceMock } from '../testClasses/request-service-mock';
+import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/player-hitting-statistics-database-table';
 
 describe('StatisticsService', () => {
   let statisticsService: StatisticsService;

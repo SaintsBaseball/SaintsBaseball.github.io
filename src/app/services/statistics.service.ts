@@ -1,8 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
-import { IStatisticsService } from './interfaces/i-statistics-service';
+import { IStatisticsService } from '../interfaces/i-statistics-service';
 import { Observable } from 'rxjs';
-import { IRequestService } from './interfaces/i-request-service';
-import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/player-hitting-statistics-database-table';
+import { IRequestService } from '../interfaces/i-request-service';
+import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/player-hitting-statistics-database-table';
 
 @Injectable({
   providedIn: 'root'
