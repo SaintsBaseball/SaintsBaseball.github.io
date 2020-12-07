@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationBarComponent } from './home/navigation-bar/navigation-bar.component';
 import { SidebarComponent } from './home/sidebar/sidebar.component';
-import { ShellComponent } from './home/shell/shell.component';
 import { SponsorComponent } from './home/sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './social-media/social-media-account-info-factory.service';
@@ -30,7 +29,6 @@ import { StatisticsService } from './statistics.service';
     AppComponent,
     NavigationBarComponent,
     SidebarComponent,
-    ShellComponent,
     SponsorComponent,
     SocialMediaAccountComponent,
     WelcomeComponent,

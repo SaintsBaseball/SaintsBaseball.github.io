@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { WelcomeComponent } from './home/welcome/welcome.component';
-import { ShellComponent } from './home/shell/shell.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ShellComponent,
+    component: AppComponent,
     children: [
       { path: 'welcome', component: WelcomeComponent },
       {

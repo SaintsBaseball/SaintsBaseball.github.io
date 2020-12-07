@@ -10,6 +10,11 @@ import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/p
 import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
 import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
+import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
+import { NavigationBarComponent } from './home/navigation-bar/navigation-bar.component';
+import { SponsorComponent } from './home/sponsor/sponsor.component';
+import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
+import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -33,9 +38,19 @@ describe('AppComponent', () => {
         {
           provide: 'IStatisticsService',
           useValue: statisticsServiceMock
+        },
+        {
+          provide: 'ISocialMediaAccountInfoFactoryService',
+          useClass: SocialMediaAccountInfoFactoryServiceMock
         }
       ],
-      declarations: [AppComponent]
+      declarations: [
+        AppComponent,
+        NavigationBarComponent,
+        SponsorComponent,
+        SocialMediaWrapperComponent,
+        SocialMediaAccountComponent
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -49,8 +64,23 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   });
 
-  it('should have the router outlet', () => {
-    expect(nativeElement.querySelector('router-outlet')).toBeTruthy();
+  it('should render the navigation bar', () => {
+    expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
+  });
+
+  it('should have the wrapper contents with the router outlet', () => {
+    expect(nativeElement.querySelector('div.w3-main')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+  });
+
+  it('should render the social media wrapper', () => {
+    expect(nativeElement.querySelector('social-media-wrapper')).toBeTruthy();
+  });
+
+  it('should render the sponsor info', () => {
+    expect(nativeElement.querySelector('sponsor')).toBeTruthy();
   });
 
   describe('ngOnInit', () => {
