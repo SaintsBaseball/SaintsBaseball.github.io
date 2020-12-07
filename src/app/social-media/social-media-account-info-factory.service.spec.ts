@@ -18,20 +18,20 @@ describe('SocialMediaAccountInfoFactoryService', () => {
 
   describe('create', () => {
     it('should create an instagram account info object', () => {
-      const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.create('instagram');
+      const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.getAccountInfo('instagram');
 
       expect(socialMediaAccountInfo).toBeInstanceOf(InstagramAccountInfo);
     });
 
     it('should create a facebook account info object', () => {
-      const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.create('facebook');
+      const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.getAccountInfo('facebook');
 
       expect(socialMediaAccountInfo).toBeInstanceOf(FacebookAccountInfo);
     });
 
     it('should throw an error if it tries to create a social media account that does not exist', () => {
       try {
-        const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.create('snapchat');
+        const socialMediaAccountInfo = socialMediaAccountInfoFactoryService.getAccountInfo('snapchat');
         expect(socialMediaAccountInfo).toBeFalsy();
       } catch(error) {
         expect(error).toBeTruthy();

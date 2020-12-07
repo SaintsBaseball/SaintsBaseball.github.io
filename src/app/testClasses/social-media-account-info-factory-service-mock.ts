@@ -4,9 +4,9 @@ import { ISocialMediaAccountInfoFactoryService } from '../interfaces/i-social-me
 import { ISocialMediaAccountInfo } from '../interfaces/i-social-media-account-info';
 
 export class SocialMediaAccountInfoFactoryServiceMock implements ISocialMediaAccountInfoFactoryService {
-  createReturnValues: ISocialMediaAccountInfo[] = [];
+  getAccountInfoReturnValues: ISocialMediaAccountInfo[] = [];
 
-  create = sinon.spy(() => {
-    return this.createReturnValues.shift();
+  getAccountInfo = sinon.spy(() => {
+    return this.getAccountInfoReturnValues.shift();
   });
 }
