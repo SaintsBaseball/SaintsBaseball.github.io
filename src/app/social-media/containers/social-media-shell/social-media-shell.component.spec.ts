@@ -45,12 +45,6 @@ describe('SocialMediaShellComponent', () => {
     expect(nativeElement.querySelector('h3').textContent).toBe(socialMediaShellComponent.title);
   });
 
-  it('should render the social media accounts', () => {
-    const socialMediaAccountComponent = nativeElement.querySelectorAll('social-media-account');
-    expect(socialMediaAccountComponent[0]).toBeTruthy();
-    expect(socialMediaAccountComponent[1]).toBeTruthy();
-  });
-
   describe('ngOnInit', () => {
     let firstFakeSocialMediaAccountInfo: ISocialMediaAccountInfo;
     let secondFakeSocialMediaAccountInfo: ISocialMediaAccountInfo;
