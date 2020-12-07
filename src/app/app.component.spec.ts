@@ -13,8 +13,8 @@ import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
-import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
-import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
+import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
+import { SocialMediaWrapperComponent } from './social-media/containers/social-media-wrapper/social-media-wrapper.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;

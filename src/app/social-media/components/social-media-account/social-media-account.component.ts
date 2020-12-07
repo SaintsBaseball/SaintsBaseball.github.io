@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { ISocialMediaAccountInfo } from '../../interfaces/i-social-media-account-info';
-import { ISocialMediaAccountInfoFactoryService } from '../../interfaces/i-social-media-account-info-factory-service';
+import { ISocialMediaAccountInfo } from '../../../interfaces/i-social-media-account-info';
+import { ISocialMediaAccountInfoFactoryService } from '../../../interfaces/i-social-media-account-info-factory-service';
 
 @Component({
   selector: 'social-media-account',
