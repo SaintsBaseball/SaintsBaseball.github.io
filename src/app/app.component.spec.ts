@@ -11,8 +11,8 @@ import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
 import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
-import { NavigationBarComponent } from './home/navigation-bar/navigation-bar.component';
-import { SponsorComponent } from './home/sponsor/sponsor.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
 

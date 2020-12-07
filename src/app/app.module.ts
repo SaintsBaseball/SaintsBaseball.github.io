@@ -11,12 +11,12 @@ import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './home/navigation-bar/navigation-bar.component';
-import { SidebarComponent } from './home/sidebar/sidebar.component';
-import { SponsorComponent } from './home/sponsor/sponsor.component';
+import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryService } from './social-media/social-media-account-info-factory.service';
-import { WelcomeComponent } from './home/welcome/welcome.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
 import { InMemoryDataService } from './in-memory-data-service/in-memory-data.service';
 import { HttpRequestService } from './services/http-request.service';
