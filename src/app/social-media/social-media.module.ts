@@ -8,6 +8,9 @@ import { SocialMediaAccountInfoFactoryService } from './social-media-account-inf
     SocialMediaAccountComponent,
     SocialMediaWrapperComponent
   ],
+  exports: [
+    SocialMediaWrapperComponent
+  ],
   providers: [
     {
       provide: 'ISocialMediaAccountInfoFactoryService',
