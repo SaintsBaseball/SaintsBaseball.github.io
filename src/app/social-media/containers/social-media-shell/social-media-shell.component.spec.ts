@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { SocialMediaWrapperComponent } from './social-media-wrapper.component';
+import { SocialMediaShellComponent } from './social-media-shell.component';
 import { SocialMediaAccountComponent } from '../../components/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryServiceMock } from '../../../testClasses/social-media-account-info-factory-service-mock';
 
-describe('SocialMediaWrapperComponent', () => {
-  let socialMediaWrapperComponent: SocialMediaWrapperComponent;
-  let fixture: ComponentFixture<SocialMediaWrapperComponent>;
+describe('SocialMediaShellComponent', () => {
+  let socialMediaShellComponent: SocialMediaShellComponent;
+  let fixture: ComponentFixture<SocialMediaShellComponent>;
   let nativeElement;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
-        SocialMediaWrapperComponent,
+        SocialMediaShellComponent,
         SocialMediaAccountComponent
       ],
       providers: [
@@ -26,19 +26,19 @@ describe('SocialMediaWrapperComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SocialMediaWrapperComponent);
-    socialMediaWrapperComponent = fixture.componentInstance;
+    fixture = TestBed.createComponent(SocialMediaShellComponent);
+    socialMediaShellComponent = fixture.componentInstance;
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
   });
 
   it('should create', () => {
-    expect(socialMediaWrapperComponent).toBeTruthy();
+    expect(socialMediaShellComponent).toBeTruthy();
   });
 
   it('should have the title', () => {
-    expect(socialMediaWrapperComponent.title).toBe('Follow us on Social Media');
-    expect(nativeElement.querySelector('h3').textContent).toBe(socialMediaWrapperComponent.title);
+    expect(socialMediaShellComponent.title).toBe('Follow us on Social Media');
+    expect(nativeElement.querySelector('h3').textContent).toBe(socialMediaShellComponent.title);
   });
 
   it('should render the social media accounts', () => {

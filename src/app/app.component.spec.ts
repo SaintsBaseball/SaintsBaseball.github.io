@@ -14,7 +14,7 @@ import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-m
 import { NavigationBarComponent } from './navigation-bar/navigation-bar.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
-import { SocialMediaWrapperComponent } from './social-media/containers/social-media-wrapper/social-media-wrapper.component';
+import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -48,7 +48,7 @@ describe('AppComponent', () => {
         AppComponent,
         NavigationBarComponent,
         SponsorComponent,
-        SocialMediaWrapperComponent,
+        SocialMediaShellComponent,
         SocialMediaAccountComponent
       ]
     }).compileComponents();
@@ -76,7 +76,7 @@ describe('AppComponent', () => {
   });
 
   it('should render the social media wrapper', () => {
-    expect(nativeElement.querySelector('social-media-wrapper')).toBeTruthy();
+    expect(nativeElement.querySelector('social-media-shell')).toBeTruthy();
   });
 
   it('should render the sponsor info', () => {
