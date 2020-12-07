@@ -21,6 +21,7 @@ import { AppEffects } from './state/app.effects';
 import { reducer } from './state/app.reducer';
 import { StatisticsService } from './statistics.service';
 import { SocialMediaModule } from './social-media/social-media.module';
+import { NavigationModule } from './navigation/navigation.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { SocialMediaModule } from './social-media/social-media.module';
       maxAge: 25,
       logOnly: environment.production
     }),
-    SocialMediaModule
+    SocialMediaModule,
+    NavigationModule
   ],
   providers: [
     {
