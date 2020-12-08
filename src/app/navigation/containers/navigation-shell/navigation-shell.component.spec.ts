@@ -1,15 +1,10 @@
-import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationBarComponent } from '../../components/navigation-bar/navigation-bar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { BlankComponent } from '../../../testClasses/blank-component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
-
-@Component({})
-class BlankComponent{
-
-}
 
 describe('NavigationShellComponent', () => {
   let navigationShellComponent: NavigationShellComponent;
