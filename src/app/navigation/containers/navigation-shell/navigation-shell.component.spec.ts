@@ -31,7 +31,7 @@ describe('NavigationShellComponent', () => {
     expect(navigationShellComponent).toBeTruthy();
   });
 
-  fdescribe('navigation-bar', () => {
+  describe('navigation-bar', () => {
     it('should have a link to the homepage with text Saints', () => {
       const linkToHomePage = nativeElement.querySelector('.w3-top .w3-bar a#link-to-homepage');
       expect(linkToHomePage.textContent).toBe('Saints')
