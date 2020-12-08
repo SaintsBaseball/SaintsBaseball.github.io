@@ -12,6 +12,6 @@ export class NavigationShellComponent {
   }
 
   closeSidebar() {
-    
+    this.sidebarIsOpen = false;
   }
 }
