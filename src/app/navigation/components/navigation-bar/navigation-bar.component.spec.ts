@@ -33,12 +33,6 @@ describe('NavigationBarComponent', () => {
     expect(navigationBarComponent).toBeTruthy();
   });
 
-  it('should have a link to the homepage with text Saints', () => {
-    expect(navigationBarComponent.linkToHomepageText).toBe('Saints');
-    expect(nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[0].textContent).toBe(navigationBarComponent.linkToHomepageText)
-    expect(nativeElement.querySelectorAll('.w3-top .w3-bar a.w3-bar-item')[0].href).toContain('/home')
-  });
-
   it('should open the sidebar when the sidebar button is clicked', () => {
     expect(navigationBarComponent.sidebarIsOpen).toBe(false);
     let overlay = nativeElement.querySelector('div.w3-overlay');

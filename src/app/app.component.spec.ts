@@ -15,6 +15,7 @@ import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
 import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
 import { NavigationBarComponent } from './navigation/components/navigation-bar/navigation-bar.component';
+import { NavigationShellComponent } from './navigation/containers/navigation-shell/navigation-shell.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -46,6 +47,7 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
+        NavigationShellComponent,
         NavigationBarComponent,
         SponsorComponent,
         SocialMediaShellComponent,
