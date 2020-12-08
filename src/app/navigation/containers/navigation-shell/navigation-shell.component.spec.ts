@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationBarComponent } from '../../components/navigation-bar/navigation-bar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
@@ -15,6 +17,9 @@ describe('NavigationShellComponent', () => {
         NavigationShellComponent,
         NavigationBarComponent,
         SidebarComponent
+      ],
+      imports: [
+        RouterTestingModule
       ]
     })
       .compileComponents();
@@ -34,8 +39,8 @@ describe('NavigationShellComponent', () => {
   describe('navigation-bar', () => {
     it('should have a link to the homepage with text Saints', () => {
       const linkToHomePage = nativeElement.querySelector('.w3-top .w3-bar a#link-to-homepage');
-      expect(linkToHomePage.textContent).toBe('Saints')
-      // expect(linkToHomePage.href).toContain('')
+      expect(linkToHomePage.textContent).toBe('Saints');
+      expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
   });
 
