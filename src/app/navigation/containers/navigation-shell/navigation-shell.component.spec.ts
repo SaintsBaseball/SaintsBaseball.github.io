@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationBarComponent } from '../../components/navigation-bar/navigation-bar.component';
-import { SidebarComponent } from '../../components/sidebar/sidebar.component';
+import { NavigationSidebarComponent } from '../../components/navigation-sidebar/navigation-sidebar.component';
 import { BlankComponent } from '../../../testClasses/blank-component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
@@ -16,7 +16,7 @@ describe('NavigationShellComponent', () => {
       declarations: [
         NavigationShellComponent,
         NavigationBarComponent,
-        SidebarComponent
+        NavigationSidebarComponent
       ],
       imports: [
         RouterTestingModule.withRoutes([
@@ -50,7 +50,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       let overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
-      let sidebarComponent = nativeElement.querySelector('sidebar');
+      let sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
 
       const sidebarButton = nativeElement.querySelector('.w3-top .w3-bar a#sidebar-button');
@@ -60,7 +60,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(true);
       overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeTruthy();
-      sidebarComponent = nativeElement.querySelector('sidebar');
+      sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeTruthy();
     });
   });
@@ -69,7 +69,7 @@ describe('NavigationShellComponent', () => {
     it('should close the sidebar when the overlay is clicked', () => {
       navigationShellComponent.sidebarIsOpen = true;
       fixture.detectChanges();
-      let sidebarComponent = nativeElement.querySelector('sidebar');
+      let sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeTruthy();
 
       let overlay = nativeElement.querySelector('div.w3-overlay');
@@ -79,7 +79,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
-      sidebarComponent = nativeElement.querySelector('sidebar');
+      sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
     });
   });
@@ -102,7 +102,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       const overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
-      const sidebarComponent = nativeElement.querySelector('sidebar');
+      const sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
     });
   
@@ -120,7 +120,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       const overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
-      const sidebarComponent = nativeElement.querySelector('sidebar');
+      const sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
     });
     
@@ -138,7 +138,7 @@ describe('NavigationShellComponent', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       const overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
-      const sidebarComponent = nativeElement.querySelector('sidebar');
+      const sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
     });
   });

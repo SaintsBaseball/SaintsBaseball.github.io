@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
-  selector: 'sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  selector: 'navigation-sidebar',
+  templateUrl: './navigation-sidebar.component.html',
+  styleUrls: ['./navigation-sidebar.component.css']
 })
-export class SidebarComponent{
+export class NavigationSidebarComponent{
   title: string = 'Menu';
 
   @Output() sidebarClosed = new EventEmitter<void>();
