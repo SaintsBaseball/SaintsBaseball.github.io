@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'sidebar',
@@ -8,5 +8,9 @@ import {Component, Input} from '@angular/core';
 export class SidebarComponent{
   title: string = 'Menu';
 
-  @Input() closeSidebar: Function = () => {};
+  @Output() sidebarClosed = new EventEmitter<void>();
+
+  closeSidebar() {
+    this.sidebarClosed.emit();
+  }
 }

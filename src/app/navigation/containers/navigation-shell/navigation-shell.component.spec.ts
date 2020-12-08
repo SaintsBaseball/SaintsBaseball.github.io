@@ -1,10 +1,15 @@
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NavigationBarComponent } from '../../components/navigation-bar/navigation-bar.component';
 import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
+
+@Component({})
+class BlankComponent{
+
+}
 
 describe('NavigationShellComponent', () => {
   let navigationShellComponent: NavigationShellComponent;
@@ -19,7 +24,10 @@ describe('NavigationShellComponent', () => {
         SidebarComponent
       ],
       imports: [
-        RouterTestingModule
+        RouterTestingModule.withRoutes([
+          { path: 'statistics', component: BlankComponent },
+          { path: 'players', component: BlankComponent }
+        ])
       ]
     })
       .compileComponents();
@@ -77,6 +85,65 @@ describe('NavigationShellComponent', () => {
       overlay = nativeElement.querySelector('div.w3-overlay');
       expect(overlay).toBeFalsy();
       sidebarComponent = nativeElement.querySelector('sidebar');
+      expect(sidebarComponent).toBeFalsy();
+    });
+  });
+
+  describe('navigation-sidebar', () => {
+    beforeEach(() => {
+      navigationShellComponent.sidebarIsOpen = true;
+      fixture.detectChanges();
+    });
+
+    it('should have the Sidebar Title at the top of the sidebar', () => {
+      expect(nativeElement.querySelector('nav.w3-sidebar h4.w3-bar-item b').textContent).toBe('Menu');
+    });
+  
+    it('should have an X that closes the sidebar', () => {
+      const xButton = nativeElement.querySelector('nav.w3-sidebar button');
+      xButton.click();
+      fixture.detectChanges();
+  
+      expect(navigationShellComponent.sidebarIsOpen).toBe(false);
+      const overlay = nativeElement.querySelector('div.w3-overlay');
+      expect(overlay).toBeFalsy();
+      const sidebarComponent = nativeElement.querySelector('sidebar');
+      expect(sidebarComponent).toBeFalsy();
+    });
+  
+    it('should have a link to the stats page', () => {
+      const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
+      expect(linkToStatsPage.textContent).toBe('Statistics');
+      expect(linkToStatsPage.href).toContain('/statistics');
+    });
+  
+    it('should close the sidebar when navigating to the stats page', () => {  
+      const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[0];
+      linkToStatsPage.click();
+      fixture.detectChanges();
+  
+      expect(navigationShellComponent.sidebarIsOpen).toBe(false);
+      const overlay = nativeElement.querySelector('div.w3-overlay');
+      expect(overlay).toBeFalsy();
+      const sidebarComponent = nativeElement.querySelector('sidebar');
+      expect(sidebarComponent).toBeFalsy();
+    });
+    
+    it('should have a link to the players page', () => {
+      const linkToPlayersPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[1];
+      expect(linkToPlayersPage.textContent).toBe('Players');
+      expect(linkToPlayersPage.href).toContain('/players');
+    });
+  
+    it('should close the sidebar when navigating to the players page', () => {
+      const linkToStatsPage = nativeElement.querySelectorAll('nav.w3-sidebar a.w3-bar-item')[1];
+      linkToStatsPage.click();
+      fixture.detectChanges();
+  
+      expect(navigationShellComponent.sidebarIsOpen).toBe(false);
+      const overlay = nativeElement.querySelector('div.w3-overlay');
+      expect(overlay).toBeFalsy();
+      const sidebarComponent = nativeElement.querySelector('sidebar');
       expect(sidebarComponent).toBeFalsy();
     });
   });
