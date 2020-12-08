@@ -4,7 +4,7 @@ import { SidebarComponent } from '../../components/sidebar/sidebar.component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
 
-fdescribe('NavigationShellComponent', () => {
+describe('NavigationShellComponent', () => {
   let navigationShellComponent: NavigationShellComponent;
   let fixture: ComponentFixture<NavigationShellComponent>;
   let nativeElement;
