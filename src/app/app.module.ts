@@ -9,7 +9,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -20,16 +19,17 @@ import { reducer } from './state/app.reducer';
 import { StatisticsService } from './services/statistics.service';
 import { SocialMediaModule } from './social-media/social-media.module';
 import { NavigationModule } from './navigation/navigation.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
     SponsorComponent,
-    WelcomeComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
     StoreModule.forRoot({
