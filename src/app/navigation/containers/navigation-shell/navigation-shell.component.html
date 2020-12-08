@@ -1,5 +1,5 @@
 <navigation-bar (sidebarOpened)="openSidebar()"></navigation-bar>
 
-<div class="w3-overlay" *ngIf="sidebarIsOpen" (click)="closeSidebar()"></div>
+<navigation-overlay *ngIf="sidebarIsOpen" (sidebarClosed)="closeSidebar()"></navigation-overlay>
 
 <navigation-sidebar *ngIf="sidebarIsOpen" (sidebarClosed)="closeSidebar()"></navigation-sidebar>

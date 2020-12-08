@@ -5,6 +5,7 @@ import { NavigationSidebarComponent } from '../../components/navigation-sidebar/
 import { BlankComponent } from '../../../testClasses/blank-component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
+import { NavigationOverlayComponent } from '../../components/navigation-overlay/navigation-overlay.component';
 
 describe('NavigationShellComponent', () => {
   let navigationShellComponent: NavigationShellComponent;
@@ -16,7 +17,8 @@ describe('NavigationShellComponent', () => {
       declarations: [
         NavigationShellComponent,
         NavigationBarComponent,
-        NavigationSidebarComponent
+        NavigationSidebarComponent,
+        NavigationOverlayComponent
       ],
       imports: [
         RouterTestingModule.withRoutes([

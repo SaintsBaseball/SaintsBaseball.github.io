@@ -4,12 +4,14 @@ import { NavigationBarComponent } from './components/navigation-bar/navigation-b
 import { SharedModule } from '../shared/shared.module';
 import { NavigationShellComponent } from './containers/navigation-shell/navigation-shell.component';
 import { NavigationRoutingModule } from './navigation-routing.module';
+import { NavigationOverlayComponent } from './components/navigation-overlay/navigation-overlay.component';
 
 @NgModule({
   declarations: [
     NavigationBarComponent,
     NavigationShellComponent,
-    NavigationSidebarComponent
+    NavigationSidebarComponent,
+    NavigationOverlayComponent
   ],
   imports: [
     SharedModule,
