@@ -5,5 +5,13 @@ import { Component } from '@angular/core';
   templateUrl: './navigation-shell.component.html'
 })
 export class NavigationShellComponent {
+  sidebarIsOpen: boolean = false;
 
+  openSidebar(): void {
+    this.sidebarIsOpen = true;
+  }
+
+  closeSidebar() {
+    
+  }
 }

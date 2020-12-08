@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'navigation-bar',
@@ -7,13 +7,9 @@ import { Component } from '@angular/core';
 })
 export class NavigationBarComponent {
   linkToHomepageText: string = 'Saints';
-  sidebarIsOpen: boolean = false;
-
+  @Output() sidebarOpened = new EventEmitter<void>();
+  
   openSidebar() {
-    this.sidebarIsOpen = true;
-  }
-
-  closeSidebar() {
-    this.sidebarIsOpen = false;
+    this.sidebarOpened.emit();
   }
 }

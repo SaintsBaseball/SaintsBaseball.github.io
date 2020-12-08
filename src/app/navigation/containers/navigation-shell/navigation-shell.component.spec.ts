@@ -42,6 +42,24 @@ describe('NavigationShellComponent', () => {
       expect(linkToHomePage.textContent).toBe('Saints');
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
+
+    it('should open the sidebar when the sidebar button is clicked', () => {
+      expect(navigationShellComponent.sidebarIsOpen).toBe(false);
+      let overlay = nativeElement.querySelector('div.w3-overlay');
+      expect(overlay).toBeFalsy();
+      let sidebarComponent = nativeElement.querySelector('sidebar');
+      expect(sidebarComponent).toBeFalsy();
+
+      const sidebarButton = nativeElement.querySelector('.w3-top .w3-bar a#sidebar-button');
+      sidebarButton.click();
+      fixture.detectChanges();
+
+      expect(navigationShellComponent.sidebarIsOpen).toBe(true);
+      overlay = nativeElement.querySelector('div.w3-overlay');
+      expect(overlay).toBeTruthy();
+      sidebarComponent = nativeElement.querySelector('sidebar');
+      expect(sidebarComponent).toBeTruthy();
+    });
   });
 
   // it('should open the sidebar when the sidebar button is clicked', () => {
