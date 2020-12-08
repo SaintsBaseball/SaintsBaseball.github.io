@@ -13,7 +13,7 @@ export class SocialMediaAccountInfoFactoryService implements ISocialMediaAccount
     instagram: InstagramAccountInfo
   };
 
-  create(socialMediaAccountInfoToCreate: string): ISocialMediaAccountInfo {
+  getAccountInfo(socialMediaAccountInfoToCreate: string): ISocialMediaAccountInfo {
     const socialMediaAccountInfoClassToCreate = this.socialMediaAccountInfoDictionary[socialMediaAccountInfoToCreate];
     return new socialMediaAccountInfoClassToCreate();
   }

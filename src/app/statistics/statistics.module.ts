@@ -28,7 +28,6 @@ const statisticsRoutes: Routes = [
     RouterModule.forChild(statisticsRoutes),
     StoreModule.forFeature('statistics', reducer),
     EffectsModule.forFeature([]),
-  ],
-  providers: []
+  ]
 })
 export class StatisticsModule { }

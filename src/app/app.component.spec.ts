@@ -10,6 +10,12 @@ import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/p
 import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
 import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
+import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
+import { SponsorComponent } from './sponsor/sponsor.component';
+import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
+import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
+import { NavigationBarComponent } from './navigation/components/navigation-bar/navigation-bar.component';
+import { NavigationShellComponent } from './navigation/containers/navigation-shell/navigation-shell.component';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -33,9 +39,20 @@ describe('AppComponent', () => {
         {
           provide: 'IStatisticsService',
           useValue: statisticsServiceMock
+        },
+        {
+          provide: 'ISocialMediaAccountInfoFactoryService',
+          useClass: SocialMediaAccountInfoFactoryServiceMock
         }
       ],
-      declarations: [AppComponent]
+      declarations: [
+        AppComponent,
+        NavigationShellComponent,
+        NavigationBarComponent,
+        SponsorComponent,
+        SocialMediaShellComponent,
+        SocialMediaAccountComponent
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);
@@ -49,8 +66,23 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   });
 
-  it('should have the router outlet', () => {
-    expect(nativeElement.querySelector('router-outlet')).toBeTruthy();
+  it('should render the navigation bar', () => {
+    expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
+  });
+
+  it('should have the wrapper contents with the router outlet', () => {
+    expect(nativeElement.querySelector('div.w3-main')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
+    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+  });
+
+  it('should render the social media wrapper', () => {
+    expect(nativeElement.querySelector('social-media-shell')).toBeTruthy();
+  });
+
+  it('should render the sponsor info', () => {
+    expect(nativeElement.querySelector('sponsor')).toBeTruthy();
   });
 
   describe('ngOnInit', () => {

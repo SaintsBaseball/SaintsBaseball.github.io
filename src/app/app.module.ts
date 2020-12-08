@@ -9,37 +9,28 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationBarComponent } from './home/navigation-bar/navigation-bar.component';
-import { SidebarComponent } from './home/sidebar/sidebar.component';
-import { ShellComponent } from './home/shell/shell.component';
-import { SponsorComponent } from './home/sponsor/sponsor.component';
-import { SocialMediaAccountComponent } from './social-media/social-media-account/social-media-account.component';
-import { SocialMediaAccountInfoFactoryService } from './social-media/social-media-account-info-factory.service';
-import { WelcomeComponent } from './home/welcome/welcome.component';
-import { SocialMediaWrapperComponent } from './social-media/social-media-wrapper/social-media-wrapper.component';
+import { SponsorComponent } from './sponsor/sponsor.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 import { InMemoryDataService } from './in-memory-data-service/in-memory-data.service';
 import { HttpRequestService } from './services/http-request.service';
 import { AppEffects } from './state/app.effects';
 import { reducer } from './state/app.reducer';
-import { StatisticsService } from './statistics.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StatisticsService } from './services/statistics.service';
+import { SocialMediaModule } from './social-media/social-media.module';
+import { NavigationModule } from './navigation/navigation.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationBarComponent,
-    SidebarComponent,
-    ShellComponent,
     SponsorComponent,
-    SocialMediaAccountComponent,
-    WelcomeComponent,
-    SocialMediaWrapperComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    RouterModule,
     HttpClientModule,
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService),
     StoreModule.forRoot({
@@ -51,13 +42,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       maxAge: 25,
       logOnly: environment.production
     }),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SocialMediaModule,
+    NavigationModule
   ],
   providers: [
-    {
-      provide: 'ISocialMediaAccountInfoFactoryService',
-      useClass: SocialMediaAccountInfoFactoryService
-    },
     {
       provide: 'IRequestService',
       useClass: HttpRequestService
