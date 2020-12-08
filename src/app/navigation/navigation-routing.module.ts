@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { WelcomeComponent } from '../welcome/welcome.component';
 
 const routes: Routes = [
   {
@@ -9,11 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'statistics',
-    loadChildren: () => import('./statistics/statistics.module').then(m => m.StatisticsModule)
+    loadChildren: () => import('../statistics/statistics.module').then(m => m.StatisticsModule)
   },
   {
     path: 'players',
-    loadChildren: () => import('./players/players.module').then(m => m.PlayersModule)
+    loadChildren: () => import('../players/players.module').then(m => m.PlayersModule)
   },
   { path: '**', redirectTo: '' }
 ];
@@ -22,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class NavigationRoutingModule { }
