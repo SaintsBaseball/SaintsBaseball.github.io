@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
-const materialModules = [];
+const materialModules = [
+  MatToolbarModule
+];
 
 @NgModule({
   imports: [materialModules],
