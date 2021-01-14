@@ -6,6 +6,7 @@ import { BlankComponent } from '../../../testClasses/blank-component';
 
 import { NavigationShellComponent } from './navigation-shell.component';
 import { NavigationOverlayComponent } from '../../components/navigation-overlay/navigation-overlay.component';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('NavigationShellComponent', () => {
   let navigationShellComponent: NavigationShellComponent;
@@ -24,7 +25,8 @@ describe('NavigationShellComponent', () => {
         RouterTestingModule.withRoutes([
           { path: 'statistics', component: BlankComponent },
           { path: 'players', component: BlankComponent }
-        ])
+        ]),
+        MaterialModule
       ]
     })
       .compileComponents();
@@ -43,7 +45,7 @@ describe('NavigationShellComponent', () => {
 
   describe('navigation-bar', () => {
     it('should have a link to the homepage with text Saints', () => {
-      const linkToHomePage = nativeElement.querySelector('.w3-top .w3-bar a#link-to-homepage');
+      const linkToHomePage = nativeElement.querySelector('mat-toolbar > a#link-to-homepage');
       expect(linkToHomePage.textContent).toBe('Saints');
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
@@ -55,7 +57,7 @@ describe('NavigationShellComponent', () => {
       let sidebarComponent = nativeElement.querySelector('navigation-sidebar');
       expect(sidebarComponent).toBeFalsy();
 
-      const sidebarButton = nativeElement.querySelector('.w3-top .w3-bar a#sidebar-button');
+      const sidebarButton = nativeElement.querySelector('mat-toolbar > button#sidebar-button');
       sidebarButton.click();
       fixture.detectChanges();
 

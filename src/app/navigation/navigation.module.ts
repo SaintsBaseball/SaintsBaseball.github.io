@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { NavigationShellComponent } from './containers/navigation-shell/navigation-shell.component';
 import { NavigationRoutingModule } from './navigation-routing.module';
 import { NavigationOverlayComponent } from './components/navigation-overlay/navigation-overlay.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavigationOverlayComponent } from './components/navigation-overlay/navi
   ],
   imports: [
     SharedModule,
-    NavigationRoutingModule
+    NavigationRoutingModule,
+    MaterialModule
   ],
   exports: [NavigationShellComponent]
 })

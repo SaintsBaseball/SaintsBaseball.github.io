@@ -16,6 +16,7 @@ import { SocialMediaAccountComponent } from './social-media/components/social-me
 import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
 import { NavigationBarComponent } from './navigation/components/navigation-bar/navigation-bar.component';
 import { NavigationShellComponent } from './navigation/containers/navigation-shell/navigation-shell.component';
+import { MaterialModule } from './material/material.module';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -33,7 +34,8 @@ describe('AppComponent', () => {
         StoreModule.forRoot({
           appState: reducer
         }),
-        EffectsModule.forRoot([AppEffects])
+        EffectsModule.forRoot([AppEffects]),
+        MaterialModule
       ],
       providers: [
         {
