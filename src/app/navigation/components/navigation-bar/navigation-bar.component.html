@@ -1,6 +1,7 @@
 <mat-toolbar color="primary">
   <a id="link-to-homepage" routerLink="/">{{linkToHomepageText}}</a>
-  <button id="sidebar-button" (click)="openSidebar()">
-    <i class="fa fa-bars"></i>
+  <span class="spacer"></span>
+  <button mat-icon-button id="sidebar-button" (click)="openSidebar()">
+    <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>

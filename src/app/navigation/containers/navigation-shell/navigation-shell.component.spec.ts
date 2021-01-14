@@ -50,6 +50,18 @@ describe('NavigationShellComponent', () => {
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
 
+    it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
+      const spacer = nativeElement.querySelector('mat-toolbar > span.spacer');
+      expect(spacer).toBeTruthy();
+      expect(spacer.textContent).toBe('');
+    });
+
+    it('should have a menu icon for the sidebar toggle', () => {
+      const sidebarToggleIcon = nativeElement.querySelector('mat-toolbar > button#sidebar-button mat-icon');
+      expect(sidebarToggleIcon).toBeTruthy();
+      expect(sidebarToggleIcon.textContent).toBe('menu');
+    });
+
     it('should open the sidebar when the sidebar button is clicked', () => {
       expect(navigationShellComponent.sidebarIsOpen).toBe(false);
       let overlay = nativeElement.querySelector('div.w3-overlay');
