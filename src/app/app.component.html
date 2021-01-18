@@ -1,12 +1,32 @@
-<navigation-shell></navigation-shell>
+<mat-toolbar color="primary">
+  <a id="link-to-homepage" routerLink="/">Saints</a>
+  <span class="spacer"></span>
+  <button mat-icon-button (click)="sidenav.open()">
+    <mat-icon>menu</mat-icon>
+  </button>
+</mat-toolbar>
 
-<div class="w3-main">
-  <div class="w3-row w3-padding-64">
-    <div class="w3-container">
-      <router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav position="end">
+    <button mat-icon-button (click)="sidenav.close()" title="Close Menu">
+      <mat-icon>close</mat-icon>
+    </button>
+    <h4>
+      <b>Menu</b>
+    </h4>
+    <a routerLink='/statistics' (click)="sidenav.close()">Statistics</a>
+    <a routerLink='/players' (click)="sidenav.close()">Players</a>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="w3-main">
+      <div class="w3-row w3-padding-64">
+        <div class="w3-container">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<social-media-shell></social-media-shell>
-<sponsor></sponsor>
+    <social-media-shell></social-media-shell>
+    <sponsor></sponsor>
+  </mat-sidenav-content>
+</mat-sidenav-container>

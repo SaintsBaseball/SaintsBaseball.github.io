@@ -19,8 +19,9 @@ import { reducer } from './state/app.reducer';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StatisticsService } from './services/statistics.service';
 import { SocialMediaModule } from './social-media/social-media.module';
-import { NavigationModule } from './navigation/navigation.module';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from './material/material.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { RouterModule } from '@angular/router';
     }),
     BrowserAnimationsModule,
     SocialMediaModule,
-    NavigationModule
+    AppRoutingModule,
+    MaterialModule
   ],
   providers: [
     {

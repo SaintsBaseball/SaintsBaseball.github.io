@@ -9,14 +9,14 @@ import { AppEffects } from './state/app.effects';
 import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/player-hitting-statistics-database-table';
 import * as fromRoot from './state';
 import { reducer } from './state/app.reducer';
-import {PlayerHittingStatistics} from './classes/player-hitting-statistics';
+import { PlayerHittingStatistics } from './classes/player-hitting-statistics';
 import { SocialMediaAccountInfoFactoryServiceMock } from './testClasses/social-media-account-info-factory-service-mock';
 import { SponsorComponent } from './sponsor/sponsor.component';
 import { SocialMediaAccountComponent } from './social-media/components/social-media-account/social-media-account.component';
 import { SocialMediaShellComponent } from './social-media/containers/social-media-shell/social-media-shell.component';
-import { NavigationBarComponent } from './navigation/components/navigation-bar/navigation-bar.component';
-import { NavigationShellComponent } from './navigation/containers/navigation-shell/navigation-shell.component';
 import { MaterialModule } from './material/material.module';
+import { BlankComponent } from './testClasses/blank-component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -25,17 +25,21 @@ describe('AppComponent', () => {
   let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(async () => {
     statisticsServiceMock = new StatisticsServiceMock();
 
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule,
+        RouterTestingModule.withRoutes([
+          { path: 'statistics', component: BlankComponent },
+          { path: 'players', component: BlankComponent }
+        ]),
         StoreModule.forRoot({
           appState: reducer
         }),
         EffectsModule.forRoot([AppEffects]),
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule
       ],
       providers: [
         {
@@ -49,8 +53,6 @@ describe('AppComponent', () => {
       ],
       declarations: [
         AppComponent,
-        NavigationShellComponent,
-        NavigationBarComponent,
         SponsorComponent,
         SocialMediaShellComponent,
         SocialMediaAccountComponent
@@ -62,29 +64,120 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
     store = TestBed.inject(Store);
-  }));
+  });
 
   it('should create the app', () => {
     expect(appComponent).toBeTruthy();
   });
 
-  it('should render the navigation bar', () => {
-    expect(nativeElement.querySelector('navigation-bar')).toBeTruthy();
+  describe('mat-toolbar', () => {
+    it('should have a link to the homepage with text Saints', () => {
+      const linkToHomePage = nativeElement.querySelector('mat-toolbar > a#link-to-homepage');
+      expect(linkToHomePage.textContent).toBe('Saints');
+      expect(linkToHomePage.href.slice(-1)).toBe('/');
+    });
+
+    it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
+      const spacer = nativeElement.querySelector('mat-toolbar > span.spacer');
+      expect(spacer).toBeTruthy();
+      expect(spacer.textContent).toBe('');
+    });
+
+    it('should have a menu icon for the sidebar toggle', () => {
+      const sidebarToggleIcon = nativeElement.querySelector('mat-toolbar > button mat-icon');
+      expect(sidebarToggleIcon).toBeTruthy();
+      expect(sidebarToggleIcon.textContent).toBe('menu');
+    });
+
+    it('should open the sidebar when the sidebar button is clicked', () => {
+      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeFalsy();
+
+      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+      sidebarButton.click();
+      fixture.detectChanges();
+
+      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeTruthy();
+    });
   });
 
-  it('should have the wrapper contents with the router outlet', () => {
-    expect(nativeElement.querySelector('div.w3-main')).toBeTruthy();
-    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
-    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
-    expect(nativeElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
-  });
+  describe('mat-sidenav-container', () => {
+    describe('mat-sidenav', () => {
+      beforeEach(() => {
+        const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+        sidebarButton.click();
+        fixture.detectChanges();
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeTruthy();
+      });
 
-  it('should render the social media wrapper', () => {
-    expect(nativeElement.querySelector('social-media-shell')).toBeTruthy();
-  });
+      it('should have the Sidebar Title at the top of the sidebar', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav h4 > b').textContent).toBe('Menu');
+      });
 
-  it('should render the sponsor info', () => {
-    expect(nativeElement.querySelector('sponsor')).toBeTruthy();
+      it('should have an X to closes the sidebar', () => {
+        const xButtonIcon = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button mat-icon');
+        expect(xButtonIcon).toBeTruthy();
+        expect(xButtonIcon.textContent).toBe('close');
+      });
+
+      it('should close the sidebar when you click the X', () => {
+        const xButton = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button');
+        xButton.click();
+        fixture.detectChanges();
+
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+
+      it('should have a link to the stats page', () => {
+        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        expect(linkToStatsPage.textContent).toBe('Statistics');
+        expect(linkToStatsPage.href).toContain('/statistics');
+      });
+
+      it('should close the sidebar when navigating to the stats page', () => {  
+        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        linkToStatsPage.click();
+        fixture.detectChanges();
+    
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+
+      it('should have a link to the players page', () => {
+        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        expect(linkToPlayersPage.textContent).toBe('Players');
+        expect(linkToPlayersPage.href).toContain('/players');
+      });
+
+      it('should close the sidebar when navigating to the players page', () => {
+        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        linkToPlayersPage.click();
+        fixture.detectChanges();
+    
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+    });
+
+    describe('mat-sidenav-content', () => {
+      it('should have the wrapper contents with the router outlet', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+      });
+
+      it('should render the social media wrapper', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > social-media-shell')).toBeTruthy();
+      });
+
+      it('should render the sponsor info', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > sponsor')).toBeTruthy();
+      });
+    });
   });
 
   describe('ngOnInit', () => {
