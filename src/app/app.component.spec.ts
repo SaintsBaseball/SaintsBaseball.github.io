@@ -393,6 +393,8 @@ describe('AppComponent', () => {
 
   describe('mat-sidenav-container', () => {
     describe('mat-sidenav', () => {
+      let matSidenavElement;
+
       beforeEach(() => {
         const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
         sidebarButton.click();
@@ -400,20 +402,23 @@ describe('AppComponent', () => {
         expect(appComponent.sidenavOpened).toBeTrue();
         const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
         expect(sidebarElementOpened).toBeTruthy();
+
+        matSidenavElement = nativeElement.querySelector('mat-sidenav-container > mat-sidenav');
+        expect(matSidenavElement).toBeTruthy();
       });
 
       it('should have the Sidebar Title at the top of the sidebar', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav h4 > b').textContent).toBe('Menu');
+        expect(matSidenavElement.querySelector('h4 > b').textContent).toBe('Menu');
       });
 
       it('should have an X to closes the sidebar', () => {
-        const xButtonIcon = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button mat-icon');
+        const xButtonIcon = matSidenavElement.querySelector('button mat-icon');
         expect(xButtonIcon).toBeTruthy();
         expect(xButtonIcon.textContent).toBe('close');
       });
 
       it('should close the sidebar when you click the X', () => {
-        const xButton = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button');
+        const xButton = matSidenavElement.querySelector('button');
         xButton.click();
         fixture.detectChanges();
 
@@ -423,13 +428,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the stats page', () => {
-        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        const linkToStatsPage = matSidenavElement.querySelectorAll('a')[0];
         expect(linkToStatsPage.textContent).toBe('Statistics');
         expect(linkToStatsPage.href).toContain('/statistics');
       });
 
       it('should close the sidebar when navigating to the stats page', () => {
-        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        const linkToStatsPage = matSidenavElement.querySelectorAll('a')[0];
         linkToStatsPage.click();
         fixture.detectChanges();
 
@@ -439,13 +444,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the players page', () => {
-        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        const linkToPlayersPage = matSidenavElement.querySelectorAll('a')[1];
         expect(linkToPlayersPage.textContent).toBe('Players');
         expect(linkToPlayersPage.href).toContain('/players');
       });
 
       it('should close the sidebar when navigating to the players page', () => {
-        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        const linkToPlayersPage = matSidenavElement.querySelectorAll('a')[1];
         linkToPlayersPage.click();
         fixture.detectChanges();
 
