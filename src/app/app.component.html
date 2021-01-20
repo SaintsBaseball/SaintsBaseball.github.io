@@ -1,21 +1,21 @@
 <mat-toolbar color="primary">
   <a id="link-to-homepage" routerLink="/">Saints</a>
   <span class="spacer"></span>
-  <button mat-icon-button (click)="sidenav.open()">
+  <button mat-icon-button (click)="toggleSidenav()">
     <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
 
 <mat-sidenav-container>
-  <mat-sidenav #sidenav position="end">
-    <button mat-icon-button (click)="sidenav.close()" title="Close Menu">
+  <mat-sidenav position="end" [(opened)]="sidenavOpened">
+    <button mat-icon-button (click)="toggleSidenav()" title="Close Menu">
       <mat-icon>close</mat-icon>
     </button>
     <h4>
       <b>Menu</b>
     </h4>
-    <a routerLink='/statistics' (click)="sidenav.close()">Statistics</a>
-    <a routerLink='/players' (click)="sidenav.close()">Players</a>
+    <a routerLink='/statistics' (click)="toggleSidenav()">Statistics</a>
+    <a routerLink='/players' (click)="toggleSidenav()">Players</a>
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="w3-main">

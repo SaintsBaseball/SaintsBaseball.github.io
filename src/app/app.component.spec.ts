@@ -70,116 +70,6 @@ describe('AppComponent', () => {
     expect(appComponent).toBeTruthy();
   });
 
-  describe('mat-toolbar', () => {
-    it('should have a link to the homepage with text Saints', () => {
-      const linkToHomePage = nativeElement.querySelector('mat-toolbar > a#link-to-homepage');
-      expect(linkToHomePage.textContent).toBe('Saints');
-      expect(linkToHomePage.href.slice(-1)).toBe('/');
-    });
-
-    it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
-      const spacer = nativeElement.querySelector('mat-toolbar > span.spacer');
-      expect(spacer).toBeTruthy();
-      expect(spacer.textContent).toBe('');
-    });
-
-    it('should have a menu icon for the sidebar toggle', () => {
-      const sidebarToggleIcon = nativeElement.querySelector('mat-toolbar > button mat-icon');
-      expect(sidebarToggleIcon).toBeTruthy();
-      expect(sidebarToggleIcon.textContent).toBe('menu');
-    });
-
-    it('should open the sidebar when the sidebar button is clicked', () => {
-      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeFalsy();
-
-      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
-      sidebarButton.click();
-      fixture.detectChanges();
-
-      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeTruthy();
-    });
-  });
-
-  describe('mat-sidenav-container', () => {
-    describe('mat-sidenav', () => {
-      beforeEach(() => {
-        const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
-        sidebarButton.click();
-        fixture.detectChanges();
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeTruthy();
-      });
-
-      it('should have the Sidebar Title at the top of the sidebar', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav h4 > b').textContent).toBe('Menu');
-      });
-
-      it('should have an X to closes the sidebar', () => {
-        const xButtonIcon = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button mat-icon');
-        expect(xButtonIcon).toBeTruthy();
-        expect(xButtonIcon.textContent).toBe('close');
-      });
-
-      it('should close the sidebar when you click the X', () => {
-        const xButton = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button');
-        xButton.click();
-        fixture.detectChanges();
-
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
-      });
-
-      it('should have a link to the stats page', () => {
-        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
-        expect(linkToStatsPage.textContent).toBe('Statistics');
-        expect(linkToStatsPage.href).toContain('/statistics');
-      });
-
-      it('should close the sidebar when navigating to the stats page', () => {  
-        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
-        linkToStatsPage.click();
-        fixture.detectChanges();
-    
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
-      });
-
-      it('should have a link to the players page', () => {
-        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
-        expect(linkToPlayersPage.textContent).toBe('Players');
-        expect(linkToPlayersPage.href).toContain('/players');
-      });
-
-      it('should close the sidebar when navigating to the players page', () => {
-        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
-        linkToPlayersPage.click();
-        fixture.detectChanges();
-    
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
-      });
-    });
-
-    describe('mat-sidenav-content', () => {
-      it('should have the wrapper contents with the router outlet', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
-      });
-
-      it('should render the social media wrapper', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > social-media-shell')).toBeTruthy();
-      });
-
-      it('should render the sponsor info', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > sponsor')).toBeTruthy();
-      });
-    });
-  });
-
   describe('ngOnInit', () => {
     it('should load the player hitting statistics', () => {
       statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
@@ -440,6 +330,138 @@ describe('AppComponent', () => {
 
         expect(statsForEachPlayer).toEqual(expectedStatsForEachPlayer);
         done();
+      });
+    });
+  });
+
+  describe('mat-toolbar', () => {
+    it('should have a link to the homepage with text Saints', () => {
+      const linkToHomePage = nativeElement.querySelector('mat-toolbar > a#link-to-homepage');
+      expect(linkToHomePage.textContent).toBe('Saints');
+      expect(linkToHomePage.href.slice(-1)).toBe('/');
+    });
+
+    it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
+      const spacer = nativeElement.querySelector('mat-toolbar > span.spacer');
+      expect(spacer).toBeTruthy();
+      expect(spacer.textContent).toBe('');
+    });
+
+    it('should have a menu icon for the sidebar toggle', () => {
+      const sidebarToggleIcon = nativeElement.querySelector('mat-toolbar > button mat-icon');
+      expect(sidebarToggleIcon).toBeTruthy();
+      expect(sidebarToggleIcon.textContent).toBe('menu');
+    });
+
+    it('should open the sidebar when the sidebar button is clicked', () => {
+      expect(appComponent.sidenavOpened).toBeFalse();
+      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeFalsy();
+
+      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+      sidebarButton.click();
+      fixture.detectChanges();
+
+      expect(appComponent.sidenavOpened).toBeTrue();
+      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeTruthy();
+    });
+
+    it('should close the sidebar when the sidebar button is clicked while the sidebar is open', () => {
+      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+      sidebarButton.click();
+      fixture.detectChanges();
+      expect(appComponent.sidenavOpened).toBeTrue();
+      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeTruthy();
+
+      sidebarButton.click();
+      fixture.detectChanges();
+
+      expect(appComponent.sidenavOpened).toBeFalse();
+      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidebarElementOpened).toBeFalsy();
+    });
+  });
+
+  describe('mat-sidenav-container', () => {
+    describe('mat-sidenav', () => {
+      beforeEach(() => {
+        const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+        sidebarButton.click();
+        fixture.detectChanges();
+        expect(appComponent.sidenavOpened).toBeTrue();
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeTruthy();
+      });
+
+      it('should have the Sidebar Title at the top of the sidebar', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav h4 > b').textContent).toBe('Menu');
+      });
+
+      it('should have an X to closes the sidebar', () => {
+        const xButtonIcon = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button mat-icon');
+        expect(xButtonIcon).toBeTruthy();
+        expect(xButtonIcon.textContent).toBe('close');
+      });
+
+      it('should close the sidebar when you click the X', () => {
+        const xButton = nativeElement.querySelector('mat-sidenav-container > mat-sidenav button');
+        xButton.click();
+        fixture.detectChanges();
+
+        expect(appComponent.sidenavOpened).toBeFalse();
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+
+      it('should have a link to the stats page', () => {
+        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        expect(linkToStatsPage.textContent).toBe('Statistics');
+        expect(linkToStatsPage.href).toContain('/statistics');
+      });
+
+      it('should close the sidebar when navigating to the stats page', () => {
+        const linkToStatsPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[0];
+        linkToStatsPage.click();
+        fixture.detectChanges();
+
+        expect(appComponent.sidenavOpened).toBeFalse();
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+
+      it('should have a link to the players page', () => {
+        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        expect(linkToPlayersPage.textContent).toBe('Players');
+        expect(linkToPlayersPage.href).toContain('/players');
+      });
+
+      it('should close the sidebar when navigating to the players page', () => {
+        const linkToPlayersPage = nativeElement.querySelectorAll('mat-sidenav-container > mat-sidenav a')[1];
+        linkToPlayersPage.click();
+        fixture.detectChanges();
+
+        expect(appComponent.sidenavOpened).toBeFalse();
+        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidebarElementOpened).toBeFalsy();
+      });
+    });
+
+    describe('mat-sidenav-content', () => {
+      it('should have the wrapper contents with the router outlet', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+      });
+
+      it('should render the social media wrapper', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > social-media-shell')).toBeTruthy();
+      });
+
+      it('should render the sponsor info', () => {
+        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > sponsor')).toBeTruthy();
       });
     });
   });

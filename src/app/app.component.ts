@@ -9,9 +9,15 @@ import * as appActions from './state/app.actions';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  sidenavOpened: boolean = false;
+
   constructor(private store: Store<fromRoot.State>) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.dispatch(new appActions.Load());
+  }
+
+  toggleSidenav(): void {
+    this.sidenavOpened = !this.sidenavOpened;
   }
 }
