@@ -461,19 +461,26 @@ describe('AppComponent', () => {
     });
 
     describe('mat-sidenav-content', () => {
+      let matSidenavContentElement;
+
+      beforeEach(() => {
+        matSidenavContentElement = nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content');
+        expect(matSidenavContentElement).toBeTruthy();
+      });
+
       it('should have the wrapper contents with the router outlet', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('div.w3-main')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
       });
 
       it('should render the social media wrapper', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > social-media-shell')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('social-media-shell')).toBeTruthy();
       });
 
       it('should render the sponsor info', () => {
-        expect(nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content > sponsor')).toBeTruthy();
+        expect(matSidenavContentElement.querySelector('sponsor')).toBeTruthy();
       });
     });
   });
