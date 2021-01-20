@@ -335,20 +335,27 @@ describe('AppComponent', () => {
   });
 
   describe('mat-toolbar', () => {
+    let matToolbarElement;
+
+    beforeEach(() => {
+      matToolbarElement = nativeElement.querySelector('mat-toolbar');
+      expect(matToolbarElement).toBeTruthy();
+    });
+
     it('should have a link to the homepage with text Saints', () => {
-      const linkToHomePage = nativeElement.querySelector('mat-toolbar > a#link-to-homepage');
+      const linkToHomePage = matToolbarElement.querySelector('a#link-to-homepage');
       expect(linkToHomePage.textContent).toBe('Saints');
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
 
     it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
-      const spacer = nativeElement.querySelector('mat-toolbar > span.spacer');
+      const spacer = matToolbarElement.querySelector('span.spacer');
       expect(spacer).toBeTruthy();
       expect(spacer.textContent).toBe('');
     });
 
     it('should have a menu icon for the sidebar toggle', () => {
-      const sidebarToggleIcon = nativeElement.querySelector('mat-toolbar > button mat-icon');
+      const sidebarToggleIcon = matToolbarElement.querySelector('button mat-icon');
       expect(sidebarToggleIcon).toBeTruthy();
       expect(sidebarToggleIcon.textContent).toBe('menu');
     });
@@ -358,7 +365,7 @@ describe('AppComponent', () => {
       let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
       expect(sidebarElementOpened).toBeFalsy();
 
-      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+      const sidebarButton = matToolbarElement.querySelector('button');
       sidebarButton.click();
       fixture.detectChanges();
 
@@ -368,7 +375,7 @@ describe('AppComponent', () => {
     });
 
     it('should close the sidebar when the sidebar button is clicked while the sidebar is open', () => {
-      const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+      const sidebarButton = matToolbarElement.querySelector('button');
       sidebarButton.click();
       fixture.detectChanges();
       expect(appComponent.sidenavOpened).toBeTrue();
