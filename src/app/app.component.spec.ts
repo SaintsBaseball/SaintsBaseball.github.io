@@ -343,7 +343,7 @@ describe('AppComponent', () => {
     });
 
     it('should have a link to the homepage with text Saints', () => {
-      const linkToHomePage = matToolbarElement.querySelector('a#link-to-homepage');
+      const linkToHomePage = matToolbarElement.querySelector('a.mat-button');
       expect(linkToHomePage.textContent).toBe('Saints');
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
