@@ -5,3 +5,15 @@ a {
 .spacer {
   flex: 1 1 auto;
 }
+
+.mat-toolbar {
+  padding-left: 0;
+}
+
+.mat-toolbar > a.mat-button {
+  font-size: larger;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
