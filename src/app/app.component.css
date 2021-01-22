@@ -25,3 +25,8 @@ mat-sidenav {
 mat-sidenav button {
   float: right;
 }
+
+mat-sidenav h4 {
+  font-size: x-large;
+  padding: 0.563rem 1rem;
+}
