@@ -17,3 +17,7 @@ a {
   justify-content: center;
   align-items: center;
 }
+
+mat-sidenav button {
+  float: right;
+}
