@@ -18,6 +18,10 @@ a {
   align-items: center;
 }
 
+mat-sidenav {
+  width: 12.5rem;
+}
+
 mat-sidenav button {
   float: right;
 }
