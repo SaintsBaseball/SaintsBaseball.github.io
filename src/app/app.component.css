@@ -30,3 +30,7 @@ mat-sidenav h4 {
   font-size: x-large;
   padding: 0.563rem 1rem;
 }
+
+mat-sidenav a {
+  display: block;
+}
