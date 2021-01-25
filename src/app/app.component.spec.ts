@@ -428,13 +428,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the stats page', () => {
-        const linkToStatsPage = matSidenavElement.querySelectorAll('a')[0];
+        const linkToStatsPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[0];
         expect(linkToStatsPage.textContent).toBe('Statistics');
         expect(linkToStatsPage.href).toContain('/statistics');
       });
 
       it('should close the sidebar when navigating to the stats page', () => {
-        const linkToStatsPage = matSidenavElement.querySelectorAll('a')[0];
+        const linkToStatsPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[0];
         linkToStatsPage.click();
         fixture.detectChanges();
 
@@ -444,13 +444,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the players page', () => {
-        const linkToPlayersPage = matSidenavElement.querySelectorAll('a')[1];
+        const linkToPlayersPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[1];
         expect(linkToPlayersPage.textContent).toBe('Players');
         expect(linkToPlayersPage.href).toContain('/players');
       });
 
       it('should close the sidebar when navigating to the players page', () => {
-        const linkToPlayersPage = matSidenavElement.querySelectorAll('a')[1];
+        const linkToPlayersPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[1];
         linkToPlayersPage.click();
         fixture.detectChanges();
 
