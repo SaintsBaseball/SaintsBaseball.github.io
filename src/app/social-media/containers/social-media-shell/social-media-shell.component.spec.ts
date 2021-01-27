@@ -8,7 +8,7 @@ import { ISocialMediaAccountInfo } from 'src/app/interfaces/i-social-media-accou
 describe('SocialMediaShellComponent', () => {
   let socialMediaShellComponent: SocialMediaShellComponent;
   let fixture: ComponentFixture<SocialMediaShellComponent>;
-  let nativeElement;
+  let nativeElement: HTMLElement;
   let socialMediaAccountInfoFactoryServiceMock: SocialMediaAccountInfoFactoryServiceMock;
 
   beforeEach(waitForAsync(() => {
