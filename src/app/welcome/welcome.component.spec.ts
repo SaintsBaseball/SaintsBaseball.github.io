@@ -5,7 +5,7 @@ import { WelcomeComponent } from './welcome.component';
 describe('WelcomeComponent', () => {
   let welcomeComponent: WelcomeComponent;
   let fixture: ComponentFixture<WelcomeComponent>;
-  let nativeElement;
+  let nativeElement: HTMLElement;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
