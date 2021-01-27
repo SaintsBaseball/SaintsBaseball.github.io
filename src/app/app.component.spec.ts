@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { take } from 'rxjs/operators';
 import { StoreModule, select, Store } from '@ngrx/store';
@@ -21,11 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
   let appComponent: AppComponent;
-  let nativeElement;
+  let nativeElement: HTMLElement;
   let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
-  beforeEach(async () => {
+  beforeEach(() => {
     statisticsServiceMock = new StatisticsServiceMock();
 
     TestBed.configureTestingModule({
@@ -335,7 +335,7 @@ describe('AppComponent', () => {
   });
 
   describe('mat-toolbar', () => {
-    let matToolbarElement;
+    let matToolbarElement: HTMLElement;
 
     beforeEach(() => {
       matToolbarElement = nativeElement.querySelector('mat-toolbar');
@@ -343,7 +343,7 @@ describe('AppComponent', () => {
     });
 
     it('should have a link to the homepage with text Saints', () => {
-      const linkToHomePage = matToolbarElement.querySelector('a.mat-button');
+      const linkToHomePage: HTMLAnchorElement = matToolbarElement.querySelector('a.mat-button');
       expect(linkToHomePage.textContent).toBe('Saints');
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
@@ -393,10 +393,10 @@ describe('AppComponent', () => {
 
   describe('mat-sidenav-container', () => {
     describe('mat-sidenav', () => {
-      let matSidenavElement;
+      let matSidenavElement: HTMLElement;
 
       beforeEach(() => {
-        const sidebarButton = nativeElement.querySelector('mat-toolbar > button');
+        const sidebarButton: HTMLButtonElement = nativeElement.querySelector('mat-toolbar > button');
         sidebarButton.click();
         fixture.detectChanges();
         expect(appComponent.sidenavOpened).toBeTrue();
@@ -428,13 +428,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the stats page', () => {
-        const linkToStatsPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[0];
+        const linkToStatsPage: HTMLAnchorElement = matSidenavElement.querySelector('a#statistics-anchor.mat-stroked-button');
         expect(linkToStatsPage.textContent).toBe('Statistics');
         expect(linkToStatsPage.href).toContain('/statistics');
       });
 
       it('should close the sidebar when navigating to the stats page', () => {
-        const linkToStatsPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[0];
+        const linkToStatsPage: HTMLAnchorElement = matSidenavElement.querySelector('a#statistics-anchor.mat-stroked-button');
         linkToStatsPage.click();
         fixture.detectChanges();
 
@@ -444,13 +444,13 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the players page', () => {
-        const linkToPlayersPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[1];
+        const linkToPlayersPage: HTMLAnchorElement = matSidenavElement.querySelector('a#players-anchor.mat-stroked-button');
         expect(linkToPlayersPage.textContent).toBe('Players');
         expect(linkToPlayersPage.href).toContain('/players');
       });
 
       it('should close the sidebar when navigating to the players page', () => {
-        const linkToPlayersPage = matSidenavElement.querySelectorAll('a.mat-stroked-button')[1];
+        const linkToPlayersPage: HTMLAnchorElement = matSidenavElement.querySelector('a#players-anchor.mat-stroked-button');
         linkToPlayersPage.click();
         fixture.detectChanges();
 
@@ -461,7 +461,7 @@ describe('AppComponent', () => {
     });
 
     describe('mat-sidenav-content', () => {
-      let matSidenavContentElement;
+      let matSidenavContentElement: HTMLElement;
 
       beforeEach(() => {
         matSidenavContentElement = nativeElement.querySelector('mat-sidenav-container > mat-sidenav-content');
