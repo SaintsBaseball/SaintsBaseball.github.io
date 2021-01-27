@@ -427,14 +427,25 @@ describe('AppComponent', () => {
         expect(sidenavElementOpened).toBeFalsy();
       });
 
+      it('should have two links on the sidenav', () => {
+        const linksOnSidenav = matSidenavElement.querySelectorAll('a');
+        const linksOnSidenavThatAreMatStrokedButtons: NodeListOf<HTMLAnchorElement> = matSidenavElement.querySelectorAll('a.mat-stroked-button');
+
+        expect(linksOnSidenav.length).toBe(2);
+        expect(linksOnSidenavThatAreMatStrokedButtons.length).toBe(2);
+        expect(linksOnSidenav).toEqual(linksOnSidenavThatAreMatStrokedButtons);
+      });
+
       it('should have a link to the stats page', () => {
-        const linkToStatsPage: HTMLAnchorElement = matSidenavElement.querySelector('a#statistics-anchor.mat-stroked-button');
+        const linksOnSidenav: NodeListOf<HTMLAnchorElement> = matSidenavElement.querySelectorAll('a.mat-stroked-button');
+        const linkToStatsPage = linksOnSidenav[0];
         expect(linkToStatsPage.textContent).toBe('Statistics');
         expect(linkToStatsPage.href).toContain('/statistics');
       });
 
       it('should close the sidenav when navigating to the stats page', () => {
-        const linkToStatsPage: HTMLAnchorElement = matSidenavElement.querySelector('a#statistics-anchor.mat-stroked-button');
+        const linksOnSidenav: NodeListOf<HTMLAnchorElement> = matSidenavElement.querySelectorAll('a.mat-stroked-button');
+        const linkToStatsPage = linksOnSidenav[0];
         linkToStatsPage.click();
         fixture.detectChanges();
 
@@ -444,13 +455,15 @@ describe('AppComponent', () => {
       });
 
       it('should have a link to the players page', () => {
-        const linkToPlayersPage: HTMLAnchorElement = matSidenavElement.querySelector('a#players-anchor.mat-stroked-button');
+        const linksOnSidenav: NodeListOf<HTMLAnchorElement> = matSidenavElement.querySelectorAll('a.mat-stroked-button');
+        const linkToPlayersPage = linksOnSidenav[1];
         expect(linkToPlayersPage.textContent).toBe('Players');
         expect(linkToPlayersPage.href).toContain('/players');
       });
 
       it('should close the sidenav when navigating to the players page', () => {
-        const linkToPlayersPage: HTMLAnchorElement = matSidenavElement.querySelector('a#players-anchor.mat-stroked-button');
+        const linksOnSidenav: NodeListOf<HTMLAnchorElement> = matSidenavElement.querySelectorAll('a.mat-stroked-button');
+        const linkToPlayersPage = linksOnSidenav[1];
         linkToPlayersPage.click();
         fixture.detectChanges();
 
