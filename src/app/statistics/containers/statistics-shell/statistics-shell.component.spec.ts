@@ -17,7 +17,7 @@ import { StatisticsKeyTableComponent } from '../../components/statistics-key-tab
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
   let fixture: ComponentFixture<StatisticsShellComponent>;
-  let nativeElement;
+  let nativeElement: HTMLElement;
   let store: Store<fromStatistics.State>;
 
   beforeEach(waitForAsync(() => {
@@ -368,7 +368,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const unselectedTableHeaderColumns = nativeElement.querySelectorAll('table#stats-table thead tr th:not(.selected)');
+      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll('table#stats-table thead tr th:not(.selected)');
       unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
         tableHeaderColumn.click();
         fixture.detectChanges();
@@ -424,7 +424,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      let selectedHeaderColumn = nativeElement.querySelector('table#stats-table thead tr th.selected');
+      let selectedHeaderColumn: HTMLTableHeaderCellElement = nativeElement.querySelector('table#stats-table thead tr th.selected');
       const selectedColumnStat = selectedHeaderColumn.textContent;
       selectedHeaderColumn.click();
       fixture.detectChanges();
@@ -433,8 +433,9 @@ describe('StatisticsShellComponent', () => {
         expect(selectedStatistic).toBe(selectedColumnStat + 'Reverse');
       });
       const expectedPlayerSeasonStats = [playerNumber4, playerNumber3];
-      selectedHeaderColumn = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
-      expect(selectedHeaderColumn.length).toBe(1);
+      const selectedHeaderColumns = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
+      expect(selectedHeaderColumns.length).toBe(1);
+
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td.selected');
       expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
       selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
@@ -456,7 +457,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      let selectedHeaderColumn = nativeElement.querySelector('table#stats-table thead tr th.selected');
+      let selectedHeaderColumn: HTMLTableHeaderCellElement = nativeElement.querySelector('table#stats-table thead tr th.selected');
       const selectedColumnStat = selectedHeaderColumn.textContent;
       selectedHeaderColumn.click();
       fixture.detectChanges();
@@ -467,8 +468,9 @@ describe('StatisticsShellComponent', () => {
         expect(selectedStatistic).toBe(selectedColumnStat);
       });
       const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
-      selectedHeaderColumn = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
-      expect(selectedHeaderColumn.length).toBe(1);
+      const selectedHeaderColumns = nativeElement.querySelectorAll('table#stats-table thead tr th.selected');
+      expect(selectedHeaderColumns.length).toBe(1);
+
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll('table#stats-table tbody tr td.selected');
       expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
       selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
