@@ -9,12 +9,12 @@ import * as fromRoot from 'src/app/state';
 import { reducer as appReducer } from 'src/app/state/app.reducer';
 import * as appActions from 'src/app/state/app.actions';
 import { SharedModule } from 'src/app/shared/shared.module';
-import {PlayerHittingStatistics} from '../../../classes/player-hitting-statistics';
+import { PlayerHittingStatistics } from '../../../classes/player-hitting-statistics';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
   let fixture: ComponentFixture<PlayersShellComponent>;
-  let nativeElement;
+  let nativeElement: HTMLElement;
   let store: Store<fromRoot.State>;
 
   beforeEach(waitForAsync(() => {
@@ -252,7 +252,7 @@ describe('PlayersShellComponent', () => {
 
     it('should not have a modal when no player has been selected', () => {
       store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
-      
+
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -283,7 +283,7 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[0].click();
       fixture.detectChanges();
 
-      const closeModalButton = nativeElement.querySelector('div.modal div.modal-content span.close');
+      const closeModalButton: HTMLButtonElement = nativeElement.querySelector('div.modal div.modal-content span.close');
       expect(closeModalButton).toBeTruthy();
       expect(closeModalButton.textContent).toBe('×');
 
