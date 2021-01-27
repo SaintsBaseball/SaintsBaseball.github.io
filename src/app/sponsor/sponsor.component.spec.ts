@@ -5,7 +5,7 @@ import { SponsorComponent } from './sponsor.component';
 describe('SponsorComponent', () => {
   let sponsorComponent: SponsorComponent;
   let fixture: ComponentFixture<SponsorComponent>;
-  let nativeElement;
+  let nativeElement: HTMLElement;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
