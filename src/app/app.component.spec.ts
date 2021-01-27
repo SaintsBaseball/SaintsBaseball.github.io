@@ -348,46 +348,46 @@ describe('AppComponent', () => {
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
 
-    it('should have a spacer between the link to the homepage and the sidebar toggle', () => {
+    it('should have a spacer between the link to the homepage and the sidenav toggle', () => {
       const spacer = matToolbarElement.querySelector('span.spacer');
       expect(spacer).toBeTruthy();
       expect(spacer.textContent).toBe('');
     });
 
-    it('should have a menu icon for the sidebar toggle', () => {
-      const sidebarToggleIcon = matToolbarElement.querySelector('button mat-icon');
-      expect(sidebarToggleIcon).toBeTruthy();
-      expect(sidebarToggleIcon.textContent).toBe('menu');
+    it('should have a menu icon for the sidenav toggle', () => {
+      const sidenavToggleIcon = matToolbarElement.querySelector('button mat-icon');
+      expect(sidenavToggleIcon).toBeTruthy();
+      expect(sidenavToggleIcon.textContent).toBe('menu');
     });
 
-    it('should open the sidebar when the sidebar button is clicked', () => {
+    it('should open the sidenav when the sidenav button is clicked', () => {
       expect(appComponent.sidenavOpened).toBeFalse();
-      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeFalsy();
+      let sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeFalsy();
 
-      const sidebarButton = matToolbarElement.querySelector('button');
-      sidebarButton.click();
+      const sidenavButton = matToolbarElement.querySelector('button');
+      sidenavButton.click();
       fixture.detectChanges();
 
       expect(appComponent.sidenavOpened).toBeTrue();
-      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeTruthy();
+      sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeTruthy();
     });
 
-    it('should close the sidebar when the sidebar button is clicked while the sidebar is open', () => {
-      const sidebarButton = matToolbarElement.querySelector('button');
-      sidebarButton.click();
+    it('should close the sidenav when the sidenav button is clicked while the sidenav is open', () => {
+      const sidenavButton = matToolbarElement.querySelector('button');
+      sidenavButton.click();
       fixture.detectChanges();
       expect(appComponent.sidenavOpened).toBeTrue();
-      let sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeTruthy();
+      let sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeTruthy();
 
-      sidebarButton.click();
+      sidenavButton.click();
       fixture.detectChanges();
 
       expect(appComponent.sidenavOpened).toBeFalse();
-      sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-      expect(sidebarElementOpened).toBeFalsy();
+      sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeFalsy();
     });
   });
 
@@ -396,35 +396,35 @@ describe('AppComponent', () => {
       let matSidenavElement: HTMLElement;
 
       beforeEach(() => {
-        const sidebarButton: HTMLButtonElement = nativeElement.querySelector('mat-toolbar > button');
-        sidebarButton.click();
+        const sidenavButton: HTMLButtonElement = nativeElement.querySelector('mat-toolbar > button');
+        sidenavButton.click();
         fixture.detectChanges();
         expect(appComponent.sidenavOpened).toBeTrue();
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeTruthy();
+        const sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidenavElementOpened).toBeTruthy();
 
         matSidenavElement = nativeElement.querySelector('mat-sidenav-container > mat-sidenav');
         expect(matSidenavElement).toBeTruthy();
       });
 
-      it('should have the Sidebar Title at the top of the sidebar', () => {
+      it('should have the sidenav Title at the top of the sidenav', () => {
         expect(matSidenavElement.querySelector('h4 > b').textContent).toBe('Menu');
       });
 
-      it('should have an X to closes the sidebar', () => {
+      it('should have an X to closes the sidenav', () => {
         const xButtonIcon = matSidenavElement.querySelector('button mat-icon');
         expect(xButtonIcon).toBeTruthy();
         expect(xButtonIcon.textContent).toBe('close');
       });
 
-      it('should close the sidebar when you click the X', () => {
+      it('should close the sidenav when you click the X', () => {
         const xButton = matSidenavElement.querySelector('button');
         xButton.click();
         fixture.detectChanges();
 
         expect(appComponent.sidenavOpened).toBeFalse();
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
+        const sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidenavElementOpened).toBeFalsy();
       });
 
       it('should have a link to the stats page', () => {
@@ -433,14 +433,14 @@ describe('AppComponent', () => {
         expect(linkToStatsPage.href).toContain('/statistics');
       });
 
-      it('should close the sidebar when navigating to the stats page', () => {
+      it('should close the sidenav when navigating to the stats page', () => {
         const linkToStatsPage: HTMLAnchorElement = matSidenavElement.querySelector('a#statistics-anchor.mat-stroked-button');
         linkToStatsPage.click();
         fixture.detectChanges();
 
         expect(appComponent.sidenavOpened).toBeFalse();
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
+        const sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidenavElementOpened).toBeFalsy();
       });
 
       it('should have a link to the players page', () => {
@@ -449,14 +449,14 @@ describe('AppComponent', () => {
         expect(linkToPlayersPage.href).toContain('/players');
       });
 
-      it('should close the sidebar when navigating to the players page', () => {
+      it('should close the sidenav when navigating to the players page', () => {
         const linkToPlayersPage: HTMLAnchorElement = matSidenavElement.querySelector('a#players-anchor.mat-stroked-button');
         linkToPlayersPage.click();
         fixture.detectChanges();
 
         expect(appComponent.sidenavOpened).toBeFalse();
-        const sidebarElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
-        expect(sidebarElementOpened).toBeFalsy();
+        const sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+        expect(sidenavElementOpened).toBeFalsy();
       });
     });
 
