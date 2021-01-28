@@ -20,4 +20,8 @@ export class AppComponent implements OnInit {
   toggleSidenav(): void {
     this.sidenavOpened = !this.sidenavOpened;
   }
+
+  closeSidenav(): void {
+    this.sidenavOpened = false;
+  }
 }

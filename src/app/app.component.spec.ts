@@ -406,6 +406,20 @@ describe('AppComponent', () => {
       sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
       expect(sidenavElementOpened).toBeFalsy();
     });
+        
+    it('should not open the sidenav when the link to the homepage is clicked while the sidenav is closed', () => {
+      expect(appComponent.sidenavOpened).toBeFalse();
+      let sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeFalsy();
+
+      const linkToHomePage: HTMLAnchorElement = matToolbarElement.querySelector('a.mat-button');
+      linkToHomePage.click();
+      fixture.detectChanges();
+
+      expect(appComponent.sidenavOpened).toBeFalse();
+      sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeFalsy();
+    });
   });
 
   describe('mat-sidenav-container', () => {
