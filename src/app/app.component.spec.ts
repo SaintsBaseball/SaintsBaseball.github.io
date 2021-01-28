@@ -499,9 +499,7 @@ describe('AppComponent', () => {
       });
 
       it('should have the wrapper contents with the router outlet', () => {
-        const wrapperDivElement = matSidenavContentElement.querySelector('div.w3-container');
-        expect(wrapperDivElement).toBeTruthy();
-        const routerOutletElement = wrapperDivElement.querySelector('router-outlet');
+        const routerOutletElement = matSidenavContentElement.querySelector('router-outlet');
         expect(routerOutletElement).toBeTruthy();
       });
 
