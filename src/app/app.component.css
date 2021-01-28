@@ -34,3 +34,8 @@ mat-sidenav h4 {
 mat-sidenav a {
   display: block;
 }
+
+mat-sidenav-content{
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
