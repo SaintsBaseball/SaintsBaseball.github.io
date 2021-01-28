@@ -348,6 +348,23 @@ describe('AppComponent', () => {
       expect(linkToHomePage.href.slice(-1)).toBe('/');
     });
 
+    it('should close the sidenav when the link to the homepage is clicked while the sidenav is open', () => {
+      const sidenavButton = matToolbarElement.querySelector('button');
+      sidenavButton.click();
+      fixture.detectChanges();
+      expect(appComponent.sidenavOpened).toBeTrue();
+      let sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeTruthy();
+
+      const linkToHomePage: HTMLAnchorElement = matToolbarElement.querySelector('a.mat-button');
+      linkToHomePage.click();
+      fixture.detectChanges();
+
+      expect(appComponent.sidenavOpened).toBeFalse();
+      sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
+      expect(sidenavElementOpened).toBeFalsy();
+    });
+
     it('should have a spacer between the link to the homepage and the sidenav toggle', () => {
       const spacer = matToolbarElement.querySelector('span.spacer');
       expect(spacer).toBeTruthy();
