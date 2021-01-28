@@ -499,10 +499,10 @@ describe('AppComponent', () => {
       });
 
       it('should have the wrapper contents with the router outlet', () => {
-        expect(matSidenavContentElement.querySelector('div.w3-main')).toBeTruthy();
-        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64')).toBeTruthy();
-        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container')).toBeTruthy();
-        expect(matSidenavContentElement.querySelector('div.w3-main > div.w3-row.w3-padding-64 > div.w3-container > router-outlet')).toBeTruthy();
+        const wrapperDivElement = matSidenavContentElement.querySelector('div.w3-padding-64.w3-container');
+        expect(wrapperDivElement).toBeTruthy();
+        const routerOutletElement = wrapperDivElement.querySelector('router-outlet');
+        expect(routerOutletElement).toBeTruthy();
       });
 
       it('should render the social media wrapper', () => {
