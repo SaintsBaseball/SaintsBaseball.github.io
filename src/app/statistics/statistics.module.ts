@@ -11,6 +11,7 @@ import { StatisticsSelectorComponent } from './components/statistics-selector/st
 import { StatisticsTableComponent } from './components/statistics-table/statistics-table.component';
 import { SharedModule } from '../shared/shared.module';
 import { StatisticsKeyTableComponent } from './components/statistics-key-table/statistics-key-table.component';
+import { MaterialModule } from '../material/material.module';
 
 const statisticsRoutes: Routes = [
   { path: '', component: StatisticsShellComponent }
@@ -25,6 +26,7 @@ const statisticsRoutes: Routes = [
   ],
   imports: [
     SharedModule,
+    MaterialModule,
     RouterModule.forChild(statisticsRoutes),
     StoreModule.forFeature('statistics', reducer),
     EffectsModule.forFeature([]),

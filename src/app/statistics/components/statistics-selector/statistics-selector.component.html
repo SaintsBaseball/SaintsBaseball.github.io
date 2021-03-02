@@ -1,5 +1,7 @@
-<select (change)="changeSeason($event.target.value)">
-    <option [selected]="currentSeason == 'Season'">Season</option>
-    <option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
-        [selected]="currentSeason == seasonName">{{seasonName}}</option>
-</select>
+<mat-form-field>
+  <mat-select [(value)]="currentSeason" (selectionChange)="changeSeason($event.value)">
+    <mat-option value="Season">Season</mat-option>
+    <mat-option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
+      [value]="seasonName">{{seasonName}}</mat-option>
+  </mat-select>
+</mat-form-field>

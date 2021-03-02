@@ -13,6 +13,8 @@ import * as fromStatistics from '../../state';
 import * as appActions from 'src/app/state/app.actions';
 import * as statisticActions from '../../state/statistic.actions';
 import { StatisticsKeyTableComponent } from '../../components/statistics-key-table/statistics-key-table.component';
+import { MaterialModule } from 'src/app/material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -31,6 +33,8 @@ describe('StatisticsShellComponent', () => {
       providers: [],
       imports: [
         SharedModule,
+        MaterialModule,
+        BrowserAnimationsModule,
         StoreModule.forRoot({
           appState: appReducer
         }),
@@ -178,8 +182,11 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector('select')).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement).not.toBeNull();
+      selectElement.click()
+      fixture.detectChanges();
+      const allOptionsInDropdown = document.querySelectorAll('mat-option');
       expect(allOptionsInDropdown.length).toBe(1);
       const defaultOption = allOptionsInDropdown[0];
       expect(defaultOption.textContent).toBe('Season');
@@ -194,8 +201,11 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector('select')).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement).not.toBeNull();
+      selectElement.click()
+      fixture.detectChanges();
+      const allOptionsInDropdown = document.querySelectorAll('mat-option');
       expect(allOptionsInDropdown.length).toBe(3);
       const expectedOptions = ['Season', 'Fall 2019-2020', 'Spring 2019'];
       allOptionsInDropdown.forEach((dropdownOption, index) => {
@@ -210,8 +220,11 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector('select')).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement).not.toBeNull();
+      selectElement.click()
+      fixture.detectChanges();
+      const allOptionsInDropdown = document.querySelectorAll('mat-option');
       expect(allOptionsInDropdown.length).toBe(1);
       expect(allOptionsInDropdown[0].textContent).toBe('Season');
     });
@@ -225,9 +238,16 @@ describe('StatisticsShellComponent', () => {
       fixture.detectChanges();
 
       const seasonToSelect = 'Fall 2019-2020';
-      const seasonDropdown = nativeElement.querySelector('select');
-      seasonDropdown.value = seasonToSelect;
-      seasonDropdown.dispatchEvent(new Event('change'));
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement).not.toBeNull();
+      selectElement.click()
+      fixture.detectChanges();
+      const allOptionsInDropdown: NodeListOf<HTMLOptionElement> = document.querySelectorAll('mat-option');
+      allOptionsInDropdown.forEach(dropdownOption => {
+        if (dropdownOption.textContent === seasonToSelect) {
+          dropdownOption.click();
+        }
+      });
       fixture.detectChanges();
 
       statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
@@ -247,15 +267,9 @@ describe('StatisticsShellComponent', () => {
       const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       fixture.detectChanges();
-
-      const allOptionsInDropdown = nativeElement.querySelectorAll('option');
-      allOptionsInDropdown.forEach(dropdownOption => {
-        if (dropdownOption.textContent === currentSeason) {
-          expect(dropdownOption.selected).toBeTrue();
-        } else {
-          expect(dropdownOption.selected).toBeFalse();
-        }
-      });
+      
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement.textContent).toBe(currentSeason);
     });
   });
 
