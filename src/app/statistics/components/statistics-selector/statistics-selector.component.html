@@ -1,6 +1,6 @@
 <mat-form-field>
+  <mat-label>Season</mat-label>
   <mat-select [(value)]="currentSeason" (selectionChange)="changeSeason($event.value)">
-    <mat-option value="Season">Season</mat-option>
     <mat-option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
       [value]="seasonName">{{seasonName}}</mat-option>
   </mat-select>

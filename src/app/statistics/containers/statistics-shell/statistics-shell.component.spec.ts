@@ -178,18 +178,18 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-selector', () => {
-    it('should have only default option in dropdown when no statistics have been loaded', () => {
+    it('should have only the label no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
+      const labelElement = nativeElement.querySelector('mat-label');
+      expect(labelElement.textContent).toBe('Season');
       const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
       expect(selectElement).not.toBeNull();
       selectElement.click()
       fixture.detectChanges();
       const allOptionsInDropdown = document.querySelectorAll('mat-option');
-      expect(allOptionsInDropdown.length).toBe(1);
-      const defaultOption = allOptionsInDropdown[0];
-      expect(defaultOption.textContent).toBe('Season');
+      expect(allOptionsInDropdown.length).toBe(0);
     });
 
     it('should populate the dropdown with the list of seasons when statistics have been loaded', () => {
@@ -206,8 +206,8 @@ describe('StatisticsShellComponent', () => {
       selectElement.click()
       fixture.detectChanges();
       const allOptionsInDropdown = document.querySelectorAll('mat-option');
-      expect(allOptionsInDropdown.length).toBe(3);
-      const expectedOptions = ['Season', 'Fall 2019-2020', 'Spring 2019'];
+      expect(allOptionsInDropdown.length).toBe(2);
+      const expectedOptions = ['Fall 2019-2020', 'Spring 2019'];
       allOptionsInDropdown.forEach((dropdownOption, index) => {
         const expectedText = expectedOptions[index];
         expect(dropdownOption.textContent).toBe(expectedText);
@@ -225,8 +225,7 @@ describe('StatisticsShellComponent', () => {
       selectElement.click()
       fixture.detectChanges();
       const allOptionsInDropdown = document.querySelectorAll('mat-option');
-      expect(allOptionsInDropdown.length).toBe(1);
-      expect(allOptionsInDropdown[0].textContent).toBe('Season');
+      expect(allOptionsInDropdown.length).toBe(0);
     });
 
     it('should set the current season when the user changes the selected season', (done) => {
