@@ -6,7 +6,7 @@ export interface StatisticState {
 }
 
 const initialState: StatisticState = {
-  currentSeason: 'Season',
+  currentSeason: '',
   selectedStatistic: '#'
 }
 

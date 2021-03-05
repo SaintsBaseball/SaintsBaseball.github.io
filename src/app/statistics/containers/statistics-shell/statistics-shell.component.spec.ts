@@ -171,7 +171,7 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
 
       statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
-        expect(currentSeason).toBe('Season');
+        expect(currentSeason).toBe('');
         done();
       });
     });
