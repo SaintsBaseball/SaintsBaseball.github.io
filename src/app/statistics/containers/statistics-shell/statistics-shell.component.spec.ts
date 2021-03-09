@@ -297,10 +297,8 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should have a table for the statistics', () => {
-      expect(nativeElement.querySelector('table#stats-table')).toBeTruthy();
-      expect(nativeElement.querySelector('table#stats-table thead')).toBeTruthy();
-      expect(nativeElement.querySelector('table#stats-table thead tr')).toBeTruthy();
-      expect(nativeElement.querySelector('table#stats-table tbody')).toBeTruthy();
+      expect(nativeElement.querySelector('mat-table#stats-table')).toBeTruthy();
+      expect(nativeElement.querySelector('mat-table#stats-table mat-header-row')).toBeTruthy();
     });
 
     it('should have an empty table when dropdown is set to default option', () => {

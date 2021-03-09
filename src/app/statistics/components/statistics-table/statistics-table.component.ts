@@ -11,8 +11,10 @@ export class StatisticsTableComponent {
   @Input() currentSeason: string;
   @Input() selectedStatistic: string;
   @Output() selectedStatisticChanged = new EventEmitter<string>();
-  
-  public keepOriginalOrder = (a) => a.key;
+
+  displayedColumns: string[] = [];
+
+  keepOriginalOrder = (a) => a.key;
 
   changeSelectedStatistic(statisticKey: string): void {
     if (statisticKey === this.selectedStatistic) {

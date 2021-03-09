@@ -1,15 +1,4 @@
-<table id="stats-table" cellpadding="8">
-    <thead>
-        <tr>
-            <th *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason"
-                [ngClass]="{'selected':determineIfStatisticIsSelected(statisticKey)}"
-                (click)="changeSelectedStatistic(statisticKey)">{{statisticKey}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let playerStatistics of playerHittingStatistics[currentSeason] | sortStatistics: selectedStatistic">
-            <td *ngFor="let statistic of playerStatistics | keyvalue:keepOriginalOrder"
-                [ngClass]="{'selected':determineIfStatisticIsSelected(statistic.key)}">{{statistic.value}}</td>
-        </tr>
-    </tbody>
-</table>
+<mat-table id="stats-table" cellpadding="8" class="mat-elevation-z8" [dataSource]="playerHittingStatistics[currentSeason]">
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
