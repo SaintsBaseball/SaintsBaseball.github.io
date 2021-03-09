@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
 
 const materialModules = [
   MatToolbarModule,
@@ -12,7 +13,8 @@ const materialModules = [
   MatButtonModule,
   MatSidenavModule,
   MatSelectModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MatTableModule
 ];
 
 @NgModule({
