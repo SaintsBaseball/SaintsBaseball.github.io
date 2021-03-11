@@ -1,4 +1,4 @@
-<table mat-table id="stats-table" cellpadding="8" class="mat-elevation-z8" [dataSource]="playerHittingStatistics[currentSeason]">
+<table mat-table id="stats-table" *ngIf="playerHittingStatistics[currentSeason]" cellpadding="8" class="mat-elevation-z8" [dataSource]="playerHittingStatistics[currentSeason]">
   <ng-container *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason" [matColumnDef]="statisticKey">
     <th mat-header-cell *matHeaderCellDef>{{statisticKey}}</th>
     <td mat-cell *matCellDef="let element">{{element[statisticKey]}}</td>
