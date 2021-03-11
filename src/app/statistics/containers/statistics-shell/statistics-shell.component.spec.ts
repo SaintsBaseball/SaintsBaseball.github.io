@@ -286,13 +286,13 @@ describe('StatisticsShellComponent', () => {
       '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
     };
     const selectedColumnClass = '.selected';
-    const statsTableSelector = 'mat-table#stats-table';
-    const statsTableHeaderSelector = statsTableSelector + ' mat-header-row';
-    const statsTableHeaderCellSelector = statsTableHeaderSelector + ' mat-header-cell';
+    const statsTableSelector = 'table#stats-table';
+    const statsTableHeaderSelector = statsTableSelector + ' thead tr';
+    const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
     const statsTableSelectedHeaderCellSelector = statsTableHeaderCellSelector + selectedColumnClass;
     const statsTableUnselectedHeaderCellSelector = statsTableHeaderCellSelector + ':not(.selected)';
-    const statsTableBodyRowSelector = statsTableSelector + ' mat-row';
-    const statsTableBodyCellSelector = statsTableBodyRowSelector + ' mat-cell';
+    const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
+    const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const statsTableSelectedBodyCellSelector = statsTableBodyCellSelector + selectedColumnClass;
     
     let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
@@ -335,7 +335,7 @@ describe('StatisticsShellComponent', () => {
       expect(allRowsInBody.length).toBe(0);
     });
 
-    fit('should populate the table with stats from season when a valid option is selected', () => {
+    it('should populate the table with stats from season when a valid option is selected', () => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));

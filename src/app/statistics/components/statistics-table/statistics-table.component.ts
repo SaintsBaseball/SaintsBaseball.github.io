@@ -12,7 +12,7 @@ export class StatisticsTableComponent {
   @Input() selectedStatistic: string;
   @Output() selectedStatisticChanged = new EventEmitter<string>();
 
-  displayedColumns: string[] = [];
+  displayedColumns = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS', 'IBB', 'HBP', 'SAC', 'SF', 'TB', 'XBH', 'GDP', 'GO', 'AO', 'GO_AO', 'PA']
 
   keepOriginalOrder = (a) => a.key;
 
