@@ -312,7 +312,7 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should have an empty table when dropdown is set to default option', () => {
-      const defaultOption = 'Season';
+      const defaultOption = '';
 
       store.dispatch(new statisticActions.ChangeSeason(defaultOption));
       fixture.detectChanges();

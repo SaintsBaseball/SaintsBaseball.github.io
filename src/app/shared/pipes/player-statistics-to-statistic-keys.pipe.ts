@@ -5,7 +5,6 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
   name: 'playerStatisticsToStatisticKeys'
 })
 export class PlayerStatisticsToStatisticKeys implements PipeTransform {
-
   transform(value: PlayerHittingStatisticsDatabaseTable, season: string): string[] {
     if (!value[season] || value[season].length === 0) {
       return [];
