@@ -306,29 +306,28 @@ describe('StatisticsShellComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should have a table for the statistics', () => {
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
-    });
-
-    it('should have an empty table when dropdown is set to default option', () => {
+    it('should not have a table when dropdown is set to default option', () => {
       const defaultOption = '';
 
       store.dispatch(new statisticActions.ChangeSeason(defaultOption));
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeFalsy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeFalsy();
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
     });
 
-    it('should have an empty table when an invalid option is selected', () => {
+    it('should not have a table when an invalid option is selected', () => {
       const invalidSeason = 'this is an invalid season';
 
       store.dispatch(new statisticActions.ChangeSeason(invalidSeason));
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeFalsy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeFalsy();
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       expect(allColumnsInHeadRow.length).toBe(0);
@@ -341,6 +340,8 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
       const expectedHeaderColumns = Object.keys(expectedPlayerSeasonStats[0]);
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
@@ -367,6 +368,8 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
       const selectedHeaderColumn = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll(statsTableSelectedBodyCellSelector);
@@ -389,6 +392,8 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
         tableHeaderColumn.click();
@@ -412,9 +417,11 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const unselectedTableHeaderColumns = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
+      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       const columnToSelect = 'Player';
-      let playerNameColumn;
+      let playerNameColumn: HTMLTableHeaderCellElement;
       unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
         if (tableHeaderColumn.textContent === columnToSelect) {
           playerNameColumn = tableHeaderColumn;
@@ -450,6 +457,8 @@ describe('StatisticsShellComponent', () => {
       selectedHeaderColumn.click();
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
         expect(selectedStatistic).toBe(selectedColumnStat + 'Reverse');
       });
@@ -485,6 +494,8 @@ describe('StatisticsShellComponent', () => {
       selectedHeaderColumn.click();
       fixture.detectChanges();
 
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
         expect(selectedStatistic).toBe(selectedColumnStat);
       });
