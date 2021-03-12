@@ -289,7 +289,7 @@ describe('StatisticsShellComponent', () => {
     const statsTableSelector = 'table#stats-table';
     const statsTableHeaderSelector = statsTableSelector + ' thead tr';
     const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
-    const statsTableSelectedHeaderCellSelector = statsTableHeaderCellSelector + selectedColumnClass;
+    const statsTableSelectedHeaderCellSelector = statsTableHeaderCellSelector + selectedColumnClass + ' div.mat-sort-header-sorted';
     const statsTableUnselectedHeaderCellSelector = statsTableHeaderCellSelector + ':not(.selected)';
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
@@ -362,7 +362,7 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should be ordered by jersey number', (done) => {
+    it('should not be sorted by default', () => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
@@ -370,21 +370,10 @@ describe('StatisticsShellComponent', () => {
 
       expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
       expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
-      const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
-      const selectedHeaderColumn = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
+      const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll(statsTableSelectedBodyCellSelector);
-      expect(selectedHeaderColumn.length).toBe(1);
-      const expectedSelectedStat = '#';
-      expect(selectedHeaderColumn[0].textContent).toBe(expectedSelectedStat);
-      expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
-      selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
-        const statsForPlayer = expectedPlayerSeasonStats[index];
-        expect(columnElements.textContent).toBe(statsForPlayer[expectedSelectedStat].toString());
-      });
-      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe(expectedSelectedStat);
-        done();
-      });
+      expect(selectedHeaderColumns.length).toBe(0);
+      expect(selectedColumnElementsInBodyRows.length).toBe(0);
     });
 
     it('should change the selected statistic if a new statistic is selected', () => {

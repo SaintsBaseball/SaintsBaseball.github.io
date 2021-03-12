@@ -1,11 +1,11 @@
-<table mat-table id="stats-table" *ngIf="playerHittingStatistics[currentSeason]" cellpadding="8" class="mat-elevation-z8" 
-  [dataSource]="playerHittingStatistics[currentSeason]" matSort>
-  <ng-container *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason" 
+<table mat-table id="stats-table" *ngIf="playerHittingStatistics[currentSeason]" cellpadding="8"
+  class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+  <ng-container *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason"
     [matColumnDef]="statisticKey">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header 
+    <th mat-header-cell *matHeaderCellDef mat-sort-header
       [ngClass]="{'selected':determineIfStatisticIsSelected(statisticKey)}"
       (click)="changeSelectedStatistic(statisticKey)">{{statisticKey}}</th>
-    <td mat-cell *matCellDef="let element"
+    <td mat-cell *matCellDef="let element" 
       [ngClass]="{'selected':determineIfStatisticIsSelected(statisticKey)}">{{element[statisticKey]}}</td>
   </ng-container>
 

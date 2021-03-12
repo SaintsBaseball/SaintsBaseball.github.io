@@ -1,4 +1,7 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 
 @Component({
@@ -6,12 +9,18 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
   templateUrl: './statistics-table.component.html',
   styleUrls: ['./statistics-table.component.css']
 })
-export class StatisticsTableComponent {
+export class StatisticsTableComponent implements OnChanges {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: string;
   @Input() selectedStatistic: string;
   @Output() selectedStatisticChanged = new EventEmitter<string>();
-  keepOriginalOrder = (a) => a.key;
+  @ViewChild(MatSort) sort: MatSort;
+  dataSource: MatTableDataSource<PlayerHittingStatistics[]>;
+
+  ngOnChanges(): void {
+    this.dataSource = new MatTableDataSource(this.playerHittingStatistics[this.currentSeason]);
+    this.dataSource.sort = this.sort;
+  }
 
   changeSelectedStatistic(statisticKey: string): void {
     if (statisticKey === this.selectedStatistic) {

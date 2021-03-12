@@ -7,7 +7,7 @@ export interface StatisticState {
 
 const initialState: StatisticState = {
   currentSeason: '',
-  selectedStatistic: '#'
+  selectedStatistic: ''
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {
@@ -15,8 +15,7 @@ export function reducer(state = initialState, action: StatisticActions): Statist
     case StatisticActionTypes.ChangeSeason:
       return {
         ...state,
-        currentSeason: action.payload,
-        selectedStatistic: '#'
+        currentSeason: action.payload
       };
 
     case StatisticActionTypes.ChangeSelectedStatistic:
