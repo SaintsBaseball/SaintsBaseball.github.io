@@ -290,8 +290,8 @@ describe('StatisticsShellComponent', () => {
     const statsTableSelector = 'table#stats-table';
     const statsTableHeaderSelector = statsTableSelector + ' thead tr';
     const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
-    const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector}${selectedColumnClass} div${matSortHeaderSortedClass}`;
-    const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector}:not(${selectedColumnClass}) div:not(${matSortHeaderSortedClass})`;
+    const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector}${selectedColumnClass}`;
+    const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector}:not(${selectedColumnClass})`;
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const statsTableSelectedBodyCellSelector = statsTableBodyCellSelector + selectedColumnClass;
@@ -368,9 +368,7 @@ describe('StatisticsShellComponent', () => {
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
-
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
+      
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll(statsTableSelectedBodyCellSelector);
       expect(selectedHeaderColumns.length).toBe(0);
@@ -382,8 +380,6 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
         tableHeaderColumn.click();
@@ -407,8 +403,6 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       const columnToSelect = '#';
       let jerseyNumberColumn: HTMLTableHeaderCellElement;
@@ -442,8 +436,6 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       const columnToSelect = 'Player';
       let playerNameColumn: HTMLTableHeaderCellElement;
@@ -477,8 +469,6 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
       const columnToSelect = 'SB';
       let playerNameColumn: HTMLTableHeaderCellElement;
@@ -512,17 +502,21 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      let selectedHeaderColumn: HTMLTableHeaderCellElement = nativeElement.querySelector(statsTableSelectedHeaderCellSelector);
-      const selectedColumnStat = selectedHeaderColumn.textContent;
-      selectedHeaderColumn.click();
+      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
+      const columnToSelect = 'Player';
+      let playerNameColumn: HTMLTableHeaderCellElement;
+      unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
+        if (tableHeaderColumn.textContent === columnToSelect) {
+          playerNameColumn = tableHeaderColumn;
+        }
+      });
+      playerNameColumn.click();
       fixture.detectChanges();
-      selectedHeaderColumn.click();
+      playerNameColumn.click();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe(selectedColumnStat);
+        expect(selectedStatistic).toBe(columnToSelect);
       });
       const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
@@ -532,7 +526,7 @@ describe('StatisticsShellComponent', () => {
       expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
       selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
         const statsForPlayer = expectedPlayerSeasonStats[index];
-        expect(columnElements.textContent).toBe(statsForPlayer[selectedColumnStat].toString());
+        expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
       let columnInBodyRowIndex = 0;

@@ -23,9 +23,6 @@ export class StatisticsTableComponent implements OnChanges {
   }
 
   changeSelectedStatistic(statisticKey: string): void {
-    if (statisticKey === this.selectedStatistic) {
-      statisticKey += 'Reverse';
-    }
     this.selectedStatisticChanged.emit(statisticKey);
   }
 
