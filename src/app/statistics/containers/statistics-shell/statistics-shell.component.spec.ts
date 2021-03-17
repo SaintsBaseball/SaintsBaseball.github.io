@@ -286,11 +286,12 @@ describe('StatisticsShellComponent', () => {
       '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
     };
     const selectedColumnClass = '.selected';
+    const matSortHeaderSortedClass = '.mat-sort-header-sorted';
     const statsTableSelector = 'table#stats-table';
     const statsTableHeaderSelector = statsTableSelector + ' thead tr';
     const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
-    const statsTableSelectedHeaderCellSelector = statsTableHeaderCellSelector + selectedColumnClass + ' div.mat-sort-header-sorted';
-    const statsTableUnselectedHeaderCellSelector = statsTableHeaderCellSelector + ':not(.selected)';
+    const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector}${selectedColumnClass} div${matSortHeaderSortedClass}`;
+    const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector}:not(${selectedColumnClass}) div:not(${matSortHeaderSortedClass})`;
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const statsTableSelectedBodyCellSelector = statsTableBodyCellSelector + selectedColumnClass;
@@ -376,7 +377,7 @@ describe('StatisticsShellComponent', () => {
       expect(selectedColumnElementsInBodyRows.length).toBe(0);
     });
 
-    it('should change the selected statistic if a new statistic is selected', () => {
+    it('should change the selected statistic if a statistic is selected', () => {
       const validSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
@@ -401,7 +402,42 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should sort the statistics in order of selected stat when a new stat is selected', () => {
+    it('should sort the statistics ascending when sorting by jersey number', () => {
+      const validSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
+      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
+      const columnToSelect = '#';
+      let jerseyNumberColumn: HTMLTableHeaderCellElement;
+      unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
+        if (tableHeaderColumn.textContent === columnToSelect) {
+          jerseyNumberColumn = tableHeaderColumn;
+        }
+      });
+      jerseyNumberColumn.click();
+      fixture.detectChanges();
+
+      const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
+      const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll(statsTableSelectedBodyCellSelector);
+      expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
+      selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
+        const statsForPlayer = expectedPlayerSeasonStats[index];
+        expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
+      });
+      const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
+      let columnInBodyRowIndex = 0;
+      expectedPlayerSeasonStats.forEach(playerStats => {
+        Object.values(playerStats).forEach(statistic => {
+          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
+          columnInBodyRowIndex++;
+        });
+      });
+    });
+
+    it('should sort the statistics ascending when sorting by player name', () => {
       const validSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
@@ -436,30 +472,30 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should sort the statistics in reverse order of selected stat when the same stat is selected', () => {
-      const validSeason = 'Spring 2019';
+    it('should sort the statistics descending when sorting by statistic', () => {
+      const validSeason = 'Fall 2019-2020';
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
-      fixture.detectChanges();
-
-      let selectedHeaderColumn: HTMLTableHeaderCellElement = nativeElement.querySelector(statsTableSelectedHeaderCellSelector);
-      const selectedColumnStat = selectedHeaderColumn.textContent;
-      selectedHeaderColumn.click();
       fixture.detectChanges();
 
       expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
       expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
-      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe(selectedColumnStat + 'Reverse');
+      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
+      const columnToSelect = 'SB';
+      let playerNameColumn: HTMLTableHeaderCellElement;
+      unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
+        if (tableHeaderColumn.textContent === columnToSelect) {
+          playerNameColumn = tableHeaderColumn;
+        }
       });
-      const expectedPlayerSeasonStats = [playerNumber4, playerNumber3];
-      const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
-      expect(selectedHeaderColumns.length).toBe(1);
+      playerNameColumn.click();
+      fixture.detectChanges();
 
+      const expectedPlayerSeasonStats = [playerNumber8, playerNumber6];
       const selectedColumnElementsInBodyRows = nativeElement.querySelectorAll(statsTableSelectedBodyCellSelector);
       expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
       selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
         const statsForPlayer = expectedPlayerSeasonStats[index];
-        expect(columnElements.textContent).toBe(statsForPlayer[selectedColumnStat].toString());
+        expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
       let columnInBodyRowIndex = 0;

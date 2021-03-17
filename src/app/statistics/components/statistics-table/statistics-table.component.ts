@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ViewChild, OnChanges } from '@angular/core';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
@@ -32,5 +32,13 @@ export class StatisticsTableComponent implements OnChanges {
   determineIfStatisticIsSelected(statisticName: string): boolean {
     const selectedStatisticName = this.selectedStatistic.replace('Reverse', '');
     return selectedStatisticName === statisticName;
+  }
+
+  determineInitialSortOrderForStatistic(statisticKey: string): SortDirection {
+    if (statisticKey === '#' || statisticKey === 'Player') {
+      return 'asc';
+    }
+
+    return 'desc';
   }
 }
