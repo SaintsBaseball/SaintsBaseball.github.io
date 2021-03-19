@@ -3,7 +3,6 @@
   <ng-container *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason"
     [matColumnDef]="statisticKey">
     <th mat-header-cell *matHeaderCellDef mat-sort-header [start]="determineInitialSortOrderForStatistic(statisticKey)"
-      [ngClass]="{'selected':determineIfStatisticIsSelected(statisticKey)}"
       (click)="changeSelectedStatistic(statisticKey)">{{statisticKey}}</th>
     <td mat-cell *matCellDef="let element" 
       [ngClass]="{'selected':determineIfStatisticIsSelected(statisticKey)}">{{element[statisticKey]}}</td>
