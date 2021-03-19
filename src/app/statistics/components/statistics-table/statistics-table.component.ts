@@ -37,10 +37,6 @@ export class StatisticsTableComponent implements OnChanges {
     }
   }
 
-  determineIfStatisticIsSelected(statisticName: string): boolean {
-    return this.selectedStatistic === statisticName;
-  }
-
   determineInitialSortOrderForStatistic(statisticKey: string): SortDirection {
     if (statisticKey === '#' || statisticKey === 'Player') {
       return 'asc';
