@@ -38,8 +38,7 @@ export class StatisticsTableComponent implements OnChanges {
   }
 
   determineIfStatisticIsSelected(statisticName: string): boolean {
-    const selectedStatisticName = this.selectedStatistic.replace('Reverse', '');
-    return selectedStatisticName === statisticName;
+    return this.selectedStatistic === statisticName;
   }
 
   determineInitialSortOrderForStatistic(statisticKey: string): SortDirection {
