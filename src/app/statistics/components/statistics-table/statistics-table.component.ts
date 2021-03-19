@@ -16,6 +16,7 @@ export class StatisticsTableComponent implements OnChanges {
   @Output() selectedStatisticChanged = new EventEmitter<string>();
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]>;
+  private statisticClickCount: number = 0;
 
   ngOnChanges(): void {
     this.dataSource = new MatTableDataSource(this.playerHittingStatistics[this.currentSeason]);
@@ -23,7 +24,17 @@ export class StatisticsTableComponent implements OnChanges {
   }
 
   changeSelectedStatistic(statisticKey: string): void {
-    this.selectedStatisticChanged.emit(statisticKey);
+    if (statisticKey === this.selectedStatistic) {
+      this.statisticClickCount++;
+    } else {
+      this.statisticClickCount = 1;
+    }
+
+    if (this.statisticClickCount % 3 === 0) {
+      this.selectedStatisticChanged.emit('');
+    } else {
+      this.selectedStatisticChanged.emit(statisticKey);
+    }
   }
 
   determineIfStatisticIsSelected(statisticName: string): boolean {
