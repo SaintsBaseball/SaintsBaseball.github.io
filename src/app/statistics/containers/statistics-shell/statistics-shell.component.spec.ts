@@ -286,11 +286,12 @@ describe('StatisticsShellComponent', () => {
       '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
     };
     const selectedColumnClass = '.selected';
+    const materialSortedHeaderColumnClass = '.mat-sort-header-sorted';
     const statsTableSelector = 'table#stats-table';
     const statsTableHeaderSelector = statsTableSelector + ' thead tr';
     const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
-    const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector}${selectedColumnClass}`;
-    const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector}:not(${selectedColumnClass})`;
+    const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector} ${materialSortedHeaderColumnClass}`;
+    const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector} div:not(${materialSortedHeaderColumnClass})`;
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const statsTableSelectedBodyCellSelector = statsTableBodyCellSelector + selectedColumnClass;
@@ -379,8 +380,8 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const unselectedTableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableUnselectedHeaderCellSelector);
-      unselectedTableHeaderColumns.forEach(tableHeaderColumn => {
+      const tableHeaderColumns: NodeListOf<HTMLTableHeaderCellElement> = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
+      tableHeaderColumns.forEach(tableHeaderColumn => {
         tableHeaderColumn.click();
         fixture.detectChanges();
 
