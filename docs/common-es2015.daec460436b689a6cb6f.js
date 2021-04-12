@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{"/LE6":function(t,n,e){"use strict";e.d(n,"b",function(){return a}),e.d(n,"a",function(){return i}),e.d(n,"c",function(){return o});var r=e("l7P3");function c(t){return t.appState}const a=Object(r.p)(c,t=>t.playerHittingStatistics),i=Object(r.p)(c,t=>t.errorMessage),o=Object(r.p)(c,t=>t.statsForEachPlayer)}}]);
