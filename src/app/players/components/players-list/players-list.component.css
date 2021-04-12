@@ -6,6 +6,10 @@ ul {
     width: fit-content;
 }
 
+li {
+    padding-bottom: 0.5rem;
+}
+
 li:hover {
     text-decoration: underline;
 }
