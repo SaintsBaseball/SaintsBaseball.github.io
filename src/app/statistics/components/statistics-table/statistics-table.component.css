@@ -2,7 +2,6 @@ table.mat-table {
     border: 0.188rem black solid;
     border-collapse: collapse;
     text-align: center;
-    width: 90%;
     overflow: hidden;
 }
 
