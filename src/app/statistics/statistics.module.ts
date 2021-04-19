@@ -10,7 +10,6 @@ import { StatisticsShellComponent } from './containers/statistics-shell/statisti
 import { StatisticsSelectorComponent } from './components/statistics-selector/statistics-selector.component';
 import { StatisticsTableComponent } from './components/statistics-table/statistics-table.component';
 import { SharedModule } from '../shared/shared.module';
-import { StatisticsKeyTableComponent } from './components/statistics-key-table/statistics-key-table.component';
 import { MaterialModule } from '../material/material.module';
 
 const statisticsRoutes: Routes = [
@@ -21,8 +20,7 @@ const statisticsRoutes: Routes = [
   declarations: [
     StatisticsShellComponent,
     StatisticsSelectorComponent,
-    StatisticsTableComponent,
-    StatisticsKeyTableComponent
+    StatisticsTableComponent
   ],
   imports: [
     SharedModule,
