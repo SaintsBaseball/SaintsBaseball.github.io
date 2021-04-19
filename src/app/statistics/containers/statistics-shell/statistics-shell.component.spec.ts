@@ -614,6 +614,19 @@ describe('StatisticsShellComponent', () => {
         });
       });
     });
+
+    it('should have a tooltip on the headers for what the abbreviations stand for', () => {
+      const validSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      const expectedTooltips = ['', '', 'Games', 'At Bats', 'Runs', 'Hits', 'Doubles', 'Triples', 'Homeruns', 'Runs Batted In', 'Base On Balls', 'Strikeouts', 'Stolen Bases', 'Caught Stealing', 'Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Intentional Walks', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Total Bases', 'Extra Base Hits', 'Grounded Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Plate Appearances'];
+      const tableHeaderColumns = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
+      tableHeaderColumns.forEach((tableHeaderColumn, index) => {        
+        const tooltipMessage = tableHeaderColumn.getAttribute("ng-reflect-message");
+        expect(tooltipMessage).toBe(expectedTooltips[index]);
+      });
+    });
   });
 
   describe('statistics-key-table', () => {
