@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { InMemoryDataService } from './in-memory-data.service';
 
-describe('InMemoryDataServiceService', () => {
+describe('InMemoryDataService', () => {
   let inMemoryStatsDataService: InMemoryDataService;
 
   beforeEach(() => {
