@@ -543,9 +543,6 @@ describe('StatisticsShellComponent', () => {
       playerNameColumn.click();
       fixture.detectChanges();
 
-      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe('');
-      });
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       expect(selectedHeaderColumns.length).toBe(0);
 

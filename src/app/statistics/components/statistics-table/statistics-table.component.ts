@@ -13,7 +13,6 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: string;
   @Input() selectedStatistic: string;
-  @Output() selectedStatisticChanged = new EventEmitter<string>();
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
 
