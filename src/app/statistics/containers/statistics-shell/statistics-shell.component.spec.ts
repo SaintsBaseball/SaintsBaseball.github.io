@@ -280,7 +280,7 @@ describe('StatisticsShellComponent', () => {
       '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
     };
     const materialSortedHeaderColumnClass = '.mat-sort-header-sorted';
-    const statsTableSelector = 'table#stats-table';
+    const statsTableSelector = 'table.mat-table';
     const statsTableHeaderSelector = statsTableSelector + ' thead tr';
     const statsTableHeaderCellSelector = statsTableHeaderSelector + ' th';
     const statsTableSelectedHeaderCellSelector = `${statsTableHeaderCellSelector} ${materialSortedHeaderColumnClass}`;
@@ -303,28 +303,28 @@ describe('StatisticsShellComponent', () => {
       fixture.detectChanges();
     });
 
-    it('should not have a table when dropdown is set to default option', () => {
+    it('should not have any rows or columns in table when dropdown is set to default option', () => {
       const defaultOption = '';
 
       store.dispatch(new statisticActions.ChangeSeason(defaultOption));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeFalsy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeFalsy();
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       expect(allColumnsInHeadRow.length).toBe(0);
       expect(allRowsInBody.length).toBe(0);
     });
 
-    it('should not have a table when an invalid option is selected', () => {
+    it('should not have any rows or columns in table when an invalid option is selected', () => {
       const invalidSeason = 'this is an invalid season';
 
       store.dispatch(new statisticActions.ChangeSeason(invalidSeason));
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector(statsTableSelector)).toBeFalsy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeFalsy();
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       expect(allColumnsInHeadRow.length).toBe(0);
@@ -379,14 +379,10 @@ describe('StatisticsShellComponent', () => {
         tableHeaderColumn.click();
         fixture.detectChanges();
 
-        const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
         const selectedHeaderColumn = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
         expect(selectedHeaderColumn.length).toBe(1);
         const expectedSelectedStat = tableHeaderColumn.textContent;
         expect(selectedHeaderColumn[0].textContent).toBe(expectedSelectedStat);
-        statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-          expect(selectedStatistic).toBe(expectedSelectedStat);
-        });
       });
     });
 
@@ -507,9 +503,6 @@ describe('StatisticsShellComponent', () => {
       playerNameColumn.click();
       fixture.detectChanges();
 
-      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe(columnToSelect);
-      });
       const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       expect(selectedHeaderColumns.length).toBe(1);
@@ -586,9 +579,6 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(newValidSeason));
       fixture.detectChanges();
 
-      statisticsShellComponent.selectedStatistic$.pipe(take(1)).subscribe(selectedStatistic => {
-        expect(selectedStatistic).toBe(columnToSelect);
-      });
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       expect(selectedHeaderColumns.length).toBe(1);
 
