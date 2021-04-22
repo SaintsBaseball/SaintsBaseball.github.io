@@ -1,4 +1,4 @@
-<table mat-table id="stats-table" cellpadding="8" class="mat-elevation-z8" [dataSource]="dataSource" matSort>
+<table mat-table cellpadding="8" class="mat-elevation-z8" [dataSource]="dataSource" matSort>
   <ng-container *ngFor="let statisticKey of playerHittingStatistics | playerStatisticsToStatisticKeys:currentSeason"
     [matColumnDef]="statisticKey">
     <th mat-header-cell *matHeaderCellDef mat-sort-header
