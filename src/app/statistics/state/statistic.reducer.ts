@@ -1,13 +1,11 @@
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
-  currentSeason: string,
-  selectedStatistic: string
+  currentSeason: string
 }
 
 const initialState: StatisticState = {
-  currentSeason: '',
-  selectedStatistic: ''
+  currentSeason: ''
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {
@@ -16,12 +14,6 @@ export function reducer(state = initialState, action: StatisticActions): Statist
       return {
         ...state,
         currentSeason: action.payload
-      };
-
-    case StatisticActionTypes.ChangeSelectedStatistic:
-      return {
-        ...state,
-        selectedStatistic: action.payload
       };
 
     default:

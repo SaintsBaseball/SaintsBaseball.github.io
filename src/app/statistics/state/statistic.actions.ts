@@ -11,11 +11,4 @@ export class ChangeSeason implements Action {
   constructor(public payload: string) { }
 }
 
-export class ChangeSelectedStatistic implements Action {
-  readonly type = StatisticActionTypes.ChangeSelectedStatistic;
-
-  constructor(public payload: string) { }
-}
-
-export type StatisticActions = ChangeSeason
-  | ChangeSelectedStatistic;
+export type StatisticActions = ChangeSeason;
