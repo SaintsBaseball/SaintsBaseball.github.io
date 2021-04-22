@@ -16,7 +16,6 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Output() selectedStatisticChanged = new EventEmitter<string>();
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
-  private statisticClickCount: number = 0;
 
   ngOnChanges(): void {    
     this.dataSource.data = this.playerHittingStatistics[this.currentSeason] || [];
@@ -24,20 +23,6 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
-  }
-
-  changeSelectedStatistic(statisticKey: string): void {
-    if (statisticKey === this.selectedStatistic) {
-      this.statisticClickCount++;
-    } else {
-      this.statisticClickCount = 1;
-    }
-
-    if (this.statisticClickCount % 3 === 0) {
-      this.selectedStatisticChanged.emit('');
-    } else {
-      this.selectedStatisticChanged.emit(statisticKey);
-    }
   }
 
   determineInitialSortOrderForStatistic(statisticKey: string): SortDirection {
