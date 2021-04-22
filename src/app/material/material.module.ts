@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
 
 const materialModules = [
   MatToolbarModule,
@@ -18,7 +19,8 @@ const materialModules = [
   MatFormFieldModule,
   MatTableModule,
   MatSortModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule
 ];
 
 @NgModule({

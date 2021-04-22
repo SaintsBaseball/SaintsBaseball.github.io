@@ -1,16 +1,9 @@
-ul {
-    list-style-type: none;
+.mat-list-item {
     color: #010150;
-    font-size: 150%;
-    padding-left: 0;
-    width: fit-content;
+    font-size: x-large;
 }
 
-li {
-    padding-bottom: 0.5rem;
-}
-
-li:hover {
+.mat-list-item:hover {
     text-decoration: underline;
 }
 

@@ -10,6 +10,7 @@ import { reducer as appReducer } from 'src/app/state/app.reducer';
 import * as appActions from 'src/app/state/app.actions';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { PlayerHittingStatistics } from '../../../classes/player-hitting-statistics';
+import { MaterialModule } from 'src/app/material/material.module';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
@@ -27,7 +28,8 @@ describe('PlayersShellComponent', () => {
         SharedModule,
         StoreModule.forRoot({
           appState: appReducer
-        })
+        }),
+        MaterialModule
       ]
     })
       .compileComponents();
@@ -226,12 +228,15 @@ describe('PlayersShellComponent', () => {
   });
 
   describe('players-list', () => {
+    const playersListSelector = 'mat-list';
+    const playersListItemSelector = 'mat-list-item';
+
     it('should have an empty list when the players are not loaded', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector('ul')).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      expect(nativeElement.querySelector(playersListSelector)).toBeTruthy();
+      const allOptionsInDropdown = nativeElement.querySelectorAll(playersListItemSelector);
       expect(allOptionsInDropdown.length).toBe(0);
     });
 
@@ -241,8 +246,8 @@ describe('PlayersShellComponent', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      expect(nativeElement.querySelector('ul')).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      expect(nativeElement.querySelector(playersListSelector)).toBeTruthy();
+      const allOptionsInDropdown = nativeElement.querySelectorAll(playersListItemSelector);
       const expectedTotalNumberOfPlayers = 3;
       expect(allOptionsInDropdown.length).toBe(expectedTotalNumberOfPlayers);
       expect(allOptionsInDropdown[0].textContent).toBe('Alpha');
@@ -265,7 +270,7 @@ describe('PlayersShellComponent', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      const allOptionsInDropdown: NodeListOf<HTMLUListElement> = nativeElement.querySelectorAll(playersListItemSelector);
       allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
@@ -279,7 +284,7 @@ describe('PlayersShellComponent', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      const allOptionsInDropdown: NodeListOf<HTMLUListElement> = nativeElement.querySelectorAll(playersListItemSelector);
       allOptionsInDropdown[0].click();
       fixture.detectChanges();
 
@@ -299,7 +304,7 @@ describe('PlayersShellComponent', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const allOptionsInDropdown = nativeElement.querySelectorAll('li');
+      const allOptionsInDropdown: NodeListOf<HTMLUListElement> = nativeElement.querySelectorAll(playersListItemSelector);
       allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
