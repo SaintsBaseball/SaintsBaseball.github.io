@@ -67,8 +67,14 @@ describe('StatisticsService', () => {
             GDP: 1,
             GO: 7,
             AO: 10,
-            GO_AO: '0.70',
-            PA: 31
+            'GO/AO': '0.70',
+            PA: 31,
+            BABIP: '0.00', 
+            ISO: '0.10', 
+            'AB/HR': '0.20', 
+            'BB/K': '0.30', 
+            'BB%': '0.40', 
+            'SO%': '0.50'
           },
           {
             '#': 2,
@@ -98,8 +104,14 @@ describe('StatisticsService', () => {
             GDP: 3,
             GO: 8,
             AO: 4,
-            GO_AO: '2.00',
-            PA: 33
+            'GO/AO': '2.00',
+            PA: 33,
+            BABIP: '0.00', 
+            ISO: '0.10', 
+            'AB/HR': '0.20', 
+            'BB/K': '0.30', 
+            'BB%': '0.40', 
+            'SO%': '0.50'
           }
         ],
         'Spring 2019': []

@@ -59,8 +59,14 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       GDP: 'Grounded Into Double Play', 
       GO: 'Ground Outs', 
       AO: 'Fly Outs', 
-      GO_AO: 'Ground Outs Per Fly Out', 
-      PA: 'Plate Appearances'
+      'GO/AO': 'Ground Outs Per Fly Out', 
+      PA: 'Plate Appearances',
+      BABIP: 'Average on Balls in Play',
+      ISO: 'Isolated Power',
+      'AB/HR': 'At Bats per Home Run',
+      'BB/K': 'Walk to Strikout Ratio',
+      'BB%': 'Walk Percentage',
+      'SO%': 'Strikeout Percentage'
     };
 
     return abbreviationToStatisticDictionary[statisticKey] || '';

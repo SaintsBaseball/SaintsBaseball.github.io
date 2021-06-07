@@ -17,15 +17,21 @@ export class PlayerHittingStatistics {
   OBP: string;
   SLG: string;
   OPS: string;
-  IBB: number;
+  PA: number;
   HBP: number;
   SAC: number;
   SF: number;
-  TB: number;
-  XBH: number;
   GDP: number;
   GO: number;
   AO: number;
-  GO_AO: string;
-  PA: number;
+  'GO/AO': string;
+  XBH: number;
+  TB: number;
+  IBB: number;
+  BABIP: string;
+  ISO: string;
+  'AB/HR': string;
+  'BB/K': string;
+  'BB%': string;
+  'SO%': string;
 }

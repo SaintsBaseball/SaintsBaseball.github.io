@@ -86,8 +86,14 @@ describe('PlayersShellComponent', () => {
       GDP: 1,
       GO: 7,
       AO: 10,
-      GO_AO: '0.70',
-      PA: 31
+      'GO/AO': '0.70',
+      PA: 31,
+      BABIP: '0.00', 
+      ISO: '0.10', 
+      'AB/HR': '0.20', 
+      'BB/K': '0.30', 
+      'BB%': '0.40', 
+      'SO%': '0.50'
     },
     {
       '#': 2,
@@ -117,8 +123,14 @@ describe('PlayersShellComponent', () => {
       GDP: 3,
       GO: 8,
       AO: 4,
-      GO_AO: '2.00',
-      PA: 33
+      'GO/AO': '2.00',
+      PA: 33,
+      BABIP: '0.00', 
+      ISO: '0.10', 
+      'AB/HR': '0.20', 
+      'BB/K': '0.30', 
+      'BB%': '0.40', 
+      'SO%': '0.50'
     }
   ];
   statisticsToReturn['Spring 2019'] = [
@@ -150,8 +162,14 @@ describe('PlayersShellComponent', () => {
       GDP: 1,
       GO: 7,
       AO: 10,
-      GO_AO: '0.70',
-      PA: 31
+      'GO/AO': '0.70',
+      PA: 31,
+      BABIP: '0.00', 
+      ISO: '0.10', 
+      'AB/HR': '0.20', 
+      'BB/K': '0.30', 
+      'BB%': '0.40', 
+      'SO%': '0.50'
     },
     {
       '#': 3,
@@ -181,8 +199,14 @@ describe('PlayersShellComponent', () => {
       GDP: 1,
       GO: 7,
       AO: 10,
-      GO_AO: '0.70',
-      PA: 31
+      'GO/AO': '0.70',
+      PA: 31,
+      BABIP: '0.00', 
+      ISO: '0.10', 
+      'AB/HR': '0.20', 
+      'BB/K': '0.30', 
+      'BB%': '0.40', 
+      'SO%': '0.50'
     }
   ];
 
@@ -308,7 +332,7 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
-      const expectedNumberOfColumns = 28;
+      const expectedNumberOfColumns = 34;
       const expectedNumberOfRows = 2;
       const modalTableHeaderRow = nativeElement.querySelector('div.modal div.modal-content table thead tr');
       expect(modalTableHeaderRow).toBeTruthy();

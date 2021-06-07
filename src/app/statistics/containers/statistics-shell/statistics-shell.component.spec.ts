@@ -100,8 +100,14 @@ describe('StatisticsShellComponent', () => {
           GDP: 1,
           GO: 7,
           AO: 10,
-          GO_AO: '0.70',
-          PA: 31
+          'GO/AO': '0.70',
+          PA: 31,
+          BABIP: '0.00', 
+          ISO: '0.10', 
+          'AB/HR': '0.20', 
+          'BB/K': '0.30', 
+          'BB%': '0.40', 
+          'SO%': '0.50'
         },
         {
           '#': 2,
@@ -131,8 +137,14 @@ describe('StatisticsShellComponent', () => {
           GDP: 3,
           GO: 8,
           AO: 4,
-          GO_AO: '2.00',
-          PA: 33
+          'GO/AO': '2.00',
+          PA: 33,
+          BABIP: '0.00', 
+          ISO: '0.10', 
+          'AB/HR': '0.20', 
+          'BB/K': '0.30', 
+          'BB%': '0.40', 
+          'SO%': '0.50'
         }
       ];
       statisticsToReturn['Spring 2019'] = [];
@@ -268,16 +280,16 @@ describe('StatisticsShellComponent', () => {
 
   describe('statistics-table', () => {
     const playerNumber3 = {
-      '#': 3, Player: 'this is my bro', G: 17, AB: 63, R: 9, H: 19, '2B': 1, '3B': 0, HR: 0, RBI: 11, BB: 7, SO: 19, SB: 3, CS: 1, AVG: '0.302', OBP: '0.380', SLG: '0.317', OPS: '0.697', IBB: 0, HBP: 1, SAC: 0, SF: 0, TB: 20, XBH: 1, GDP: 1, GO: 6, AO: 12, GO_AO: '0.50', PA: 71
+      '#': 3, Player: 'this is my bro', G: 17, AB: 63, R: 9, H: 19, '2B': 1, '3B': 0, HR: 0, RBI: 11, BB: 7, SO: 19, SB: 3, CS: 1, AVG: '0.302', OBP: '0.380', SLG: '0.317', OPS: '0.697', IBB: 0, HBP: 1, SAC: 0, SF: 0, TB: 20, XBH: 1, GDP: 1, GO: 6, AO: 12, 'GO/AO': '0.50', PA: 71, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber4 = {
-      '#': 4, Player: 'real estate', G: 12, AB: 44, R: 13, H: 15, '2B': 1, '3B': 1, HR: 1, RBI: 12, BB: 6, SO: 15, SB: 1, CS: 0, AVG: '0.341', OBP: '0.431', SLG: '0.477', OPS: '0.908', IBB: 0, HBP: 1, SAC: 1, SF: 0, TB: 21, XBH: 3, GDP: 0, GO: 7, AO: 7, GO_AO: '1.00', PA: 52
+      '#': 4, Player: 'real estate', G: 12, AB: 44, R: 13, H: 15, '2B': 1, '3B': 1, HR: 1, RBI: 12, BB: 6, SO: 15, SB: 1, CS: 0, AVG: '0.341', OBP: '0.431', SLG: '0.477', OPS: '0.908', IBB: 0, HBP: 1, SAC: 1, SF: 0, TB: 21, XBH: 3, GDP: 0, GO: 7, AO: 7, 'GO/AO': '1.00', PA: 52, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber6 = {
-      '#': 6, Player: 'me', G: 14, AB: 54, R: 11, H: 21, '2B': 1, '3B': 0, HR: 0, RBI: 9, BB: 10, SO: 6, SB: 3, CS: 1, AVG: '0.389', OBP: '0.500', SLG: '0.407', OPS: '0.907', IBB: 0, HBP: 2, SAC: 2, SF: 0, TB: 22, XBH: 1, GDP: 0, GO: 17, AO: 4, GO_AO: '4.25', PA: 68
+      '#': 6, Player: 'me', G: 14, AB: 54, R: 11, H: 21, '2B': 1, '3B': 0, HR: 0, RBI: 9, BB: 10, SO: 6, SB: 3, CS: 1, AVG: '0.389', OBP: '0.500', SLG: '0.407', OPS: '0.907', IBB: 0, HBP: 2, SAC: 2, SF: 0, TB: 22, XBH: 1, GDP: 0, GO: 17, AO: 4, 'GO/AO': '4.25', PA: 68, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber8 = {
-      '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, GO_AO: '0.40', PA: 50
+      '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, 'GO/AO': '0.40', PA: 50, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const materialSortedHeaderColumnClass = '.mat-sort-header-sorted';
     const statsTableSelector = 'table.mat-table';
@@ -601,7 +613,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const expectedTooltips = ['', '', 'Games', 'At Bats', 'Runs', 'Hits', 'Doubles', 'Triples', 'Homeruns', 'Runs Batted In', 'Base On Balls', 'Strikeouts', 'Stolen Bases', 'Caught Stealing', 'Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Intentional Walks', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Total Bases', 'Extra Base Hits', 'Grounded Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Plate Appearances'];
+      const expectedTooltips = ['', '', 'Games', 'At Bats', 'Runs', 'Hits', 'Doubles', 'Triples', 'Homeruns', 'Runs Batted In', 'Base On Balls', 'Strikeouts', 'Stolen Bases', 'Caught Stealing', 'Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Intentional Walks', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Total Bases', 'Extra Base Hits', 'Grounded Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Plate Appearances', 'Average on Balls in Play', 'Isolated Power', 'At Bats per Home Run', 'Walk to Strikout Ratio', 'Walk Percentage', 'Strikeout Percentage'];
       const tableHeaderColumns = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       tableHeaderColumns.forEach((tableHeaderColumn, index) => {        
         const tooltipMessage = tableHeaderColumn.getAttribute("ng-reflect-message");
