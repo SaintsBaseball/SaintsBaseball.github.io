@@ -1,7 +1,8 @@
 'use strict';
-const excelToJson = require('convert-excel-to-json');
 
-function convert(sourceFile) {
+import excelToJson from 'convert-excel-to-json';
+
+function convertExcelToJson(sourceFile) {
     return excelToJson({
         sourceFile: sourceFile,
         header: {
@@ -13,6 +14,4 @@ function convert(sourceFile) {
     });
 }
 
-module.exports = {
-    convert
-}
+export default convertExcelToJson;

@@ -1,15 +1,15 @@
 'use strict';
 
-const convertExcelToJsonService = require('../services/convertExcelToJson.service');
-const writeToFileService = require('../services/writeToFile.service');
+import convertExcelToJson from '../services/convertExcelToJson.service.js';
+import writeToFile from '../services/writeToFile.service.js';
 
 (function buildStatsFilebase () {
     const sourceFile = 'filebase/Hitting Statistics.xlsx';
 
-    const statsObject = convertExcelToJsonService.convert(sourceFile);
+    const statsObject = convertExcelToJson(sourceFile);
 
     const filebaseVarName = 'stats';
     const statsFilebase = 'filebase/hittingStatisticsFilebase.js';
 
-    writeToFileService.writeToFile(filebaseVarName, statsObject, statsFilebase);
+    writeToFile(filebaseVarName, statsObject, statsFilebase);
 })();
