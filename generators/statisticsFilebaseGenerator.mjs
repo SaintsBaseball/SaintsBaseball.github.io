@@ -1,7 +1,7 @@
 'use strict';
 
-import convertExcelToJson from '../services/convertExcelToJson.service.js';
-import writeToFile from '../services/writeToFile.service.js';
+import convertExcelToJson from '../services/convertExcelToJson.service.mjs';
+import writeToFile from '../services/writeToFile.service.mjs';
 
 (function buildStatsFilebase () {
     const sourceFile = 'filebase/Hitting Statistics.xlsx';

@@ -2,7 +2,7 @@
   "name": "saints-baseball",
   "version": "1.1.0",
   "scripts": {
-    "buildStats": "node ./generators/statisticsFilebaseGenerator.js",
+    "buildStats": "node ./generators/statisticsFilebaseGenerator.mjs",
     "test": "ng test --watch=false",
     "start": "ng serve",
     "buildProd": "ng build --prod --baseHref=\"https://saintsbaseball.github.io/\"",
@@ -10,7 +10,6 @@
     "e2e": "ng e2e"
   },
   "private": true,
-  "type": "module",
   "dependencies": {
     "@angular/animations": "~11.0.0",
     "@angular/cdk": "^11.0.0",
