@@ -276,6 +276,24 @@ describe('StatisticsShellComponent', () => {
       const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
       expect(selectElement.textContent).toBe(currentSeason);
     });
+
+    it('should allow the user to select whether they want to select standard or expanded statistics', () => {
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      const currentSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(currentSeason));
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      expect(buttonToggleGroup).not.toBeNull();
+      const buttonToggles = buttonToggleGroup.querySelectorAll('mat-button-toggle');
+      expect(buttonToggles.length).toBe(2);
+      expect(buttonToggles[0].textContent).toBe('Standard');
+      expect(buttonToggles[1].textContent).toBe('Expanded');
+    });
   });
 
   describe('statistics-table', () => {

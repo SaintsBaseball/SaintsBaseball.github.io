@@ -9,6 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 const materialModules = [
   MatToolbarModule,
@@ -20,7 +21,8 @@ const materialModules = [
   MatTableModule,
   MatSortModule,
   MatTooltipModule,
-  MatListModule
+  MatListModule,
+  MatButtonToggleModule
 ];
 
 @NgModule({
