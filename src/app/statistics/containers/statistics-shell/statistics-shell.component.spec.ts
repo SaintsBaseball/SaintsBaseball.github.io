@@ -294,6 +294,18 @@ describe('StatisticsShellComponent', () => {
       expect(buttonToggles[0].textContent).toBe('Standard');
       expect(buttonToggles[1].textContent).toBe('Expanded');
     });
+
+    it('should not give the user the option to select the group of statistics when no season is selected', () => {
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      expect(buttonToggleGroup).toBeNull();
+    });
   });
 
   describe('statistics-table', () => {
