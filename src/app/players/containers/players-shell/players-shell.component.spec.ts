@@ -271,12 +271,12 @@ describe('PlayersShellComponent', () => {
       fixture.detectChanges();
 
       expect(nativeElement.querySelector(playersListSelector)).toBeTruthy();
-      const allOptionsInDropdown = nativeElement.querySelectorAll(playersListItemSelector);
+      const allPlayersInList = nativeElement.querySelectorAll(playersListItemSelector);
       const expectedTotalNumberOfPlayers = 3;
-      expect(allOptionsInDropdown.length).toBe(expectedTotalNumberOfPlayers);
-      expect(allOptionsInDropdown[0].textContent).toBe('Alpha');
-      expect(allOptionsInDropdown[1].textContent).toBe('Beta');
-      expect(allOptionsInDropdown[2].textContent).toBe('Charlie');
+      expect(allPlayersInList.length).toBe(expectedTotalNumberOfPlayers);
+      expect(allPlayersInList[0].textContent).toBe('Alpha');
+      expect(allPlayersInList[1].textContent).toBe('Beta');
+      expect(allPlayersInList[2].textContent).toBe('Charlie');
     });
 
     it('should not have a modal when no player has been selected', () => {
