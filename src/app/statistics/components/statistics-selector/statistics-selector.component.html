@@ -6,7 +6,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-button-toggle-group *ngIf="currentSeason">
-  <mat-button-toggle>Standard</mat-button-toggle>
+<mat-button-toggle-group *ngIf="currentSeason" [formControl]="selectedStatisticsGroup">
+  <mat-button-toggle value="standard">Standard</mat-button-toggle>
   <mat-button-toggle>Expanded</mat-button-toggle>
 </mat-button-toggle-group>

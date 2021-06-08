@@ -306,6 +306,21 @@ describe('StatisticsShellComponent', () => {
       const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
       expect(buttonToggleGroup).toBeNull();
     });
+
+    it('should have standard statistics group selected by default', () => {
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      const currentSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(currentSeason));
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
+      expect(selectedButtonToggle.textContent).toBe('Standard');
+    });
   });
 
   describe('statistics-table', () => {
