@@ -321,6 +321,29 @@ describe('StatisticsShellComponent', () => {
       const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
       expect(selectedButtonToggle.textContent).toBe('Standard');
     });
+
+    it('should set the statistics group when the user changes the selected statistics group', (done) => {
+      const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      statisticsToReturn['Fall 2019-2020'] = [];
+      statisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      const currentSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(currentSeason));
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const expandedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
+      expandedStatsGroupButton.click();
+      fixture.detectChanges();
+
+      const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
+      expect(selectedButtonToggle.textContent).toBe('Expanded');
+      statisticsShellComponent.selectedStatisticsGroup$.pipe(take(1)).subscribe(selectedStatisticsGroup => {
+        expect(selectedStatisticsGroup).toBe('expanded');
+        done();
+      });
+    });
   });
 
   describe('statistics-table', () => {

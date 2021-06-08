@@ -3,7 +3,9 @@
 <statistics-selector
   [playerHittingStatistics]="playerHittingStatistics$ | async"
   [currentSeason]="currentSeason$ | async"
+  [selectedStatisticsGroup]="selectedStatisticsGroup$ | async"
   (seasonChanged)="changeSeason($event)"
+  (statisticsGroupChanged)="changeStatisticsGroup($event)"
 ></statistics-selector>
 
 <div></div>

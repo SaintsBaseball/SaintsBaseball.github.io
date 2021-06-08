@@ -12,3 +12,8 @@ export const getCurrentSeason = createSelector(
   getStatisticFeatureState,
   state => state.currentSeason
 )
+
+export const getSelectedStatisticsGroup = createSelector(
+  getStatisticFeatureState,
+  state => state.selectedStatisticsGroup
+)
