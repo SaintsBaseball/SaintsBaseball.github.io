@@ -14,6 +14,7 @@ import * as appActions from 'src/app/state/app.actions';
 import * as statisticActions from '../../state/statistic.actions';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -367,11 +368,22 @@ describe('StatisticsShellComponent', () => {
     const statsTableUnselectedHeaderCellSelector = `${statsTableHeaderCellSelector} div:not(${materialSortedHeaderColumnClass})`;
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
+    const expectedStandardStatisticsKeys = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
 
     let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
 
     function getSelectedTableBodyCells(selectedColumn: string): NodeListOf<Element> {
       return nativeElement.querySelectorAll(`${statsTableBodyCellSelector}.mat-column-${selectedColumn}`);
+    }
+    
+    function verifyStatsTableBodyContents(expectedPlayerSeasonStats: PlayerHittingStatistics[], expectedHeaderColumns: string[], actualCellsInTableBody: NodeListOf<Element>){
+      let columnInBodyRowIndex = 0;
+      expectedPlayerSeasonStats.forEach(playerStats => {
+        expectedHeaderColumns.forEach(statisticKey => {
+          expect(actualCellsInTableBody[columnInBodyRowIndex].textContent).toBe(playerStats[statisticKey].toString());
+          columnInBodyRowIndex++;
+        });
+      });
     }
 
     beforeEach(() => {
@@ -411,7 +423,7 @@ describe('StatisticsShellComponent', () => {
       expect(allRowsInBody.length).toBe(0);
     });
 
-    it('should populate the table with stats from season when a valid option is selected', () => {
+    it('should populate the table with standard group of stats from season when a valid option is selected', () => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
@@ -420,23 +432,16 @@ describe('StatisticsShellComponent', () => {
       expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
       expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
       const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
-      const expectedHeaderColumns = Object.keys(expectedPlayerSeasonStats[0]);
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      expect(allColumnsInHeadRow.length).toBe(expectedHeaderColumns.length);
+      expect(allColumnsInHeadRow.length).toBe(expectedStandardStatisticsKeys.length);
       allColumnsInHeadRow.forEach((column, index) => {
-        expect(column.textContent).toBe(expectedHeaderColumns[index]);
+        expect(column.textContent).toBe(expectedStandardStatisticsKeys[index]);
       });
       expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
-      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedHeaderColumns.length);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedStandardStatisticsKeys.length);
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should not be sorted by default', () => {
@@ -490,13 +495,7 @@ describe('StatisticsShellComponent', () => {
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should sort the statistics ascending when sorting by player name', () => {
@@ -523,13 +522,7 @@ describe('StatisticsShellComponent', () => {
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should sort the statistics descending when sorting by statistic', () => {
@@ -556,13 +549,7 @@ describe('StatisticsShellComponent', () => {
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should sort the statistics in reverse order of selected stat when the same stat is selected', () => {
@@ -586,7 +573,6 @@ describe('StatisticsShellComponent', () => {
       const expectedPlayerSeasonStats = [playerNumber3, playerNumber4];
       const selectedHeaderColumns = nativeElement.querySelectorAll(statsTableSelectedHeaderCellSelector);
       expect(selectedHeaderColumns.length).toBe(1);
-
       const selectedColumnElementsInBodyRows = getSelectedTableBodyCells(columnToSelect);
       expect(selectedColumnElementsInBodyRows.length).toBe(expectedPlayerSeasonStats.length);
       selectedColumnElementsInBodyRows.forEach((columnElements, index) => {
@@ -594,13 +580,7 @@ describe('StatisticsShellComponent', () => {
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should return the statistics to the original order when selecting a statistic three times', () => {
@@ -628,13 +608,7 @@ describe('StatisticsShellComponent', () => {
 
       const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should be sorted by the same statistic when changing seasons', () => {
@@ -667,13 +641,7 @@ describe('StatisticsShellComponent', () => {
         expect(columnElements.textContent).toBe(statsForPlayer[columnToSelect].toString());
       });
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      let columnInBodyRowIndex = 0;
-      expectedPlayerSeasonStats.forEach(playerStats => {
-        Object.values(playerStats).forEach(statistic => {
-          expect(allColumnsInBodyRows[columnInBodyRowIndex].textContent).toBe(statistic.toString());
-          columnInBodyRowIndex++;
-        });
-      });
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should have a tooltip on the headers for what the abbreviations stand for', () => {

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
@@ -15,9 +15,15 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() selectedStatistic: string;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
+  displayedColumns: string[] = [];
+  private standardStatisticColumns: string[] = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
 
   ngOnChanges(): void {    
-    this.dataSource.data = this.playerHittingStatistics[this.currentSeason] || [];
+    this.dataSource.data = this.playerHittingStatistics[this.currentSeason] ?? [];
+
+    if (this.dataSource.data.length > 0) {
+      this.displayedColumns = this.standardStatisticColumns;
+    }
   }
 
   ngAfterViewInit(): void {
