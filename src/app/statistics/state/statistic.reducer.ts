@@ -3,7 +3,7 @@ import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
   currentSeason: string;
-  selectedStatisticsGroup: string;
+  selectedStatisticsGroup: StatisticGroups;
 }
 
 const initialState: StatisticState = {
