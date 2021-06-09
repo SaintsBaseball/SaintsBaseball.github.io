@@ -1,3 +1,4 @@
+import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
@@ -7,7 +8,7 @@ export interface StatisticState {
 
 const initialState: StatisticState = {
   currentSeason: '',
-  selectedStatisticsGroup: 'standard'
+  selectedStatisticsGroup: StatisticGroups.standard
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {

@@ -5,6 +5,7 @@ import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 
 @Component({
   selector: 'statistics-shell',
@@ -31,7 +32,7 @@ export class StatisticsShellComponent implements OnInit {
     this.store.dispatch(new statisticActions.ChangeSeason(seasonName));
   }
 
-  changeStatisticsGroup(statisticsGroupName: string): void {
+  changeStatisticsGroup(statisticsGroupName: StatisticGroups): void {
     this.store.dispatch(new statisticActions.ChangeStatisticsGroup(statisticsGroupName));
   }
 }
