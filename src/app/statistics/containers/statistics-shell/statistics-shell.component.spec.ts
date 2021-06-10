@@ -15,7 +15,7 @@ import * as statisticActions from '../../state/statistic.actions';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-group';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;

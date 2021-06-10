@@ -5,7 +5,7 @@ import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
-import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-group';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 
 @Component({

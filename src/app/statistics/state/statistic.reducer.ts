@@ -1,5 +1,5 @@
 import { BaseballSeason } from 'src/app/types/baseball-season';
-import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-group';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
