@@ -21,7 +21,7 @@ export class PlayerHittingStatistics {
   HBP: number;
   SAC: number;
   SF: number;
-  GDP: number;
+  GIDP: number;
   GO: number;
   AO: number;
   'GO/AO': string;
