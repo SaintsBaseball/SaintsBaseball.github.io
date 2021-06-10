@@ -11,6 +11,6 @@ export class StatisticsService implements IStatisticsService {
   constructor(@Inject('IRequestService') private requestService: IRequestService) { }
 
   getPlayerHittingStatistics(): Observable<PlayerHittingStatisticsDatabaseTable> {
-    return this.requestService.get<PlayerHittingStatisticsDatabaseTable>('api/stats');
+    return this.requestService.get<PlayerHittingStatisticsDatabaseTable>('api/hittingStatistics');
   }
 }

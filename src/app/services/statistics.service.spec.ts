@@ -32,7 +32,7 @@ describe('StatisticsService', () => {
       statisticsService.getPlayerHittingStatistics();
 
       expect(requestServiceMock.get.callCount).toBe(1);
-      expect(requestServiceMock.get.args[0][0]).toBe('api/stats');
+      expect(requestServiceMock.get.args[0][0]).toBe('api/hittingStatistics');
     });
 
     it('should return an observable of the requested statistics', (done) => {
