@@ -294,7 +294,7 @@ describe('StatisticsShellComponent', () => {
       const buttonToggles = buttonToggleGroup.querySelectorAll('mat-button-toggle');
       expect(buttonToggles.length).toBe(2);
       expect(buttonToggles[0].textContent).toBe('Standard');
-      expect(buttonToggles[1].textContent).toBe('Expanded');
+      expect(buttonToggles[1].textContent).toBe('Advanced');
     });
 
     it('should not give the user the option to select the group of statistics when no season is selected', () => {
@@ -340,7 +340,7 @@ describe('StatisticsShellComponent', () => {
       fixture.detectChanges();
 
       const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
-      expect(selectedButtonToggle.textContent).toBe('Expanded');
+      expect(selectedButtonToggle.textContent).toBe('Advanced');
       statisticsShellComponent.selectedStatisticsGroup$.pipe(take(1)).subscribe(selectedStatisticsGroup => {
         expect(selectedStatisticsGroup).toBe('expanded');
         done();
