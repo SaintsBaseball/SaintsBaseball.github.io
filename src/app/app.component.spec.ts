@@ -79,6 +79,14 @@ describe('AppComponent', () => {
       expect(statisticsServiceMock.getPlayerHittingStatistics.callCount).toBe(1);
     });
 
+    it('should load the player pitching statistics', () => {
+      spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics');
+
+      appComponent.ngOnInit();
+
+      expect(statisticsServiceMock.getPlayerPitchingStatistics).toHaveBeenCalledTimes(1);
+    });
+
     it('should update the statistics on successful load', (done) => {
       const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();

@@ -1,6 +1,7 @@
 import * as sinon from 'sinon';
-import { of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { IStatisticsService } from '../interfaces/i-statistics-service';
+import { PlayerPitchingStatisticsDatabaseTable } from '../in-memory-data-service/player-pitching-statistics-database-table';
 
 export class StatisticsServiceMock implements IStatisticsService {
   getPlayerHittingStatisticsReturnValues: any[][] = [];
@@ -20,4 +21,8 @@ export class StatisticsServiceMock implements IStatisticsService {
 
     return of(data);
   });
+
+  getPlayerPitchingStatistics(): Observable<PlayerPitchingStatisticsDatabaseTable> {
+    throw new Error('Method not implemented.');
+  }
 }

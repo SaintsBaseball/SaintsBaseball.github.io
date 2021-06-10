@@ -6,6 +6,7 @@ export enum AppActionTypes {
   Load = '[App] Load',
   LoadSuccess = '[App] Load Success',
   LoadFail = '[App] Load Fail',
+  LoadPitchingStatistics = '[App] Load Pitching Statistics',
   FormatStatsForEachPlayer = '[App] Format Stats For Each Player',
   FormatSuccess = '[App] Format Success'
 }
@@ -22,6 +23,10 @@ export class LoadSuccess implements Action {
 
 export class LoadFail implements Action {
   readonly type = AppActionTypes.LoadFail;
+}
+
+export class LoadPitchingStatistics implements Action {
+  readonly type = AppActionTypes.LoadPitchingStatistics;
 }
 
 export class FormatStatsForEachPlayer implements Action {

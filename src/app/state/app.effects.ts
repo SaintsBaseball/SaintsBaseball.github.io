@@ -26,6 +26,19 @@ export class AppEffects {
   );
 
   @Effect()
+  loadPitchingStatistics$ = this.actions$.pipe(
+    ofType(appActions.AppActionTypes.LoadPitchingStatistics),
+    mergeMap(() => this.statisticsService.getPlayerPitchingStatistics())
+    // .pipe(
+      // switchMap(statistics => [
+      //   (new appActions.LoadSuccess(statistics)),
+      //   (new appActions.FormatStatsForEachPlayer(statistics))
+      // ]),
+      // catchError(() => of(new appActions.LoadFail()))
+    // ))
+  );
+
+  @Effect()
   formatStatsForEachPlayer$ = this.actions$.pipe(
     ofType(appActions.AppActionTypes.FormatStatsForEachPlayer),
     map((formatStatsForEachPlayerAction: appActions.FormatStatsForEachPlayer) => {
