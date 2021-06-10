@@ -20,10 +20,10 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
   displayedColumns: string[] = [];
   private standardStatisticColumns: string[] = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
-  private expandedStatisticColumns: string[] = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
+  private advancedStatisticColumns: string[] = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
   private statisticsGroupToColumnsDictionary = {
     standard: this.standardStatisticColumns,
-    expanded: this.expandedStatisticColumns
+    advanced: this.advancedStatisticColumns
   };
 
   ngOnChanges(): void {    

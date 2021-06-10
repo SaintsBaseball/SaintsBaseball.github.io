@@ -17,8 +17,8 @@ export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
   playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
-  currentSeason$: Observable<string>;
-  selectedStatisticsGroup$: Observable<string>;
+  currentSeason$: Observable<BaseballSeason>;
+  selectedStatisticsGroup$: Observable<StatisticGroups>;
 
   constructor(private store: Store<fromStatistics.State>) { }
 

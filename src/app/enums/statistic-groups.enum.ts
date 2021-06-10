@@ -1,4 +1,4 @@
 export enum StatisticGroups {
   standard = 'standard',
-  expanded = 'expanded'
+  advanced = 'advanced'
 }

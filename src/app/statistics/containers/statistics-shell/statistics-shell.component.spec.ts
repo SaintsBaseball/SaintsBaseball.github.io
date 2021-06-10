@@ -279,7 +279,7 @@ describe('StatisticsShellComponent', () => {
       expect(selectElement.textContent).toBe(currentSeason);
     });
 
-    it('should allow the user to select whether they want to select standard or expanded statistics', () => {
+    it('should allow the user to select whether they want to select standard or advanced statistics', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
@@ -335,14 +335,14 @@ describe('StatisticsShellComponent', () => {
       fixture.detectChanges();
 
       const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
-      const expandedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
-      expandedStatsGroupButton.click();
+      const advancedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
+      advancedStatsGroupButton.click();
       fixture.detectChanges();
 
       const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
       expect(selectedButtonToggle.textContent).toBe('Advanced');
       statisticsShellComponent.selectedStatisticsGroup$.pipe(take(1)).subscribe(selectedStatisticsGroup => {
-        expect(selectedStatisticsGroup).toBe('expanded');
+        expect(selectedStatisticsGroup).toBe(StatisticGroups.advanced);
         done();
       });
     });
@@ -370,7 +370,7 @@ describe('StatisticsShellComponent', () => {
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const expectedStandardStatisticsKeys = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
-    const expectedExpandedStatisticsKeys = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
+    const expectedAdvancedStatisticsKeys = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
 
     let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
 
@@ -432,11 +432,11 @@ describe('StatisticsShellComponent', () => {
       verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
     });
     
-    it('should populate the table with expanded group of stats from season when a valid option is selected', () => {
+    it('should populate the table with advanced group of stats from season when a valid option is selected', () => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
-      store.dispatch(new statisticActions.ChangeStatisticsGroup(StatisticGroups.expanded));
+      store.dispatch(new statisticActions.ChangeStatisticsGroup(StatisticGroups.advanced));
       fixture.detectChanges();
 
       expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
@@ -445,13 +445,13 @@ describe('StatisticsShellComponent', () => {
       const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
       const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
-      expect(allColumnsInHeadRow.length).toBe(expectedExpandedStatisticsKeys.length);
+      expect(allColumnsInHeadRow.length).toBe(expectedAdvancedStatisticsKeys.length);
       allColumnsInHeadRow.forEach((column, index) => {
-        expect(column.textContent).toBe(expectedExpandedStatisticsKeys[index]);
+        expect(column.textContent).toBe(expectedAdvancedStatisticsKeys[index]);
       });
       expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
-      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedExpandedStatisticsKeys.length);
-      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedExpandedStatisticsKeys, allColumnsInBodyRows);
+      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedAdvancedStatisticsKeys.length);
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedAdvancedStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should not be sorted by default', () => {
