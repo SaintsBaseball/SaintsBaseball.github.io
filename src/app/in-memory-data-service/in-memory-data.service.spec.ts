@@ -14,11 +14,18 @@ describe('InMemoryDataService', () => {
   });
 
   describe('createDb', () => {
-    it('should create the database with the statistics', () => {
+    it('should create the database with the hitting statistics', () => {
       const actualDatabase = inMemoryStatsDataService.createDb();
 
       expect(typeof actualDatabase).toBe('object');
       expect(actualDatabase.hittingStatistics).toBeTruthy();
+    });
+
+    it('should create the database with the pitching statistics', () => {
+      const actualDatabase = inMemoryStatsDataService.createDb();
+
+      expect(typeof actualDatabase).toBe('object');
+      expect(actualDatabase.pitchingStatistics).toBeTruthy();
     });
   });
 });
