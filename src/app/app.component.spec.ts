@@ -4,7 +4,6 @@ import { take } from 'rxjs/operators';
 import { StoreModule, select, Store } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppComponent } from './app.component';
-import { StatisticsServiceMock } from './testClasses/statistics-service-mock';
 import { AppEffects } from './state/app.effects';
 import { PlayerHittingStatisticsDatabaseTable } from './in-memory-data-service/player-hitting-statistics-database-table';
 import * as fromRoot from './state';
@@ -17,6 +16,8 @@ import { SocialMediaShellComponent } from './social-media/containers/social-medi
 import { MaterialModule } from './material/material.module';
 import { BlankComponent } from './testClasses/blank-component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { of, throwError } from 'rxjs';
+import { StatisticsServiceMock } from './testClasses/statistics-service-mock';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -25,7 +26,7 @@ describe('AppComponent', () => {
   let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
-  beforeEach(() => {
+  beforeEach(() => {    
     statisticsServiceMock = new StatisticsServiceMock();
 
     TestBed.configureTestingModule({
@@ -64,6 +65,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
     store = TestBed.inject(Store);
+    //statisticsServiceMock = TestBed.inject(StatisticsService);
   });
 
   it('should create the app', () => {
@@ -72,11 +74,11 @@ describe('AppComponent', () => {
 
   describe('ngOnInit', () => {
     it('should load the player hitting statistics', () => {
-      statisticsServiceMock.getPlayerHittingStatistics.resetHistory();
+      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics');
 
       appComponent.ngOnInit();
 
-      expect(statisticsServiceMock.getPlayerHittingStatistics.callCount).toBe(1);
+      expect(statisticsServiceMock.getPlayerHittingStatistics).toHaveBeenCalledTimes(1);
     });
 
     it('should load the player pitching statistics', () => {
@@ -88,7 +90,6 @@ describe('AppComponent', () => {
     });
 
     it('should update the statistics on successful load', (done) => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [
         {
@@ -121,11 +122,11 @@ describe('AppComponent', () => {
           AO: 10,
           'GO/AO': '0.70',
           PA: 31,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         },
         {
@@ -158,16 +159,16 @@ describe('AppComponent', () => {
           AO: 4,
           'GO/AO': '2.00',
           PA: 33,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         }
       ];
       statisticsToReturn['Spring 2019'] = [];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(of(statisticsToReturn));
 
       appComponent.ngOnInit();
 
@@ -179,8 +180,7 @@ describe('AppComponent', () => {
 
     it('should populate the error message if failed to load statistics', (done) => {
       const getPlayerHittingStatisticsError = new Error('Some error');
-      const statisticsToReturn = null;
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(throwError(getPlayerHittingStatisticsError));
 
       appComponent.ngOnInit();
 
@@ -201,7 +201,6 @@ describe('AppComponent', () => {
     });
 
     it('should update the statistics for each player on successful load', (done) => {
-      const getPlayerHittingStatisticsError = null;
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [
         {
@@ -234,11 +233,11 @@ describe('AppComponent', () => {
           AO: 10,
           'GO/AO': '0.70',
           PA: 31,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         },
         {
@@ -271,11 +270,11 @@ describe('AppComponent', () => {
           AO: 4,
           'GO/AO': '2.00',
           PA: 33,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         }
       ];
@@ -310,11 +309,11 @@ describe('AppComponent', () => {
           AO: 10,
           'GO/AO': '0.70',
           PA: 31,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         },
         {
@@ -347,15 +346,15 @@ describe('AppComponent', () => {
           AO: 10,
           'GO/AO': '0.70',
           PA: 31,
-          BABIP: '0.00', 
-          ISO: '0.10', 
-          'AB/HR': '0.20', 
-          'BB/K': '0.30', 
-          'BB%': '0.40', 
+          BABIP: '0.00',
+          ISO: '0.10',
+          'AB/HR': '0.20',
+          'BB/K': '0.30',
+          'BB%': '0.40',
           'SO%': '0.50'
         }
       ];
-      statisticsServiceMock.getPlayerHittingStatisticsReturnValues.push([getPlayerHittingStatisticsError, statisticsToReturn]);
+      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(of(statisticsToReturn));
 
       appComponent.ngOnInit();
 
@@ -433,7 +432,7 @@ describe('AppComponent', () => {
       sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
       expect(sidenavElementOpened).toBeFalsy();
     });
-    
+
     it('should close the sidenav when the link to the homepage is clicked while the sidenav is open', () => {
       const sidenavButton = matToolbarElement.querySelector('button');
       sidenavButton.click();
@@ -450,7 +449,7 @@ describe('AppComponent', () => {
       sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
       expect(sidenavElementOpened).toBeFalsy();
     });
-        
+
     it('should not open the sidenav when the link to the homepage is clicked while the sidenav is closed', () => {
       expect(appComponent.sidenavOpened).toBeFalse();
       let sidenavElementOpened = nativeElement.querySelector('mat-sidenav-container > mat-sidenav.mat-drawer-opened');
