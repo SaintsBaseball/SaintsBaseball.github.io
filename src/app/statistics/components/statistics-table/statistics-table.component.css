@@ -10,18 +10,24 @@ th.mat-header-cell {
     background-color: lightgray;
     border-right: 0.063rem black solid;
     color: #010150;
-    padding-left: 0.875rem;
+    padding-left: 1.5rem;
+    padding-right: 0.5665rem;
+    white-space: nowrap;
 }
 
 th.mat-header-cell:first-of-type {
-    padding-left: 0.875rem;
+    padding-left: 1.5rem;
 }
 
 td.mat-cell:first-of-type {
     padding-left: 0;
 }
 
-th.mat-header-cell:last-of-type, td.mat-cell:last-of-type {
+th.mat-header-cell:last-of-type {
+    padding-right: 0.5665rem;
+}
+
+td.mat-cell:last-of-type {
     padding-right: 0;
 }
 
