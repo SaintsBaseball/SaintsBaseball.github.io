@@ -15,6 +15,7 @@ import * as statisticActions from '../../state/statistic.actions';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
+import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -98,7 +99,7 @@ describe('StatisticsShellComponent', () => {
           SF: 2,
           TB: 21,
           XBH: 4,
-          GDP: 1,
+          GIDP: 1,
           GO: 7,
           AO: 10,
           'GO/AO': '0.70',
@@ -135,7 +136,7 @@ describe('StatisticsShellComponent', () => {
           SF: 1,
           TB: 24,
           XBH: 2,
-          GDP: 3,
+          GIDP: 3,
           GO: 8,
           AO: 4,
           'GO/AO': '2.00',
@@ -349,16 +350,16 @@ describe('StatisticsShellComponent', () => {
 
   describe('statistics-table', () => {
     const playerNumber3 = {
-      '#': 3, Player: 'this is my bro', G: 17, AB: 63, R: 9, H: 19, '2B': 1, '3B': 0, HR: 0, RBI: 11, BB: 7, SO: 19, SB: 3, CS: 1, AVG: '0.302', OBP: '0.380', SLG: '0.317', OPS: '0.697', IBB: 0, HBP: 1, SAC: 0, SF: 0, TB: 20, XBH: 1, GDP: 1, GO: 6, AO: 12, 'GO/AO': '0.50', PA: 71, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
+      '#': 3, Player: 'this is my bro', G: 17, AB: 63, R: 9, H: 19, '2B': 1, '3B': 0, HR: 0, RBI: 11, BB: 7, SO: 19, SB: 3, CS: 1, AVG: '0.302', OBP: '0.380', SLG: '0.317', OPS: '0.697', IBB: 0, HBP: 1, SAC: 0, SF: 0, TB: 20, XBH: 1, GIDP: 1, GO: 6, AO: 12, 'GO/AO': '0.50', PA: 71, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber4 = {
-      '#': 4, Player: 'real estate', G: 12, AB: 44, R: 13, H: 15, '2B': 1, '3B': 1, HR: 1, RBI: 12, BB: 6, SO: 15, SB: 1, CS: 0, AVG: '0.341', OBP: '0.431', SLG: '0.477', OPS: '0.908', IBB: 0, HBP: 1, SAC: 1, SF: 0, TB: 21, XBH: 3, GDP: 0, GO: 7, AO: 7, 'GO/AO': '1.00', PA: 52, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
+      '#': 4, Player: 'real estate', G: 12, AB: 44, R: 13, H: 15, '2B': 1, '3B': 1, HR: 1, RBI: 12, BB: 6, SO: 15, SB: 1, CS: 0, AVG: '0.341', OBP: '0.431', SLG: '0.477', OPS: '0.908', IBB: 0, HBP: 1, SAC: 1, SF: 0, TB: 21, XBH: 3, GIDP: 0, GO: 7, AO: 7, 'GO/AO': '1.00', PA: 52, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber6 = {
-      '#': 6, Player: 'me', G: 14, AB: 54, R: 11, H: 21, '2B': 1, '3B': 0, HR: 0, RBI: 9, BB: 10, SO: 6, SB: 3, CS: 1, AVG: '0.389', OBP: '0.500', SLG: '0.407', OPS: '0.907', IBB: 0, HBP: 2, SAC: 2, SF: 0, TB: 22, XBH: 1, GDP: 0, GO: 17, AO: 4, 'GO/AO': '4.25', PA: 68, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
+      '#': 6, Player: 'me', G: 14, AB: 54, R: 11, H: 21, '2B': 1, '3B': 0, HR: 0, RBI: 9, BB: 10, SO: 6, SB: 3, CS: 1, AVG: '0.389', OBP: '0.500', SLG: '0.407', OPS: '0.907', IBB: 0, HBP: 2, SAC: 2, SF: 0, TB: 22, XBH: 1, GIDP: 0, GO: 17, AO: 4, 'GO/AO': '4.25', PA: 68, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const playerNumber8 = {
-      '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GDP: 0, GO: 8, AO: 20, 'GO/AO': '0.40', PA: 50, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
+      '#': 8, Player: 'helmet slammer', G: 11, AB: 36, R: 7, H: 6, '2B': 1, '3B': 0, HR: 0, RBI: 4, BB: 9, SO: 4, SB: 5, CS: 0, AVG: '0.167', OBP: '0.347', SLG: '0.194', OPS: '0.541', IBB: 0, HBP: 2, SAC: 1, SF: 2, TB: 7, XBH: 1, GIDP: 0, GO: 8, AO: 20, 'GO/AO': '0.40', PA: 50, BABIP: '0.00', ISO: '0.10', 'AB/HR': '0.20', 'BB/K': '0.30', 'BB%': '0.40', 'SO%': '0.50'
     };
     const materialSortedHeaderColumnClass = '.mat-sort-header-sorted';
     const statsTableSelector = 'table.mat-table';
@@ -369,6 +370,7 @@ describe('StatisticsShellComponent', () => {
     const statsTableBodyRowSelector = statsTableSelector + ' tbody tr';
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const expectedStandardStatisticsKeys = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
+    const expectedExpandedStatisticsKeys = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
 
     let statisticsToReturn: PlayerHittingStatisticsDatabaseTable;
 
@@ -442,6 +444,28 @@ describe('StatisticsShellComponent', () => {
       expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
       expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedStandardStatisticsKeys.length);
       verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardStatisticsKeys, allColumnsInBodyRows);
+    });
+    
+    it('should populate the table with expanded group of stats from season when a valid option is selected', () => {
+      const validSeason = 'Spring 2019';
+
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      store.dispatch(new statisticActions.ChangeStatisticsGroup(StatisticGroups.expanded));
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
+      const expectedPlayerSeasonStats = statisticsToReturn[validSeason];
+      const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
+      const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
+      const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
+      expect(allColumnsInHeadRow.length).toBe(expectedExpandedStatisticsKeys.length);
+      allColumnsInHeadRow.forEach((column, index) => {
+        expect(column.textContent).toBe(expectedExpandedStatisticsKeys[index]);
+      });
+      expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
+      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedExpandedStatisticsKeys.length);
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedExpandedStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should not be sorted by default', () => {

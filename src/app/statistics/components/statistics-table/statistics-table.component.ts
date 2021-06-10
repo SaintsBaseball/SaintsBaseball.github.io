@@ -2,6 +2,7 @@ import { Component, Input, ViewChild, OnChanges, AfterViewInit } from '@angular/
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
+import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 
 @Component({
@@ -13,16 +14,22 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: string;
   @Input() selectedStatistic: string;
+  @Input() selectedStatisticsGroup: StatisticGroups;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
   displayedColumns: string[] = [];
   private standardStatisticColumns: string[] = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
+  private expandedStatisticColumns: string[] = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
+  private statisticsGroupToColumnsDictionary = {
+    standard: this.standardStatisticColumns,
+    expanded: this.expandedStatisticColumns
+  };
 
   ngOnChanges(): void {    
     this.dataSource.data = this.playerHittingStatistics[this.currentSeason] ?? [];
 
     if (this.dataSource.data.length > 0) {
-      this.displayedColumns = this.standardStatisticColumns;
+      this.displayedColumns = this.statisticsGroupToColumnsDictionary[this.selectedStatisticsGroup];
     }
   }
 
@@ -62,7 +69,7 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       SF: 'Sacrifice Flys', 
       TB: 'Total Bases', 
       XBH: 'Extra Base Hits', 
-      GDP: 'Grounded Into Double Play', 
+      GIDP: 'Grounded Into Double Play', 
       GO: 'Ground Outs', 
       AO: 'Fly Outs', 
       'GO/AO': 'Ground Outs Per Fly Out', 
