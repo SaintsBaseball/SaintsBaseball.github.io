@@ -5,6 +5,7 @@ import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statisti
 import { StatisticGroup } from 'src/app/types/statistic-group';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
+import { statisticGroupToStatisticKeys } from 'src/app/constants/statistic-group-to-statistic-keys';
 
 @Component({
   selector: 'statistics-table',
@@ -19,18 +20,12 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
   displayedColumns: string[] = [];
-  private standardStatisticColumns: string[] = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
-  private advancedStatisticColumns: string[] = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
-  private statisticsGroupToColumnsDictionary = {
-    standard: this.standardStatisticColumns,
-    advanced: this.advancedStatisticColumns
-  };
 
   ngOnChanges(): void {    
     this.dataSource.data = this.playerHittingStatistics[this.currentSeason] ?? [];
 
     if (this.dataSource.data.length > 0) {
-      this.displayedColumns = this.statisticsGroupToColumnsDictionary[this.selectedStatisticsGroup];
+      this.displayedColumns = statisticGroupToStatisticKeys[this.selectedStatisticsGroup];
     }
   }
 
