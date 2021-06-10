@@ -18,6 +18,7 @@ import { BlankComponent } from './testClasses/blank-component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { StatisticsServiceMock } from './testClasses/statistics-service-mock';
+import { PlayerPitchingStatisticsDatabaseTable } from './in-memory-data-service/player-pitching-statistics-database-table';
 
 describe('AppComponent', () => {
   let fixture: ComponentFixture<AppComponent>;
@@ -88,7 +89,7 @@ describe('AppComponent', () => {
       expect(statisticsServiceMock.getPlayerPitchingStatistics).toHaveBeenCalledTimes(1);
     });
 
-    it('should update the statistics on successful load', (done) => {
+    it('should update the stores hitting statistics on successful load', (done) => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [
         {
@@ -172,6 +173,22 @@ describe('AppComponent', () => {
       appComponent.ngOnInit();
 
       store.pipe(select(fromRoot.getPlayerHittingStatistics, take(1))).subscribe(stats => {
+        expect(stats).toBe(statisticsToReturn);
+        done();
+      });
+    });
+
+    it('should update the stores pitching statistics on successful load', (done) => {
+      const statisticsToReturn = new PlayerPitchingStatisticsDatabaseTable();
+      statisticsToReturn['Spring 2021'] = [
+        {"#":4,"Player":"real estate","W":0,"L":0,"ERA":".--","G":0,"GS":0,"CG":0,"SHO":0,"SV":0,"SVO":0,"IP":0,"H":0,"R":0,"ER":0,"HR":0,"HB":0,"BB":0,"SO":0,"AB":0,"WHIP":".--","AVG":".---","TBF":0,"NP":0,"P/IP":".--","QS":0,"GF":0,"HLD":0,"IBB":0,"WP":0,"BK":0,"SF":0,"GDP":0,"GO":0,"AO":0,"GO/AO":".--","SO/9":".--","BB/9":".--","K/BB":".--","BABIP":".---","SB":0,"CS":0,"PK":0},
+        {"#":6,"Player":"yours truly","W":0,"L":0,"ERA":".--","G":0,"GS":0,"CG":0,"SHO":0,"SV":0,"SVO":0,"IP":0,"H":0,"R":0,"ER":0,"HR":0,"HB":0,"BB":0,"SO":0,"AB":0,"WHIP":".--","AVG":".---","TBF":0,"NP":0,"P/IP":".--","QS":0,"GF":0,"HLD":0,"IBB":0,"WP":0,"BK":0,"SF":0,"GDP":0,"GO":0,"AO":0,"GO/AO":".--","SO/9":".--","BB/9":".--","K/BB":".--","BABIP":".---","SB":0,"CS":0,"PK":0}
+      ];
+      spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics').and.returnValue(of(statisticsToReturn));
+
+      appComponent.ngOnInit();
+
+      store.pipe(select(fromRoot.getPlayerPitchingStatistics, take(1))).subscribe(stats => {
         expect(stats).toBe(statisticsToReturn);
         done();
       });

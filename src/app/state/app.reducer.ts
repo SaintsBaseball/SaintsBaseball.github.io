@@ -2,9 +2,11 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 import { AppActions, AppActionTypes } from './app.actions';
 import { State } from '.';
 import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
+import { PlayerPitchingStatisticsDatabaseTable } from '../in-memory-data-service/player-pitching-statistics-database-table';
 
 const initialState: State = {
   playerHittingStatistics: new PlayerHittingStatisticsDatabaseTable(),
+  playerPitchingStatistics: new PlayerPitchingStatisticsDatabaseTable(),
   errorMessage: null,
   statsForEachPlayer: new Map<string, Map<string, PlayerHittingStatistics>>()
 };
@@ -14,8 +16,7 @@ export function reducer(state = initialState, action: AppActions): State {
     case AppActionTypes.LoadSuccess:
       return {
         ...state,
-        playerHittingStatistics: action.payload,
-        errorMessage: null
+        playerHittingStatistics: action.payload
       };
 
     case AppActionTypes.LoadFail:
@@ -24,6 +25,12 @@ export function reducer(state = initialState, action: AppActions): State {
         playerHittingStatistics: new PlayerHittingStatisticsDatabaseTable(),
         errorMessage: 'Could not load statistics',
         statsForEachPlayer: new Map<string, Map<string, PlayerHittingStatistics>>()
+      };
+
+    case AppActionTypes.LoadPitchingStatisticsSuccess:
+      return {
+        ...state,
+        playerPitchingStatistics: action.payload
       };
 
     case AppActionTypes.FormatSuccess:
