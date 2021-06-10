@@ -1,8 +1,9 @@
+import { BaseballSeason } from 'src/app/types/baseball-season';
 import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
-  currentSeason: string;
+  currentSeason: BaseballSeason;
   selectedStatisticsGroup: StatisticGroups;
 }
 

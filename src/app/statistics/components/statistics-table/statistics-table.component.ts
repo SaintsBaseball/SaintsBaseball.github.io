@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
 import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { BaseballSeason } from 'src/app/types/baseball-season';
 
 @Component({
   selector: 'statistics-table',
@@ -12,7 +13,7 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 })
 export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
-  @Input() currentSeason: string;
+  @Input() currentSeason: BaseballSeason;
   @Input() selectedStatistic: string;
   @Input() selectedStatisticsGroup: StatisticGroups;
   @ViewChild(MatSort) sort: MatSort;

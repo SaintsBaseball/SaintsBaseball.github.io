@@ -411,20 +411,6 @@ describe('StatisticsShellComponent', () => {
       expect(allRowsInBody.length).toBe(0);
     });
 
-    it('should not have any rows or columns in table when an invalid option is selected', () => {
-      const invalidSeason = 'this is an invalid season';
-
-      store.dispatch(new statisticActions.ChangeSeason(invalidSeason));
-      fixture.detectChanges();
-
-      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
-      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
-      const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
-      const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
-      expect(allColumnsInHeadRow.length).toBe(0);
-      expect(allRowsInBody.length).toBe(0);
-    });
-
     it('should populate the table with standard group of stats from season when a valid option is selected', () => {
       const validSeason = 'Spring 2019';
 
