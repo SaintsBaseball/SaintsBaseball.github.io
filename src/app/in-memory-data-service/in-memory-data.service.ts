@@ -8,6 +8,6 @@ import hittingStatistics from '../../../filebase/hittingStatisticsFilebase';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb(): SaintsDatabase {
-    return { stats: hittingStatistics };
+    return { hittingStatistics };
   }
 }

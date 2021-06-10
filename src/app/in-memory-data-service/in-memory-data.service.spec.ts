@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { InMemoryDataService } from './in-memory-data.service';
 
 describe('InMemoryDataService', () => {
@@ -19,7 +18,7 @@ describe('InMemoryDataService', () => {
       const actualDatabase = inMemoryStatsDataService.createDb();
 
       expect(typeof actualDatabase).toBe('object');
-      expect(actualDatabase.stats).toBeTruthy();
+      expect(actualDatabase.hittingStatistics).toBeTruthy();
     });
   });
 });
