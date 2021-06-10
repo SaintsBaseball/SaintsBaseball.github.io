@@ -50,7 +50,6 @@ describe('SocialMediaShellComponent', () => {
     let secondFakeSocialMediaAccountInfo: ISocialMediaAccountInfo;
 
     beforeEach(() => {
-      socialMediaAccountInfoFactoryServiceMock.getAccountInfo.resetHistory();
       firstFakeSocialMediaAccountInfo = {
         linkToAccount: 'https://fakeurl.com/',
         linkTitle: 'title of first',
@@ -63,16 +62,15 @@ describe('SocialMediaShellComponent', () => {
         imageSource: 'image_source_of_second',
         imageAlternate: 'alternate name for second'
       };
-      socialMediaAccountInfoFactoryServiceMock.getAccountInfoReturnValues.push(firstFakeSocialMediaAccountInfo);
-      socialMediaAccountInfoFactoryServiceMock.getAccountInfoReturnValues.push(secondFakeSocialMediaAccountInfo);
+      spyOn(socialMediaAccountInfoFactoryServiceMock, 'getAccountInfo').and.returnValues(firstFakeSocialMediaAccountInfo, secondFakeSocialMediaAccountInfo);
     });
 
     it('should get the account info for each social media account', () => {
       socialMediaShellComponent.ngOnInit();
 
-      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo.callCount).toBe(2);
-      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo.args[0][0]).toBe('instagram');
-      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo.args[1][0]).toBe('facebook');
+      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo).toHaveBeenCalledTimes(2);
+      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo).toHaveBeenCalledWith('instagram');
+      expect(socialMediaAccountInfoFactoryServiceMock.getAccountInfo).toHaveBeenCalledWith('facebook');
       expect(socialMediaShellComponent.instagramAccountInfo).toBe(firstFakeSocialMediaAccountInfo);
       expect(socialMediaShellComponent.facebookAccountInfo).toBe(secondFakeSocialMediaAccountInfo);
     });

@@ -65,7 +65,6 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     nativeElement = fixture.nativeElement;
     store = TestBed.inject(Store);
-    //statisticsServiceMock = TestBed.inject(StatisticsService);
   });
 
   it('should create the app', () => {
