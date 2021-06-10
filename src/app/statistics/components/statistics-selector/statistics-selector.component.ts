@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 
@@ -12,9 +12,9 @@ import { BaseballSeason } from 'src/app/types/baseball-season';
 export class StatisticsSelectorComponent implements OnInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: BaseballSeason;
-  @Input() selectedStatisticsGroup: StatisticGroups;
+  @Input() selectedStatisticsGroup: StatisticGroup;
   @Output() seasonChanged = new EventEmitter<string>();
-  @Output() statisticsGroupChanged = new EventEmitter<StatisticGroups>();
+  @Output() statisticsGroupChanged = new EventEmitter<StatisticGroup>();
   selectedStatisticsGroupControl: FormControl;
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class StatisticsSelectorComponent implements OnInit {
     this.seasonChanged.emit(seasonName);
   }
 
-  changeSelectedStatisticsGroup(statisticsGroupName: StatisticGroups): void {
+  changeSelectedStatisticsGroup(statisticsGroupName: StatisticGroup): void {
     this.statisticsGroupChanged.emit(statisticsGroupName);
   }
 }

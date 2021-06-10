@@ -2,7 +2,7 @@ import { Component, Input, ViewChild, OnChanges, AfterViewInit } from '@angular/
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 
@@ -15,7 +15,7 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: BaseballSeason;
   @Input() selectedStatistic: string;
-  @Input() selectedStatisticsGroup: StatisticGroups;
+  @Input() selectedStatisticsGroup: StatisticGroup;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
   displayedColumns: string[] = [];

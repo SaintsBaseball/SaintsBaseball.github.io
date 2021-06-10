@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { BaseballSeason } from 'src/app/types/baseball-season';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 
 export enum StatisticActionTypes {
   ChangeSeason = '[Statistics] Change Season',
@@ -16,7 +16,7 @@ export class ChangeSeason implements Action {
 export class ChangeStatisticsGroup implements Action {
   readonly type = StatisticActionTypes.ChangeStatisticsGroup;
 
-  constructor(public payload: StatisticGroups) { }
+  constructor(public payload: StatisticGroup) { }
 }
 
 export type StatisticActions = ChangeSeason | ChangeStatisticsGroup;

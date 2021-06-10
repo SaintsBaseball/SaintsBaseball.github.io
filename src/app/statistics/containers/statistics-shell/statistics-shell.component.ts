@@ -5,7 +5,7 @@ import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 
 @Component({
@@ -18,7 +18,7 @@ export class StatisticsShellComponent implements OnInit {
   playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
   currentSeason$: Observable<BaseballSeason>;
-  selectedStatisticsGroup$: Observable<StatisticGroups>;
+  selectedStatisticsGroup$: Observable<StatisticGroup>;
 
   constructor(private store: Store<fromStatistics.State>) { }
 
@@ -33,7 +33,7 @@ export class StatisticsShellComponent implements OnInit {
     this.store.dispatch(new statisticActions.ChangeSeason(seasonName));
   }
 
-  changeStatisticsGroup(statisticsGroupName: StatisticGroups): void {
+  changeStatisticsGroup(statisticsGroupName: StatisticGroup): void {
     this.store.dispatch(new statisticActions.ChangeStatisticsGroup(statisticsGroupName));
   }
 }

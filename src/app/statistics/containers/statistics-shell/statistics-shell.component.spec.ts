@@ -15,7 +15,7 @@ import * as statisticActions from '../../state/statistic.actions';
 import { MaterialModule } from 'src/app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;
@@ -342,7 +342,7 @@ describe('StatisticsShellComponent', () => {
       const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
       expect(selectedButtonToggle.textContent).toBe('Advanced');
       statisticsShellComponent.selectedStatisticsGroup$.pipe(take(1)).subscribe(selectedStatisticsGroup => {
-        expect(selectedStatisticsGroup).toBe(StatisticGroups.advanced);
+        expect(selectedStatisticsGroup).toBe('advanced');
         done();
       });
     });
@@ -436,7 +436,7 @@ describe('StatisticsShellComponent', () => {
       const validSeason = 'Spring 2019';
 
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
-      store.dispatch(new statisticActions.ChangeStatisticsGroup(StatisticGroups.advanced));
+      store.dispatch(new statisticActions.ChangeStatisticsGroup('advanced'));
       fixture.detectChanges();
 
       expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();

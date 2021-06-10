@@ -1,15 +1,15 @@
 import { BaseballSeason } from 'src/app/types/baseball-season';
-import { StatisticGroups } from 'src/app/enums/statistic-groups.enum';
+import { StatisticGroup } from 'src/app/types/statistic-groups.enum';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
   currentSeason: BaseballSeason;
-  selectedStatisticsGroup: StatisticGroups;
+  selectedStatisticsGroup: StatisticGroup;
 }
 
 const initialState: StatisticState = {
   currentSeason: '',
-  selectedStatisticsGroup: StatisticGroups.standard
+  selectedStatisticsGroup: 'standard'
 }
 
 export function reducer(state = initialState, action: StatisticActions): StatisticState {
