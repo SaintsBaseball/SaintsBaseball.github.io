@@ -3,6 +3,7 @@ import { IStatisticsService } from '../interfaces/i-statistics-service';
 import { Observable } from 'rxjs';
 import { IRequestService } from '../interfaces/i-request-service';
 import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerPitchingStatisticsDatabaseTable } from '../in-memory-data-service/player-pitching-statistics-database-table';
 
 @Injectable({
   providedIn: 'root'
@@ -12,5 +13,9 @@ export class StatisticsService implements IStatisticsService {
 
   getPlayerHittingStatistics(): Observable<PlayerHittingStatisticsDatabaseTable> {
     return this.requestService.get<PlayerHittingStatisticsDatabaseTable>('api/hittingStatistics');
+  }
+
+  getPlayerPitchingStatistics(): Observable<PlayerPitchingStatisticsDatabaseTable> {
+    return this.requestService.get<PlayerPitchingStatisticsDatabaseTable>('api/pitchingStatistics');
   }
 }
