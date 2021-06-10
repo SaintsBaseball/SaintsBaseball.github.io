@@ -29,10 +29,6 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type {
     margin: 0 0 0 0.125rem;
 }
 
-th:hover {
-    text-decoration: underline;
-}
-
 td {
     border: 0.063rem black solid;
     position: relative;
@@ -40,15 +36,4 @@ td {
 
 tr:hover {
     background-color: #e3f113;
-}
-
-td:hover::after {
-    content: "";
-    position: absolute;
-    background-color: #e3f113;
-    left: 0;
-    top: -312.5rem;
-    height: 625rem;
-    width: 100%;
-    z-index: -1;
 }
