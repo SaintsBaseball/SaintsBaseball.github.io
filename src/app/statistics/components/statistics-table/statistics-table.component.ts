@@ -5,7 +5,7 @@ import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statisti
 import { StatisticGroup } from 'src/app/types/statistic-group';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
-import { statisticGroupToStatisticKeys } from 'src/app/constants/statistic-group-to-statistic-keys';
+import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-group-to-statistic-columns';
 
 @Component({
   selector: 'statistics-table',
@@ -25,7 +25,7 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
     this.dataSource.data = this.playerHittingStatistics[this.currentSeason] ?? [];
 
     if (this.dataSource.data.length > 0) {
-      this.displayedColumns = statisticGroupToStatisticKeys[this.selectedStatisticsGroup];
+      this.displayedColumns = statisticGroupToStatisticColumns[this.selectedStatisticsGroup];
     }
   }
 
