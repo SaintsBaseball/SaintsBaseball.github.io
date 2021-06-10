@@ -8,7 +8,7 @@ import writeToFile from '../services/writeToFile.service.mjs';
 
     const statsObject = convertExcelToJson(sourceFile);
 
-    const filebaseVarName = 'stats';
+    const filebaseVarName = 'hittingStatistics';
     const statsFilebase = 'filebase/hittingStatisticsFilebase.js';
 
     writeToFile(filebaseVarName, statsObject, statsFilebase);
