@@ -30,10 +30,12 @@ describe('StatisticsService', () => {
 
   describe('getPlayerHittingStatistics', () => {
     it('should request the statistics', () => {
+      spyOn(requestServiceMock, 'get');
+      
       statisticsService.getPlayerHittingStatistics();
 
-      expect(requestServiceMock.get.callCount).toBe(1);
-      expect(requestServiceMock.get.args[0][0]).toBe('api/hittingStatistics');
+      expect(requestServiceMock.get).toHaveBeenCalledTimes(1);
+      expect(requestServiceMock.get).toHaveBeenCalledWith('api/hittingStatistics');
     });
 
     it('should return an observable of the requested statistics', (done) => {
@@ -146,10 +148,12 @@ describe('StatisticsService', () => {
 
   describe('getPlayerPitchingStatistics', () => {
     it('should request the statistics', () => {
+      spyOn(requestServiceMock, 'get');
+
       statisticsService.getPlayerPitchingStatistics();
 
-      expect(requestServiceMock.get.callCount).toBe(1);
-      expect(requestServiceMock.get.args[0][0]).toBe('api/pitchingStatistics');
+      expect(requestServiceMock.get).toHaveBeenCalledTimes(1);
+      expect(requestServiceMock.get).toHaveBeenCalledWith('api/pitchingStatistics');
     });
 
     it('should return an observable of the requested statistics', (done) => {
