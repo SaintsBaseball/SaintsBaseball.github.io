@@ -817,12 +817,26 @@ describe('StatisticsShellComponent', () => {
       verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardHittingStatisticsKeys, allColumnsInBodyRows);
     });
 
-    it('should have a tooltip on the headers for what the abbreviations stand for', () => {
+    it('should have a tooltip on the headers for the abbreviations of the hitting statistics', () => {
       const validSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const expectedTooltips = ['', '', 'Games', 'At Bats', 'Runs', 'Hits', 'Doubles', 'Triples', 'Homeruns', 'Runs Batted In', 'Base On Balls', 'Strikeouts', 'Stolen Bases', 'Caught Stealing', 'Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Intentional Walks', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Total Bases', 'Extra Base Hits', 'Grounded Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Plate Appearances', 'Average on Balls in Play', 'Isolated Power', 'At Bats per Home Run', 'Walk to Strikout Ratio', 'Walk Percentage', 'Strikeout Percentage'];
+      const expectedTooltips = ['', '', 'Games', 'At Bats', 'Runs', 'Hits', 'Doubles', 'Triples', 'Home Runs', 'Runs Batted In', 'Walks', 'Strikeouts', 'Stolen Bases', 'Caught Stealing', 'Batting Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Intentional Walks', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Total Bases', 'Extra Base Hits', 'Ground Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Plate Appearances', 'Average on Balls in Play', 'Isolated Power', 'At Bats per Home Run', 'Walk to Strikeout Ratio', 'Walk Percentage', 'Strikeout Percentage'];
+      const tableHeaderColumns = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
+      tableHeaderColumns.forEach((tableHeaderColumn, index) => {        
+        const tooltipMessage = tableHeaderColumn.getAttribute("ng-reflect-message");
+        expect(tooltipMessage).toBe(expectedTooltips[index]);
+      });
+    });
+
+    it('should have a tooltip on the headers for the abbreviations of the pitching statistics', () => {
+      store.dispatch(new statisticActions.ChangeStatisticsType('pitching'));
+      const validSeason = 'Spring 2021';
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      fixture.detectChanges();
+
+      const expectedTooltips = ['', '', 'Wins', 'Losses', 'Earned Run Average', 'Games', 'Games Started', 'Complete Games', 'Shutouts', 'Saves', 'Save Opportunities', 'Innings Pitched', 'Hits', 'Runs', 'Earned Runs', 'Home Runs', 'Hit Batsmen', 'Walks', 'Strikeouts', 'At Bats', 'Walks & Hits Per Inning', 'Batting Average Against', 'Total Batters Faced', 'Number of Pitches', 'Pitches per Inning', 'Quality Starts', 'Games Finished', 'Holds', 'Intentional Walks', 'Wild Pitches', 'Balks', 'Ground Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Strikeouts per 9 IP', 'Walks per 9 IP', 'Strikeout to Walk Rate', 'Average on Balls in Play', 'Stolen Bases Allowed', 'Caught Stealing', 'Pickoffs'];
       const tableHeaderColumns = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       tableHeaderColumns.forEach((tableHeaderColumn, index) => {        
         const tooltipMessage = tableHeaderColumn.getAttribute("ng-reflect-message");

@@ -48,20 +48,18 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   }
 
   getTooltipMessage(statisticKey: string): string {
-    const abbreviationToStatisticDictionary = {
+    const commonAbbreviationToStatisticDictionary = {
       G: 'Games',
       AB: 'At Bats',
       R: 'Runs', 
       H: 'Hits', 
       '2B': 'Doubles', 
       '3B': 'Triples', 
-      HR: 'Homeruns', 
-      RBI : 'Runs Batted In', 
-      BB : 'Base On Balls', 
+      HR: 'Home Runs', 
+      RBI: 'Runs Batted In', 
+      BB: 'Walks', 
       SO: 'Strikeouts',
-      SB :  'Stolen Bases', 
       CS: 'Caught Stealing', 
-      AVG: 'Average', 
       OBP: 'On-Base Percentage', 
       SLG: 'Slugging Percentage', 
       OPS: 'On-Base Plus Slugging', 
@@ -71,7 +69,7 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       SF: 'Sacrifice Flys', 
       TB: 'Total Bases', 
       XBH: 'Extra Base Hits', 
-      GIDP: 'Grounded Into Double Play', 
+      GIDP: 'Ground Into Double Play', 
       GO: 'Ground Outs', 
       AO: 'Fly Outs', 
       'GO/AO': 'Ground Outs Per Fly Out', 
@@ -81,9 +79,46 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       'AB/HR': 'At Bats per Home Run',
       'BB/K': 'Walk to Strikout Ratio',
       'BB%': 'Walk Percentage',
-      'SO%': 'Strikeout Percentage'
+      'SO%': 'Strikeout Percentage',
+      W: 'Wins',
+      L: 'Losses',
+      ERA: 'Earned Run Average',
+      GS: 'Games Started',
+      CG: 'Complete Games',
+      SHO: 'Shutouts',
+      SV: 'Saves',
+      SVO: 'Save Opportunities',
+      IP: 'Innings Pitched',
+      ER: 'Earned Runs',
+      HB: 'Hit Batsmen',
+      WHIP: 'Walks & Hits Per Inning',
+      TBF: 'Total Batters Faced',
+      NP: 'Number of Pitches',
+      'P/IP': 'Pitches per Innings Pitched',
+      QS: 'Quality Starts',
+      GF: 'Games Finished',
+      HLD: 'Holds',
+      WP: 'Wild Pitches',
+      BK: 'Balks',
+      GDP: 'Ground Into Double Play',
+      'SO/9': 'Strikeouts per 9 IP',
+      'BB/9': 'Walks per 9 IP',
+      'K/BB': 'Strikeout to Walk Rate',
+      PK: 'Pickoffs'
     };
 
-    return abbreviationToStatisticDictionary[statisticKey] || '';
+    const hittingAbbreviationToStatisticDictionary = {
+      AVG: 'Batting Average',
+      SB: 'Stolen Bases'
+    };
+
+    const pitchingAbbreviationToStatisticDictionary = {
+      AVG: 'Batting Average Against',
+      SB: 'Stolen Bases Allowed'
+    };
+
+    const abbreviationToStatisticTypeDictionary = this.selectedStatisticsType === 'hitting' ? hittingAbbreviationToStatisticDictionary : pitchingAbbreviationToStatisticDictionary;
+
+    return commonAbbreviationToStatisticDictionary[statisticKey] ?? abbreviationToStatisticTypeDictionary[statisticKey] ?? '';
   }
 }
