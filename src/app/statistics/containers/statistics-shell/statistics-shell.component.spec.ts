@@ -202,7 +202,7 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-selector', () => {
-    it('should have only the label no statistics have been loaded', () => {
+    it('should have only the label when no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
