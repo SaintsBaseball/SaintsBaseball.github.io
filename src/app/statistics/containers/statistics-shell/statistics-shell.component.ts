@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { StatisticGroup } from 'src/app/types/statistic-group';
 import { BaseballSeason } from 'src/app/types/baseball-season';
+import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
 
 @Component({
   selector: 'statistics-shell',
@@ -16,6 +17,7 @@ import { BaseballSeason } from 'src/app/types/baseball-season';
 export class StatisticsShellComponent implements OnInit {
   title: string = 'Saints Statistics';
   playerHittingStatistics$: Observable<PlayerHittingStatisticsDatabaseTable>;
+  playerPitchingStatistics$: Observable<PlayerPitchingStatisticsDatabaseTable>;
   errorMessage$: Observable<string>;
   currentSeason$: Observable<BaseballSeason>;
   selectedStatisticsGroup$: Observable<StatisticGroup>;
@@ -24,6 +26,7 @@ export class StatisticsShellComponent implements OnInit {
 
   ngOnInit(): void {
     this.playerHittingStatistics$ = this.store.pipe(select(fromRoot.getPlayerHittingStatistics));
+    this.playerPitchingStatistics$ = this.store.pipe(select(fromRoot.getPlayerPitchingStatistics));
     this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
     this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
     this.selectedStatisticsGroup$ = this.store.pipe(select(fromStatistics.getSelectedStatisticsGroup));
