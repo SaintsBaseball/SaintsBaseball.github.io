@@ -6,6 +6,8 @@ import { StatisticGroup } from 'src/app/types/statistic-group';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-group-to-statistic-columns';
+import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
+import { StatisticType } from 'src/app/types/statistic-type';
 
 @Component({
   selector: 'statistics-table',
@@ -14,18 +16,22 @@ import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-gr
 })
 export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
+  @Input() playerPitchingStatistics: PlayerPitchingStatisticsDatabaseTable;
   @Input() currentSeason: BaseballSeason;
   @Input() selectedStatistic: string;
   @Input() selectedStatisticsGroup: StatisticGroup;
+  @Input() selectedStatisticsType: StatisticType;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<PlayerHittingStatistics[]> = new MatTableDataSource<PlayerHittingStatistics[]>();
   displayedColumns: string[] = [];
 
-  ngOnChanges(): void {    
-    this.dataSource.data = this.playerHittingStatistics[this.currentSeason] ?? [];
+  ngOnChanges(): void {
+    const statisticsToShow = this.selectedStatisticsType === 'hitting' ? this.playerHittingStatistics : this.playerPitchingStatistics
+    this.dataSource.data = statisticsToShow[this.currentSeason] ?? [];
 
     if (this.dataSource.data.length > 0) {
-      this.displayedColumns = statisticGroupToStatisticColumns[this.selectedStatisticsGroup];
+      const key = `${this.selectedStatisticsType}-${this.selectedStatisticsGroup}`;
+      this.displayedColumns = statisticGroupToStatisticColumns[key];
     }
   }
 
