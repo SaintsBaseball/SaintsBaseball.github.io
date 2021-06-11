@@ -13,12 +13,15 @@ export class StatisticsSelectorComponent implements OnInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
   @Input() currentSeason: BaseballSeason;
   @Input() selectedStatisticsGroup: StatisticGroup;
+  @Input() selectedStatisticsType: string;
   @Output() seasonChanged = new EventEmitter<string>();
   @Output() statisticsGroupChanged = new EventEmitter<StatisticGroup>();
   selectedStatisticsGroupControl: FormControl;
+  selectedStatisticsTypeControl: FormControl;
 
   ngOnInit(): void {
     this.selectedStatisticsGroupControl = new FormControl(this.selectedStatisticsGroup);
+    this.selectedStatisticsTypeControl = new FormControl(this.selectedStatisticsType);
   }
 
   changeSeason(seasonName: string): void {

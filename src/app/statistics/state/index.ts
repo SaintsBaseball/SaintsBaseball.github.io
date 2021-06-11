@@ -17,3 +17,8 @@ export const getSelectedStatisticsGroup = createSelector(
   getStatisticFeatureState,
   state => state.selectedStatisticsGroup
 )
+
+export const getSelectedStatisticsType = createSelector(
+  getStatisticFeatureState,
+  state => state.selectedStatisticsType
+)

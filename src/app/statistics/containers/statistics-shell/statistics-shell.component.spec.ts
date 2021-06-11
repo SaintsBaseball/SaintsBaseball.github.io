@@ -214,6 +214,15 @@ describe('StatisticsShellComponent', () => {
       expect(statisticTypeButtonToggles[1].textContent).toBe('Pitching');
     });
 
+    it('should have hitting statistics selected by default', () => {
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-types');
+      const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
+      expect(selectedButtonToggle.textContent).toBe('Hitting');
+    });
+
     it('should have only the label when no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();

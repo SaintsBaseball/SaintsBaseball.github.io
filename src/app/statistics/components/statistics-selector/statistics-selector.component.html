@@ -1,6 +1,8 @@
-<mat-button-toggle-group id="statistic-types">
-  <mat-button-toggle>Hitting</mat-button-toggle>
-  <mat-button-toggle>Pitching</mat-button-toggle>
+<mat-button-toggle-group 
+  [formControl]="selectedStatisticsTypeControl"
+  id="statistic-types">
+  <mat-button-toggle value="hitting">Hitting</mat-button-toggle>
+  <mat-button-toggle value="pitching">Pitching</mat-button-toggle>
 </mat-button-toggle-group>
 
 <br>

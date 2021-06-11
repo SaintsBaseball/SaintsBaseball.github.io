@@ -21,6 +21,7 @@ export class StatisticsShellComponent implements OnInit {
   errorMessage$: Observable<string>;
   currentSeason$: Observable<BaseballSeason>;
   selectedStatisticsGroup$: Observable<StatisticGroup>;
+  selectedStatisticsType$: Observable<string>;
 
   constructor(private store: Store<fromStatistics.State>) { }
 
@@ -30,6 +31,7 @@ export class StatisticsShellComponent implements OnInit {
     this.errorMessage$ = this.store.pipe(select(fromRoot.getErrorMessage));
     this.currentSeason$ = this.store.pipe(select(fromStatistics.getCurrentSeason));
     this.selectedStatisticsGroup$ = this.store.pipe(select(fromStatistics.getSelectedStatisticsGroup));
+    this.selectedStatisticsType$ = this.store.pipe(select(fromStatistics.getSelectedStatisticsType));
   }
 
   changeSeason(seasonName: BaseballSeason): void {

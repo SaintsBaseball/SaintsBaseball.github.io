@@ -4,6 +4,7 @@
   [playerHittingStatistics]="playerHittingStatistics$ | async"
   [currentSeason]="currentSeason$ | async"
   [selectedStatisticsGroup]="selectedStatisticsGroup$ | async"
+  [selectedStatisticsType]="selectedStatisticsType$ | async"
   (seasonChanged)="changeSeason($event)"
   (statisticsGroupChanged)="changeStatisticsGroup($event)"
 ></statistics-selector>
