@@ -23,7 +23,7 @@ export function reducer(state = initialState, action: AppActions): State {
       return {
         ...state,
         playerHittingStatistics: new PlayerHittingStatisticsDatabaseTable(),
-        errorMessage: 'Could not load statistics',
+        errorMessage: 'Could not load hitting statistics',
         statsForEachPlayer: new Map<string, Map<string, PlayerHittingStatistics>>()
       };
 
@@ -31,6 +31,13 @@ export function reducer(state = initialState, action: AppActions): State {
       return {
         ...state,
         playerPitchingStatistics: action.payload
+      };
+
+    case AppActionTypes.LoadPitchingStatisticsFail:
+      return {
+        ...state,
+        playerPitchingStatistics: new PlayerPitchingStatisticsDatabaseTable(),
+        errorMessage: 'Could not load pitching statistics'
       };
 
     case AppActionTypes.FormatHittingStatisticsSuccess:

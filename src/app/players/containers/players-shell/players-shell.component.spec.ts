@@ -223,7 +223,7 @@ describe('PlayersShellComponent', () => {
   statsForEachPlayerToReturn.set('Charlie', statsForCharlie);
 
   describe('ngOnInit', () => {
-    it('should populate the error message if failed to load statistics', (done) => {
+    it('should populate the error message if failed to load hitting statistics', (done) => {
       store.dispatch(new appActions.LoadHittingStatisticsFail());
 
       playersShellComponent.ngOnInit();
@@ -233,7 +233,7 @@ describe('PlayersShellComponent', () => {
         expect(stats).toEqual(defaultStats);
 
         playersShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
-          expect(errorMessage).toBe('Could not load statistics');
+          expect(errorMessage).toBe('Could not load hitting statistics');
           done();
         });
       });

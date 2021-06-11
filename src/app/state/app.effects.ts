@@ -31,10 +31,8 @@ export class AppEffects {
     mergeMap(() => this.statisticsService.getPlayerPitchingStatistics().pipe(
       switchMap(statistics => [
         (new appActions.LoadPitchingStatisticsSuccess(statistics))
-      ])
-      //   (new appActions.FormatStatsForEachPlayer(statistics))
-      // ]),
-      // catchError(() => of(new appActions.LoadFail()))
+      ]),
+      catchError(() => of(new appActions.LoadPitchingStatisticsFail()))
     ))
   );
 

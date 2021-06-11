@@ -9,6 +9,7 @@ export enum AppActionTypes {
   LoadHittingStatisticsFail = '[App] Load Hitting Statistics Fail',
   LoadPitchingStatistics = '[App] Load Pitching Statistics',
   LoadPitchingStatisticsSuccess = '[App] Load Pitching Statistics Success',
+  LoadPitchingStatisticsFail = '[App] Load Pitching Statistics Fail',
   FormatHittingStatisticsForEachPlayer = '[App] Format Hitting Statistics For Each Player',
   FormatHittingStatisticsSuccess = '[App] Format Hitting Statistics Success'
 }
@@ -37,6 +38,10 @@ export class LoadPitchingStatisticsSuccess implements Action {
   constructor(public payload: PlayerPitchingStatisticsDatabaseTable) { }
 }
 
+export class LoadPitchingStatisticsFail implements Action {
+  readonly type = AppActionTypes.LoadPitchingStatisticsFail;
+}
+
 export class FormatHittingStatisticsForEachPlayer implements Action {
   readonly type = AppActionTypes.FormatHittingStatisticsForEachPlayer;
 
@@ -52,4 +57,5 @@ export class FormatHittingStatisticsSuccess implements Action {
 export type AppActions = LoadHittingStatisticsSuccess
   | LoadHittingStatisticsFail
   | LoadPitchingStatisticsSuccess
+  | LoadPitchingStatisticsFail
   | FormatHittingStatisticsSuccess;

@@ -160,7 +160,7 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should populate the error message if failed to load statistics', (done) => {
+    it('should populate the error message if failed to load hitting statistics', (done) => {
       statisticsShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadHittingStatisticsFail());
 
@@ -169,7 +169,7 @@ describe('StatisticsShellComponent', () => {
         expect(stats).toEqual(defaultStats);
 
         statisticsShellComponent.errorMessage$.pipe(take(1)).subscribe(errorMessage => {
-          expect(errorMessage).toBe('Could not load statistics');
+          expect(errorMessage).toBe('Could not load hitting statistics');
           done();
         });
       });

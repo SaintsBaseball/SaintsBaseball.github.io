@@ -27,7 +27,7 @@ describe('AppComponent', () => {
   let statisticsServiceMock: StatisticsServiceMock;
   let store: Store<fromRoot.State>;
 
-  beforeEach(() => {    
+  beforeEach(() => {
     statisticsServiceMock = new StatisticsServiceMock();
 
     TestBed.configureTestingModule({
@@ -181,8 +181,8 @@ describe('AppComponent', () => {
     it('should update the stores pitching statistics on successful load', (done) => {
       const statisticsToReturn = new PlayerPitchingStatisticsDatabaseTable();
       statisticsToReturn['Spring 2021'] = [
-        {"#":4,"Player":"real estate","W":0,"L":0,"ERA":".--","G":0,"GS":0,"CG":0,"SHO":0,"SV":0,"SVO":0,"IP":0,"H":0,"R":0,"ER":0,"HR":0,"HB":0,"BB":0,"SO":0,"AB":0,"WHIP":".--","AVG":".---","TBF":0,"NP":0,"P/IP":".--","QS":0,"GF":0,"HLD":0,"IBB":0,"WP":0,"BK":0,"SF":0,"GDP":0,"GO":0,"AO":0,"GO/AO":".--","SO/9":".--","BB/9":".--","K/BB":".--","BABIP":".---","SB":0,"CS":0,"PK":0},
-        {"#":6,"Player":"yours truly","W":0,"L":0,"ERA":".--","G":0,"GS":0,"CG":0,"SHO":0,"SV":0,"SVO":0,"IP":0,"H":0,"R":0,"ER":0,"HR":0,"HB":0,"BB":0,"SO":0,"AB":0,"WHIP":".--","AVG":".---","TBF":0,"NP":0,"P/IP":".--","QS":0,"GF":0,"HLD":0,"IBB":0,"WP":0,"BK":0,"SF":0,"GDP":0,"GO":0,"AO":0,"GO/AO":".--","SO/9":".--","BB/9":".--","K/BB":".--","BABIP":".---","SB":0,"CS":0,"PK":0}
+        { "#": 4, "Player": "real estate", "W": 0, "L": 0, "ERA": ".--", "G": 0, "GS": 0, "CG": 0, "SHO": 0, "SV": 0, "SVO": 0, "IP": 0, "H": 0, "R": 0, "ER": 0, "HR": 0, "HB": 0, "BB": 0, "SO": 0, "AB": 0, "WHIP": ".--", "AVG": ".---", "TBF": 0, "NP": 0, "P/IP": ".--", "QS": 0, "GF": 0, "HLD": 0, "IBB": 0, "WP": 0, "BK": 0, "SF": 0, "GDP": 0, "GO": 0, "AO": 0, "GO/AO": ".--", "SO/9": ".--", "BB/9": ".--", "K/BB": ".--", "BABIP": ".---", "SB": 0, "CS": 0, "PK": 0 },
+        { "#": 6, "Player": "yours truly", "W": 0, "L": 0, "ERA": ".--", "G": 0, "GS": 0, "CG": 0, "SHO": 0, "SV": 0, "SVO": 0, "IP": 0, "H": 0, "R": 0, "ER": 0, "HR": 0, "HB": 0, "BB": 0, "SO": 0, "AB": 0, "WHIP": ".--", "AVG": ".---", "TBF": 0, "NP": 0, "P/IP": ".--", "QS": 0, "GF": 0, "HLD": 0, "IBB": 0, "WP": 0, "BK": 0, "SF": 0, "GDP": 0, "GO": 0, "AO": 0, "GO/AO": ".--", "SO/9": ".--", "BB/9": ".--", "K/BB": ".--", "BABIP": ".---", "SB": 0, "CS": 0, "PK": 0 }
       ];
       spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics').and.returnValue(of(statisticsToReturn));
 
@@ -194,7 +194,7 @@ describe('AppComponent', () => {
       });
     });
 
-    it('should populate the error message if failed to load statistics', (done) => {
+    it('should populate the error message if failed to load hitting statistics', (done) => {
       const getPlayerHittingStatisticsError = new Error('Some error');
       spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.returnValue(throwError(getPlayerHittingStatisticsError));
 
@@ -209,9 +209,26 @@ describe('AppComponent', () => {
           expect(statsForEachPlayer).toEqual(defaultStatsForEachPlayer);
 
           store.pipe(select(fromRoot.getErrorMessage, take(1))).subscribe(errorMessage => {
-            expect(errorMessage).toBe('Could not load statistics');
+            expect(errorMessage).toBe('Could not load hitting statistics');
             done();
           });
+        });
+      });
+    });
+
+    it('should populate the error message if failed to load pitching statistics', (done) => {
+      const getPlayerPitchingStatisticsError = new Error('Some error');
+      spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics').and.returnValue(throwError(getPlayerPitchingStatisticsError));
+
+      appComponent.ngOnInit();
+
+      store.pipe(select(fromRoot.getPlayerPitchingStatistics, take(1))).subscribe(stats => {
+        const defaultStats = new PlayerPitchingStatisticsDatabaseTable();
+        expect(stats).toEqual(defaultStats);
+
+        store.pipe(select(fromRoot.getErrorMessage, take(1))).subscribe(errorMessage => {
+          expect(errorMessage).toBe('Could not load pitching statistics');
+          done();
         });
       });
     });
