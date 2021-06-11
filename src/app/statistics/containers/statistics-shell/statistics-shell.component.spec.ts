@@ -481,7 +481,8 @@ describe('StatisticsShellComponent', () => {
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const expectedStandardHittingStatisticsKeys = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
     const expectedAdvancedHittingStatisticsKeys = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
-    const expectedStandardPitchingStatisticsKeys = ['#', 'Player', 'W', 'L', 'ERA', 'G', 'GS', 'CG', 'SHO', 'SV', 'SVO', 'IP', 'H', 'R', 'ER', 'HR', 'HB', 'BB', 'SO', 'WHIP', 'AVG'];
+    const expectedStandardPitchingStatisticsKeys = ['#', 'Player', 'W', 'L', 'ERA', 'G', 'GS', 'CG', 'SHO', 'SV', 'SVO', 'IP', 'H', 'R', 'ER', 'HR', 'HB', 'BB', 'SO', 'AB', 'WHIP', 'AVG'];
+    const expectedAdvancedPitchingStatisticsKeys = ['#', 'Player', 'TBF', 'NP', 'P/IP', 'QS', 'GF', 'HLD', 'IBB', 'WP', 'BK', 'SF', 'GDP', 'GO', 'AO', 'GO/AO', 'SO/9', 'BB/9', 'K/BB', 'BABIP', 'SB', 'CS', 'PK'];
 
     let hittingStatisticsToReturn: PlayerHittingStatisticsDatabaseTable;
     let pitchingStatisticsToReturn: PlayerPitchingStatisticsDatabaseTable;
@@ -591,6 +592,29 @@ describe('StatisticsShellComponent', () => {
       expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
       expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedStandardPitchingStatisticsKeys.length);
       verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedStandardPitchingStatisticsKeys, allColumnsInBodyRows);
+    });
+
+    it('should populate the table with advanced group of pitching stats from season when a valid option is selected', () => {
+      store.dispatch(new statisticActions.ChangeStatisticsType('pitching'));
+      const validSeason = 'Spring 2021';
+
+      store.dispatch(new statisticActions.ChangeSeason(validSeason));
+      store.dispatch(new statisticActions.ChangeStatisticsGroup('advanced'));
+      fixture.detectChanges();
+
+      expect(nativeElement.querySelector(statsTableSelector)).toBeTruthy();
+      expect(nativeElement.querySelector(statsTableHeaderSelector)).toBeTruthy();
+      const expectedPlayerSeasonStats = pitchingStatisticsToReturn[validSeason];
+      const allColumnsInHeadRow = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
+      const allRowsInBody = nativeElement.querySelectorAll(statsTableBodyRowSelector);
+      const allColumnsInBodyRows = nativeElement.querySelectorAll(statsTableBodyCellSelector);
+      expect(allColumnsInHeadRow.length).toBe(expectedAdvancedPitchingStatisticsKeys.length);
+      allColumnsInHeadRow.forEach((column, index) => {
+        expect(column.textContent).toBe(expectedAdvancedPitchingStatisticsKeys[index]);
+      });
+      expect(allRowsInBody.length).toBe(expectedPlayerSeasonStats.length);
+      expect(allColumnsInBodyRows.length).toBe(expectedPlayerSeasonStats.length * expectedAdvancedPitchingStatisticsKeys.length);
+      verifyStatsTableBodyContents(expectedPlayerSeasonStats, expectedAdvancedPitchingStatisticsKeys, allColumnsInBodyRows);
     });
 
     it('should not be sorted by default', () => {
