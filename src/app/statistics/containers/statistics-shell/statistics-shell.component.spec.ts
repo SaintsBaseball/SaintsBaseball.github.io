@@ -176,7 +176,7 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
-    it('should populate the error message if failed to load hitting statistics', (done) => {
+    it('should populate the error message if failed to load', (done) => {
       statisticsShellComponent.ngOnInit();
       store.dispatch(new appActions.LoadHittingStatisticsFail());
 
