@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { StatisticGroup } from 'src/app/types/statistic-group';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
+import { StatisticType } from 'src/app/types/statistic-type';
 
 @Component({
   selector: 'statistics-selector',
@@ -16,7 +17,7 @@ export class StatisticsSelectorComponent implements OnInit {
   @Input() selectedStatisticsType: string;
   @Output() seasonChanged = new EventEmitter<string>();
   @Output() statisticsGroupChanged = new EventEmitter<StatisticGroup>();
-  @Output() statisticsTypeChanged = new EventEmitter<string>();
+  @Output() statisticsTypeChanged = new EventEmitter<StatisticType>();
   selectedStatisticsGroupControl: FormControl;
   selectedStatisticsTypeControl: FormControl;
 
@@ -33,7 +34,7 @@ export class StatisticsSelectorComponent implements OnInit {
     this.statisticsGroupChanged.emit(statisticsGroupName);
   }
 
-  changeSelectedStatisticsType(statisticsTypeName: string): void {
+  changeSelectedStatisticsType(statisticsTypeName: StatisticType): void {
     this.statisticsTypeChanged.emit(statisticsTypeName);
   }
 }

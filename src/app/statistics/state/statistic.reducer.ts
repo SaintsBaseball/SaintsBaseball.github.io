@@ -1,11 +1,12 @@
 import { BaseballSeason } from 'src/app/types/baseball-season';
 import { StatisticGroup } from 'src/app/types/statistic-group';
+import { StatisticType } from 'src/app/types/statistic-type';
 import { StatisticActions, StatisticActionTypes } from './statistic.actions';
 
 export interface StatisticState {
   currentSeason: BaseballSeason;
   selectedStatisticsGroup: StatisticGroup;
-  selectedStatisticsType: string;
+  selectedStatisticsType: StatisticType;
 }
 
 const initialState: StatisticState = {

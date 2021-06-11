@@ -8,6 +8,7 @@ import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-ser
 import { StatisticGroup } from 'src/app/types/statistic-group';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
+import { StatisticType } from 'src/app/types/statistic-type';
 
 @Component({
   selector: 'statistics-shell',
@@ -21,7 +22,7 @@ export class StatisticsShellComponent implements OnInit {
   errorMessage$: Observable<string>;
   currentSeason$: Observable<BaseballSeason>;
   selectedStatisticsGroup$: Observable<StatisticGroup>;
-  selectedStatisticsType$: Observable<string>;
+  selectedStatisticsType$: Observable<StatisticType>;
 
   constructor(private store: Store<fromStatistics.State>) { }
 
@@ -42,7 +43,7 @@ export class StatisticsShellComponent implements OnInit {
     this.store.dispatch(new statisticActions.ChangeStatisticsGroup(statisticsGroupName));
   }
 
-  changeStatisticsType(statisticsTypeName: string): void {
+  changeStatisticsType(statisticsTypeName: StatisticType): void {
     this.store.dispatch(new statisticActions.ChangeStatisticsType(statisticsTypeName));
   }
 }
