@@ -240,6 +240,31 @@ describe('StatisticsShellComponent', () => {
       });
     });
 
+    it('should reset the current season when switching statistic types', (done) => {
+      const hittingStatisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      hittingStatisticsToReturn['Fall 2019-2020'] = [];
+      hittingStatisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(hittingStatisticsToReturn));
+      const pitchingStatisticsToReturn = new PlayerPitchingStatisticsDatabaseTable();
+      pitchingStatisticsToReturn['Spring 2021'] = [];
+      store.dispatch(new appActions.LoadPitchingStatisticsSuccess(pitchingStatisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      const currentSeason = 'Spring 2019';
+      store.dispatch(new statisticActions.ChangeSeason(currentSeason));
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-types');
+      const advancedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
+      advancedStatsGroupButton.click();
+      fixture.detectChanges();
+
+      statisticsShellComponent.currentSeason$.pipe(take(1)).subscribe(currentSeason => {
+        expect(currentSeason).toBe('');
+        done();
+      });
+    });
+
     it('should have only the label when no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -254,7 +279,7 @@ describe('StatisticsShellComponent', () => {
       expect(allOptionsInDropdown.length).toBe(0);
     });
 
-    it('should populate the dropdown with the list of seasons when statistics have been loaded', () => {
+    it('should populate the dropdown with the list of seasons when hitting statistics have been loaded', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];

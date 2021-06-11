@@ -32,7 +32,8 @@ export function reducer(state = initialState, action: StatisticActions): Statist
     case StatisticActionTypes.ChangeStatisticsType:
       return {
         ...state,
-        selectedStatisticsType: action.payload
+        selectedStatisticsType: action.payload,
+        currentSeason: initialState.currentSeason
       };
 
     default:
