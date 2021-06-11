@@ -1,7 +1,8 @@
 <mat-button-toggle-group 
   [formControl]="selectedStatisticsTypeControl"
   (change)="changeSelectedStatisticsType($event.value)"
-  id="statistic-types">
+  id="statistic-types"
+>
   <mat-button-toggle value="hitting">Hitting</mat-button-toggle>
   <mat-button-toggle value="pitching">Pitching</mat-button-toggle>
 </mat-button-toggle-group>
@@ -10,17 +11,22 @@
 
 <mat-form-field>
   <mat-label>Season</mat-label>
+  
   <mat-select 
     *ngIf="selectedStatisticsType === 'hitting'"
     [(value)]="currentSeason" 
-    (selectionChange)="changeSeason($event.value)">
-    <mat-option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
+    (selectionChange)="changeSeason($event.value)"
+  >  
+    <mat-option 
+      *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
       [value]="seasonName">{{seasonName}}</mat-option>
   </mat-select>
+
   <mat-select 
     *ngIf="selectedStatisticsType === 'pitching'"
     [(value)]="currentSeason" 
-    (selectionChange)="changeSeason($event.value)">
+    (selectionChange)="changeSeason($event.value)"  
+  >
     <mat-option 
       *ngFor="let seasonName of playerPitchingStatistics | statisticsToSeason"
       [value]="seasonName">{{seasonName}}</mat-option>
@@ -33,7 +39,8 @@
   *ngIf="currentSeason" 
   [formControl]="selectedStatisticsGroupControl" 
   (change)="changeSelectedStatisticsGroup($event.value)"
-  id="statistic-groups">
+  id="statistic-groups"
+>
   <mat-button-toggle value="standard">Standard</mat-button-toggle>
   <mat-button-toggle value="advanced">Advanced</mat-button-toggle>
 </mat-button-toggle-group>
