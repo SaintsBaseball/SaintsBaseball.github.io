@@ -4,6 +4,7 @@ import { StatisticGroup } from 'src/app/types/statistic-group';
 import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
 import { BaseballSeason } from 'src/app/types/baseball-season';
 import { StatisticType } from 'src/app/types/statistic-type';
+import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
 
 @Component({
   selector: 'statistics-selector',
@@ -12,6 +13,7 @@ import { StatisticType } from 'src/app/types/statistic-type';
 })
 export class StatisticsSelectorComponent implements OnInit {
   @Input() playerHittingStatistics: PlayerHittingStatisticsDatabaseTable;
+  @Input() playerPitchingStatistics: PlayerPitchingStatisticsDatabaseTable;
   @Input() currentSeason: BaseballSeason;
   @Input() selectedStatisticsGroup: StatisticGroup;
   @Input() selectedStatisticsType: string;

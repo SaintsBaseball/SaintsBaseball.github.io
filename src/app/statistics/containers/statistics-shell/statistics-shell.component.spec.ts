@@ -248,7 +248,6 @@ describe('StatisticsShellComponent', () => {
       const pitchingStatisticsToReturn = new PlayerPitchingStatisticsDatabaseTable();
       pitchingStatisticsToReturn['Spring 2021'] = [];
       store.dispatch(new appActions.LoadPitchingStatisticsSuccess(pitchingStatisticsToReturn));
-      statisticsShellComponent.ngOnInit();
       const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       statisticsShellComponent.ngOnInit();
@@ -295,6 +294,35 @@ describe('StatisticsShellComponent', () => {
       const allOptionsInDropdown = document.querySelectorAll('mat-option');
       expect(allOptionsInDropdown.length).toBe(2);
       const expectedOptions = ['Fall 2019-2020', 'Spring 2019'];
+      allOptionsInDropdown.forEach((dropdownOption, index) => {
+        const expectedText = expectedOptions[index];
+        expect(dropdownOption.textContent).toBe(expectedText);
+      });
+    });
+
+    it('should populate the dropdown with the list of seasons when switching to pitching statistics', () => {
+      const hittingStatisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
+      hittingStatisticsToReturn['Fall 2019-2020'] = [];
+      hittingStatisticsToReturn['Spring 2019'] = [];
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(hittingStatisticsToReturn));
+      const pitchingStatisticsToReturn = new PlayerPitchingStatisticsDatabaseTable();
+      pitchingStatisticsToReturn['Spring 2021'] = [];
+      store.dispatch(new appActions.LoadPitchingStatisticsSuccess(pitchingStatisticsToReturn));
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-types');
+      const advancedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
+      advancedStatsGroupButton.click();
+      fixture.detectChanges();
+
+      const selectElement: HTMLSelectElement = nativeElement.querySelector('mat-select');
+      expect(selectElement).not.toBeNull();
+      selectElement.click()
+      fixture.detectChanges();
+      const allOptionsInDropdown = document.querySelectorAll('mat-option');
+      expect(allOptionsInDropdown.length).toBe(1);
+      const expectedOptions = ['Spring 2021'];
       allOptionsInDropdown.forEach((dropdownOption, index) => {
         const expectedText = expectedOptions[index];
         expect(dropdownOption.textContent).toBe(expectedText);

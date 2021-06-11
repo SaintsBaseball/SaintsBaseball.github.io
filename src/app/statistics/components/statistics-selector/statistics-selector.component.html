@@ -10,8 +10,19 @@
 
 <mat-form-field>
   <mat-label>Season</mat-label>
-  <mat-select [(value)]="currentSeason" (selectionChange)="changeSeason($event.value)">
+  <mat-select 
+    *ngIf="selectedStatisticsType === 'hitting'"
+    [(value)]="currentSeason" 
+    (selectionChange)="changeSeason($event.value)">
     <mat-option *ngFor="let seasonName of playerHittingStatistics | statisticsToSeason"
+      [value]="seasonName">{{seasonName}}</mat-option>
+  </mat-select>
+  <mat-select 
+    *ngIf="selectedStatisticsType === 'pitching'"
+    [(value)]="currentSeason" 
+    (selectionChange)="changeSeason($event.value)">
+    <mat-option 
+      *ngFor="let seasonName of playerPitchingStatistics | statisticsToSeason"
       [value]="seasonName">{{seasonName}}</mat-option>
   </mat-select>
 </mat-form-field>
