@@ -202,6 +202,18 @@ describe('StatisticsShellComponent', () => {
   });
 
   describe('statistics-selector', () => {
+    it('should allow the user to select hitting or pitching statistics', () => {
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const statisticTypesButtonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-types');
+      expect(statisticTypesButtonToggleGroup).not.toBeNull();
+      const statisticTypeButtonToggles = statisticTypesButtonToggleGroup.querySelectorAll('mat-button-toggle');
+      expect(statisticTypeButtonToggles.length).toBe(2);
+      expect(statisticTypeButtonToggles[0].textContent).toBe('Hitting');
+      expect(statisticTypeButtonToggles[1].textContent).toBe('Pitching');
+    });
+
     it('should have only the label when no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -305,7 +317,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       fixture.detectChanges();
 
-      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-groups');
       expect(buttonToggleGroup).not.toBeNull();
       const buttonToggles = buttonToggleGroup.querySelectorAll('mat-button-toggle');
       expect(buttonToggles.length).toBe(2);
@@ -321,7 +333,7 @@ describe('StatisticsShellComponent', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-groups');
       expect(buttonToggleGroup).toBeNull();
     });
 
@@ -335,7 +347,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       fixture.detectChanges();
 
-      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-groups');
       const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
       expect(selectedButtonToggle.textContent).toBe('Standard');
     });
@@ -350,7 +362,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
       fixture.detectChanges();
 
-      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group');
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-groups');
       const advancedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
       advancedStatsGroupButton.click();
       fixture.detectChanges();
