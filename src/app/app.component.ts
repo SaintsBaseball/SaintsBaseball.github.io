@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit(): void {
-    this.store.dispatch(new appActions.Load());
+    this.store.dispatch(new appActions.LoadHittingStatistics());
     this.store.dispatch(new appActions.LoadPitchingStatistics());
   }
 

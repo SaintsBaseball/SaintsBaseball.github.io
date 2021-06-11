@@ -13,13 +13,13 @@ const initialState: State = {
 
 export function reducer(state = initialState, action: AppActions): State {
   switch (action.type) {
-    case AppActionTypes.LoadSuccess:
+    case AppActionTypes.LoadHittingStatisticsSuccess:
       return {
         ...state,
         playerHittingStatistics: action.payload
       };
 
-    case AppActionTypes.LoadFail:
+    case AppActionTypes.LoadHittingStatisticsFail:
       return {
         ...state,
         playerHittingStatistics: new PlayerHittingStatisticsDatabaseTable(),
@@ -33,7 +33,7 @@ export function reducer(state = initialState, action: AppActions): State {
         playerPitchingStatistics: action.payload
       };
 
-    case AppActionTypes.FormatSuccess:
+    case AppActionTypes.FormatHittingStatisticsSuccess:
       return {
         ...state,
         statsForEachPlayer: action.payload

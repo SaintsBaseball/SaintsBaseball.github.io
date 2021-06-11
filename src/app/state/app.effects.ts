@@ -15,13 +15,13 @@ export class AppEffects {
 
   @Effect()
   loadApp$ = this.actions$.pipe(
-    ofType(appActions.AppActionTypes.Load),
+    ofType(appActions.AppActionTypes.LoadHittingStatistics),
     mergeMap(() => this.statisticsService.getPlayerHittingStatistics().pipe(
       switchMap(statistics => [
-        (new appActions.LoadSuccess(statistics)),
-        (new appActions.FormatStatsForEachPlayer(statistics))
+        (new appActions.LoadHittingStatisticsSuccess(statistics)),
+        (new appActions.FormatHittingStatisticsForEachPlayer(statistics))
       ]),
-      catchError(() => of(new appActions.LoadFail()))
+      catchError(() => of(new appActions.LoadHittingStatisticsFail()))
     ))
   );
 
@@ -40,8 +40,8 @@ export class AppEffects {
 
   @Effect()
   formatStatsForEachPlayer$ = this.actions$.pipe(
-    ofType(appActions.AppActionTypes.FormatStatsForEachPlayer),
-    map((formatStatsForEachPlayerAction: appActions.FormatStatsForEachPlayer) => {
+    ofType(appActions.AppActionTypes.FormatHittingStatisticsForEachPlayer),
+    map((formatStatsForEachPlayerAction: appActions.FormatHittingStatisticsForEachPlayer) => {
       const statistics = formatStatsForEachPlayerAction.payload;
       const statsForEachPlayer = new Map<string, Map<string, PlayerHittingStatistics>>();
 
@@ -59,7 +59,7 @@ export class AppEffects {
         });
       });
 
-      return new appActions.FormatSuccess(statsForEachPlayer);
+      return new appActions.FormatHittingStatisticsSuccess(statsForEachPlayer);
     })
   );
 }

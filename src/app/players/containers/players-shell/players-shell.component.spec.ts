@@ -224,7 +224,7 @@ describe('PlayersShellComponent', () => {
 
   describe('ngOnInit', () => {
     it('should populate the error message if failed to load statistics', (done) => {
-      store.dispatch(new appActions.LoadFail());
+      store.dispatch(new appActions.LoadHittingStatisticsFail());
 
       playersShellComponent.ngOnInit();
 
@@ -240,7 +240,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should update the stats for each player on successful load', (done) => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
 
       playersShellComponent.ngOnInit();
 
@@ -265,7 +265,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should have a list of all players when the players are loaded', () => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
 
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -280,7 +280,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should not have a modal when no player has been selected', () => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
 
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -290,7 +290,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should open a modal with the player name and number in the header', () => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -304,7 +304,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should have an X to close the modal', () => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -324,7 +324,7 @@ describe('PlayersShellComponent', () => {
     });
 
     it('should open a modal with a table of the stats for the player', () => {
-      store.dispatch(new appActions.FormatSuccess(statsForEachPlayerToReturn));
+      store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 

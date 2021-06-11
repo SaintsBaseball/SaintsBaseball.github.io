@@ -4,27 +4,27 @@ import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
 import { PlayerPitchingStatisticsDatabaseTable } from '../in-memory-data-service/player-pitching-statistics-database-table';
 
 export enum AppActionTypes {
-  Load = '[App] Load',
-  LoadSuccess = '[App] Load Success',
-  LoadFail = '[App] Load Fail',
+  LoadHittingStatistics = '[App] Load Hitting Statistics',
+  LoadHittingStatisticsSuccess = '[App] Load Hitting Statistics Success',
+  LoadHittingStatisticsFail = '[App] Load Hitting Statistics Fail',
   LoadPitchingStatistics = '[App] Load Pitching Statistics',
   LoadPitchingStatisticsSuccess = '[App] Load Pitching Statistics Success',
-  FormatStatsForEachPlayer = '[App] Format Stats For Each Player',
-  FormatSuccess = '[App] Format Success'
+  FormatHittingStatisticsForEachPlayer = '[App] Format Hitting Statistics For Each Player',
+  FormatHittingStatisticsSuccess = '[App] Format Hitting Statistics Success'
 }
 
-export class Load implements Action {
-  readonly type = AppActionTypes.Load;
+export class LoadHittingStatistics implements Action {
+  readonly type = AppActionTypes.LoadHittingStatistics;
 }
 
-export class LoadSuccess implements Action {
-  readonly type = AppActionTypes.LoadSuccess;
+export class LoadHittingStatisticsSuccess implements Action {
+  readonly type = AppActionTypes.LoadHittingStatisticsSuccess;
 
   constructor(public payload: PlayerHittingStatisticsDatabaseTable) { }
 }
 
-export class LoadFail implements Action {
-  readonly type = AppActionTypes.LoadFail;
+export class LoadHittingStatisticsFail implements Action {
+  readonly type = AppActionTypes.LoadHittingStatisticsFail;
 }
 
 export class LoadPitchingStatistics implements Action {
@@ -37,19 +37,19 @@ export class LoadPitchingStatisticsSuccess implements Action {
   constructor(public payload: PlayerPitchingStatisticsDatabaseTable) { }
 }
 
-export class FormatStatsForEachPlayer implements Action {
-  readonly type = AppActionTypes.FormatStatsForEachPlayer;
+export class FormatHittingStatisticsForEachPlayer implements Action {
+  readonly type = AppActionTypes.FormatHittingStatisticsForEachPlayer;
 
   constructor(public payload: PlayerHittingStatisticsDatabaseTable) { }
 }
 
-export class FormatSuccess implements Action {
-  readonly type = AppActionTypes.FormatSuccess;
+export class FormatHittingStatisticsSuccess implements Action {
+  readonly type = AppActionTypes.FormatHittingStatisticsSuccess;
 
   constructor(public payload: Map<string, Map<string, PlayerHittingStatistics>>) { }
 }
 
-export type AppActions = LoadSuccess
-  | LoadFail
+export type AppActions = LoadHittingStatisticsSuccess
+  | LoadHittingStatisticsFail
   | LoadPitchingStatisticsSuccess
-  | FormatSuccess;
+  | FormatHittingStatisticsSuccess;

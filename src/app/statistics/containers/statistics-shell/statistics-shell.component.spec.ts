@@ -150,7 +150,7 @@ describe('StatisticsShellComponent', () => {
         }
       ];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
 
       statisticsShellComponent.ngOnInit();
 
@@ -162,7 +162,7 @@ describe('StatisticsShellComponent', () => {
 
     it('should populate the error message if failed to load statistics', (done) => {
       statisticsShellComponent.ngOnInit();
-      store.dispatch(new appActions.LoadFail());
+      store.dispatch(new appActions.LoadHittingStatisticsFail());
 
       const defaultStats = new PlayerHittingStatisticsDatabaseTable();
       statisticsShellComponent.playerHittingStatistics$.pipe(take(1)).subscribe(stats => {
@@ -204,7 +204,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
 
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -223,7 +223,7 @@ describe('StatisticsShellComponent', () => {
     });
 
     it('should not populate the dropdown when statistics failed to load', () => {
-      store.dispatch(new appActions.LoadFail());
+      store.dispatch(new appActions.LoadHittingStatisticsFail());
 
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -240,7 +240,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -267,7 +267,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -283,7 +283,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
@@ -301,7 +301,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
 
@@ -313,7 +313,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
@@ -328,7 +328,7 @@ describe('StatisticsShellComponent', () => {
       const statisticsToReturn = new PlayerHittingStatisticsDatabaseTable();
       statisticsToReturn['Fall 2019-2020'] = [];
       statisticsToReturn['Spring 2019'] = [];
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       statisticsShellComponent.ngOnInit();
       const currentSeason = 'Spring 2019';
       store.dispatch(new statisticActions.ChangeSeason(currentSeason));
@@ -393,7 +393,7 @@ describe('StatisticsShellComponent', () => {
       statisticsToReturn['Fall 2019-2020'] = [playerNumber6, playerNumber8];
       statisticsToReturn['Spring 2019'] = [playerNumber3, playerNumber4];
       statisticsShellComponent.ngOnInit();
-      store.dispatch(new appActions.LoadSuccess(statisticsToReturn));
+      store.dispatch(new appActions.LoadHittingStatisticsSuccess(statisticsToReturn));
       fixture.detectChanges();
     });
 
