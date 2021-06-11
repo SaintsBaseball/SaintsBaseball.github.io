@@ -41,4 +41,8 @@ export class StatisticsShellComponent implements OnInit {
   changeStatisticsGroup(statisticsGroupName: StatisticGroup): void {
     this.store.dispatch(new statisticActions.ChangeStatisticsGroup(statisticsGroupName));
   }
+
+  changeStatisticsType(statisticsTypeName: string): void {
+    this.store.dispatch(new statisticActions.ChangeStatisticsType(statisticsTypeName));
+  }
 }

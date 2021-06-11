@@ -28,6 +28,12 @@ export function reducer(state = initialState, action: StatisticActions): Statist
         selectedStatisticsGroup: action.payload
       };
 
+    case StatisticActionTypes.ChangeStatisticsType:
+      return {
+        ...state,
+        selectedStatisticsType: action.payload
+      };
+
     default:
       return state;
   }

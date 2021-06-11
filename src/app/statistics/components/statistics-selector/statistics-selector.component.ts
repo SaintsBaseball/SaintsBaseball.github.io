@@ -16,6 +16,7 @@ export class StatisticsSelectorComponent implements OnInit {
   @Input() selectedStatisticsType: string;
   @Output() seasonChanged = new EventEmitter<string>();
   @Output() statisticsGroupChanged = new EventEmitter<StatisticGroup>();
+  @Output() statisticsTypeChanged = new EventEmitter<string>();
   selectedStatisticsGroupControl: FormControl;
   selectedStatisticsTypeControl: FormControl;
 
@@ -30,5 +31,9 @@ export class StatisticsSelectorComponent implements OnInit {
 
   changeSelectedStatisticsGroup(statisticsGroupName: StatisticGroup): void {
     this.statisticsGroupChanged.emit(statisticsGroupName);
+  }
+
+  changeSelectedStatisticsType(statisticsTypeName: string): void {
+    this.statisticsTypeChanged.emit(statisticsTypeName);
   }
 }

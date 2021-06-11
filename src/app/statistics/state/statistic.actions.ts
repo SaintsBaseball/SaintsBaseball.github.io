@@ -4,7 +4,8 @@ import { StatisticGroup } from 'src/app/types/statistic-group';
 
 export enum StatisticActionTypes {
   ChangeSeason = '[Statistics] Change Season',
-  ChangeStatisticsGroup = '[Statsitics] Change Statistics Group'
+  ChangeStatisticsGroup = '[Statsitics] Change Statistics Group',
+  ChangeStatisticsType = '[Statsitics] Change Statistics Type'
 }
 
 export class ChangeSeason implements Action {
@@ -19,4 +20,12 @@ export class ChangeStatisticsGroup implements Action {
   constructor(public payload: StatisticGroup) { }
 }
 
-export type StatisticActions = ChangeSeason | ChangeStatisticsGroup;
+export class ChangeStatisticsType implements Action {
+  readonly type = StatisticActionTypes.ChangeStatisticsType;
+
+  constructor(public payload: string) { }
+}
+
+export type StatisticActions = ChangeSeason 
+  | ChangeStatisticsGroup
+  | ChangeStatisticsType;

@@ -1,5 +1,6 @@
 <mat-button-toggle-group 
   [formControl]="selectedStatisticsTypeControl"
+  (change)="changeSelectedStatisticsType($event.value)"
   id="statistic-types">
   <mat-button-toggle value="hitting">Hitting</mat-button-toggle>
   <mat-button-toggle value="pitching">Pitching</mat-button-toggle>

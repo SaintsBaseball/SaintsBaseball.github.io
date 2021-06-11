@@ -223,6 +223,23 @@ describe('StatisticsShellComponent', () => {
       expect(selectedButtonToggle.textContent).toBe('Hitting');
     });
 
+    it('should set the statistics type when the user changes the selected statistics type', (done) => {
+      statisticsShellComponent.ngOnInit();
+      fixture.detectChanges();
+
+      const buttonToggleGroup = nativeElement.querySelector('mat-button-toggle-group#statistic-types');
+      const advancedStatsGroupButton: HTMLButtonElement = buttonToggleGroup.querySelector('mat-button-toggle:not(.mat-button-toggle-checked) > button');
+      advancedStatsGroupButton.click();
+      fixture.detectChanges();
+
+      const selectedButtonToggle = buttonToggleGroup.querySelector('mat-button-toggle.mat-button-toggle-checked');
+      expect(selectedButtonToggle.textContent).toBe('Pitching');
+      statisticsShellComponent.selectedStatisticsType$.pipe(take(1)).subscribe(selectedStatisticsGroup => {
+        expect(selectedStatisticsGroup).toBe('pitching');
+        done();
+      });
+    });
+
     it('should have only the label when no statistics have been loaded', () => {
       statisticsShellComponent.ngOnInit();
       fixture.detectChanges();
