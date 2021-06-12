@@ -32,6 +32,8 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
     if (this.dataSource.data.length > 0) {
       const key = `${this.selectedStatisticsType}-${this.selectedStatisticsGroup}`;
       this.displayedColumns = statisticGroupToStatisticColumns[key];
+    } else {
+      this.displayedColumns = [];
     }
   }
 
