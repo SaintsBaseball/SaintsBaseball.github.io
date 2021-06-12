@@ -323,7 +323,7 @@ describe('PlayersShellComponent', () => {
       expect(modalHeader).toBeFalsy();
     });
 
-    it('should open a modal with a table of the stats for the player', () => {
+    it('should open a modal with a table of the standard hitting stats for the player', () => {
       store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
@@ -332,7 +332,7 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
-      const expectedNumberOfColumns = 34;
+      const expectedNumberOfColumns = 17;
       const expectedNumberOfRows = 2;
       const modalTableHeaderRow = nativeElement.querySelector('div.modal div.modal-content table thead tr');
       expect(modalTableHeaderRow).toBeTruthy();

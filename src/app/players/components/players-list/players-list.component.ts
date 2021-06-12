@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
+import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-group-to-statistic-columns';
 
 @Component({
   selector: 'players-list',
@@ -36,7 +37,7 @@ export class PlayersListComponent {
   private buildModalTableHeader(mostRecentSeasonStats: PlayerHittingStatistics) {
     this.modalTableHeader = ['Season'];
     Object.keys(mostRecentSeasonStats).forEach(statsKey => {
-      if (statsKey === 'Player' || statsKey === '#') {
+      if (this.shouldIgnoreStatisticKey(statsKey)) {
         return;
       }
 
@@ -49,7 +50,7 @@ export class PlayersListComponent {
     playerStats.forEach((statsForOneSeason, season) => {
       const statsAndSeasonToDisplay = [season];
       Object.keys(statsForOneSeason).forEach(statsKey => {
-        if (statsKey === 'Player' || statsKey === '#') {
+        if (this.shouldIgnoreStatisticKey(statsKey)) {
           return;
         }
 
@@ -58,5 +59,11 @@ export class PlayersListComponent {
 
       this.modalTableBody.push(statsAndSeasonToDisplay);
     });
+  }
+
+  private shouldIgnoreStatisticKey(statsKey: string) {
+    return statsKey === 'Player'
+      || statsKey === '#'
+      || !statisticGroupToStatisticColumns['hitting-standard'].includes(statsKey);
   }
 }
