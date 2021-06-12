@@ -481,8 +481,8 @@ describe('StatisticsShellComponent', () => {
     const statsTableBodyCellSelector = statsTableBodyRowSelector + ' td';
     const expectedStandardHittingStatisticsKeys = ['#', 'Player', 'G', 'AB', 'R', 'H', '2B', '3B', 'HR', 'RBI', 'BB', 'SO', 'SB', 'CS', 'AVG', 'OBP', 'SLG', 'OPS'];
     const expectedAdvancedHittingStatisticsKeys = ['#', 'Player', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'GO/AO', 'XBH', 'TB', 'IBB', 'BABIP', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
-    const expectedStandardPitchingStatisticsKeys = ['#', 'Player', 'W', 'L', 'ERA', 'G', 'GS', 'CG', 'SHO', 'SV', 'SVO', 'IP', 'H', 'R', 'ER', 'HR', 'HB', 'BB', 'SO', 'AB', 'WHIP', 'AVG'];
-    const expectedAdvancedPitchingStatisticsKeys = ['#', 'Player', 'TBF', 'NP', 'P/IP', 'QS', 'GF', 'HLD', 'IBB', 'WP', 'BK', 'SF', 'GDP', 'GO', 'AO', 'GO/AO', 'SO/9', 'BB/9', 'K/BB', 'BABIP', 'SB', 'CS', 'PK'];
+    const expectedStandardPitchingStatisticsKeys = ['#', 'Player', 'W', 'L', 'ERA', 'G', 'GS', 'CG', 'SHO', 'SV', 'SVO', 'IP', 'H', 'R', 'ER', 'HR', 'HB', 'BB', 'SO', 'WHIP', 'AVG'];
+    const expectedAdvancedPitchingStatisticsKeys = ['#', 'Player', 'TBF', 'NP', 'P/IP', 'QS', 'GF', 'HLD', 'IBB', 'WP', 'BK', 'GDP', 'GO/AO', 'SO/9', 'BB/9', 'K/BB', 'BABIP', 'SB', 'CS', 'PK'];
 
     let hittingStatisticsToReturn: PlayerHittingStatisticsDatabaseTable;
     let pitchingStatisticsToReturn: PlayerPitchingStatisticsDatabaseTable;
@@ -853,7 +853,7 @@ describe('StatisticsShellComponent', () => {
       store.dispatch(new statisticActions.ChangeSeason(validSeason));
       fixture.detectChanges();
 
-      const expectedTooltips = ['', '', 'Wins', 'Losses', 'Earned Run Average', 'Games', 'Games Started', 'Complete Games', 'Shutouts', 'Saves', 'Save Opportunities', 'Innings Pitched', 'Hits', 'Runs', 'Earned Runs', 'Home Runs', 'Hit Batsmen', 'Walks', 'Strikeouts', 'At Bats', 'Walks & Hits Per Inning', 'Batting Average Against', 'Total Batters Faced', 'Number of Pitches', 'Pitches per Inning', 'Quality Starts', 'Games Finished', 'Holds', 'Intentional Walks', 'Wild Pitches', 'Balks', 'Ground Into Double Play', 'Ground Outs', 'Fly Outs', 'Ground Outs Per Fly Out', 'Strikeouts per 9 IP', 'Walks per 9 IP', 'Strikeout to Walk Rate', 'Average on Balls in Play', 'Stolen Bases Allowed', 'Caught Stealing', 'Pickoffs'];
+      const expectedTooltips = ['', '', 'Wins', 'Losses', 'Earned Run Average', 'Games', 'Games Started', 'Complete Games', 'Shutouts', 'Saves', 'Save Opportunities', 'Innings Pitched', 'Hits', 'Runs', 'Earned Runs', 'Home Runs', 'Hit Batsmen', 'Walks', 'Strikeouts', 'Walks & Hits Per Inning', 'Batting Average Against', 'Total Batters Faced', 'Number of Pitches', 'Pitches per Inning', 'Quality Starts', 'Games Finished', 'Holds', 'Intentional Walks', 'Wild Pitches', 'Balks', 'Ground Into Double Play', 'Ground Outs Per Fly Out', 'Strikeouts per 9 IP', 'Walks per 9 IP', 'Strikeout to Walk Rate', 'Average on Balls in Play', 'Stolen Bases Allowed', 'Caught Stealing', 'Pickoffs'];
       const tableHeaderColumns = nativeElement.querySelectorAll(statsTableHeaderCellSelector);
       tableHeaderColumns.forEach((tableHeaderColumn, index) => {        
         const tooltipMessage = tableHeaderColumn.getAttribute("ng-reflect-message");
