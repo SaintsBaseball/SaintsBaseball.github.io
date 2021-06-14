@@ -30,5 +30,16 @@ describe('StatisticKeyToTooltipMessagePipe', () => {
         expect(result).toBe(expectedTooltipMessages[i]);
       }
     });  
+
+    it('should return the correct tooltip string when a valid hitting stats key is passed in', () => {
+      const validStatisticKeys = ['AB', '2B', '3B', 'RBI', 'SB', 'AVG', 'OBP', 'SLG', 'OPS', 'PA', 'HBP', 'SAC', 'SF', 'GIDP', 'XBH', 'TB', 'ISO', 'AB/HR', 'BB/K', 'BB%', 'SO%'];
+      const expectedTooltipMessages = ['At Bats', 'Doubles', 'Triples', 'Runs Batted In', 'Stolen Bases', 'Batting Average', 'On-Base Percentage', 'Slugging Percentage', 'On-Base Plus Slugging', 'Plate Appearances', 'Hit By Pitch', 'Sacrifice Bunts', 'Sacrifice Flys', 'Ground Into Double Play', 'Extra Base Hits', 'Total Bases', 'Isolated Power', 'At Bats per Home Run', 'Walk to Strikeout Ratio', 'Walk Percentage', 'Strikeout Percentage'];
+
+      for (let i = 0; i < validStatisticKeys.length; i++) {
+        const result = pipe.transform(validStatisticKeys[i]);
+
+        expect(result).toBe(expectedTooltipMessages[i]);
+      }
+    });  
   });
 });
