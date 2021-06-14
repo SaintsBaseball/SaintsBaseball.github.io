@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { StatisticsToSeasonPipe } from './pipes/statistics-to-season.pipe';
-import { PlayerStatisticsToStatisticKeys } from './pipes/player-statistics-to-statistic-keys.pipe';
-import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
 import { SortMapByKeyAlphabeticallyPipe } from './pipes/sort-map-by-key-alphabetically.pipe';
 import { StatisticKeyToTooltipMessagePipe } from './pipes/statistic-key-to-tooltip-message.pipe';
 
@@ -14,8 +12,6 @@ import { StatisticKeyToTooltipMessagePipe } from './pipes/statistic-key-to-toolt
   ],
   declarations: [
     StatisticsToSeasonPipe,
-    PlayerStatisticsToStatisticKeys,
-    SortStatisticsPipe,
     SortMapByKeyAlphabeticallyPipe,
     StatisticKeyToTooltipMessagePipe
   ],
@@ -24,8 +20,6 @@ import { StatisticKeyToTooltipMessagePipe } from './pipes/statistic-key-to-toolt
     FormsModule,
     ReactiveFormsModule,
     StatisticsToSeasonPipe,
-    PlayerStatisticsToStatisticKeys,
-    SortStatisticsPipe,
     SortMapByKeyAlphabeticallyPipe
   ]
 })
