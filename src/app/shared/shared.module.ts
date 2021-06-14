@@ -6,6 +6,7 @@ import { StatisticsToSeasonPipe } from './pipes/statistics-to-season.pipe';
 import { PlayerStatisticsToStatisticKeys } from './pipes/player-statistics-to-statistic-keys.pipe';
 import { SortStatisticsPipe } from './pipes/sort-statistics.pipe';
 import { SortMapByKeyAlphabeticallyPipe } from './pipes/sort-map-by-key-alphabetically.pipe';
+import { StatisticKeyToTooltipMessagePipe } from './pipes/statistic-key-to-tooltip-message.pipe';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SortMapByKeyAlphabeticallyPipe } from './pipes/sort-map-by-key-alphabet
     StatisticsToSeasonPipe,
     PlayerStatisticsToStatisticKeys,
     SortStatisticsPipe,
-    SortMapByKeyAlphabeticallyPipe
+    SortMapByKeyAlphabeticallyPipe,
+    StatisticKeyToTooltipMessagePipe
   ],
   exports: [
     CommonModule,
