@@ -52,34 +52,42 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
   getTooltipMessage(statisticKey: string): string {
     const commonAbbreviationToStatisticDictionary = {
       G: 'Games',
-      AB: 'At Bats',
       R: 'Runs', 
       H: 'Hits', 
-      '2B': 'Doubles', 
-      '3B': 'Triples', 
       HR: 'Home Runs', 
-      RBI: 'Runs Batted In', 
       BB: 'Walks', 
       SO: 'Strikeouts',
       CS: 'Caught Stealing', 
-      OBP: 'On-Base Percentage', 
-      SLG: 'Slugging Percentage', 
-      OPS: 'On-Base Plus Slugging', 
       IBB: 'Intentional Walks', 
-      HBP:'Hit By Pitch', 
+      'GO/AO': 'Ground Outs Per Fly Out', 
+      BABIP: 'Average on Balls in Play'
+    };
+
+    const hittingAbbreviationToStatisticDictionary = {
+      AB: 'At Bats',
+      '2B': 'Doubles',
+      '3B': 'Triples',
+      RBI: 'Runs Batted In',
+      SB: 'Stolen Bases',
+      AVG: 'Batting Average',
+      OBP: 'On-Base Percentage',
+      SLG: 'Slugging Percentage',
+      OPS: 'On-Base Plus Slugging',
+      PA: 'Plate Appearances',
+      HBP: 'Hit By Pitch', 
       SAC: 'Sacrifice Bunts', 
       SF: 'Sacrifice Flys',
-      TB: 'Total Bases', 
-      XBH: 'Extra Base Hits', 
-      GIDP: 'Ground Into Double Play', 
-      'GO/AO': 'Ground Outs Per Fly Out', 
-      PA: 'Plate Appearances',
-      BABIP: 'Average on Balls in Play',
+      GIDP: 'Ground Into Double Play',
+      XBH: 'Extra Base Hits',
+      TB: 'Total Bases',
       ISO: 'Isolated Power',
       'AB/HR': 'At Bats per Home Run',
       'BB/K': 'Walk to Strikout Ratio',
       'BB%': 'Walk Percentage',
-      'SO%': 'Strikeout Percentage',
+      'SO%': 'Strikeout Percentage'
+    };
+
+    const pitchingAbbreviationToStatisticDictionary = {
       W: 'Wins',
       L: 'Losses',
       ERA: 'Earned Run Average',
@@ -92,6 +100,7 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       ER: 'Earned Runs',
       HB: 'Hit Batsmen',
       WHIP: 'Walks & Hits Per Inning',
+      AVG: 'Batting Average Against',
       TBF: 'Total Batters Faced',
       NP: 'Number of Pitches',
       'P/IP': 'Pitches per Innings Pitched',
@@ -104,17 +113,8 @@ export class StatisticsTableComponent implements OnChanges, AfterViewInit {
       'SO/9': 'Strikeouts per 9 IP',
       'BB/9': 'Walks per 9 IP',
       'K/BB': 'Strikeout to Walk Rate',
+      SB: 'Stolen Bases Allowed',
       PK: 'Pickoffs'
-    };
-
-    const hittingAbbreviationToStatisticDictionary = {
-      AVG: 'Batting Average',
-      SB: 'Stolen Bases'
-    };
-
-    const pitchingAbbreviationToStatisticDictionary = {
-      AVG: 'Batting Average Against',
-      SB: 'Stolen Bases Allowed'
     };
 
     const abbreviationToStatisticTypeDictionary = this.selectedStatisticsType === 'hitting' ? hittingAbbreviationToStatisticDictionary : pitchingAbbreviationToStatisticDictionary;
