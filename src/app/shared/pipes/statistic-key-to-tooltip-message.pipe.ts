@@ -5,6 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StatisticKeyToTooltipMessagePipe implements PipeTransform {
   transform(statisticKey: string): string {
-    return null;
+    return '';
   }
 }
