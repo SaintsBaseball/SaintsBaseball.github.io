@@ -1,10 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { StatisticType } from 'src/app/types/statistic-type';
 
 @Pipe({
   name: 'statisticKeyToTooltipMessage'
 })
 export class StatisticKeyToTooltipMessagePipe implements PipeTransform {
-  transform(statisticKey: string): string {
+  transform(statisticKey: string, statisticType: StatisticType): string {
     const commonAbbreviationToStatisticDictionary = {
       G: 'Games',
       R: 'Runs', 
@@ -42,6 +43,45 @@ export class StatisticKeyToTooltipMessagePipe implements PipeTransform {
       'SO%': 'Strikeout Percentage'
     };
 
-    return commonAbbreviationToStatisticDictionary[statisticKey] ?? hittingAbbreviationToStatisticDictionary[statisticKey] ?? '';
+    const pitchingAbbreviationToStatisticDictionary = {
+      W: 'Wins',
+      L: 'Losses',
+      ERA: 'Earned Run Average',
+      GS: 'Games Started',
+      CG: 'Complete Games',
+      SHO: 'Shutouts',
+      SV: 'Saves',
+      SVO: 'Save Opportunities',
+      IP: 'Innings Pitched',
+      ER: 'Earned Runs',
+      HB: 'Hit Batsmen',
+      WHIP: 'Walks & Hits Per Inning',
+      AVG: 'Batting Average Against',
+      TBF: 'Total Batters Faced',
+      NP: 'Number of Pitches',
+      'P/IP': 'Pitches per Inning',
+      QS: 'Quality Starts',
+      GF: 'Games Finished',
+      HLD: 'Holds',
+      WP: 'Wild Pitches',
+      BK: 'Balks',
+      GDP: 'Ground Into Double Play',
+      'SO/9': 'Strikeouts per 9 IP',
+      'BB/9': 'Walks per 9 IP',
+      'K/BB': 'Strikeout to Walk Rate',
+      SB: 'Stolen Bases Allowed',
+      PK: 'Pickoffs'
+    };
+
+    const statisticTypeToAbbreviationDictionary = {
+      hitting: hittingAbbreviationToStatisticDictionary,
+      pitching: pitchingAbbreviationToStatisticDictionary
+    };
+
+    const statisticTypeAbbreviationToStatisticName = statisticTypeToAbbreviationDictionary[statisticType];
+
+    return commonAbbreviationToStatisticDictionary[statisticKey] 
+      ?? statisticTypeAbbreviationToStatisticName[statisticKey] 
+      ?? '';
   }
 }
