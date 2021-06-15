@@ -20,7 +20,8 @@ import { StatisticKeyToTooltipMessagePipe } from './pipes/statistic-key-to-toolt
     FormsModule,
     ReactiveFormsModule,
     StatisticsToSeasonPipe,
-    SortMapByKeyAlphabeticallyPipe
+    SortMapByKeyAlphabeticallyPipe,
+    StatisticKeyToTooltipMessagePipe
   ]
 })
 export class SharedModule { }
