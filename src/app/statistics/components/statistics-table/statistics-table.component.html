@@ -3,7 +3,7 @@
     [matColumnDef]="statisticKey">
     <th mat-header-cell *matHeaderCellDef mat-sort-header
       [start]="determineInitialSortOrderForStatistic(statisticKey)"
-      [matTooltip]="getTooltipMessage(statisticKey)" matTooltipPosition="above"
+      [matTooltip]="statisticKey | statisticKeyToTooltipMessage : selectedStatisticsType" matTooltipPosition="above"
       >{{statisticKey}}</th>
     <td mat-cell *matCellDef="let element">{{element[statisticKey]}}</td>
   </ng-container>
