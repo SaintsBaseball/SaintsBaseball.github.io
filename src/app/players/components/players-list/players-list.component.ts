@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-group-to-statistic-columns';
+import { PlayerHittingStatistics } from 'app/classes/player-hitting-statistics';
+import { statisticGroupToStatisticColumns } from 'app/constants/statistic-group-to-statistic-columns';
 
 @Component({
   selector: 'players-list',

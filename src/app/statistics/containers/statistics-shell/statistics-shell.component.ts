@@ -4,11 +4,11 @@ import * as fromRoot from '../../../state';
 import * as fromStatistics from '../../state';
 import * as statisticActions from '../../state/statistic.actions';
 import { Observable } from 'rxjs';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
-import { StatisticGroup } from 'src/app/types/statistic-group';
-import { BaseballSeason } from 'src/app/types/baseball-season';
-import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
-import { StatisticType } from 'src/app/types/statistic-type';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
+import { StatisticGroup } from 'app/types/statistic-group';
+import { BaseballSeason } from 'app/types/baseball-season';
+import { PlayerPitchingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-pitching-statistics-database-table';
+import { StatisticType } from 'app/types/statistic-type';
 
 @Component({
   selector: 'statistics-shell',

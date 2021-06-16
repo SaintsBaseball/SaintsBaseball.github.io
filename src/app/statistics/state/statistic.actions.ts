@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
-import { BaseballSeason } from 'src/app/types/baseball-season';
-import { StatisticGroup } from 'src/app/types/statistic-group';
-import { StatisticType } from 'src/app/types/statistic-type';
+import { BaseballSeason } from 'app/types/baseball-season';
+import { StatisticGroup } from 'app/types/statistic-group';
+import { StatisticType } from 'app/types/statistic-type';
 
 export enum StatisticActionTypes {
   ChangeSeason = '[Statistics] Change Season',

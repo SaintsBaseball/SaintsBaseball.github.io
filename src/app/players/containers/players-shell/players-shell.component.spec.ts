@@ -2,15 +2,15 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PlayersShellComponent } from './players-shell.component';
 import { PlayersListComponent } from '../../components/players-list/players-list.component';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
 import { take } from 'rxjs/operators';
 import { StoreModule, Store } from '@ngrx/store';
-import * as fromRoot from 'src/app/state';
-import { reducer as appReducer } from 'src/app/state/app.reducer';
-import * as appActions from 'src/app/state/app.actions';
-import { SharedModule } from 'src/app/shared/shared.module';
+import * as fromRoot from 'app/state';
+import { reducer as appReducer } from 'app/state/app.reducer';
+import * as appActions from 'app/state/app.actions';
+import { SharedModule } from 'app/shared/shared.module';
 import { PlayerHittingStatistics } from '../../../classes/player-hitting-statistics';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MaterialModule } from 'app/material/material.module';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;

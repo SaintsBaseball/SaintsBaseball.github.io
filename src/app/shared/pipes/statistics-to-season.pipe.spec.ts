@@ -1,5 +1,5 @@
 import { StatisticsToSeasonPipe } from './statistics-to-season.pipe';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
 
 describe('StatisticsToSeasonPipe', () => {
   let statisticsToSeasonPipe: StatisticsToSeasonPipe;

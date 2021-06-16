@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { commonAbbreviationToStatisticDictionary, statisticTypeToAbbreviationDictionary } from 'src/app/constants/statistic-abbreviation-to-statistic-name-dictionary';
-import { StatisticType } from 'src/app/types/statistic-type';
+import { commonAbbreviationToStatisticDictionary, statisticTypeToAbbreviationDictionary } from 'app/constants/statistic-abbreviation-to-statistic-name-dictionary';
+import { StatisticType } from 'app/types/statistic-type';
 
 @Pipe({
   name: 'statisticKeyToTooltipMessage'

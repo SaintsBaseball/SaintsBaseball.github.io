@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { StatisticGroup } from 'src/app/types/statistic-group';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
-import { BaseballSeason } from 'src/app/types/baseball-season';
-import { StatisticType } from 'src/app/types/statistic-type';
-import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
+import { StatisticGroup } from 'app/types/statistic-group';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
+import { BaseballSeason } from 'app/types/baseball-season';
+import { StatisticType } from 'app/types/statistic-type';
+import { PlayerPitchingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-pitching-statistics-database-table';
 
 @Component({
   selector: 'statistics-selector',

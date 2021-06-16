@@ -1,13 +1,13 @@
 import { Component, Input, ViewChild, OnChanges, AfterViewInit } from '@angular/core';
 import { MatSort, SortDirection } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { PlayerHittingStatistics } from 'src/app/classes/player-hitting-statistics';
-import { StatisticGroup } from 'src/app/types/statistic-group';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
-import { BaseballSeason } from 'src/app/types/baseball-season';
-import { statisticGroupToStatisticColumns } from 'src/app/constants/statistic-group-to-statistic-columns';
-import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
-import { StatisticType } from 'src/app/types/statistic-type';
+import { PlayerHittingStatistics } from 'app/classes/player-hitting-statistics';
+import { StatisticGroup } from 'app/types/statistic-group';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
+import { BaseballSeason } from 'app/types/baseball-season';
+import { statisticGroupToStatisticColumns } from 'app/constants/statistic-group-to-statistic-columns';
+import { PlayerPitchingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-pitching-statistics-database-table';
+import { StatisticType } from 'app/types/statistic-type';
 
 @Component({
   selector: 'statistics-table',

@@ -4,18 +4,18 @@ import { StatisticsShellComponent } from './statistics-shell.component';
 import { StatisticsSelectorComponent } from '../../components/statistics-selector/statistics-selector.component';
 import { StatisticsTableComponent } from '../../components/statistics-table/statistics-table.component';
 import { EffectsModule } from '@ngrx/effects';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
 import { take } from 'rxjs/operators';
-import { reducer as appReducer } from 'src/app/state/app.reducer';
+import { reducer as appReducer } from 'app/state/app.reducer';
 import { reducer as statisticsReducer } from '../../state/statistic.reducer';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from 'app/shared/shared.module';
 import * as fromStatistics from '../../state';
-import * as appActions from 'src/app/state/app.actions';
+import * as appActions from 'app/state/app.actions';
 import * as statisticActions from '../../state/statistic.actions';
-import { MaterialModule } from 'src/app/material/material.module';
+import { MaterialModule } from 'app/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PlayerPitchingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-pitching-statistics-database-table';
-import { IPlayerStatistics } from 'src/app/interfaces/i-player-statistics';
+import { PlayerPitchingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-pitching-statistics-database-table';
+import { IPlayerStatistics } from 'app/interfaces/i-player-statistics';
 
 describe('StatisticsShellComponent', () => {
   let statisticsShellComponent: StatisticsShellComponent;

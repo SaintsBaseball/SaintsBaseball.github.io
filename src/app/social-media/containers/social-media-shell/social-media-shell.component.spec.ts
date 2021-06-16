@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SocialMediaShellComponent } from './social-media-shell.component';
 import { SocialMediaAccountComponent } from '../../components/social-media-account/social-media-account.component';
 import { SocialMediaAccountInfoFactoryServiceMock } from '../../../testClasses/social-media-account-info-factory-service-mock';
-import { ISocialMediaAccountInfo } from 'src/app/interfaces/i-social-media-account-info';
+import { ISocialMediaAccountInfo } from 'app/interfaces/i-social-media-account-info';
 
 describe('SocialMediaShellComponent', () => {
   let socialMediaShellComponent: SocialMediaShellComponent;

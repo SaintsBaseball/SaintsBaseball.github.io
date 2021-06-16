@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
 import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
 import { PlayerPitchingStatisticsDatabaseTable } from '../in-memory-data-service/player-pitching-statistics-database-table';
 

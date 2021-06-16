@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import * as fromRoot from 'src/app/state';
+import * as fromRoot from 'app/state';
 import {PlayerHittingStatistics} from '../../../classes/player-hitting-statistics';
 
 @Component({

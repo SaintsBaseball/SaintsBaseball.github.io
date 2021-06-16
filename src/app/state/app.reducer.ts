@@ -1,4 +1,4 @@
-import { PlayerHittingStatisticsDatabaseTable } from 'src/app/in-memory-data-service/player-hitting-statistics-database-table';
+import { PlayerHittingStatisticsDatabaseTable } from 'app/in-memory-data-service/player-hitting-statistics-database-table';
 import { AppActions, AppActionTypes } from './app.actions';
 import { State } from '.';
 import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';

@@ -2,7 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import {mergeMap, map, catchError, switchMap} from 'rxjs/operators';
 import { of } from 'rxjs';
-import { IStatisticsService } from 'src/app/interfaces/i-statistics-service';
+import { IStatisticsService } from 'app/interfaces/i-statistics-service';
 import * as appActions from './app.actions';
 import { PlayerHittingStatistics } from '../classes/player-hitting-statistics';
 

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { IPlayerStatisticsDatabaseTable } from 'src/app/in-memory-data-service/i-player-statistics-database-table';
+import { IPlayerStatisticsDatabaseTable } from 'app/in-memory-data-service/i-player-statistics-database-table';
 
 @Pipe({
   name: 'statisticsToSeason'
