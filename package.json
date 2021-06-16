@@ -3,7 +3,7 @@
   "version": "1.1.0",
   "scripts": {
     "buildStats": "node ./generators/statisticsFilebaseGenerator.mjs",
-    "test": "ng test --watch=false",
+    "test": "ng test --watch=false --browsers=ChromeHeadless",
     "start": "ng serve",
     "buildProd": "ng build --prod --baseHref=\"https://saintsbaseball.github.io/\"",
     "lint": "ng lint",
