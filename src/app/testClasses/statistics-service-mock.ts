@@ -5,10 +5,10 @@ import { PlayerHittingStatisticsDatabaseTable } from '../in-memory-data-service/
 
 export class StatisticsServiceMock implements IStatisticsService {
   getPlayerHittingStatistics(): Observable<PlayerHittingStatisticsDatabaseTable> {
-    return of();
+    return of(new PlayerHittingStatisticsDatabaseTable());
   };
 
   getPlayerPitchingStatistics(): Observable<PlayerPitchingStatisticsDatabaseTable> {
-    return of();
+    return of(new PlayerPitchingStatisticsDatabaseTable());
   }
 }

@@ -74,7 +74,7 @@ describe('AppComponent', () => {
 
   describe('ngOnInit', () => {
     it('should load the player hitting statistics', () => {
-      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics');
+      spyOn(statisticsServiceMock, 'getPlayerHittingStatistics').and.callThrough();
 
       appComponent.ngOnInit();
 
@@ -82,7 +82,7 @@ describe('AppComponent', () => {
     });
 
     it('should load the player pitching statistics', () => {
-      spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics');
+      spyOn(statisticsServiceMock, 'getPlayerPitchingStatistics').and.callThrough();
 
       appComponent.ngOnInit();
 
