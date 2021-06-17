@@ -278,6 +278,10 @@ describe('PlayersShellComponent', () => {
       expect(allPlayersInList[1].textContent).toBe('Beta');
       expect(allPlayersInList[2].textContent).toBe('Charlie');
     });
+  });
+
+  describe('players-modal', () => {
+    const playersListItemSelector = 'mat-list-item';
 
     it('should not have a modal when no player has been selected', () => {
       store.dispatch(new appActions.FormatHittingStatisticsSuccess(statsForEachPlayerToReturn));
