@@ -2,4 +2,5 @@
 
 <players-list
   [statsForEachPlayer]="statsForEachPlayer$ | async"
+  (playerSelected)="showModal($event)"
 ></players-list>

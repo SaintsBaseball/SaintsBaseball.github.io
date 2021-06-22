@@ -1,9 +1,11 @@
 <mat-list>
-  <mat-list-item *ngFor="let player of statsForEachPlayer | sortMapByKeyAlphabeticallyPipe"
-    (click)="showModal(player)">{{player}}</mat-list-item>
+  <mat-list-item 
+    *ngFor="let player of statsForEachPlayer | sortMapByKeyAlphabeticallyPipe"
+    (click)="selectPlayer(player)"
+  >{{player}}</mat-list-item>
 </mat-list>
 
-<div class="modal" *ngIf="showPlayerStatsModal">
+<!-- <div class="modal" *ngIf="showPlayerStatsModal">
   <div class="modal-content">
     <span class="close" (click)="closeModal()">&times;</span>
     <h2>{{modalHeader}}</h2>
@@ -20,4 +22,4 @@
       </tbody>
     </table>
   </div>
-</div>
+</div> -->

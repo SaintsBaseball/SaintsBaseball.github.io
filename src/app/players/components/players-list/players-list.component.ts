@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PlayerHittingStatistics } from 'app/classes/player-hitting-statistics';
 import { statisticGroupToStatisticColumns } from 'app/constants/statistic-group-to-statistic-columns';
 
@@ -9,20 +9,27 @@ import { statisticGroupToStatisticColumns } from 'app/constants/statistic-group-
 })
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
+  @Output() playerSelected = new EventEmitter<any>();
   showPlayerStatsModal = false;
   modalHeader: string;
   modalTableHeader: string[];
   modalTableBody: any[][];
 
-  showModal(playerName: string): void {
+  selectPlayer(playerName: string): void {
     const playerStats = this.statsForEachPlayer.get(playerName);
-    const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
+    // const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
 
-    this.buildModalHeader(mostRecentSeasonStats, playerName);
-    this.buildModalTableHeader(mostRecentSeasonStats);
-    this.buildModalTableBody(playerStats);
+    // this.buildModalHeader(mostRecentSeasonStats, playerName);
+    // this.buildModalTableHeader(mostRecentSeasonStats);
+    // this.buildModalTableBody(playerStats);
 
-    this.showPlayerStatsModal = true;
+    // this.showPlayerStatsModal = true;
+
+    const valueToEmit = {
+      playerName,
+      playerStats
+    };
+    this.playerSelected.emit(valueToEmit);
   }
 
   closeModal(): void {

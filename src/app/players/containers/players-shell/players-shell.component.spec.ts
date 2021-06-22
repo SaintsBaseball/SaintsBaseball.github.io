@@ -11,6 +11,7 @@ import * as appActions from 'app/state/app.actions';
 import { SharedModule } from 'app/shared/shared.module';
 import { PlayerHittingStatistics } from '../../../classes/player-hitting-statistics';
 import { MaterialModule } from 'app/material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('PlayersShellComponent', () => {
   let playersShellComponent: PlayersShellComponent;
@@ -29,7 +30,8 @@ describe('PlayersShellComponent', () => {
         StoreModule.forRoot({
           appState: appReducer
         }),
-        MaterialModule
+        MaterialModule,
+        BrowserAnimationsModule
       ]
     })
       .compileComponents();
@@ -289,8 +291,8 @@ describe('PlayersShellComponent', () => {
       playersShellComponent.ngOnInit();
       fixture.detectChanges();
 
-      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
-      expect(modalHeader).toBeFalsy();
+      const matDialogContainer = document.querySelector('mat-dialog-container');
+      expect(matDialogContainer).toBeFalsy();
     });
 
     it('should open a modal with the player name and number in the header', () => {
@@ -302,7 +304,9 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[1].click();
       fixture.detectChanges();
 
-      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
+      const matDialogContainer = document.querySelector('mat-dialog-container');
+      expect(matDialogContainer).toBeTruthy();
+      const modalHeader = matDialogContainer.querySelector('h2');
       expect(modalHeader).toBeTruthy();
       expect(modalHeader.textContent).toBe('Beta #1');
     });
@@ -316,14 +320,14 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[0].click();
       fixture.detectChanges();
 
-      const closeModalButton: HTMLButtonElement = nativeElement.querySelector('div.modal div.modal-content span.close');
+      const closeModalButton: HTMLButtonElement = nativeElement.querySelector('span.close');
       expect(closeModalButton).toBeTruthy();
       expect(closeModalButton.textContent).toBe('×');
 
       closeModalButton.click();
       fixture.detectChanges();
 
-      const modalHeader = nativeElement.querySelector('div.modal div.modal-content h2');
+      const modalHeader = nativeElement.querySelector('h2');
       expect(modalHeader).toBeFalsy();
     });
 
@@ -338,9 +342,9 @@ describe('PlayersShellComponent', () => {
 
       const expectedNumberOfColumns = 17;
       const expectedNumberOfRows = 2;
-      const modalTableHeaderRow = nativeElement.querySelector('div.modal div.modal-content table thead tr');
+      const modalTableHeaderRow = nativeElement.querySelector('mat-dialog-content table thead tr');
       expect(modalTableHeaderRow).toBeTruthy();
-      const modalTableHeaderElements = nativeElement.querySelectorAll('div.modal div.modal-content table thead tr th');
+      const modalTableHeaderElements = nativeElement.querySelectorAll('mat-dialog-content table thead tr th');
       expect(modalTableHeaderElements).toBeTruthy();
       expect(modalTableHeaderElements.length).toBe(expectedNumberOfColumns);
       modalTableHeaderElements.forEach((element, index) => {
@@ -350,12 +354,12 @@ describe('PlayersShellComponent', () => {
           expect(element.textContent).toBe(Object.keys(statisticsToReturn['Fall 2019-2020'][0])[index + 1]);
         }
       });
-      const modalTableBody = nativeElement.querySelector('div.modal div.modal-content table tbody');
+      const modalTableBody = nativeElement.querySelector('mat-dialog-content table tbody');
       expect(modalTableBody).toBeTruthy();
-      const modalTableBodyRows = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr');
+      const modalTableBodyRows = nativeElement.querySelectorAll('mat-dialog-content table tbody tr');
       expect(modalTableBodyRows).toBeTruthy();
       expect(modalTableBodyRows.length).toBe(expectedNumberOfRows);
-      const modalTableBodyElements = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr td');
+      const modalTableBodyElements = nativeElement.querySelectorAll('mat-dialog-content table tbody tr td');
       expect(modalTableBodyElements).toBeTruthy();
       expect(modalTableBodyElements.length).toBe(expectedNumberOfColumns * expectedNumberOfRows);
       modalTableBodyElements.forEach((element, index) => {
