@@ -320,15 +320,12 @@ describe('PlayersShellComponent', () => {
       allOptionsInDropdown[0].click();
       fixture.detectChanges();
 
-      const closeModalButton: HTMLButtonElement = nativeElement.querySelector('span.close');
+      const matDialogContainer = document.querySelector('mat-dialog-container');
+      expect(matDialogContainer).toBeTruthy();
+      const closeModalButton: HTMLButtonElement = matDialogContainer.querySelector('span.close');
       expect(closeModalButton).toBeTruthy();
       expect(closeModalButton.textContent).toBe('×');
-
-      closeModalButton.click();
-      fixture.detectChanges();
-
-      const modalHeader = nativeElement.querySelector('h2');
-      expect(modalHeader).toBeFalsy();
+      expect(closeModalButton.attributes.getNamedItem('mat-dialog-close')).toBeTruthy();
     });
 
     it('should open a modal with a table of the standard hitting stats for the player', () => {
