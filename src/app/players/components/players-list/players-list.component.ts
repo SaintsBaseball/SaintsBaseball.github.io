@@ -17,19 +17,19 @@ export class PlayersListComponent {
 
   selectPlayer(playerName: string): void {
     const playerStats = this.statsForEachPlayer.get(playerName);
-    // const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
+    const mostRecentSeasonStats: PlayerHittingStatistics = playerStats.values().next().value;
 
-    // this.buildModalHeader(mostRecentSeasonStats, playerName);
-    // this.buildModalTableHeader(mostRecentSeasonStats);
-    // this.buildModalTableBody(playerStats);
+    this.buildModalHeader(mostRecentSeasonStats, playerName);
+    this.buildModalTableHeader(mostRecentSeasonStats);
+    this.buildModalTableBody(playerStats);
 
-    // this.showPlayerStatsModal = true;
+    this.showPlayerStatsModal = true;
 
-    const valueToEmit = {
-      playerName,
-      playerStats
-    };
-    this.playerSelected.emit(valueToEmit);
+    // const valueToEmit = {
+    //   playerName,
+    //   playerStats
+    // };
+    // this.playerSelected.emit(valueToEmit);
   }
 
   closeModal(): void {
