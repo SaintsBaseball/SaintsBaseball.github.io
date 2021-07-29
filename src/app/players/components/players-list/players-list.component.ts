@@ -9,7 +9,6 @@ import { statisticGroupToStatisticColumns } from 'app/constants/statistic-group-
 })
 export class PlayersListComponent {
   @Input() statsForEachPlayer: Map<string, Map<string, PlayerHittingStatistics>>;
-  @Output() playerSelected = new EventEmitter<any>();
   showPlayerStatsModal = false;
   modalHeader: string;
   modalTableHeader: string[];
