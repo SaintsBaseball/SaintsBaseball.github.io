@@ -342,7 +342,7 @@ describe('PlayersShellComponent', () => {
       const expectedNumberOfRows = 2;
       const modalTableHeaderRow = nativeElement.querySelector('div.modal div.modal-content table thead tr');
       expect(modalTableHeaderRow).toBeTruthy();
-      const modalTableHeaderElements = nativeElement.querySelectorAll('div.modal div.modal-content table thead tr th');
+      const modalTableHeaderElements = modalTableHeaderRow.querySelectorAll('th');
       expect(modalTableHeaderElements).toBeTruthy();
       expect(modalTableHeaderElements.length).toBe(expectedNumberOfColumns);
       modalTableHeaderElements.forEach((element, index) => {
@@ -354,10 +354,10 @@ describe('PlayersShellComponent', () => {
       });
       const modalTableBody = nativeElement.querySelector('div.modal div.modal-content table tbody');
       expect(modalTableBody).toBeTruthy();
-      const modalTableBodyRows = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr');
+      const modalTableBodyRows = modalTableBody.querySelectorAll('tr');
       expect(modalTableBodyRows).toBeTruthy();
       expect(modalTableBodyRows.length).toBe(expectedNumberOfRows);
-      const modalTableBodyElements = nativeElement.querySelectorAll('div.modal div.modal-content table tbody tr td');
+      const modalTableBodyElements = modalTableBody.querySelectorAll('tr td');
       expect(modalTableBodyElements).toBeTruthy();
       expect(modalTableBodyElements.length).toBe(expectedNumberOfColumns * expectedNumberOfRows);
       modalTableBodyElements.forEach((element, index) => {
