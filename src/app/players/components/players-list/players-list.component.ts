@@ -24,12 +24,6 @@ export class PlayersListComponent {
     this.buildModalTableBody(playerStats);
 
     this.showPlayerStatsModal = true;
-
-    // const valueToEmit = {
-    //   playerName,
-    //   playerStats
-    // };
-    // this.playerSelected.emit(valueToEmit);
   }
 
   closeModal(): void {
